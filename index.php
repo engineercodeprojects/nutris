@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <?php 
-include "includes/menu.php"; 
 ini_set('default_charset','UTF-8');
 ?>    
 <html>    
@@ -9,7 +8,7 @@ ini_set('default_charset','UTF-8');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>ENGINEERCODE</title>
+    <title>NUTRIS - Plataforma Nutricional</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -22,22 +21,55 @@ ini_set('default_charset','UTF-8');
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-<body class="fundo_azul_escuro fundo_imagem">
+<body>
 
     
     
-<div class="container-fluid" style="z-index:0">
+<div class="container-fluid">
 
-    
+    <!-- inicio da única linha da página -->
+    <div class="row margin_top_150">
         
-    <div class='margin_top_100 centralizado'>
-    PLATAFORMA NUTRIS EM DESENVOLVIMENTO
+        
+        <!-- inicio coluna da esquerda - logo -->
+        <div class='col-md-offset-2 col-md-4 margin_top_70'>
+            <img src="img/logo_login.png" class="img-responsive  margin_auto" alt="logo nutris" alt="logo nutris">
+        </div>
+        <!-- fim coluna da esquerda - logo -->
+        
+        
+        
+        
+        <!-- inicio coluna da direita - formulário de login -->
+        <div class='col-md-3 margin_top_100'>
+        <!-- inicio formulario de login -->
+        <form>
+          <div class="form-group">
+            <label for="login">Login</label>
+            <input type="login" class="form-control borda_verde_claro padding_25 borda_arredondada_20" id="login" placeholder="LOGIN">
+          </div>
+
+          <div class="form-group">
+            <label for="senha">Senha</label>
+            <input type="password" class="form-control borda_verde_claro padding_25 borda_arredondada_20" id="senha" placeholder="SENHA">
+          </div>
+
+          <button type="submit" class="btn btn-default fonte_branca largura_40 altura_40">Acessar</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+          <span class="glyphicon glyphicon-lock"></span> Esqueci minha senha
+
+        </form>
+        <!-- fim formulario de login -->
+        </div>
+        <!-- fim coluna da direita - formulário de login -->
+        
+        
     </div>
-    
+    <!-- fim da única linha da página -->
     
 </div>
     
-<?php include "includes/rodape.php"; ?>
+
     
     
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

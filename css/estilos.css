@@ -42,7 +42,13 @@ a:active    {text-decoration:none; color:#0A4438 }
 .fundo_amarelo          {background-color:#FF9E45}
 .fundo_bege             {background-color:#D2BDA0}
 .fundo_cinza            {background-color:#ddd}
-
+.fundo_login            {
+                        background: url(../img/fundo_login.jpg) no-repeat center center fixed; 
+                      -webkit-background-size: cover;
+                      -moz-background-size: cover;
+                      -o-background-size: cover;
+                      background-size: cover;                        
+                        }
 
 
 /* tamanhos de fonte */
@@ -106,6 +112,7 @@ a:active    {text-decoration:none; color:#0A4438 }
 
 
 /* margin */
+.margin_00             {margin: 0px}
 .margin_05             {margin: 05px}
 .margin_10             {margin: 10px}
 .margin_15             {margin: 15px}
@@ -355,25 +362,25 @@ a:active    {text-decoration:none; color:#0A4438 }
 
 
 
-.padding_right_05              {padding-right: 5x}
+.padding_right_05              {padding-right: 5px}
 .padding_right_10              {padding-right: 10px}
-.padding_right_15              {padding-right: 15x}
+.padding_right_15              {padding-right: 15px}
 .padding_right_20              {padding-right: 20px}
-.padding_right_25              {padding-right: 25x}
+.padding_right_25              {padding-right: 25px}
 .padding_right_30              {padding-right: 30px}
-.padding_right_35              {padding-right: 35x}
+.padding_right_35              {padding-right: 35px}
 .padding_right_40              {padding-right: 40px}
-.padding_right_45              {padding-right: 45x}
+.padding_right_45              {padding-right: 45px}
 .padding_right_50              {padding-right: 50px}
-.padding_right_55              {padding-right: 55x}
+.padding_right_55              {padding-right: 55px}
 .padding_right_60              {padding-right: 60px}
-.padding_right_65              {padding-right: 65x}
+.padding_right_65              {padding-right: 65px}
 .padding_right_70              {padding-right: 70px}
-.padding_right_75              {padding-right: 75x}
+.padding_right_75              {padding-right: 75px}
 .padding_right_80              {padding-right: 80px}
-.padding_right_85              {padding-right: 85x}
+.padding_right_85              {padding-right: 85px}
 .padding_right_90              {padding-right: 90px}
-.padding_right_95              {padding-right: 95x}
+.padding_right_95              {padding-right: 95px}
 .padding_right_100             {padding-right: 100px}
 
 
@@ -386,12 +393,18 @@ a:active    {text-decoration:none; color:#0A4438 }
 .borda_inferior         {border-bottom: 1px solid rgba(40,96,144,.2)}
 .borda_branca           {border:1px solid #fff}
 .borda_verde_escuro     {border:1px solid #0A4438}
-.borda_verde_claro      {border:1px solid #18A689}
+.borda_verde_claro      {border:1px solid #58a518}
 .borda_vermelho         {border:1px solid #FF534F}
 .borda_amarelo          {border:1px solid #FF9E45}
 .borda_bege             {border:1px solid #D2BDA0}
 .borda_cinza            {border:1px solid #ddd}
 
+
+.borda_arredondada_10   {border-radius:10px}
+.borda_arredondada_15   {border-radius:15px}
+.borda_arredondada_20   {border-radius:20px}
+.borda_arredondada_25   {border-radius:25px}
+.borda_arredondada_30   {border-radius:30px}
 
 
 
@@ -409,6 +422,13 @@ a:active    {text-decoration:none; color:#0A4438 }
 .tr_hover               {background-color:#f00}
 
 
-/* botoes */
-.btn                    {border:1px solid #1f2f67}
-.btn:hover              {background-color:#fff; color:#0A4438; border:1px solid #18A689}
+/* formularios e botoes forms buttons */
+.btn                    {background-color: #58a518 ; border:1px solid #58a518}
+.btn:hover              {background-color:#58a518; color:#fff; border:1px solid #58a518}
+
+.form-control:focus     {box-shadow: 0 0 1px #58a518; border:1px solid #58a518}
+
+
+
+
+/
