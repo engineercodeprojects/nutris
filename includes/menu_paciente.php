@@ -5,6 +5,7 @@
     }
 
     
+    
     #check{
         display:none;
     }   
@@ -18,12 +19,13 @@
     }
     
     .barra{
-        background-color:#0A4438;
+        background-color:rgba(10,68,56,.2);
         height:100%;
         width:300px;
         position:absolute;
         transition: all .2s linear;
         left:-300px;
+        z-index:99;
     }
     
     .barra_fixa
@@ -33,6 +35,7 @@
         width:75px;
         position:absolute;        
         left:0px;
+        z-index:98;
         
     }
     

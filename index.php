@@ -43,15 +43,15 @@ ini_set('default_charset','UTF-8');
         <!-- inicio coluna da direita - formulário de login -->
         <div class='col-md-3 margin_top_100'>
         <!-- inicio formulario de login -->
-        <form>
+        <form method="post" action="verifica_login.php">
           <div class="form-group">
             <label for="login">Login</label>
-            <input type="login" class="form-control borda_verde_claro padding_25 borda_arredondada_20" id="login" placeholder="LOGIN">
+            <input type="text" class="form-control borda_verde_claro padding_25 borda_arredondada_20" name="login" id="login" placeholder="LOGIN">
           </div>
 
           <div class="form-group">
             <label for="senha">Senha</label>
-            <input type="password" class="form-control borda_verde_claro padding_25 borda_arredondada_20" id="senha" placeholder="SENHA">
+            <input type="password" class="form-control borda_verde_claro padding_25 borda_arredondada_20" name="senha" id="senha" placeholder="SENHA">
           </div>
 
           <button type="submit" class="btn btn-default fonte_branca largura_40 altura_40">Acessar</button>

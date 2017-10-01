@@ -35,6 +35,7 @@ a:active    {text-decoration:none; color:#0A4438 }
 
 
 /* cor de fundo */
+.fundo_transparente     {background-color:rgba(0,0,0,.0)}
 .fundo_branco           {background-color:#fff}
 .fundo_verde_escuro     {background-color:#0A4438}
 .fundo_verde_claro      {background-color:#18A689}
@@ -57,6 +58,7 @@ a:active    {text-decoration:none; color:#0A4438 }
 .fonte_media            {font-size: 1em}
 .fonte_grande           {font-size: 1.1em}
 .fonte_muito_grande     {font-size: 1.2em}
+.fonte_icone_sucesso    {font-size: 2em}
 
 
 /* altura */
@@ -338,25 +340,26 @@ a:active    {text-decoration:none; color:#0A4438 }
 
 
 
-.padding_left_05               {padding-left: 5x}
+.padding_left_00               {padding-left: 0px}
+.padding_left_05               {padding-left: 5px}
 .padding_left_10               {padding-left: 10px}
-.padding_left_15               {padding-left: 15x}
+.padding_left_15               {padding-left: 15Px}
 .padding_left_20               {padding-left: 20px}
-.padding_left_25               {padding-left: 25x}
+.padding_left_25               {padding-left: 25px}
 .padding_left_30               {padding-left: 30px}
-.padding_left_35               {padding-left: 35x}
+.padding_left_35               {padding-left: 35px}
 .padding_left_40               {padding-left: 40px}
-.padding_left_45               {padding-left: 45x}
+.padding_left_45               {padding-left: 45px}
 .padding_left_50               {padding-left: 50px}
-.padding_left_55               {padding-left: 55x}
+.padding_left_55               {padding-left: 55px}
 .padding_left_60               {padding-left: 60px}
-.padding_left_65               {padding-left: 65x}
+.padding_left_65               {padding-left: 65px}
 .padding_left_70               {padding-left: 70px}
-.padding_left_75               {padding-left: 75x}
+.padding_left_75               {padding-left: 75px}
 .padding_left_80               {padding-left: 80px}
-.padding_left_85               {padding-left: 85x}
+.padding_left_85               {padding-left: 85px}
 .padding_left_90               {padding-left: 90px}
-.padding_left_95               {padding-left: 95x}
+.padding_left_95               {padding-left: 95px}
 .padding_left_100              {padding-left: 100px}
 
 
@@ -399,6 +402,7 @@ a:active    {text-decoration:none; color:#0A4438 }
 .borda_bege             {border:1px solid #D2BDA0}
 .borda_cinza            {border:1px solid #ddd}
 
+.borda_esquerda_grossa  {border-left:5px solid #0A4438}
 
 .borda_arredondada_10   {border-radius:10px}
 .borda_arredondada_15   {border-radius:15px}
@@ -423,12 +427,13 @@ a:active    {text-decoration:none; color:#0A4438 }
 
 
 /* formularios e botoes forms buttons */
-.btn                    {background-color: #58a518 ; border:1px solid #58a518}
+.btn                    {background-color: #0A4438; border:1px solid #0A4438}
 .btn:hover              {background-color:#58a518; color:#fff; border:1px solid #58a518}
 
+.panel-body             {border:1px solid rgba(10,68,56,.2)}
+.form-control           {border:1px solid rgba(10,68,56,.2)}
 .form-control:focus     {box-shadow: 0 0 1px #58a518; border:1px solid #58a518}
+label                   {color:#0A4438}
 
 
 
-
-/
