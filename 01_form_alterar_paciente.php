@@ -9,6 +9,15 @@ $db = BancoDeDados::getInstance();
 mysql_set_charset('utf8');
 ini_set('default_charset','UTF-8');
 
+// recuperando o paciente selecionado
+$cod_paciente = base64_decode($_GET['cod']);
+
+
+$sqlstring_paciente_selecionado = "Select * from tb_paciente where cod_paciente = " . $cod_paciente;   
+$info_paciente_selecionado = $db->sql_query($sqlstring_paciente_selecionado);
+$dados_paciente_selecionado = mysql_fetch_array($info_paciente_selecionado);
+
+
 ?>    
 <html>    
 <head>
@@ -29,7 +38,7 @@ ini_set('default_charset','UTF-8');
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>    
-  <script src="js/funcoes.js    "></script>
+  <script src="js/funcoes.js"></script>
 <body class="margin_00">
 
 <?php include "includes/menu_nutricionista.php" ?>     
@@ -41,8 +50,8 @@ ini_set('default_charset','UTF-8');
     
     <!-- inicio - titulo do formulário -->  
     <div class="row">
-        <div class="well centralizado fundo_transparente sem_borda">
-            <h2>AVALIAÇÃO NUTRICIONAL</h2>
+        <div class="well fundo_transparente sem_borda">
+            <h2>ATUALIZAÇÃO - DADOS PACIENTE</h2>
         </div>
     </div>
     <!-- fim - titulo do formulário -->
@@ -63,14 +72,14 @@ ini_set('default_charset','UTF-8');
               <!-- inicio nome paciente -->
               <div class="form-group col-md-8">
                 <label for="nomecompleto">Nome Completo</label>
-                <input type="text" class="form-control" name="nome_paciente" id="nome_paciente" placeholder="Maria da Silva">
+                <input type="text" class="form-control" name="nome_paciente" id="nome_paciente" value="<?php print $dados_paciente_selecionado['nome_paciente'] ?>">
               </div>
               <!-- fim nome paciente -->
 
               <!-- inicio profissao -->    
               <div class="form-group col-md-4">
                 <label for="profissao">Profissão</label>
-                <input type="text" class="form-control" name="profissao" id="profissao" placeholder="Vendedora">
+                <input type="text" class="form-control" name="profissao" id="profissao" value="<?php print $dados_paciente_selecionado['profissao'] ?>">
               </div>
               <!-- inicio profissao -->
           <!-- fim - linha 1 -->
@@ -81,7 +90,7 @@ ini_set('default_charset','UTF-8');
               <!-- inicio endereco -->    
               <div class="form-group col-md-5">
                 <label for="endereco">Endereço</label>
-                <input type="text" class="form-control" name="endereco" id="endereco" placeholder="Rua dos Nutrientes">
+                <input type="text" class="form-control" name="endereco" id="endereco" value="<?php print $dados_paciente_selecionado['endereco'] ?>">
               </div>
               <!-- fim endereco -->
 
@@ -89,7 +98,7 @@ ini_set('default_charset','UTF-8');
               <!-- inicio numero -->    
               <div class="form-group col-md-2">
                 <label for="numero">Número</label>
-                <input type="text" class="form-control" name="numero" id="numero" placeholder="1000">
+                <input type="text" class="form-control" name="numero" id="numero" value="<?php print $dados_paciente_selecionado['numero'] ?>">
               </div>
               <!-- fim numero -->
 
@@ -97,7 +106,7 @@ ini_set('default_charset','UTF-8');
               <!-- inicio complemento -->    
               <div class="form-group col-md-2">
                 <label for="complemento">Complemento</label>
-                <input type="text" class="form-control" name="complemento" id="complemento" placeholder="Apto 141">
+                <input type="text" class="form-control" name="complemento" id="complemento" value="<?php print $dados_paciente_selecionado['complemento'] ?>">
               </div>
               <!-- fim complemento -->
 
@@ -105,7 +114,7 @@ ini_set('default_charset','UTF-8');
               <!-- inicio bairro -->    
               <div class="form-group col-md-3">
                 <label for="bairro">Bairro</label>
-                <input type="text" class="form-control" name="bairro" id="bairro" placeholder="Saúde">
+                <input type="text" class="form-control" name="bairro" id="bairro" value="<?php print $dados_paciente_selecionado['bairro'] ?>">
               </div>
               <!-- fim bairro -->
           <!-- fim - linha 2 --> 
@@ -120,7 +129,7 @@ ini_set('default_charset','UTF-8');
               <!-- inicio CEP -->    
               <div class="form-group col-md-2">
                 <label for="cep">CEP</label>
-                <input type="text" class="form-control" name="cep" id="cep" placeholder="18132852">
+                <input type="text" class="form-control" name="cep" id="cep" value="<?php print $dados_paciente_selecionado['cep'] ?>">
               </div>
               <!-- fim CEP -->
 
@@ -128,7 +137,7 @@ ini_set('default_charset','UTF-8');
               <!-- inicio cidade -->    
               <div class="form-group col-md-4">
                 <label for="cidade">Cidade</label>
-                <input type="text" class="form-control" name="cidade" id="cidade" placeholder="Sorocaba">
+                <input type="text" class="form-control" name="cidade" id="cidade" value="<?php print $dados_paciente_selecionado['cidade'] ?>">
               </div>
               <!-- fim cidade -->
 
@@ -136,7 +145,7 @@ ini_set('default_charset','UTF-8');
               <!-- inicio telefone residencial -->    
               <div class="form-group col-md-2">
                 <label for="telfone_residencial">Tel Residencial</label>
-                <input type="text" class="form-control" name="telefone_residencial" id="telefone_residencial" placeholder="1147128523">
+                <input type="text" class="form-control" name="telefone_residencial" id="telefone_residencial" value="<?php print $dados_paciente_selecionado['telefone_residencial'] ?>">
               </div>
               <!-- fim telefone residencial -->
 
@@ -144,14 +153,14 @@ ini_set('default_charset','UTF-8');
               <!-- inicio telefone comercial -->    
               <div class="form-group col-md-2">
                 <label for="telefone_comercial">Tel Comercial</label>
-                <input type="text" class="form-control" name="telefone_comercial" id="telefone_comercial" placeholder="1132359632">
+                <input type="text" class="form-control" name="telefone_comercial" id="telefone_comercial" value="<?php print $dados_paciente_selecionado['telefone_comercial'] ?>">
               </div>
               <!-- fim telefone comercial -->
             
               <!-- inicio telefone celular -->    
               <div class="form-group col-md-2">
                 <label for="celular">Celular</label>
-                <input type="text" class="form-control" name="celular" id="celular" placeholder="11999998877">
+                <input type="text" class="form-control" name="celular" id="celular" value="<?php print $dados_paciente_selecionado['celular'] ?>">
               </div>
               <!-- fim telefone celular -->
           <!-- fim - linha 3 -->
@@ -163,15 +172,15 @@ ini_set('default_charset','UTF-8');
               <!-- inicio email -->    
               <div class="form-group col-md-4">
                 <label for="email">e-mail</label>
-                <input type="text" class="form-control" name="email" id="email" placeholder="maria_silva@gmail.com">
+                <input type="text" class="form-control" name="email" id="email" value="<?php print $dados_paciente_selecionado['email'] ?>">
               </div>
               <!-- fim email -->
 
 
               <!-- inicio data nascimento -->    
-              <div class="form-group col-md-2">
+              <div class="form-group col-md-2"> 
                 <label for="cidade">Dt Nascimento</label>
-                <input type="text" class="form-control" name="data_nascimento" id="data_nascimento" placeholder="12/12/2017">
+                <input type="text" class="form-control" name="data_nascimento" id="data_nascimento" value="<?php print date("d/m/Y", strtotime($dados_paciente_selecionado['data_nascimento'])) ?>">
               </div>
               <!-- fim data nascimento -->
 
@@ -179,14 +188,14 @@ ini_set('default_charset','UTF-8');
               <!-- inicio sexo -->
               <div class="form-group col-md-2">
                 <label for="sexo">Sexo</label>
-                <input type="text" class="form-control" name="sexo" id="sexo" placeholder="Feminino">
+                <input type="text" class="form-control" name="sexo" id="sexo" value="<?php print $dados_paciente_selecionado['sexo'] ?>">
               </div>
               <!-- fim sexo -->
             
               <!-- inicio peso -->
               <div class="form-group col-md-2">
                 <label for="peso">Peso</label>
-                <input type="text" class="form-control" name="peso" id="peso" placeholder="72.57">
+                <input type="text" class="form-control" name="peso" id="peso" value="<?php print $dados_paciente_selecionado['peso'] ?>">
               </div>
               <!-- fim peso -->
             
@@ -194,7 +203,7 @@ ini_set('default_charset','UTF-8');
               <!-- inicio altura -->
               <div class="form-group col-md-2">
                 <label for="altura">Altura</label>
-                <input type="text" class="form-control" name="altura" id="altura" placeholder="167">
+                <input type="text" class="form-control" name="altura" id="altura" value="<?php print $dados_paciente_selecionado['altura'] ?>">
               </div>
               <!-- fim altura -->
               
@@ -207,7 +216,7 @@ ini_set('default_charset','UTF-8');
               <!-- inicio outros -->    
               <div class="form-group col-md-12">
                 <label for="outros">Outros</label>
-                <textarea class="form-control" rows="3" name="outros" id="paciente"></textarea>
+                <textarea class="form-control" rows="3" name="outros" id="paciente"><?php print $dados_paciente_selecionado['outros'] ?></textarea>
               </div>
               <!-- fim outros -->
           <!-- fim - linha 5 -->
@@ -839,7 +848,7 @@ ini_set('default_charset','UTF-8');
       
         
     <div class="col-md-12  direito">
-    <button type="submit" class="btn btn-primary">Cadastrar Paciente</button>    
+    <button type="button" class="btn btn-primary">Atualizar Dados Paciente</button>    
     </div>
         
     

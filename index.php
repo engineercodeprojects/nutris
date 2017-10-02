@@ -41,19 +41,20 @@ ini_set('default_charset','UTF-8');
         
         
         <!-- inicio coluna da direita - formulário de login -->
-        <div class='col-md-3 margin_top_100'>
+        <div class='col-md-4 margin_top_100'>
         <!-- inicio formulario de login -->
         <form method="post" action="verifica_login.php">
           <div class="form-group">
-            <label for="login">Login</label>
-            <input type="text" class="form-control borda_verde_claro padding_25 borda_arredondada_20" name="login" id="login" placeholder="LOGIN">
+            <label for="login"><span class="fonte_verde_escuro">Login</span></label>
+            <input type="text" class="form-control borda_verde_light  borda_arredondada_20 altura_50" name="login" id="login" placeholder="LOGIN" style="border:1px solid #18A689">
           </div>
 
           <div class="form-group">
-            <label for="senha">Senha</label>
-            <input type="password" class="form-control borda_verde_claro padding_25 borda_arredondada_20" name="senha" id="senha" placeholder="SENHA">
+              <label for="senha"><span class="fonte_verde_escuro">Senha</span></label>
+            <input type="password" class="form-control borda_verde_light  borda_arredondada_20 altura_50" name="senha" id="senha" placeholder="SENHA" style="border:1px solid #18A689; box-sizing: border-box;">
           </div>
-
+          
+          <br/>
           <button type="submit" class="btn btn-default fonte_branca largura_40 altura_40">Acessar</button>
             &nbsp;&nbsp;&nbsp;&nbsp;
           <span class="glyphicon glyphicon-lock"></span> Esqueci minha senha

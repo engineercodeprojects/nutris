@@ -67,12 +67,12 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
         <!--  inicio - busca simples -->
         <div class="row">
           <form name="form_pesquisa" id="form_pesquisa" class="form-inline padding_bottom_20">
-              <input type="text" name="busca" id="busca" class="form-control" style="width:94%" placeholder="NOME DO PACIENTE">
-              <button type="button" class="btn btn-default fonte_branca" onclick="nova_pesquisa('01_lista_pacientes.php?pesquisa=')"> 
+              <input type="text" name="busca" id="busca" class="form-control" style="width:90%" placeholder="NOME DO PACIENTE">
+              <button type="button" class="btn btn-default fonte_branca" alt="Exibe os pacientes com nomes contendo o valor digitado na busca"  title="Exibe os pacientes com nomes contendo o valor digitado na busca" onclick="nova_pesquisa('01_lista_pacientes.php?pesquisa=')"> 
                   <span class="glyphicon glyphicon-search"></span> 
               </button>
               
-              <button type="button" class="btn btn-default fonte_branca" onclick="nova_pesquisa('01_lista_pacientes.php')"> 
+              <button type="button" class="btn btn-default fonte_branca" alt="Exibe todos os pacientes cadastrados"  title="Exibe todos os pacientes cadastrados"  onclick="nova_pesquisa('01_lista_pacientes.php')"> 
                   <span class="glyphicon glyphicon-th-list"></span> 
               </button>
           </form>  
@@ -134,7 +134,11 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
                     <td><?php print $dados_pacientes['celular'] ?></td>
                     <td><?php print $dados_pacientes['peso'] ?></td>
                     <td><?php print $dados_pacientes['altura'] ?></td>
-                    <td class="centralizado"><span class="glyphicon glyphicon-edit"></span></td>
+                    <td class="centralizado">
+                        <a href="01_form_alterar_paciente.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>">;
+                        <span class="glyphicon glyphicon-edit"></span>
+                        </a>
+                    </td>
                     </tr>
 
                     <?php
@@ -187,6 +191,10 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
 	{
 		$arr = filter( $_POST['excluir'] );
         
+        if(sizeof($arr) > 0)
+        {
+            
+        
         $sqlstring_habitos_alimentares = "delete from tb_habito_alimentar where cod_paciente IN(".implode(',', $arr ).")";
         $info_habitos_alimentares = $db->sql_query($sqlstring_habitos_alimentares);
 
@@ -205,7 +213,18 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
         $btn_direita = "Lista de Pacientes";
         $btn_direita_destino = "01_lista_pacientes.php";
         $btn_x = "01_lista_pacientes.php";
-
+        }
+        else
+        {
+        //preparando modal para informar o sucesso da exclusão
+        $titulo = "Exclusão de Paciente";
+        $mensagem = "Você não selecionou o paciente que deseja excluir. <br/><strong>Selecione</strong> o paciente e tente novamente!";
+        $btn_esquerda = "Novo Paciente";
+        $btn_esquerda_destino = "01_form_cadastro_paciente.php";
+        $btn_direita = "Lista de Pacientes";
+        $btn_direita_destino = "01_lista_pacientes.php";
+        $btn_x = "01_lista_pacientes.php";
+        }
 
         include_once ("includes/modal_sucesso.php");
         ?>
@@ -224,9 +243,12 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
 
 function filter( $dados )
 	{
+        if(isset($dados))
+        {
 		$arr = Array();
 		foreach( $dados AS $dado ) $arr[] = (int)$dado;
 		return $arr;
+        }
 	}
 // fim exclusão de registros selecionados
 ?>

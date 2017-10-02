@@ -396,6 +396,7 @@ a:active    {text-decoration:none; color:#0A4438 }
 .borda_inferior         {border-bottom: 1px solid rgba(40,96,144,.2)}
 .borda_branca           {border:1px solid #fff}
 .borda_verde_escuro     {border:1px solid #0A4438}
+.borda_verde_light      {border:1px solid #18A689}
 .borda_verde_claro      {border:1px solid #58a518}
 .borda_vermelho         {border:1px solid #FF534F}
 .borda_amarelo          {border:1px solid #FF9E45}
@@ -428,11 +429,11 @@ a:active    {text-decoration:none; color:#0A4438 }
 
 /* formularios e botoes forms buttons */
 .btn                    {background-color: #0A4438; border:1px solid #0A4438}
-.btn:hover              {background-color:#58a518; color:#fff; border:1px solid #58a518}
+.btn:hover              {background-color:#18A689; color:#fff; border:1px solid #18A689}
 
 .panel-body             {border:1px solid rgba(10,68,56,.2)}
 .form-control           {border:1px solid rgba(10,68,56,.2)}
-.form-control:focus     {box-shadow: 0 0 1px #58a518; border:1px solid #58a518}
+.form-control:focus     {box-shadow: 0 0 1px #18A689; border:1px solid #18A689}
 label                   {color:#0A4438}
 
 
