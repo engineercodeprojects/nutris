@@ -77,7 +77,7 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
                 if($dados_objetivo_programa['foto_01'] != "" and $dados_objetivo_programa['foto_01'] != "avatar.png") 
                 {                                    
                  ?>                 
-                <label for="uploadImage"><img src="fotos/<?php print $dados_objetivo_programa['foto_01'] ?>" class="img-responsive margin_auto" width=150 height=200  id="uploadPreview"/></label>   
+                <label for="uploadImage"><img src="/fotos/<?php print $dados_objetivo_programa['foto_01'] ?>" class="img-responsive margin_auto" width=150 height=200  id="uploadPreview"/></label>   
                 <input id="uploadImage" type="file" name="foto_01" onchange="pre_visualizacao();" style="display:none"/>
                 <?php
                 }                
@@ -112,7 +112,7 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
                 if($dados_objetivo_programa['foto_02'] != "" and $dados_objetivo_programa['foto_02'] != "avatar.png") 
                 {                                    
                  ?>                 
-                <label for="uploadImage1"><img src="fotos/<?php print $dados_objetivo_programa['foto_02'] ?>" class="img-responsive margin_auto" width=150 height=200  id="uploadPreview1"/></label>   
+                <label for="uploadImage1"><img src="/fotos/<?php print $dados_objetivo_programa['foto_02'] ?>" class="img-responsive margin_auto" width=150 height=200  id="uploadPreview1"/></label>   
                 <input id="uploadImage1" type="file"  name="foto_02" onchange="pre_visualizacao1();" style="display:none"/>
                 <?php
                 }                
@@ -333,7 +333,8 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
         // fazendo uplodas das fotos 01
         $arquivo = $_FILES['foto_01'];                         
 
-        $destino = 'C:\Bitnami\\wampstack-5.5.28-0\\apache2\htdocs\\plataformanutris\\fotos\\';
+        //$destino = 'C:\Bitnami\\wampstack-5.5.28-0\\apache2\htdocs\\plataformanutris\\fotos\\';
+        $destino  = '/home/engineercode/public_html/plataformanutris/fotos/';
         $destino .= $_SESSION['cod_paciente_selecionado'] . "_1_";
         $destino .= $arquivo['name'];  
 
@@ -342,7 +343,8 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
         // fazendo uplodas das fotos 02
         $arquivo = $_FILES['foto_02']; 
 
-        $destino = 'C:\Bitnami\\wampstack-5.5.28-0\\apache2\htdocs\\plataformanutris\\fotos\\';
+        //$destino = 'C:\Bitnami\\wampstack-5.5.28-0\\apache2\htdocs\\plataformanutris\\fotos\\';
+        $destino  = '/home/engineercode/public_html/plataformanutris/fotos/';
         $destino .= $_SESSION['cod_paciente_selecionado'] . "_2_";
         $destino .= $arquivo['name'];  
 

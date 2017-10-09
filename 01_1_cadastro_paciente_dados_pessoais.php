@@ -1,6 +1,4 @@
-<!DOCTYPE html>
 <?php 
-// iniciando sessão
 session_start();
 //include do arquivo de conexao com o banco de dados
 include_once('conexao/connect_db.php');

@@ -215,7 +215,13 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
         if(sizeof($arr) > 0)
         {
             
-        
+            
+        $sqlstring_atividade_fisica = "delete from tb_atividade_fisica where cod_paciente IN(".implode(',', $arr ).")";
+        $info_atividade_fisica = $db->sql_query($sqlstring_atividade_fisica);
+            
+        $sqlstring_objetivo_paciente = "delete from tb_objetivo_paciente where cod_paciente IN(".implode(',', $arr ).")";
+        $info_objetivo_paciente = $db->sql_query($sqlstring_objetivo_paciente);
+            
         $sqlstring_habitos_alimentares = "delete from tb_habito_alimentar where cod_paciente IN(".implode(',', $arr ).")";
         $info_habitos_alimentares = $db->sql_query($sqlstring_habitos_alimentares);
 
