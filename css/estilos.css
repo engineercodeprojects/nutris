@@ -265,6 +265,7 @@ a:active    {text-decoration:none; color:#0A4438 }
 
 
 /* enchimento paddings */
+.padding_00                 {padding: 0px}
 .padding_03                 {padding: 3px}
 .padding_04                 {padding: 4px}
 .padding_05                 {padding: 5px}
@@ -438,3 +439,7 @@ label                   {color:#0A4438}
 
 
 
+
+
+/* exibir mostrar elementos na tela */
+.invisivel      {display:none}

@@ -89,7 +89,7 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
             </div>
 
             <div class="col-md-2">          
-                <a href="01_form_cadastro_paciente.php" alt="Cadastro de Paciente" title="Cadastro de Paciente">
+                <a href="01_1_cadastro_paciente_dados_pessoais.php" alt="Cadastro de Paciente" title="Cadastro de Paciente">
                 <span class="glyphicon glyphicon-plus-sign fonte_verde_escuro"></span> Novo Paciente
                 </a>
             </div>
@@ -114,11 +114,14 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
             <table class="table table-responsive table-hover">
                 <tr class="fonte_branca">
                 <td class="largura_05 fundo_verde_escuro"><input type=checkbox name="marcar" id="marcar" onclick="marcar_desmarcar_todos()"></td>
-                <td class="largura_60 fundo_verde_escuro">Paciente</td>
-                <td class="largura_10 fundo_verde_escuro">Celular</td>
+                <td class="largura_45 fundo_verde_escuro">Paciente</td>                
                 <td class="largura_10 fundo_verde_escuro">Peso</td>
                 <td class="largura_10 fundo_verde_escuro">Altura</td>
-                <td class="largura_05  fundo_verde_escuro centralizado">Detalhes</td>
+                <td class="largura_10 fundo_verde_escuro">IMC</td>
+                <td class="largura_05  fundo_verde_escuro centralizado">DP</td>
+                <td class="largura_05  fundo_verde_escuro centralizado">AT</td>
+                <td class="largura_05  fundo_verde_escuro centralizado">HA</td>
+                <td class="largura_05  fundo_verde_escuro centralizado">OJ</td>
                 </tr>
                                 
                 <?php
@@ -131,11 +134,29 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
                     <tr>
                     <td><input type=checkbox name="excluir[]" value="<?php print $dados_pacientes['cod_paciente'] ?>"></input></td>
                     <td><?php print $dados_pacientes['nome_paciente'] ?></td>
-                    <td><?php print $dados_pacientes['celular'] ?></td>
                     <td><?php print $dados_pacientes['peso'] ?></td>
                     <td><?php print $dados_pacientes['altura'] ?></td>
+                    <td><?php print $dados_pacientes['altura'] ?></td>
                     <td class="centralizado">
-                        <a href="01_form_alterar_paciente.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>">;
+                        <a href="01_1_alteracao_paciente_dados_pessoais.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>">
+                        <span class="glyphicon glyphicon-edit"></span>
+                        </a>
+                    </td>
+                
+                    <td class="centralizado">
+                        <a href="01_1_cadastro_paciente_antopometria.php?cod=<?php print base64_encode($dados_pacientes['cod_paciente']) ?>;&alt=<?php print base64_encode($dados_pacientes['cod_paciente']) ?>">
+                        <span class="glyphicon glyphicon-edit"></span>
+                        </a>
+                    </td>
+                
+                    <td class="centralizado">
+                        <a href="01_1_cadastro_paciente_avaliacao.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>">
+                        <span class="glyphicon glyphicon-edit"></span>
+                        </a>
+                    </td>
+                
+                    <td class="centralizado">
+                        <a href="01_1_cadastro_paciente_objetivo.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>">
                         <span class="glyphicon glyphicon-edit"></span>
                         </a>
                     </td>

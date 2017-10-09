@@ -13,8 +13,8 @@ class BancoDeDados
     private function __construct()
     {
 		
-		$host = "db_nutris.mysql.dbaas.com.br";
-    	$user = "db_nutris"; 
+		$host = "localhost";
+    	$user = "root"; 
     	$senha = "fatecsr"; 
     	$banco = "db_nutris"; 
 
