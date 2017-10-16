@@ -74,7 +74,7 @@
 <label id="icone" for="check"><img src="img/hamburguer.png"></label>
     
 
-<div class="barra_fixa">
+<div class="barra_fixa hidden-xs">
 
     <nav>
     

@@ -255,10 +255,23 @@ function calcular_imc()
     
     peso = parseFloat(document.getElementById('peso').value);
     altura = parseFloat (document.getElementById('altura').value);
-
+    
     if(peso > 0  && altura > 0)
         {
-            document.getElementById('res_imc').value = Math.ceil((peso/(Math.pow((altura/100),2)))*100)/100;
+            document.getElementById('res_imc').value = Math.ceil((peso/(Math.pow((altura/100),2)))*100)/100;            
+            classificacao = parseFloat(Math.ceil((peso/(Math.pow((altura/100),2)))*100)/100);
+            if(classificacao < 18.5)                           
+                document.getElementById('classificacao').value = 'Abaixo do Peso';                                
+            else if(classificacao >= 18.5 && classificacao < 25)                
+                document.getElementById('classificacao').value = 'Peso Normal'; 
+            else if(classificacao >= 25 && classificacao < 30)                
+                document.getElementById('classificacao').value = 'Excesso de Peso'; 
+            else if(classificacao >= 30 && classificacao < 35)                
+                document.getElementById('classificacao').value = 'Obesidade Classe I'; 
+            else if(classificacao >= 35 && classificacao < 40)                
+                document.getElementById('classificacao').value = 'Obesidade Classe II'; 
+            else
+                document.getElementById('classificacao').value = 'Obesidade Classe III'; 
         }
     else
         {
@@ -268,6 +281,11 @@ function calcular_imc()
 
 
 
+function exibir_imc(peso, altura)
+{
+    document.write(Math.ceil((peso/(Math.pow((altura/100),2)))*100)/100);
+}
+
 
 
 function calcular_caq()
@@ -275,10 +293,125 @@ function calcular_caq()
     
     abd = parseFloat(document.getElementById('abdome').value);
     qdr = parseFloat (document.getElementById('quadril').value);
-
+    sxo = document.getElementById('sexo').value;
+    ida = parseInt(document.getElementById('anos').value);
+        
     if(abd > 0  && qdr > 0)
         {
             document.getElementById('res_caq').value = Math.ceil((abd/qdr)*100)/100;
+            caq = parseFloat(document.getElementById('res_caq').value);
+            
+            if(sxo == "M")
+            {
+                if(ida < 20)
+                    document.getElementById('classificacao_caq').value = "Não Classificado";
+                
+                else if(ida >=20 && ida < 30)
+                    if(caq < 0.83)
+                        document.getElementById('classificacao_caq').value = "Baixo";
+                    else if(caq >= 0.83 && caq <= 0.88)
+                        document.getElementById('classificacao_caq').value = "Moderado";
+                    else if(caq >= 0.89 && caq <= 0.94)
+                        document.getElementById('classificacao_caq').value = "Alto";
+                    else
+                        document.getElementById('classificacao_caq').value = "Muito Alto";
+                
+                else if(ida >=30 && ida < 40)
+                    if(caq < 0.84)
+                        document.getElementById('classificacao_caq').value = "Baixo";
+                    else if(caq >= 0.84 && caq <= 0.91)
+                        document.getElementById('classificacao_caq').value = "Moderado";
+                    else if(caq >= 0.92 && caq <= 0.96)
+                        document.getElementById('classificacao_caq').value = "Alto";
+                    else
+                        document.getElementById('classificacao_caq').value = "Muito Alto";
+                
+                else if(ida >=40 && ida < 50)
+                    if(caq < 0.88)
+                        document.getElementById('classificacao_caq').value = "Baixo";
+                    else if(caq >= 0.88 && caq <= 0.95)
+                        document.getElementById('classificacao_caq').value = "Moderado";
+                    else if(caq >= 0.96 && caq <= 1)
+                        document.getElementById('classificacao_caq').value = "Alto";
+                    else
+                        document.getElementById('classificacao_caq').value = "Muito Alto";
+                
+                else if(ida >=50 && ida < 60)
+                    if(caq < 0.90)
+                        document.getElementById('classificacao_caq').value = "Baixo";
+                    else if(caq >= 0.90 && caq <= 0.96)
+                        document.getElementById('classificacao_caq').value = "Moderado";
+                    else if(caq >= 0.97 && caq <= 1.02)
+                        document.getElementById('classificacao_caq').value = "Alto";
+                    else
+                        document.getElementById('classificacao_caq').value = "Muito Alto";
+                
+                else if(ida >=60 && ida < 70)
+                    if(caq < 0.91)
+                        document.getElementById('classificacao_caq').value = "Baixo";
+                    else if(caq >= 0.91 && caq <= 0.98)
+                        document.getElementById('classificacao_caq').value = "Moderado";
+                    else if(caq >= 0.99 && caq <= 1.03)
+                        document.getElementById('classificacao_caq').value = "Alto";
+                    else
+                        document.getElementById('classificacao_caq').value = "Muito Alto";
+            }
+            else
+            {
+                if(ida <20)
+                        document.getElementById('classificacao_caq').value = "Não Classificada";
+                
+                else if(ida >=20 && ida < 30)
+                    if(caq < 0.71)
+                        document.getElementById('classificacao_caq').value = "Baixo";
+                    else if(caq >= 0.71 && caq <= 0.77)
+                        document.getElementById('classificacao_caq').value = "Moderado";
+                    else if(caq >= 0.77 && caq <= 0.83)
+                        document.getElementById('classificacao_caq').value = "Alto";
+                    else
+                        document.getElementById('classificacao_caq').value = "Muito Alto";
+                
+                else if(ida >=30 && ida < 40)
+                    if(caq < 0.72)
+                        document.getElementById('classificacao_caq').value = "Baixo";
+                    else if(caq >= 0.72 && caq <= 0.78)
+                        document.getElementById('classificacao_caq').value = "Moderado";
+                    else if(caq >= 0.79 && caq <= 0.84)
+                        document.getElementById('classificacao_caq').value = "Alto";
+                    else
+                        document.getElementById('classificacao_caq').value = "Muito Alto";
+                
+                else if(ida >=40 && ida < 50)
+                    if(caq < 0.73)
+                        document.getElementById('classificacao_caq').value = "Baixo";
+                    else if(caq >= 0.73 && caq <= 0.79)
+                        document.getElementById('classificacao_caq').value = "Moderado";
+                    else if(caq >= 0.80 && caq <= 0.87)
+                        document.getElementById('classificacao_caq').value = "Alto";
+                    else
+                        document.getElementById('classificacao_caq').value = "Muito Alto";
+                
+                else if(ida >=50 && ida < 60)
+                    if(caq < 0.74)
+                        document.getElementById('classificacao_caq').value = "Baixo";
+                    else if(caq >= 0.74 && caq <= 0.81)
+                        document.getElementById('classificacao_caq').value = "Moderado";
+                    else if(caq >= 0.82 && caq <= 0.88)
+                        document.getElementById('classificacao_caq').value = "Alto";
+                    else
+                        document.getElementById('classificacao_caq').value = "Muito Alto";
+                
+                else if(ida >=60 && ida < 70)
+                    if(caq < 0.76)
+                        document.getElementById('classificacao_caq').value = "Baixo";
+                    else if(caq >= 0.76 && caq <= 0.83)
+                        document.getElementById('classificacao_caq').value = "Moderado";
+                    else if(caq >= 0.84 && caq <= 0.90)
+                        document.getElementById('classificacao_caq').value = "Alto";
+                    else
+                        document.getElementById('classificacao_caq').value = "Muito Alto";                
+                
+            } 
         }
     else
         {
@@ -297,3 +430,88 @@ function pre_visualizacao() {
                     document.getElementById("uploadPreview1").src = oFREvent.target.result;
                 };
             };
+
+
+
+
+
+
+// função para realizar a busca sem refresh
+$(function(){
+   $('#busca').keyup(function(){
+      var pesquisa = $(this).val();
+       
+      if(pesquisa != '') {
+              var dados = {
+                  palavra : pesquisa
+              }
+              $.post('01_2_processa_busca_refeicao.php', dados, function(retorna){
+                $('.resultados').empty().html('');
+                $('.resultados').html(retorna);
+              });
+          }
+   });    
+});
+
+
+
+
+
+
+
+
+
+
+// função utilizada para acrescentar alimentos na refeição
+peso_geral = 0; 
+caloria_geral=0;
+function inserir_alimento(codigo, alimento, peso, caloria, medida_caseira)
+    {  
+        peso_geral = (parseFloat(peso_geral) + parseFloat(peso)).toFixed(3);
+        document.getElementById('total_peso').value = peso_geral;
+        
+        caloria_geral = (parseFloat(caloria_geral) + parseFloat(caloria)).toFixed(3);
+        document.getElementById('total_caloria').value = caloria_geral;
+        
+        conteudo  = document.getElementById('alimentos_refeicao').innerHTML;  
+        
+        conteudo += "<div id=" + codigo + ">";
+        conteudo += "<div><input type=hidden name=codigos[] id=codigos[] value='" + codigo + "'></div>";
+        conteudo += "<div class='col-md-6 borda_inferior padding_top_05 padding_bottom_05'><input type=text value='" + alimento + "' class='form-group largura_100 margin_00 sem_borda fundo_transparente fonte_pequena'></div>";
+        conteudo += "<div class='col-md-3 borda_inferior padding_top_05 padding_bottom_05'><input type=text value='" + medida_caseira + "' class='form-group largura_100 margin_00 sem_borda fundo_transparente fonte_pequena text-uppercase'></div>";
+        conteudo += "<div class='col-md-1 borda_inferior padding_top_05 padding_bottom_05'><input type=text value=" + parseFloat(peso).toFixed(3) + " class='form-group esquerda margin_00 sem_borda fundo_transparente fonte_pequena'></div>";
+        conteudo += "<div class='col-md-1 borda_inferior padding_top_05 padding_bottom_05'><input type=text value=" + parseFloat(caloria).toFixed(3) + " class='form-group esquerda margin_00 sem_borda fundo_transparente fonte_pequena'></div>";
+        conteudo += "<div class='col-md-1 borda_inferior padding_top_05 padding_bottom_05 fonte_verde_claro centralizado'><a href='#' class='link_detalhes' onclick=javascript:remover_alimento('" +  codigo + "','" + peso + "','" + caloria + "')><span class='glyphicon glyphicon-minus-sign'></span></a></div>";
+        conteudo += "</div>";
+        
+        document.getElementById('alimentos_refeicao').innerHTML = conteudo;
+    }
+
+
+
+
+
+
+// função utilizada para remover alimentos da refeição
+function remover_alimento(codigo,peso,caloria)
+{    
+    
+    document.getElementById(codigo).remove();
+    
+    peso_geral = document.getElementById('total_peso').value;
+    peso_geral = (parseFloat(peso_geral) - parseFloat(peso)).toFixed(3);
+    document.getElementById('total_peso').value = peso_geral;
+    
+    caloria_geral = document.getElementById('total_caloria').value;
+    caloria_geral = (parseFloat(caloria_geral) - parseFloat(caloria)).toFixed(3);
+    document.getElementById('total_caloria').value = caloria_geral;
+}
+
+
+
+
+
+
+
+
+

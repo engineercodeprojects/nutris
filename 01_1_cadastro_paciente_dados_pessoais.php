@@ -1,5 +1,8 @@
 <?php 
+//inicia a sessão
 session_start();
+//include do arquivo que verifica se o usuário passou pelo login
+include_once('includes/verifica_logado.php');
 //include do arquivo de conexao com o banco de dados
 include_once('conexao/connect_db.php');
 //instancia do banco de dados
@@ -16,7 +19,7 @@ ini_set('default_charset','UTF-8');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>NUTRIS - Plataforma Nutricional</title>
+    <title>Nutris - Plataforma Nutricional</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -43,17 +46,20 @@ ini_set('default_charset','UTF-8');
     <!-- inicio - titulo do formulário -->  
     <div class="row">
         <!-- inicio - painel dados pessoais -->
-          <div class="panel panel-default margin_top_20 sem_borda">
+          <div class="panel panel-default margin_top_20 sem_borda padding_top_25">
             <div class="panel-body borda_verde_escuro" style="border:0px solid #eee; border-left:0px solid #0A4438;">                 
-                    <span class="glyphicon glyphicon-edit fonte_verde_claro"></span>
-                    <span class=" fonte_verde_claro fonte_muito_grande negrito">CADASTRO PACIENTE</span>
+                    <span class="glyphicon glyphicon-tag fonte_verde_claro"></span>
+                    <span class=" fonte_verde_claro fonte_muito_grande negrito">PACIENTE</span>
                     <br/>
-                    <span class="fonte_pequena">Dados Pessoais</span>                
+                    <span class="fonte_pequena">Dados Pessoais</span>
+                    <br/><br/>
+                    <span class="glyphicon glyphicon-asterisk fonte_verde_claro fonte_muito_pequena"></span> <span>campos com preenchimento obrigatório</span>
             </div>              
           </div>
     </div>
     <!-- fim - titulo do formulário -->
     
+       
        
     <!-- inicio - formulario paciente - dados pessoais -->   
     <form method="post" action="">
@@ -67,15 +73,15 @@ ini_set('default_charset','UTF-8');
           <!-- inicio - linha 1 -->
               <!-- inicio nome paciente -->
               <div class="form-group col-md-8">
-                <label for="nomecompleto">Nome Completo</label>
-                <input type="text" class="form-control" name="nome_paciente" id="nome_paciente" placeholder="Maria da Silva">
+                <label for="nomecompleto">Nome Completo <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
+                <input type="text" class="form-control" name="nome_paciente" id="nome_paciente" placeholder="Maria da Silva" maxlength="100" required>
               </div>
               <!-- fim nome paciente -->
 
               <!-- inicio profissao -->    
               <div class="form-group col-md-4">
-                <label for="profissao">Profissão</label>
-                <input type="text" class="form-control" name="profissao" id="profissao" placeholder="Vendedora">
+                <label for="profissao">Profissão <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
+                <input type="text" class="form-control" name="profissao" id="profissao" placeholder="Vendedora" required maxlength="40">
               </div>
               <!-- inicio profissao -->
           <!-- fim - linha 1 -->
@@ -85,8 +91,8 @@ ini_set('default_charset','UTF-8');
           <!-- inicio - linha 2 --> 
               <!-- inicio endereco -->    
               <div class="form-group col-md-5">
-                <label for="endereco">Endereço</label>
-                <input type="text" class="form-control" name="endereco" id="endereco" placeholder="Rua dos Nutrientes">
+                <label for="endereco">Endereço <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
+                <input type="text" class="form-control" name="endereco" id="endereco" placeholder="Rua dos Nutrientes" required maxlength="60">
               </div>
               <!-- fim endereco -->
 
@@ -94,7 +100,7 @@ ini_set('default_charset','UTF-8');
               <!-- inicio numero -->    
               <div class="form-group col-md-2">
                 <label for="numero">Número</label>
-                <input type="text" class="form-control" name="numero" id="numero" placeholder="1000">
+                <input type="text" class="form-control" name="numero" id="numero" placeholder="1000" maxlength="5" required>
               </div>
               <!-- fim numero -->
 
@@ -102,15 +108,15 @@ ini_set('default_charset','UTF-8');
               <!-- inicio complemento -->    
               <div class="form-group col-md-2">
                 <label for="complemento">Complemento</label>
-                <input type="text" class="form-control" name="complemento" id="complemento" placeholder="Apto 141">
+                <input type="text" class="form-control" name="complemento" id="complemento" placeholder="Apto 141" maxlength="25">
               </div>
               <!-- fim complemento -->
 
 
               <!-- inicio bairro -->    
               <div class="form-group col-md-3">
-                <label for="bairro">Bairro</label>
-                <input type="text" class="form-control" name="bairro" id="bairro" placeholder="Saúde">
+                <label for="bairro">Bairro <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
+                <input type="text" class="form-control" name="bairro" id="bairro" placeholder="Saúde" required maxlength="30">
               </div>
               <!-- fim bairro -->
           <!-- fim - linha 2 --> 
@@ -125,15 +131,15 @@ ini_set('default_charset','UTF-8');
               <!-- inicio CEP -->    
               <div class="form-group col-md-2">
                 <label for="cep">CEP</label>
-                <input type="text" class="form-control" name="cep" id="cep" placeholder="18132852">
+                <input type="text" class="form-control" name="cep" id="cep" placeholder="18132852" maxlength="8">
               </div>
               <!-- fim CEP -->
 
 
               <!-- inicio cidade -->    
               <div class="form-group col-md-4">
-                <label for="cidade">Cidade</label>
-                <input type="text" class="form-control" name="cidade" id="cidade" placeholder="Sorocaba">
+                <label for="cidade">Cidade  <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
+                <input type="text" class="form-control" name="cidade" id="cidade" placeholder="Sorocaba" required maxlength="40">
               </div>
               <!-- fim cidade -->
 
@@ -141,7 +147,7 @@ ini_set('default_charset','UTF-8');
               <!-- inicio telefone residencial -->    
               <div class="form-group col-md-2">
                 <label for="telfone_residencial">Tel Residencial</label>
-                <input type="text" class="form-control" name="telefone_residencial" id="telefone_residencial" placeholder="1147128523">
+                <input type="text" class="form-control" name="telefone_residencial" id="telefone_residencial" placeholder="1147128523" maxlength="10">
               </div>
               <!-- fim telefone residencial -->
 
@@ -149,14 +155,14 @@ ini_set('default_charset','UTF-8');
               <!-- inicio telefone comercial -->    
               <div class="form-group col-md-2">
                 <label for="telefone_comercial">Tel Comercial</label>
-                <input type="text" class="form-control" name="telefone_comercial" id="telefone_comercial" placeholder="1132359632">
+                <input type="text" class="form-control" name="telefone_comercial" id="telefone_comercial" placeholder="1132359632"  maxlength="10">
               </div>
               <!-- fim telefone comercial -->
             
               <!-- inicio telefone celular -->    
               <div class="form-group col-md-2">
                 <label for="celular">Celular</label>
-                <input type="text" class="form-control" name="celular" id="celular" placeholder="11999998877">
+                <input type="text" class="form-control" name="celular" id="celular" placeholder="11999998877"  maxlength="11">
               </div>
               <!-- fim telefone celular -->
           <!-- fim - linha 3 -->
@@ -166,42 +172,31 @@ ini_set('default_charset','UTF-8');
             
          <!-- inicio - linha 4 --> 
               <!-- inicio email -->    
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-6">
                 <label for="email">e-mail</label>
-                <input type="text" class="form-control" name="email" id="email" placeholder="maria_silva@gmail.com">
+                <input type="text" class="form-control" name="email" id="email" placeholder="maria_silva@gmail.com" maxlength="100">
               </div>
               <!-- fim email -->
 
 
               <!-- inicio data nascimento -->    
-              <div class="form-group col-md-2">
-                <label for="cidade">Dt Nascimento</label>
-                <input type="text" class="form-control" name="data_nascimento" id="data_nascimento" placeholder="12/12/2017">
+              <div class="form-group col-md-3">
+                <label for="cidade">Dt Nascimento <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
+                <input type="text" class="form-control" name="data_nascimento" id="data_nascimento" placeholder="12/12/2017" maxlength="10">
               </div>
               <!-- fim data nascimento -->
 
 
               <!-- inicio sexo -->
-              <div class="form-group col-md-2">
-                <label for="sexo">Sexo</label>
-                <input type="text" class="form-control" name="sexo" id="sexo" placeholder="Feminino">
+              <div class="form-group col-md-3">
+                <label for="sexo">Sexo  <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
+                <select class="form-control" name="sexo" id="sexo">
+                    <option value="F" checked>Feminino</option>
+                    <option value="M">Masculino</option>
+                </select>
               </div>
               <!-- fim sexo -->
-            
-              <!-- inicio peso -->
-              <div class="form-group col-md-2">
-                <label for="peso">Peso</label>
-                <input type="text" class="form-control" name="peso" id="peso" placeholder="72.57">
-              </div>
-              <!-- fim peso -->
-            
-            
-              <!-- inicio altura -->
-              <div class="form-group col-md-2">
-                <label for="altura">Altura</label>
-                <input type="text" class="form-control" name="altura" id="altura" placeholder="167">
-              </div>
-              <!-- fim altura -->
+              
               
           <!-- fim - linha 4 -->
             
@@ -218,19 +213,17 @@ ini_set('default_charset','UTF-8');
           <!-- fim - linha 5 -->
                 
                 
-               
-          <!-- inicio - botao para Salvar Dados Pessoais -->
-              <div class="col-md-12  direito">
-                <button type="submit" class="btn btn-primary">        
-                    Salvar Dados Pessoais
-                    </button>    
-                </div>
-          <!-- fim - botão para Salvar Dados Pessoais -->
-                
         </div>
     </div>        
     <!-- fim - painel dados pessoais -->
     
+        
+        <!-- inicio - botao para Salvar Dados Pessoais -->
+              <div class="col-md-12  direito">
+                <button type="submit" class="btn btn_verde_claro"> Salvar Dados Pessoais </button>    
+                <button type="button" class="btn btn_verde_claro" onclick="location.href='01_lista_pacientes.php'"> Cancelar </button>    
+                </div>
+          <!-- fim - botão para Salvar Dados Pessoais -->
             
     </div>
     <!-- fim - dados pessoais -->  
@@ -324,11 +317,12 @@ ini_set('default_charset','UTF-8');
         
         
         //preparando informações para carregar no modal
+        $numero_botoes = 2;
         $titulo = "Cadastro de Paciente - Dados Pessoais";
         $mensagem = "O dados pessoais foram cadastrados com sucesso!";
         $btn_esquerda = "Antopometria";
         $btn_esquerda_destino = "01_1_cadastro_paciente_antopometria.php";
-        $btn_direita = "Fechar";
+        $btn_direita = "Lista de Pacientes";
         $btn_direita_destino = "01_lista_pacientes.php";
         $btn_x = "01_lista_pacientes.php";
 

@@ -5,6 +5,11 @@ a:hover     {text-decoration:none; color:#0A4438 }
 a:active    {text-decoration:none; color:#0A4438 }
 
 
+a.link_detalhes:link      {text-decoration:none; color:#18A689 }
+a.link_detalhes:visited   {text-decoration:none; color:#18A689 }
+a.link_detalhes:hover     {text-decoration:none; color:#18A689 }
+a.link_detalhes:active    {text-decoration:none; color:#18A689 }
+
 /* alinhamento */
 .esquerdo           {text-align:left}
 .direito            {text-align: right}
@@ -25,13 +30,15 @@ a:active    {text-decoration:none; color:#0A4438 }
 
 
 /* cor da fonte */
+.fonte_preta       {color:#000}
 .fonte_branca       {color:#fff}
 .fonte_verde_escuro {color:#0A4438}
 .fonte_verde_claro  {color:#18A689}
-.fonte_vermelho     {color:#FF534F}
+.fonte_vermelha     {color:#FF534F}
 .fonte_amarelo      {color:#FF9E45}
 .fonte_bege         {color:#D2BDA0}
 .fonte_cinza        {color:#ddd}
+
 
 
 /* cor de fundo */
@@ -44,7 +51,7 @@ a:active    {text-decoration:none; color:#0A4438 }
 .fundo_bege             {background-color:#D2BDA0}
 .fundo_cinza            {background-color:#ddd}
 .fundo_login            {
-                        background: url(../img/fundo_login.jpg) no-repeat center center fixed; 
+                        background: url(../img/fundo_login.jpg) no-repeat center bottom fixed; 
                       -webkit-background-size: cover;
                       -moz-background-size: cover;
                       -o-background-size: cover;
@@ -86,6 +93,7 @@ a:active    {text-decoration:none; color:#0A4438 }
 .altura_200             {height: 200px}
 .altura_250             {height: 250px}
 .altura_300             {height: 300px}
+.altura_400             {height: 400px}
 .altura_500             {height: 500px}
 
 
@@ -94,12 +102,24 @@ a:active    {text-decoration:none; color:#0A4438 }
 .largura_05             {width:5%}
 .largura_10             {width:10%}
 .largura_15             {width:15%}
+.largura_16             {width:16%}
+.largura_17             {width:17%}
+.largura_18             {width:18%}
+.largura_19             {width:19%}
 .largura_20             {width:20%}
+.largura_21             {width:21%}
+.largura_22             {width:22%}
+.largura_23             {width:23%}
+.largura_24             {width:24%}
 .largura_25             {width:25%}
 .largura_30             {width:30%}
 .largura_35             {width:35%}
 .largura_40             {width:40%}
 .largura_45             {width:45%}
+.largura_46             {width:46%}
+.largura_47             {width:47%}
+.largura_48             {width:48%}
+.largura_49             {width:49%}
 .largura_50             {width:50%}
 .largura_55             {width:55%}
 .largura_60             {width:60%}
@@ -269,6 +289,8 @@ a:active    {text-decoration:none; color:#0A4438 }
 .padding_03                 {padding: 3px}
 .padding_04                 {padding: 4px}
 .padding_05                 {padding: 5px}
+.padding_06                 {padding: 6px}
+.padding_07                 {padding: 7px}
 .padding_10                 {padding: 10px}
 .padding_15                 {padding: 15px}
 .padding_20                 {padding: 20px}
@@ -294,48 +316,50 @@ a:active    {text-decoration:none; color:#0A4438 }
 
 
 
-.padding_top_05             {padding-top: 5x}
+.padding_top_05             {padding-top: 5px}
+.padding_top_06             {padding-top: 6px}
+.padding_top_07             {padding-top: 7px}
 .padding_top_10             {padding-top: 10px}
-.padding_top_15             {padding-top: 15x}
+.padding_top_15             {padding-top: 15px}
 .padding_top_20             {padding-top: 20px}
-.padding_top_25             {padding-top: 25x}
+.padding_top_25             {padding-top: 25px}
 .padding_top_30             {padding-top: 30px}
-.padding_top_35             {padding-top: 35x}
+.padding_top_35             {padding-top: 35px}
 .padding_top_40             {padding-top: 40px}
-.padding_top_45             {padding-top: 45x}
+.padding_top_45             {padding-top: 45px}
 .padding_top_50             {padding-top: 50px}
-.padding_top_55             {padding-top: 55x}
+.padding_top_55             {padding-top: 55px}
 .padding_top_60             {padding-top: 60px}
-.padding_top_65             {padding-top: 65x}
+.padding_top_65             {padding-top: 65px}
 .padding_top_70             {padding-top: 70px}
-.padding_top_75             {padding-top: 75x}
+.padding_top_75             {padding-top: 75px}
 .padding_top_80             {padding-top: 80px}
-.padding_top_85             {padding-top: 85x}
+.padding_top_85             {padding-top: 85px}
 .padding_top_90             {padding-top: 90px}
-.padding_top_95             {padding-top: 95x}
+.padding_top_95             {padding-top: 95px}
 .padding_top_100            {padding-top: 100px}
 
 
 
-.padding_bottom_05             {padding-bottom: 5x}
+.padding_bottom_05             {padding-bottom: 5px}
 .padding_bottom_10             {padding-bottom: 10px}
-.padding_bottom_15             {padding-bottom: 15x}
+.padding_bottom_15             {padding-bottom: 15px}
 .padding_bottom_20             {padding-bottom: 20px}
-.padding_bottom_25             {padding-bottom: 25x}
+.padding_bottom_25             {padding-bottom: 25px}
 .padding_bottom_30             {padding-bottom: 30px}
-.padding_bottom_35             {padding-bottom: 35x}
+.padding_bottom_35             {padding-bottom: 35px}
 .padding_bottom_40             {padding-bottom: 40px}
-.padding_bottom_45             {padding-bottom: 45x}
+.padding_bottom_45             {padding-bottom: 45px}
 .padding_bottom_50             {padding-bottom: 50px}
-.padding_bottom_55             {padding-bottom: 55x}
+.padding_bottom_55             {padding-bottom: 55px}
 .padding_bottom_60             {padding-bottom: 60px}
-.padding_bottom_65             {padding-bottom: 65x}
+.padding_bottom_65             {padding-bottom: 65px}
 .padding_bottom_70             {padding-bottom: 70px}
-.padding_bottom_75             {padding-bottom: 75x}
+.padding_bottom_75             {padding-bottom: 75px}
 .padding_bottom_80             {padding-bottom: 80px}
-.padding_bottom_85             {padding-bottom: 85x}
+.padding_bottom_85             {padding-bottom: 85px}
 .padding_bottom_90             {padding-bottom: 90px}
-.padding_bottom_95             {padding-bottom: 95x}
+.padding_bottom_95             {padding-bottom: 95px}
 .padding_bottom_100            {padding-bottom: 100px}
 
 
@@ -398,11 +422,13 @@ a:active    {text-decoration:none; color:#0A4438 }
 .borda_branca           {border:1px solid #fff}
 .borda_verde_escuro     {border:1px solid #0A4438}
 .borda_verde_light      {border:1px solid #18A689}
-.borda_verde_claro      {border:1px solid #58a518}
+.borda_verde_claro      {border:1px solid #18A689}
 .borda_vermelho         {border:1px solid #FF534F}
 .borda_amarelo          {border:1px solid #FF9E45}
 .borda_bege             {border:1px solid #D2BDA0}
 .borda_cinza            {border:1px solid #ddd}
+.borda_inferior_verde_claro {border-bottom:3px solid #18A689}
+
 
 .borda_esquerda_grossa  {border-left:5px solid #0A4438}
 
@@ -430,7 +456,13 @@ a:active    {text-decoration:none; color:#0A4438 }
 
 /* formularios e botoes forms buttons */
 .btn                    {background-color: #0A4438; border:1px solid #0A4438}
+.btn-primary            {background-color: #0A4438; border:1px solid #0A4438}
 .btn:hover              {background-color:#18A689; color:#fff; border:1px solid #18A689}
+.btn-primary:hover      {background-color: #18A689; border:1px solid #18A689}
+.btn:active .btn_login  {background-color:#18A689; color:#fff; border:1px solid #18A689}
+.btn-primary:active     {background-color: #18A689; border:1px solid #18A689}
+.btn_verde_claro        {background-color:#18A689; color:#fff; border:1px solid #18A689}
+.btn_verde_claro:hover  {background-color:#0A4438; color:#fff; border:1px solid #0A4438}
 
 .panel-body             {border:1px solid rgba(10,68,56,.2)}
 .form-control           {border:1px solid rgba(10,68,56,.2)}

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php 
+// acentuação PHP
 ini_set('default_charset','UTF-8');
 ?>    
 <html>    
@@ -21,7 +22,7 @@ ini_set('default_charset','UTF-8');
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-<body>
+<body class="fundo_login">
 
     
     
@@ -55,7 +56,7 @@ ini_set('default_charset','UTF-8');
           </div>
           
           <br/>
-          <button type="submit" class="btn btn-default fonte_branca largura_40 altura_40">Acessar</button>
+          <button type="submit" class="btn btn_verde_claro fonte_branca largura_40 altura_40">Acessar</button>
             &nbsp;&nbsp;&nbsp;&nbsp;
           <span class="glyphicon glyphicon-lock"></span> Esqueci minha senha
 

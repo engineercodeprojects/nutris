@@ -2,6 +2,8 @@
 <?php 
 // iniciando a sessão
 session_start();
+//include do arquivo que verifica se o usuário passou pelo login
+include_once('includes/verifica_logado.php');
 //include do arquivo de conexao com o banco de dados
 include_once('conexao/connect_db.php');
 //instancia do banco de dados
@@ -10,6 +12,91 @@ $db = BancoDeDados::getInstance();
 // acentuação
 mysql_set_charset('utf8');
 ini_set('default_charset','UTF-8');
+
+//atualizando os dados caso o formulário tenha sido enviado
+if( $_SERVER['REQUEST_METHOD']=='POST')
+    {
+    
+        //include do arquivo de conexao com o banco de dados
+        include_once('conexao/connect_db.php');
+
+        //instancia do banco de dados
+        $db = BancoDeDados::getInstance();  
+
+        // acentuação
+        mysql_set_charset('utf8');
+        ini_set('default_charset','UTF-8');
+
+        //recuperando dados pessoais
+        $consumo_agua = $_POST['consumo_agua'];
+        $mastigacao = $_POST['mastigacao'];
+        $gosta_de_comer = $_POST['gosta_de_comer'];
+        $nao_gosta_de_comer = $_POST['nao_gosta_de_comer'];
+        
+        $pao_integral = $_POST['pao_integral'];
+        $pao_branco = $_POST['pao_branco'];
+        $arroz_integral = $_POST['arroz_integral'];
+        $arroz_branco = $_POST['arroz_branco'];
+        $cereais = $_POST['cereais'];
+        $feijao = $_POST['feijao'];
+        $carne_boi = $_POST['carne_boi'];
+        $frango = $_POST['frango'];
+        $peixe = $_POST['peixe'];
+        $ovo = $_POST['ovo'];
+        $leite_derivados = $_POST['leite_derivados'];
+        $azeite_oliva = $_POST['azeite_oliva'];
+        $castanhas = $_POST['castanhas'];
+        $frutas_frescas = $_POST['frutas_frescas'];
+        $frutas_secas = $_POST['frutas_secas'];
+        $legumes_verduras = $_POST['legumes_verduras'];
+        $doces_biscoitos_chocolates = $_POST['doces_biscoitos_chocolates'];
+        $refrigerantes = $_POST['refrigerantes'];
+        $fast_food = $_POST['fast_food'];
+        $cafe = $_POST['cafe'];
+        
+        
+        
+        
+        $sqlstring_atualizar_habito_alimentar  = "update tb_habito_alimentar set ";
+        $sqlstring_atualizar_habito_alimentar .= "cod_consumo_agua = '" . $consumo_agua . "', ";  
+        $sqlstring_atualizar_habito_alimentar .= "cod_mastigacao = '" . $mastigacao . "', ";        
+        $sqlstring_atualizar_habito_alimentar .= "mais_gosta = '" . $gosta_de_comer . "', ";        
+        $sqlstring_atualizar_habito_alimentar .= "nao_gosta = '" . $nao_gosta_de_comer . "', ";        
+        $sqlstring_atualizar_habito_alimentar .= "pao_integral = '" . $pao_integral . "', ";        
+        $sqlstring_atualizar_habito_alimentar .= "pao_branco = '" . $pao_branco . "', ";        
+        $sqlstring_atualizar_habito_alimentar .= "arroz_integral = '" . $arroz_integral . "', ";        
+        $sqlstring_atualizar_habito_alimentar .= "arroz_branco = '" . $arroz_branco . "', ";        
+        $sqlstring_atualizar_habito_alimentar .= "cereais = '" . $cereais . "', ";        
+        $sqlstring_atualizar_habito_alimentar .= "feijao = '" . $feijao . "', ";        
+        $sqlstring_atualizar_habito_alimentar .= "carne_boi = '" . $carne_boi . "', ";        
+        $sqlstring_atualizar_habito_alimentar .= "frango = '" . $frango . "', ";        
+        $sqlstring_atualizar_habito_alimentar .= "peixe = '" . $peixe . "', ";        
+        $sqlstring_atualizar_habito_alimentar .= "ovo = '" . $ovo . "', ";        
+        $sqlstring_atualizar_habito_alimentar .= "leite_derivados = '" . $leite_derivados . "', ";        
+        $sqlstring_atualizar_habito_alimentar .= "azeite_oliva = '" . $azeite_oliva . "', ";        
+        $sqlstring_atualizar_habito_alimentar .= "castanhas = '" . $castanhas . "', ";        
+        $sqlstring_atualizar_habito_alimentar .= "frutas_frescas = '" . $frutas_frescas . "', ";        
+        $sqlstring_atualizar_habito_alimentar .= "frutas_secas = '" . $frutas_secas . "', ";        
+        $sqlstring_atualizar_habito_alimentar .= "legumes_verduras = '" . $legumes_verduras . "', ";        
+        $sqlstring_atualizar_habito_alimentar .= "doces_biscoitos_chocolates = '" . $doces_biscoitos_chocolates . "', ";        
+        $sqlstring_atualizar_habito_alimentar .= "refrigerante = '" . $refrigerantes . "', ";        
+        $sqlstring_atualizar_habito_alimentar .= "fast_food = '" . $fast_food . "', ";        
+        $sqlstring_atualizar_habito_alimentar .= "cafe = '" . $cafe . "' ";        
+        $sqlstring_atualizar_habito_alimentar .= "where cod_paciente = " . $_SESSION['cod_paciente_selecionado'];
+        
+        $db->string_query($sqlstring_atualizar_habito_alimentar);
+        
+      
+        //preparando informações para carregar no modal
+        $numero_botoes = 2;
+        $titulo = "Paciente - Hábitos Alimentares";
+        $mensagem = "Os hábitos alimentares foram cadastrados com sucesso!";
+        $btn_esquerda = "Objetivo";
+        $btn_esquerda_destino = "01_1_cadastro_paciente_objetivo.php";
+        $btn_direita = "Lista de Pacientes";
+        $btn_direita_destino = "01_lista_pacientes.php";
+        $btn_x = "01_lista_pacientes.php";
+}
 
 //recuperando o paciente selecionado caso o clique venha da listagem de pacientes
 if(isset($_GET['cod']))
@@ -52,13 +139,23 @@ $dados_habitos_alimentares = mysql_fetch_array($info_habitos_alimentares);
     
     <!-- inicio - titulo do formulário -->  
     <div class="row">
-        <!-- inicio - painel dados pessoais -->
-          <div class="panel panel-default margin_top_20 sem_borda">
-            <div class="panel-body borda_verde_escuro" style="border:0px solid #eee; border-left:0px solid #0A4438;">                 
-                    <span class="glyphicon glyphicon-edit fonte_verde_claro"></span>
-                    <span class=" fonte_verde_claro fonte_muito_grande negrito">CADASTRO PACIENTE</span>
+        <!-- inicio - painel avaliacao nutricional -->
+          <div class="panel panel-default margin_top_20 sem_borda padding_top_25">
+            <div class="panel-body borda_verde_escuro col-md-12" style="border:0px solid #eee; border-left:0px solid #0A4438;">                 
+                    <span class="glyphicon glyphicon-th-list fonte_verde_claro"></span>
+                    <span class=" fonte_verde_claro fonte_muito_grande negrito">PACIENTE - AVALIAÇÃO NUTRICIONAL</span>
                     <br/>
-                    <span class="fonte_pequena">Avaliação Nutricional</span>                
+                    <span class="fonte_pequena">
+                        <a href="01_1_alteracao_paciente_dados_pessoais.php">Dados Pessoais</a>
+                        <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
+                        <a href="01_1_cadastro_paciente_antopometria.php">Antopometria</a>
+                        <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
+                        <span class="fonte_verde_claro">Avaliação Nutricional</span>
+                        <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
+                        <a href="01_1_cadastro_paciente_objetivo.php">Objetivo</a>
+                        
+                    </span> 
+                    <br/><br/>                    
             </div>
           </div>
     </div>
@@ -73,8 +170,8 @@ $dados_habitos_alimentares = mysql_fetch_array($info_habitos_alimentares);
         
           
           <!-- inicio - painel habitos alimentares -->
-          <div class="panel panel-default">
-            <div class="panel-body borda_verde_claro" style="border-left:5px solid #0A4438">
+          <div class="panel panel-default" style="border:0px solid #eee; border-left:5px solid #18A689; border-right:2px solid #18A689;">
+            <div class="panel-body borda_verde_claro">
             
           <!-- inicio - linha 1 -->
               <!-- inicio consumo de água -->
@@ -258,7 +355,7 @@ $dados_habitos_alimentares = mysql_fetch_array($info_habitos_alimentares);
                 
                 
                 <tr>
-                <td class="largura_60">Castamhas</td> 
+                <td class="largura_60">Castanhas</td> 
                 <td class="largura_10 centralizado"><input type="radio" name="castanhas" id="castanhas" value="1"  <?php print ($dados_habitos_alimentares['castanhas'] == 1) ? "checked" : null; ?>></td>
                 <td class="largura_10 centralizado"><input type="radio" name="castanhas" id="castanhas" value="2"  <?php print ($dados_habitos_alimentares['castanhas'] == 2) ? "checked" : null; ?>></td>
                 <td class="largura_10 centralizado"><input type="radio" name="castanhas" id="castanhas" value="3"  <?php print ($dados_habitos_alimentares['castanhas'] == 3) ? "checked" : null; ?>></td>
@@ -331,30 +428,28 @@ $dados_habitos_alimentares = mysql_fetch_array($info_habitos_alimentares);
             </table>
           </div>
             
-                
-            <div class="row">
-            <!-- inicio - botao para Salvar Hábito Alimentar -->
-            <div class="col-md-12  direito">
-                <button type="submit" class="btn btn-primary">        
-                    Salvar Hábito Alimentar
-                </button>    
-            </div>
-            <!-- fim - botão para Salvar Hábito Alimentar -->            
-                
-        </div>
-   
-        
-       </form>
-       <!-- fim do formulário antopometria -->    
-            </div>
-    </div>        
+       
+    </div>              
     <!-- fim - painel hábitos alimentares -->
+    
             
     </div>
     <!-- fim - habitos alimentares -->
        
         
+    <br/>
+    <!-- inicio - botao para Salvar Hábito Alimentar -->
+    <div class="col-md-12  direito">
+        <button type="submit" class="btn btn_verde_claro">Salvar Hábito Alimentar </button>    
+        <button type="button" class="btn btn_verde_claro" onclick="location.href='01_lista_pacientes.php'">Cancelar </button>    
+    </div>
+    <!-- fim - botão para Salvar Hábito Alimentar -->            
+    </div>
+    <br/><br/>    
     
+
+    </form>
+   <!-- fim do formulário antopometria --> 
    
         
    
@@ -384,88 +479,8 @@ $dados_habitos_alimentares = mysql_fetch_array($info_habitos_alimentares);
 <?php
     if( $_SERVER['REQUEST_METHOD']=='POST')
     {
-    
-        //include do arquivo de conexao com o banco de dados
-        include_once('conexao/connect_db.php');
-
-        //instancia do banco de dados
-        $db = BancoDeDados::getInstance();  
-
-        // acentuação
-        mysql_set_charset('utf8');
-        ini_set('default_charset','UTF-8');
-
-        //recuperando dados pessoais
-        $consumo_agua = $_POST['consumo_agua'];
-        $mastigacao = $_POST['mastigacao'];
-        $gosta_de_comer = $_POST['gosta_de_comer'];
-        $nao_gosta_de_comer = $_POST['nao_gosta_de_comer'];
-        
-        $pao_integral = $_POST['pao_integral'];
-        $pao_branco = $_POST['pao_branco'];
-        $arroz_integral = $_POST['arroz_integral'];
-        $arroz_branco = $_POST['arroz_branco'];
-        $cereais = $_POST['cereais'];
-        $feijao = $_POST['feijao'];
-        $carne_boi = $_POST['carne_boi'];
-        $frango = $_POST['frango'];
-        $peixe = $_POST['peixe'];
-        $ovo = $_POST['ovo'];
-        $leite_derivados = $_POST['leite_derivados'];
-        $azeite_oliva = $_POST['azeite_oliva'];
-        $castanhas = $_POST['castanhas'];
-        $frutas_frescas = $_POST['frutas_frescas'];
-        $frutas_secas = $_POST['frutas_secas'];
-        $legumes_verduras = $_POST['legumes_verduras'];
-        $doces_biscoitos_chocolates = $_POST['doces_biscoitos_chocolates'];
-        $refrigerantes = $_POST['refrigerantes'];
-        $fast_food = $_POST['fast_food'];
-        $cafe = $_POST['cafe'];
-        
-        
-        
-        
-        $sqlstring_atualizar_habito_alimentar  = "update tb_habito_alimentar set ";
-        $sqlstring_atualizar_habito_alimentar .= "cod_consumo_agua = '" . $consumo_agua . "', ";  
-        $sqlstring_atualizar_habito_alimentar .= "cod_mastigacao = '" . $mastigacao . "', ";        
-        $sqlstring_atualizar_habito_alimentar .= "mais_gosta = '" . $gosta_de_comer . "', ";        
-        $sqlstring_atualizar_habito_alimentar .= "nao_gosta = '" . $nao_gosta_de_comer . "', ";        
-        $sqlstring_atualizar_habito_alimentar .= "pao_integral = '" . $pao_integral . "', ";        
-        $sqlstring_atualizar_habito_alimentar .= "pao_branco = '" . $pao_branco . "', ";        
-        $sqlstring_atualizar_habito_alimentar .= "arroz_integral = '" . $arroz_integral . "', ";        
-        $sqlstring_atualizar_habito_alimentar .= "arroz_branco = '" . $arroz_branco . "', ";        
-        $sqlstring_atualizar_habito_alimentar .= "cereais = '" . $cereais . "', ";        
-        $sqlstring_atualizar_habito_alimentar .= "feijao = '" . $feijao . "', ";        
-        $sqlstring_atualizar_habito_alimentar .= "carne_boi = '" . $carne_boi . "', ";        
-        $sqlstring_atualizar_habito_alimentar .= "frango = '" . $frango . "', ";        
-        $sqlstring_atualizar_habito_alimentar .= "peixe = '" . $peixe . "', ";        
-        $sqlstring_atualizar_habito_alimentar .= "ovo = '" . $ovo . "', ";        
-        $sqlstring_atualizar_habito_alimentar .= "leite_derivados = '" . $leite_derivados . "', ";        
-        $sqlstring_atualizar_habito_alimentar .= "azeite_oliva = '" . $azeite_oliva . "', ";        
-        $sqlstring_atualizar_habito_alimentar .= "castanhas = '" . $castanhas . "', ";        
-        $sqlstring_atualizar_habito_alimentar .= "frutas_frescas = '" . $frutas_frescas . "', ";        
-        $sqlstring_atualizar_habito_alimentar .= "frutas_secas = '" . $frutas_secas . "', ";        
-        $sqlstring_atualizar_habito_alimentar .= "legumes_verduras = '" . $legumes_verduras . "', ";        
-        $sqlstring_atualizar_habito_alimentar .= "doces_biscoitos_chocolates = '" . $doces_biscoitos_chocolates . "', ";        
-        $sqlstring_atualizar_habito_alimentar .= "refrigerante = '" . $refrigerantes . "', ";        
-        $sqlstring_atualizar_habito_alimentar .= "fast_food = '" . $fast_food . "', ";        
-        $sqlstring_atualizar_habito_alimentar .= "cafe = '" . $cafe . "' ";        
-        $sqlstring_atualizar_habito_alimentar .= "where cod_paciente = " . $_SESSION['cod_paciente_selecionado'];
-        
-        $db->string_query($sqlstring_atualizar_habito_alimentar);
-        
-      
-        //preparando informações para carregar no modal
-        $titulo = "Cadastro de Paciente - Dados Pessoais";
-        $mensagem = "O dados pessoais foram cadastrados com sucesso!";
-        $btn_esquerda = "Objetivo";
-        $btn_esquerda_destino = "01_1_cadastro_paciente_objetivo.php";
-        $btn_direita = "Fechar";
-        $btn_direita_destino = "01_lista_pacientes.php";
-        $btn_x = "01_lista_pacientes.php";
-
-
         include "includes/modal_sucesso.php";
+    }
         
 ?>
 
@@ -477,6 +492,4 @@ $dados_habitos_alimentares = mysql_fetch_array($info_habitos_alimentares);
         });
     </script>
     
-    <?php
-    }
-    ?>
+  
