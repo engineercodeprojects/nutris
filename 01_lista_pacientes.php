@@ -176,7 +176,7 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
                     </td>
                 
                     <td class="centralizado">
-                        <a href="#" alt="Prescrição Dieta" title="Prescrição Dieta">
+                        <a href="01_3_cadastro_dieta.php" alt="Prescrição Dieta" title="Prescrição Dieta">
                         <span class="glyphicon glyphicon-apple fonte_pequena"></span>
                         </a>
                     </td>

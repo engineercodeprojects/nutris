@@ -182,7 +182,7 @@ ini_set('default_charset','UTF-8');
               <!-- inicio data nascimento -->    
               <div class="form-group col-md-3">
                 <label for="cidade">Dt Nascimento <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
-                <input type="text" class="form-control" name="data_nascimento" id="data_nascimento" placeholder="12/12/2017" maxlength="10">
+                <input type="text" class="form-control" name="data_nascimento" id="data_nascimento" placeholder="12/12/2017" maxlength="10" required>
               </div>
               <!-- fim data nascimento -->
 

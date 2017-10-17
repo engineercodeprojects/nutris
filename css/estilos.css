@@ -10,6 +10,13 @@ a.link_detalhes:visited   {text-decoration:none; color:#18A689 }
 a.link_detalhes:hover     {text-decoration:none; color:#18A689 }
 a.link_detalhes:active    {text-decoration:none; color:#18A689 }
 
+
+a.link_branco:link      {text-decoration:none; color:#fff }
+a.link_branco:visited   {text-decoration:none; color:#fff }
+a.link_branco:hover     {text-decoration:none; color:#fff }
+a.link_branco:active    {text-decoration:none; color:#fff }
+
+
 /* alinhamento */
 .esquerdo           {text-align:left}
 .direito            {text-align: right}
@@ -292,6 +299,8 @@ a.link_detalhes:active    {text-decoration:none; color:#18A689 }
 .padding_06                 {padding: 6px}
 .padding_07                 {padding: 7px}
 .padding_10                 {padding: 10px}
+.padding_11                 {padding: 11px}
+.padding_12                 {padding: 12px}
 .padding_15                 {padding: 15px}
 .padding_20                 {padding: 20px}
 .padding_25                 {padding: 25px}
@@ -346,6 +355,7 @@ a.link_detalhes:active    {text-decoration:none; color:#18A689 }
 .padding_bottom_15             {padding-bottom: 15px}
 .padding_bottom_20             {padding-bottom: 20px}
 .padding_bottom_25             {padding-bottom: 25px}
+.padding_bottom_26             {padding-bottom: 26px}
 .padding_bottom_30             {padding-bottom: 30px}
 .padding_bottom_35             {padding-bottom: 35px}
 .padding_bottom_40             {padding-bottom: 40px}

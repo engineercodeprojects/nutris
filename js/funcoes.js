@@ -1,3 +1,13 @@
+ function abrir_modal(dia_semana, paciente)
+{
+
+        $('#modal_cadastrar_dieta').modal('show');
+        $('.modal-body').html(dia_semana + paciente);
+        
+        
+        
+}
+
 // função para preencher os campos de complementos do histórico do paciente 
 function preencher_campo_sim_nao(opcao, campo, mensagem)
 {
