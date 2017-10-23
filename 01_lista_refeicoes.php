@@ -20,7 +20,7 @@ if(isset($busca))
 {
     $sqlstring_refeicoes  = "select tb_refeicao.cod_refeicao, tb_refeicao.refeicao, tb_tipo_refeicao.tipo_refeicao,tb_refeicao.cod_status from tb_refeicao ";
     $sqlstring_refeicoes .= "inner join tb_tipo_refeicao on tb_refeicao.cod_tipo_refeicao = tb_tipo_refeicao.cod_tipo_refeicao ";
-    $sqlstring_refeicoes .= "where tb_refeicao.cod_status = 1 and refeicao like '%" . $busca . "%' or tipo_refeicao like '%" . $busca . "%'";       
+    $sqlstring_refeicoes .= "where tb_refeicao.cod_status = 1 and (refeicao like '%" . $busca . "%' or tipo_refeicao like '%" . $busca . "%')";       
 }
 else    
 {

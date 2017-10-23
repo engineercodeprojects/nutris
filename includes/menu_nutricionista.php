@@ -110,7 +110,7 @@
         </a>
         
         <a href="logout.php" alt="Sair da Plataforma Nutris" title="Sair da Plataforma Nutris">
-        <div class="link"><span class="glyphicon glyphicon-off padding_right_30 fonte_muito_grande"></span></div>
+        <div class="link"><span class="glyphicon glyphicon-log-out padding_right_30 fonte_muito_grande"></span></div>
         </a>
     
 
@@ -155,7 +155,7 @@
         
         <a href="logout.php" alt="Sair da Plataforma Nutris" title="Sair da Plataforma Nutris">
             <div class="link">
-                <span class="glyphicon glyphicon-off padding_right_30 fonte_muito_grande"></span> <span class="padding_left_30">SAIR</span> 
+                <span class="glyphicon glyphicon-log-out padding_right_30 fonte_muito_grande"></span> <span class="padding_left_30">SAIR</span> 
             </div>
         </a>
     

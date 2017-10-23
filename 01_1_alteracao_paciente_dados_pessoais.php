@@ -127,7 +127,8 @@ $dados_paciente_selecionado = mysql_fetch_array($info_paciente_selecionado);
           <div class="panel panel-default margin_top_20 sem_borda padding_top_25">
             <div class="panel-body borda_verde_escuro col-md-12" style="border:0px solid #fff; border-left:0px solid #0A4438;">                 
                     <span class="glyphicon glyphicon-tag fonte_verde_claro"></span>
-                    <span class=" fonte_verde_claro fonte_muito_grande negrito">PACIENTE - DADOS PESSOAIS</span>
+                    <span class=" fonte_verde_claro fonte_muito_grande negrito">PACIENTE DADOS PESSOAIS</span>:
+                    <span class=" fonte_verde_claro fonte_muito_grande"><?php print $dados_paciente_selecionado['nome_paciente'] ?></span>
                     <br/>
                     <span class="fonte_pequena">
                         <span class="fonte_verde_claro">Dados Pessoais</span>
@@ -137,6 +138,8 @@ $dados_paciente_selecionado = mysql_fetch_array($info_paciente_selecionado);
                         <a href="01_1_cadastro_paciente_avaliacao.php">Avaliação Nutricional</a>
                         <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
                         <a href="01_1_cadastro_paciente_objetivo.php">Objetivo</a>
+                        <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
+                        <a href="01_3_cadastro_dieta.php">Prescrição de Dieta</a>
                         
                     </span> 
                     <br/><br/>

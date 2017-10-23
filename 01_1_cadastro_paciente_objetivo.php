@@ -119,9 +119,9 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         $numero_botoes = 2;
         $titulo = "Paciente - Objetivo do Programa";
         $mensagem = "O objetivo do programa foi cadastrado com sucesso!";
-        $btn_esquerda = "Avaliação Nutricional  ";
-        $btn_esquerda_destino = "01_1_cadastro_paciente_avaliacao.php";        
-        $btn_direita = "Finalizar";
+        $btn_esquerda = "Prescrição de Dieta  ";
+        $btn_esquerda_destino = "01_3_cadastro_dieta.php";        
+        $btn_direita = "Lista de Pacientes";
         $btn_direita_destino = "01_lista_pacientes.php";        
         $btn_x = "01_lista_pacientes.php";
 }
@@ -132,7 +132,7 @@ if(isset($_GET['cod']))
     $_SESSION['cod_paciente_selecionado'] = base64_decode($_GET['cod']);
 
 
-$sqlstring_objetivo_programa  = "select tb_objetivo_paciente.*, tb_paciente.sexo, TIMESTAMPDIFF(YEAR, tb_paciente.data_nascimento, current_date) as anos,tb_paciente.data_nascimento from tb_objetivo_paciente ";
+$sqlstring_objetivo_programa  = "select tb_objetivo_paciente.*, tb_paciente.nome_paciente, tb_paciente.sexo, TIMESTAMPDIFF(YEAR, tb_paciente.data_nascimento, current_date) as anos,tb_paciente.data_nascimento from tb_objetivo_paciente ";
 $sqlstring_objetivo_programa .= "inner join tb_paciente on tb_paciente.cod_paciente = tb_objetivo_paciente.cod_paciente ";
 $sqlstring_objetivo_programa .= "where tb_objetivo_paciente.cod_paciente = " . $_SESSION['cod_paciente_selecionado'];
 $info_objetivo_programa = $db->sql_query($sqlstring_objetivo_programa);
@@ -176,7 +176,8 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
           <div class="panel panel-default margin_top_20 sem_borda padding_top_25">
             <div class="panel-body borda_verde_escuro col-md-12" style="border:0px solid #eee; border-left:0px solid #0A4438;">                 
                     <span class="glyphicon glyphicon-screenshot fonte_verde_claro"></span>
-                    <span class=" fonte_verde_claro fonte_muito_grande negrito">PACIENTE - OBJETIVO</span>
+                    <span class=" fonte_verde_claro fonte_muito_grande negrito">PACIENTE OBJETIVO</span>:
+                    <span class=" fonte_verde_claro fonte_muito_grande"><?php print $dados_objetivo_programa['nome_paciente'] ?></span>
                     <br/>
                     <span class="fonte_pequena">
                         <a href="01_1_alteracao_paciente_dados_pessoais.php">Dados Pessoais</a>
@@ -185,7 +186,9 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
                         <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
                         <a href="01_1_cadastro_paciente_avaliacao.php">Avaliação Nutricional</a>
                         <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
-                        <span class="fonte_verde_claro">Objetivo</SPAN>
+                        <span class="fonte_verde_claro">Objetivo</span>
+                        <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
+                        <a href="01_3_cadastro_dieta.php">Prescrição de Dieta</a>
                         
                     </span> 
                     <br/><br/>                    

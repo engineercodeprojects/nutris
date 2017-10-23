@@ -102,7 +102,9 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
 if(isset($_GET['cod']))
     $_SESSION['cod_paciente_selecionado'] = base64_decode($_GET['cod']);
     
-$sqlstring_habitos_alimentares = "select * from tb_habito_alimentar where cod_paciente = " . $_SESSION['cod_paciente_selecionado'];
+$sqlstring_habitos_alimentares  = "select tb_habito_alimentar.*, tb_paciente.nome_paciente from tb_habito_alimentar ";
+$sqlstring_habitos_alimentares .= "inner join tb_paciente on tb_paciente.cod_paciente = tb_habito_alimentar.cod_paciente ";
+$sqlstring_habitos_alimentares .= "where tb_habito_alimentar.cod_paciente = " . $_SESSION['cod_paciente_selecionado'];
 $info_habitos_alimentares = $db->sql_query($sqlstring_habitos_alimentares);
 $dados_habitos_alimentares = mysql_fetch_array($info_habitos_alimentares);
 
@@ -143,7 +145,8 @@ $dados_habitos_alimentares = mysql_fetch_array($info_habitos_alimentares);
           <div class="panel panel-default margin_top_20 sem_borda padding_top_25">
             <div class="panel-body borda_verde_escuro col-md-12" style="border:0px solid #eee; border-left:0px solid #0A4438;">                 
                     <span class="glyphicon glyphicon-th-list fonte_verde_claro"></span>
-                    <span class=" fonte_verde_claro fonte_muito_grande negrito">PACIENTE - AVALIAÇÃO NUTRICIONAL</span>
+                    <span class=" fonte_verde_claro fonte_muito_grande negrito">PACIENTE AVALIAÇÃO NUTRICIONAL</span>:
+                    <span class=" fonte_verde_claro fonte_muito_grande"><?php print $dados_habitos_alimentares['nome_paciente'] ?></span>
                     <br/>
                     <span class="fonte_pequena">
                         <a href="01_1_alteracao_paciente_dados_pessoais.php">Dados Pessoais</a>
@@ -153,6 +156,8 @@ $dados_habitos_alimentares = mysql_fetch_array($info_habitos_alimentares);
                         <span class="fonte_verde_claro">Avaliação Nutricional</span>
                         <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
                         <a href="01_1_cadastro_paciente_objetivo.php">Objetivo</a>
+                        <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
+                        <a href="01_3_cadastro_dieta.php">Prescrição de Dieta</a>
                         
                     </span> 
                     <br/><br/>                    

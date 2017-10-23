@@ -181,7 +181,7 @@ ini_set('default_charset','UTF-8');
 
               <!-- inicio data nascimento -->    
               <div class="form-group col-md-3">
-                <label for="cidade">Dt Nascimento <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
+                <label for="data_nascimento">Dt Nascimento <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
                 <input type="text" class="form-control" name="data_nascimento" id="data_nascimento" placeholder="12/12/2017" maxlength="10" required>
               </div>
               <!-- fim data nascimento -->
@@ -277,12 +277,13 @@ ini_set('default_charset','UTF-8');
         $telefone_comercial = $_POST['telefone_comercial'];
         $celular = $_POST['celular'];
         $email = $_POST['email'];
-        $data_nascimento = date("Y/m/d", strtotime($_POST['data_nascimento']));
+        $data_nascimento = date("Y-m-d",strtotime($data_nascimento));
         $sexo = $_POST['sexo'];
         $peso = $_POST['peso'];
         $altura = $_POST['altura'];
         $outros = $_POST['outros'];
-
+        
+        
         // insere na tb_paciente os dados pessoais do paciente
         $sqlstring_inserir_dados_pessoais = "Insert into tb_paciente (nome_paciente, profissao, endereco, numero, complemento, bairro, cep, cidade, telefone_residencial, telefone_comercial, celular, email, data_nascimento, sexo, peso, altura, outros, cod_status) values ";
         $sqlstring_inserir_dados_pessoais .= "('" . $nome_paciente . "','" . $profissao . "','" . $endereco . "','" . $numero . "','" . $complemento . "','" . $bairro . "','" . $cep . "','" . $cidade . "','" . $telefone_residencial . "','" . $telefone_comercial . "','" . $celular . "','" . $email ."','" . $data_nascimento ."','" . $sexo . "','" . $peso . "','" . $altura . "','" . $outros . "',1)";
@@ -290,6 +291,7 @@ ini_set('default_charset','UTF-8');
         $db->string_query($sqlstring_inserir_dados_pessoais); 
 
 
+        
         // seleciona o ultimo codigo cadastrado na tb_paciente para inserir as informações nas tabelas tb_historico e tb_habito_alimentar
         $sqlstring_codigo = "select cod_paciente from tb_paciente order by cod_paciente desc limit 1";
         $info_codigo = $db->sql_query($sqlstring_codigo);
@@ -314,6 +316,30 @@ ini_set('default_charset','UTF-8');
         // inserindo o paciente na tb_objetivo_paciente
         $sqlstring_inserir_objetivo_paciente = "Insert into tb_objetivo_paciente (cod_paciente) values ('" . $_SESSION['cod_paciente_selecionado'] . "')";
         $db->string_query($sqlstring_inserir_objetivo_paciente); 
+        
+        //inserindo a dieta do paciente inicialmente sem refeições definidas
+        $contador_dia_semana=1;
+        while($contador_dia_semana < 8)
+        {
+            $contador_refeicoes=1;
+            while($contador_refeicoes <7)
+            {
+            $sqlstring_inserir_dieta  = "Insert into tb_dieta (cod_paciente, cod_tipo_refeicao, cod_refeicao, cod_dia_semana) values ";
+            $sqlstring_inserir_dieta .= "(" . $_SESSION['cod_paciente_selecionado'] . "," . $contador_refeicoes . ", 0 ," . $contador_dia_semana . ")";
+            $db->string_query($sqlstring_inserir_dieta); 
+            $contador_refeicoes++;
+            }
+        $contador_dia_semana++;
+        }
+        
+        //inserir o paciente na tb_usuario para poder logar no sistema e acompanhar a dieta
+        $primeiro_nome = explode(" ", $nome_paciente);
+        $nome_usuario = substr($email, 0, strpos( $email, '@' ));
+        $senha_usuario = "nutris@2017";
+        
+        $sqlstring_inserir_usuario  = "insert into tb_usuario (cod_usuario,nome_apelido, login,senha) values ";
+        $sqlstring_inserir_usuario .= "('" . $_SESSION['cod_paciente_selecionado'] . "','". $primeiro_nome[0] . "','" . $nome_usuario . "','" . $senha_usuario . "')";
+        $db->string_query($sqlstring_inserir_usuario);
         
         
         //preparando informações para carregar no modal

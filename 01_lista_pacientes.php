@@ -176,7 +176,7 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
                     </td>
                 
                     <td class="centralizado">
-                        <a href="01_3_cadastro_dieta.php" alt="Prescrição Dieta" title="Prescrição Dieta">
+                        <a href="01_3_cadastro_dieta.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Prescrição Dieta" title="Prescrição Dieta">
                         <span class="glyphicon glyphicon-apple fonte_pequena"></span>
                         </a>
                     </td>
@@ -189,13 +189,13 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
                 {
                     ?>
                     <tr>
-                    <td colspan="9">
+                    <td colspan="10">
                         &nbsp;
                     </td>
                     </tr>
             
                     <tr>
-                    <td colspan="9" class="fonte_verde_escuro" style="border:0px solid #fff">
+                    <td colspan="10" class="fonte_verde_escuro" style="border:0px solid #fff">
                         <div class="alert alert-success" role="alert">
                             <strong><span class="glyphicon glyphicon-info-sign"></span> Nenhum paciente</strong> está cadastrado!
                         </div>    
@@ -247,6 +247,12 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
 
         $sqlstring_historico_paciente = "delete from tb_historico_paciente where cod_paciente IN(".implode(',', $arr ).")";
         $info_historico_paciente = $db->sql_query($sqlstring_historico_paciente);
+            
+        $sqlstring_dieta = "delete from tb_dieta where cod_paciente IN(".implode(',', $arr ).")";
+        $info_dieta = $db->sql_query($sqlstring_dieta);
+            
+        $sqlstring_usuario = "delete from tb_usuario where cod_usuario IN(".implode(',', $arr ).")";
+        $info_usuario = $db->sql_query($sqlstring_usuario);
 
         $sqlstring_paciente = "delete from tb_paciente where cod_paciente IN(".implode(',', $arr ).")";
         $info_paciente = $db->sql_query($sqlstring_paciente);

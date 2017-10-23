@@ -1,10 +1,6 @@
- function abrir_modal(dia_semana, paciente)
+ function abrir_modal()
 {
-
-        $('#modal_cadastrar_dieta').modal('show');
-        $('.modal-body').html(dia_semana + paciente);
-        
-        
+       
         
 }
 
@@ -63,6 +59,8 @@ function nova_pesquisa(destino)
 
 
 
+
+// exibir ocultar a quantodade de atividades fisicas
 function exibir_ocultar_atividades_fisicas(acao)
 {
     
@@ -237,7 +235,7 @@ function exibir_ocultar_atividades_fisicas(acao)
 
 
 
-
+//exibir ocultar campos
 function exibir_ocultar_campos(acao,campo1,campo2,campo3,campo4,campo5)
 {
     
@@ -260,6 +258,8 @@ function exibir_ocultar_campos(acao,campo1,campo2,campo3,campo4,campo5)
 
 
 
+
+//calcular IMC dos formularios
 function calcular_imc()
 {
     
@@ -268,7 +268,7 @@ function calcular_imc()
     
     if(peso > 0  && altura > 0)
         {
-            document.getElementById('res_imc').value = Math.ceil((peso/(Math.pow((altura/100),2)))*100)/100;            
+            document.getElementById('res_imc').value = (Math.ceil((peso/(Math.pow((altura/100),2)))*100)/100).toFixed(2);            
             classificacao = parseFloat(Math.ceil((peso/(Math.pow((altura/100),2)))*100)/100);
             if(classificacao < 18.5)                           
                 document.getElementById('classificacao').value = 'Abaixo do Peso';                                
@@ -291,13 +291,25 @@ function calcular_imc()
 
 
 
+
+//exibir imc na tabela de pacientes
 function exibir_imc(peso, altura)
 {
-    document.write(Math.ceil((peso/(Math.pow((altura/100),2)))*100)/100);
+    document.write((Math.ceil((peso/(Math.pow((altura/100),2)))*100)/100).toFixed(2));
 }
 
 
 
+function calculo_peso_ideal()
+                    {
+                    imc_ideal = parseFloat(document.getElementById('imc_ideal').value);
+                    altura = parseFloat(document.getElementById('altura').value);                        
+                    peso_ideal = (imc_ideal * Math.pow((altura/100),2)).toFixed(2);
+                    document.getElementById('peso_ideal').value = peso_ideal;
+                    }
+
+
+//calcular o CAQ
 function calcular_caq()
 {
     
@@ -308,7 +320,7 @@ function calcular_caq()
         
     if(abd > 0  && qdr > 0)
         {
-            document.getElementById('res_caq').value = Math.ceil((abd/qdr)*100)/100;
+            document.getElementById('res_caq').value = (Math.ceil((abd/qdr)*100)/100).toFixed(2);
             caq = parseFloat(document.getElementById('res_caq').value);
             
             if(sxo == "M")
@@ -432,6 +444,23 @@ function calcular_caq()
 
 
 
+//funcao para modificar o status estrela paciente
+function troca_estrela(id)
+{   
+    src_imagem = document.getElementById(id).src;    
+    ultima_barra = src_imagem.lastIndexOf("/");
+    imagem = src_imagem.substring(ultima_barra+1);
+    
+    if(imagem == 'estrela_cheia.png')
+        document.getElementById(id).src = 'img/estrela_vazia.png';
+    else
+        document.getElementById(id).src = 'img/estrela_cheia.png';
+    
+}
+
+
+
+//pre visualizacao das imagens
 function pre_visualizacao() {
                 var oFReader = new FileReader();
                 oFReader.readAsDataURL(document.getElementById("uploadImage1").files[0]);

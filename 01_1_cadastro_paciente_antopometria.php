@@ -166,7 +166,9 @@ $dias_semana_2_ = explode(";",$dados_atividades_fisicas['dias_semana_2']);
 $dias_semana_3_ = explode(";",$dados_atividades_fisicas['dias_semana_3']);
 
 // recuperando informações para preencher o formulário em caso de alteração antopometria paciente - histórico paciente
-$sqlstring_historico_paciente = "select * from tb_historico_paciente where cod_paciente = " . $_SESSION['cod_paciente_selecionado'];
+$sqlstring_historico_paciente  = "select tb_historico_paciente.*, tb_paciente.nome_paciente from tb_historico_paciente ";
+$sqlstring_historico_paciente .= "inner join tb_paciente on tb_paciente.cod_paciente = tb_historico_paciente.cod_paciente ";
+$sqlstring_historico_paciente .= "where tb_historico_paciente.cod_paciente = " . $_SESSION['cod_paciente_selecionado'];
 $info_historico_paciente = $db->sql_query($sqlstring_historico_paciente);
 $dados_historico_paciente = mysql_fetch_array($info_historico_paciente);
 
@@ -208,7 +210,8 @@ $dados_historico_paciente = mysql_fetch_array($info_historico_paciente);
           <div class="panel panel-default margin_top_20 sem_borda padding_top_25">
             <div class="panel-body borda_verde_escuro col-md-12" style="border:0px solid #eee; border-left:0px solid #0A4438;">                 
                     <span class="glyphicon glyphicon-heart-empty fonte_verde_claro"></span>
-                    <span class=" fonte_verde_claro fonte_muito_grande negrito">PACIENTE - ANTOPOMETRIA</span>
+                    <span class=" fonte_verde_claro fonte_muito_grande negrito">PACIENTE ANTOPOMETRIA</span>: 
+                    <span class="fonte_verde_claro fonte_muito_grande"><?php print $dados_historico_paciente['nome_paciente'] ?></span>
                     <br/>
                     <span class="fonte_pequena">
                         <a href="01_1_alteracao_paciente_dados_pessoais.php">Dados Pessoais</a>
@@ -217,7 +220,9 @@ $dados_historico_paciente = mysql_fetch_array($info_historico_paciente);
                         <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
                         <a href="01_1_cadastro_paciente_avaliacao.php">Avaliação Nutricional</a>
                         <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
-                        <a href="01_1_cadastro_paciente_objetivo.php">Objetivo</a>                        
+                        <a href="01_1_cadastro_paciente_objetivo.php">Objetivo</a>  
+                        <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
+                        <a href="01_3_cadastro_dieta.php">Prescrição de Dieta</a>
                     </span> 
                     <br/><br/>
             </div>
