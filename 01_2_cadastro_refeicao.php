@@ -205,7 +205,7 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         <div class="row">
         <div class="col-md-12" style="border:1px solid #eee; border-left:5px solid #18A689; border-right:2px solid #18A689;">            
         <br/>
-          <form name="form_pesquisa" id="form_pesquisa" class="padding_bottom_20 from_group form-inline" style="white-space: nowrap">          
+          <form name="form_pesquisa" id="form_pesquisa" onsubmit="return false;" class="padding_bottom_20 from_group form-inline" style="white-space: nowrap">          
               <div id="titulo_refeicao" name="titulo_refeicao" class="form-group col-md-12">
               <label for="busca">Busca Alimentos</label>
               <br/>

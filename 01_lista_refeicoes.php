@@ -83,7 +83,7 @@ $linhas_refeicoes = $db->sql_linhas($info_refeicoes);
         <div class="row">
           <form class="padding_bottom_20 form-inline" style="white-space: nowrap">          
               <input type="text" name="busca" id="busca" class="form-control" style="width:90%;" placeholder="REFEIÇÃO">
-              <button type="button" class="btn btn_verde_claro fonte_branca largura_05" alt="Exibe as refeições contendo o valor digitado na busca"  title="Exibe as refeições contendo o valor digitado na busca" onclick="nova_pesquisa('01_lista_refeicoes.php?pesquisa=')"> 
+              <button type="button" class="btn btn_verde_claro fonte_branca largura_05" alt="Exibe as refeições contendo o valor digitado na busca"  title="Exibe as refeições contendo o valor digitado na busca" onclick="nova_pesquisa('01_lista_refeicoes.php?busca=')"> 
                   <span class="glyphicon glyphicon-search"></span> 
               </button>
               

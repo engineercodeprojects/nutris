@@ -208,7 +208,7 @@ $dados_paciente = mysql_fetch_array($info_paciente);
         <div class="row  margin_top_10 margin_bottom_10">            
             <div class="col-sm-12 col-md-12 padding_00">                 
                 <div class="col-xs-12 col-md-12 fundo_verde_claro padding_10 fonte_branca text-uppercase negrito">
-                    <a class="link_branco" data-toggle="collapse" href="#<?php print $dados_dia_semana['cod_dia_semana'] ?>" aria-expanded="true" aria-controls="<?php print $dados_dia_semana['dia_semana'] ?>">
+                    <a class="link_branco" data-toggle="collapse" href="#<?php print $dados_dia_semana['cod_dia_semana'] ?>" aria-expanded="false" aria-controls="<?php print $dados_dia_semana['dia_semana'] ?>">
                     <?php print $dados_dia_semana['dia_semana'] ?>
                     </a>
                 </div>    
@@ -217,7 +217,7 @@ $dados_paciente = mysql_fetch_array($info_paciente);
         
         
         
-        <div class="row " id=<?php print $dados_dia_semana['cod_dia_semana'] ?> >           
+        <div class="row collapse in" id=<?php print $dados_dia_semana['cod_dia_semana'] ?>>           
             <div class="col-sm-12 col-md-12 padding_00" > 
                 <div class="thumbnail text-capitalize ">
                     <?php

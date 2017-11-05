@@ -110,6 +110,10 @@ a.link_branco:active    {text-decoration:none; color:#fff }
 .largura_03             {width:3%}
 .largura_05             {width:5%}
 .largura_10             {width:10%}
+.largura_11             {width:11%}
+.largura_12             {width:12%}
+.largura_13             {width:13%}
+.largura_14             {width:14%}
 .largura_15             {width:15%}
 .largura_16             {width:16%}
 .largura_17             {width:17%}
@@ -133,6 +137,7 @@ a.link_branco:active    {text-decoration:none; color:#fff }
 .largura_55             {width:55%}
 .largura_60             {width:60%}
 .largura_65             {width:65%}
+.largura_68             {width:68%}
 .largura_70             {width:70%}
 .largura_75             {width:75%}
 .largura_80             {width:80%}
@@ -354,6 +359,7 @@ a.link_branco:active    {text-decoration:none; color:#fff }
 
 .padding_bottom_05             {padding-bottom: 5px}
 .padding_bottom_10             {padding-bottom: 10px}
+.padding_bottom_14             {padding-bottom: 14px}
 .padding_bottom_15             {padding-bottom: 15px}
 .padding_bottom_20             {padding-bottom: 20px}
 .padding_bottom_25             {padding-bottom: 25px}
@@ -398,6 +404,10 @@ a.link_branco:active    {text-decoration:none; color:#fff }
 .padding_left_90               {padding-left: 90px}
 .padding_left_95               {padding-left: 95px}
 .padding_left_100              {padding-left: 100px}
+.padding_left_150              {padding-left: 150px}
+.padding_left_160              {padding-left: 160px}
+.padding_left_170              {padding-left: 170px}
+.padding_left_180              {padding-left: 180px}
 
 
 
@@ -439,6 +449,7 @@ a.link_branco:active    {text-decoration:none; color:#fff }
 .borda_amarelo          {border:1px solid #FF9E45}
 .borda_bege             {border:1px solid #D2BDA0}
 .borda_cinza            {border:1px solid #ddd}
+.borda_cinza_inferior   {border-bottom:1px solid #ddd}
 .borda_inferior_verde_claro {border-bottom:3px solid #18A689}
 
 

@@ -85,11 +85,42 @@
 
 
 
+<script>
+
+    function recua_menu(clique)
+    {
+        situacao = document.getElementById("check").checked;
+        
+        if(situacao == 0 && clique == 5)
+        {
+            document.getElementById("barra_deslizante").style.WebkitTransform = "translateX(300px)";
+            document.getElementById("check").checked=1;
+        }
+        else if((situacao == 1 && clique == 10))
+        {
+            document.getElementById("barra_deslizante").style.WebkitTransform = "translateX(0px)";
+            document.getElementById("check").checked=0;
+        }
+        else
+        {
+            document.getElementById("barra_deslizante").style.WebkitTransform = "translateX(0px)";
+            document.getElementById("check").checked=0;
+        }
+        
+    }
+
+</script>
+
+
 <body>
 
 
 <input type="checkbox" id="check">
-<label id="icone" for="check"><img src="img/hamburguer.png" class="padding_left_05"></label>
+<label id="icone" for="check">
+    <a href="#" onclick="recua_menu(5)">
+    <img src="img/hamburguer.png" class="padding_left_05">
+    </a>
+</label>
     
 
     
@@ -98,46 +129,105 @@
 
     <nav>
     
-        <a href=""><div class="link"><span class="glyphicon glyphicon-home padding_right_30 fonte_muito_grande"></span> </div></a>
-        
-        <a href="01_lista_refeicoes.php" alt="Lista de Refeições" title="Lista de Refeições">
-        <div class="link"><span class="glyphicon glyphicon-grain padding_right_30 fonte_muito_grande"></span></div>
+        <a href="#" alt="Dashboard Nutricionista" title="Dashboard Nutricionista">
+        <div class="link"><img src="img/icone_home_lateral.png"></div>
         </a>
         
+        <a href="01_lista_alimentos.php" alt="Lista de Alimentos" title="Lista de Alimentos">
+        <div class="link"><img src="img/icone_alimento_lateral.png"></div>
+        </a>
+        
+        <a href="01_lista_refeicoes.php" alt="Lista de Refeições" title="Lista de Refeições">
+        <div class="link"><img src="img/icone_refeicoes_lateral.png"></div>
+        </a>
+        
+<!--        <a href="01_lista_reeducaacoes.php" alt="Lista de Reeducações" title="Lista de Reeducações">-->
+        <a href="">
+        <div class="link"><img src="img/icone_reeducacoes_lateral.png"></div>
+        </a>
+        
+<!--        <a href="01_lista_programas.php" alt="Lista de Programas" title="Lista de Programas">-->
+        <a href="">
+        <div class="link"><img src="img/icone_programas_lateral.png"></div>
+        </a>
         
         <a href="01_lista_pacientes.php" alt="Lista de Pacientes" title="Lista de Pacientes">
-        <div class="link"><span class="glyphicon glyphicon-user padding_right_30 fonte_muito_grande"></span></div>
+        <div class="link"><img src="img/icone_pacientes_lateral.png"></div>
+        </a>
+        
+<!--        <a href="01_lista_usuarios.php" alt="Lista de Usuários" title="Lista de Usuários">-->
+        <a href="">
+        <div class="link"><img src="img/icone_usuarios_lateral.png"></div>
         </a>
         
         <a href="logout.php" alt="Sair da Plataforma Nutris" title="Sair da Plataforma Nutris">
-        <div class="link"><span class="glyphicon glyphicon-log-out padding_right_30 fonte_muito_grande"></span></div>
+        <div class="link"><img src="img/icone_sair_lateral.png"></div>
         </a>
-    
-
 
     </nav>
     
 </div>
-    
+ 
 
-
     
     
-<div class="barra">
+<div class="barra" id="barra_deslizante">
 
     <nav>
+            
         
         <div class="fonte_grande fonte_verde_claro nome_usuario padding_top_15 text-uppercase">            
-            <?php print $_SESSION['nome_apelido'];?>
+            <?php print $_SESSION['nome_apelido'];?> 
         </div>
-       
-        <a href="">
-            <div class="link"><span class="glyphicon glyphicon-home padding_right_30 fonte_muito_grande">
-                </span> <span class="padding_left_30">HOME</span> 
+        
+        <a href="#">
+            <div class="link padding_top_05"><img src="img/icone_home_lateral.png" align=left class="img-responsive"> <span class="padding_left_60">HOME</span> 
             </div>
         </a>
         
         
+        <a href="01_lista_alimentos.php" alt="Lista de Alimentos" title="Lista de Alimentos">
+            <div class="link padding_top_05"><img src="img/icone_alimento_lateral.png" align=left class="img-responsive"> <span class="padding_left_60">ALIMENTOS</span> 
+            </div>
+        </a>
+        
+        
+        <a href="01_lista_refeicoes.php" alt="Lista de Refeições" title="Lista de Refeições">
+            <div class="link padding_top_05"><img src="img/icone_refeicoes_lateral.png" align=left class="img-responsive"> <span class="padding_left_60">REFEIÇÕES</span> 
+            </div>
+        </a>
+        
+        
+<!--        <a href="01_lista_reeducacoes.php" alt="Lista de Reeducações" title="Lista de Reeducações">-->
+            <a href="">
+            <div class="link" style='padding-top:25px'><img src="img/icone_reeducacoes_lateral.png" align=left class="img-responsive"> <span class="padding_left_60">REEDUCAÇÕES</span> 
+            </div>
+        </a>
+        
+<!--        <a href="01_lista_programas.php" alt="Lista de Programas" title="Lista de Programas">-->
+            <a href="">
+            <div class="link"  style='padding-top:20px'><img src="img/icone_programas_lateral.png" align=left class="img-responsive"> <span class="padding_left_60">PROGRAMAS</span> 
+            </div>
+        </a>
+        
+        
+        <a href="01_lista_pacientes.php" alt="Lista de Pacientes" title="Lista de Pacientes">
+            <div class="link padding_top_05"><img src="img/icone_pacientes_lateral.png" align=left class="img-responsive"> <span class="padding_left_60">PACIENTES</span> 
+            </div>
+        </a>
+        
+        
+<!--        <a href="01_lista_usuarios.php" alt="Lista de Usuários" title="Lista de Usuários">-->
+            <a href="">
+            <div class="link padding_top_05"><img src="img/icone_usuarios_lateral.png" align=left class="img-responsive"> <span class="padding_left_60">USUÁRIOS</span> 
+            </div>
+        </a>
+        
+        <a href="logout.php" alt="Sair da Plataforma Nutris" title="Sair da Plataforma Nutris">
+            <div class="link"><img src="img/icone_sair_lateral.png" align=left class="img-responsive"> <span class="padding_left_60">SAIR</span> 
+            </div>
+        </a>
+<!--
         <a href="01_lista_refeicoes.php" alt="Lista de Refeições" title="Lista de Refeições">
             <div class="link">
                 <span class="glyphicon glyphicon-grain padding_right_30 fonte_muito_grande"></span> <span class="padding_left_30">REFEIÇÕES</span> 
@@ -158,6 +248,7 @@
                 <span class="glyphicon glyphicon-log-out padding_right_30 fonte_muito_grande"></span> <span class="padding_left_30">SAIR</span> 
             </div>
         </a>
+-->
     
 
     </nav>

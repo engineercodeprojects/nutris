@@ -61,7 +61,7 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
     
 
     
-<div class="container-fluid">
+<div class="container-fluid" onclick="recua_menu(10)">
     
     <!-- inicio - titulo da lista de pacientes -->  
     <div class="row">
@@ -81,7 +81,7 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
         <div class="row">
           <form name="form_pesquisa" id="form_pesquisa" class="padding_bottom_20 form-inline" style="white-space: nowrap">          
               <input type="text" name="busca" id="busca" class="form-control" style="width:90%;" placeholder="NOME DO PACIENTE">
-              <button type="button" class="btn btn_verde_claro fonte_branca largura_05" alt="Exibe os pacientes com nomes contendo o valor digitado na busca"  title="Exibe os pacientes com nomes contendo o valor digitado na busca" onclick="nova_pesquisa('01_lista_pacientes.php?pesquisa=')"> 
+              <button type="button" class="btn btn_verde_claro fonte_branca largura_05" alt="Exibe os pacientes com nomes contendo o valor digitado na busca"  title="Exibe os pacientes com nomes contendo o valor digitado na busca" onclick="nova_pesquisa('01_lista_pacientes.php?busca=')"> 
                   <span class="glyphicon glyphicon-search"></span> 
               </button>
               

@@ -502,13 +502,15 @@ $(function(){
 
 
 // função utilizada para acrescentar alimentos na refeição
-peso_geral = 0; 
-caloria_geral=0;
+//peso_geral = 0; 
+//caloria_geral=0;
 function inserir_alimento(codigo, alimento, peso, caloria, medida_caseira)
     {  
+        peso_geral = parseFloat(document.getElementById('total_peso').value);
         peso_geral = (parseFloat(peso_geral) + parseFloat(peso)).toFixed(3);
         document.getElementById('total_peso').value = peso_geral;
         
+        caloria_geral = parseFloat(document.getElementById('total_caloria').value);
         caloria_geral = (parseFloat(caloria_geral) + parseFloat(caloria)).toFixed(3);
         document.getElementById('total_caloria').value = caloria_geral;
         

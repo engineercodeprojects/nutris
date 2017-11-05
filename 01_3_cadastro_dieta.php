@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php 
 //inicia a sessão
 session_start();
@@ -227,7 +228,7 @@ $dados_paciente = mysql_fetch_array($info_paciente);
                 </div>          
                 
                 
-                <div class="col-xs-6 col-md-6 direito fonte_branca fundo_verde_claro padding_top_06 padding_bottom_20">
+                <div class="col-xs-6 col-md-6 direito fonte_branca fundo_verde_claro padding_top_06 padding_bottom_14">
                     <a href="01_3_cadastro_dieta.php?dia=<?php print $dados_dia_semana['cod_dia_semana'] ?>" class="link_branco" title="Prescrever" alt="Prescrever">
                     <span class="glyphicon glyphicon-edit"></span>
                     </a>
