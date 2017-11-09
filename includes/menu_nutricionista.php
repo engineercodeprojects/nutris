@@ -155,8 +155,7 @@
         <div class="link"><img src="img/icone_pacientes_lateral.png"></div>
         </a>
         
-<!--        <a href="01_lista_usuarios.php" alt="Lista de Usuários" title="Lista de Usuários">-->
-        <a href="">
+        <a href="01_lista_usuarios_plataforma.php" alt="Lista de Usuários" title="Lista de Usuários">        
         <div class="link"><img src="img/icone_usuarios_lateral.png"></div>
         </a>
         
@@ -216,9 +215,8 @@
             </div>
         </a>
         
-        
-<!--        <a href="01_lista_usuarios.php" alt="Lista de Usuários" title="Lista de Usuários">-->
-            <a href="">
+
+        <a href="01_lista_usuarios_plataforma.php" alt="Lista de Usuários" title="Lista de Usuários">   
             <div class="link padding_top_05"><img src="img/icone_usuarios_lateral.png" align=left class="img-responsive"> <span class="padding_left_60">USUÁRIOS</span> 
             </div>
         </a>
