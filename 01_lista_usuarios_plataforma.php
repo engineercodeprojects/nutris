@@ -20,7 +20,7 @@ if(isset($busca))
 {
     $sqlstring_usuarios_plataforma  = "Select * from tb_usuario ";
     $sqlstring_usuarios_plataforma .= "inner join tb_nivel_acesso on tb_usuario.cod_nivel_acesso = tb_nivel_acesso.cod_nivel_acesso "; 
-    $sqlstring_usuarios_plataforma .= "where nome_apelido like '%" . $busca . "%' or login like '%" . $busca . "%' and tb_usuario.cod_status = 1 ";       
+    $sqlstring_usuarios_plataforma .= "where nome_usuario like '%" . $busca . "%' or login like '%" . $busca . "%' and tb_usuario.cod_status = 1 ";       
     $sqlstring_usuarios_plataforma .= "order by login "; 
 }
 else    
@@ -147,7 +147,7 @@ $linhas_usuarios_plataforma = $db->sql_linhas($info_usuarios_plataforma);
                     <td><input type=checkbox name="excluir[]" value="<?php print $dados_usuarios_plataforma['cod_usuario'] ?>"></input></td>
                     <td class="text-uppercase fonte_pequena">
                         <a href="01_5_alteracao_usuario_plataforma.php?cod_usuario_plataforma=<?php print  base64_encode($dados_usuarios_plataforma['cod_usuario']) ?>" alt="Detalhes do Usuário Plataforma" title="Detalhes do Usuário Plataforma">
-                        <?php print $dados_usuarios_plataforma['login'] ?>
+                        <?php print $dados_usuarios_plataforma['nome_usuario'] ?>
                         </a>
                     </td>                
                 
