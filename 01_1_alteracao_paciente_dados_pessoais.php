@@ -74,8 +74,8 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         $numero_botoes = 2;
         $titulo = "Paciente - Dados Pessoais";
         $mensagem = "Os dados pessoais de <strong>" . $nome_paciente . "</strong> foram cadastrados com sucesso!";
-        $btn_esquerda = "Antopometria";
-        $btn_esquerda_destino = "01_1_cadastro_paciente_antopometria.php";
+        $btn_esquerda = "Anamnese";
+        $btn_esquerda_destino = "01_1_cadastro_paciente_anamnese.php";
         $btn_direita = "Lista de Pacientes";
         $btn_direita_destino = "01_lista_pacientes.php";
         $btn_x = "01_lista_pacientes.php";
@@ -133,7 +133,7 @@ $dados_paciente_selecionado = mysql_fetch_array($info_paciente_selecionado);
                     <span class="fonte_pequena">
                         <span class="fonte_verde_claro">Dados Pessoais</span>
                         <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
-                        <a href="01_1_cadastro_paciente_antopometria.php">Antopometria</a>
+                        <a href="01_1_cadastro_paciente_anamnese.php">Anamnese</a>
                         <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
                         <a href="01_1_cadastro_paciente_avaliacao.php">Avaliação Nutricional</a>
                         <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
@@ -318,12 +318,12 @@ $dados_paciente_selecionado = mysql_fetch_array($info_paciente_selecionado);
       <!-- fim - painel dados pessoais -->
           
         <!-- inicio - linha 6 -->
-            <!-- inicio - botoes salvar e cancelar antopometria -->      
+            <!-- inicio - botoes salvar e cancelar anamnese -->      
             <div class="col-md-12  direito">
                 <button type="submit" class="btn btn_verde_claro">Salvar Dados Pessoais</button>    
                 <button type="button" class="btn btn_verde_claro" onclick="location.href='01_lista_pacientes.php'">Cancelar</button>    
             </div>
-            <!-- inicio - botoes salvar e cancelar antopometria -->      
+            <!-- inicio - botoes salvar e cancelar anamnese -->      
           <!-- fim - linha 6 -->
         
     </div>

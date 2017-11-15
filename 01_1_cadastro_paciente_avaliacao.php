@@ -151,7 +151,7 @@ $dados_habitos_alimentares = mysql_fetch_array($info_habitos_alimentares);
                     <span class="fonte_pequena">
                         <a href="01_1_alteracao_paciente_dados_pessoais.php">Dados Pessoais</a>
                         <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
-                        <a href="01_1_cadastro_paciente_antopometria.php">Antopometria</a>
+                        <a href="01_1_cadastro_paciente_anamnese.php">Anamnese</a>
                         <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
                         <span class="fonte_verde_claro">Avaliação Nutricional</span>
                         <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
@@ -166,7 +166,7 @@ $dados_habitos_alimentares = mysql_fetch_array($info_habitos_alimentares);
     </div>
     <!-- fim - titulo do formulário -->
        
-    <!-- inicio - formulario paciente - antopometria -->   
+    <!-- inicio - formulario paciente - avaliação nutricional -->   
     <form method="post" action="">
     
     <!-- inicio - habitos alimentares -->  
@@ -454,7 +454,7 @@ $dados_habitos_alimentares = mysql_fetch_array($info_habitos_alimentares);
     
 
     </form>
-   <!-- fim do formulário antopometria --> 
+   <!-- fim do formulário avaliação nutricional --> 
    
         
    

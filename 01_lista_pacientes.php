@@ -132,7 +132,7 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
                 <td class="largura_10 fundo_verde_claro">Altura</td>
                 <td class="largura_10 fundo_verde_claro">IMC</td>
                 <td class="largura_05  fundo_verde_claro centralizado"><span class="glyphicon glyphicon-tag fonte_pequena"  alt="Dados Pessoais" title="Dados Pessoais"></span></td>
-                <td class="largura_05  fundo_verde_claro centralizado"><span class="glyphicon glyphicon-heart-empty fonte_pequena"  alt="Antopometria" title="Antopometria"></span></td>
+                <td class="largura_05  fundo_verde_claro centralizado"><span class="glyphicon glyphicon-heart-empty fonte_pequena"  alt="Anamnese" title="Anamnese"></span></td>
                 <td class="largura_05  fundo_verde_claro centralizado"><span class="glyphicon glyphicon-th-list fonte_pequena"  alt="Avaliação Nutricional" title="Avaliação Nutricional"></span></td>
                 <td class="largura_05  fundo_verde_claro centralizado"><span class="glyphicon glyphicon-screenshot fonte_pequena"  alt="Objetivo do Programa" title="Objetivo do Programa"></span></td>
                 <td class="largura_05  fundo_verde_claro centralizado"><span class="glyphicon glyphicon-apple fonte_pequena"  alt="Prescrição Dieta" title="Prescrição Dieta"></span></td>
@@ -158,7 +158,7 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
                     </td>
                 
                     <td class="centralizado">
-                        <a href="01_1_cadastro_paciente_antopometria.php?cod=<?php print base64_encode($dados_pacientes['cod_paciente']) ?>;&alt=<?php print base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Antopometria" title="Antopometria">
+                        <a href="01_1_cadastro_paciente_anamnese.php?cod=<?php print base64_encode($dados_pacientes['cod_paciente']) ?>;&alt=<?php print base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Anamnese" title="Anamnese">
                         <span class="glyphicon glyphicon-heart-empty fonte_pequena"></span>
                         </a>
                     </td>
