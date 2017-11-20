@@ -21,22 +21,71 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         //recuperando informações da refeição
         $refeicao = $_POST['refeicao'];
         $tipo_refeicao = $_POST['tipo_refeicao'];
-        $codigos = $_POST['codigos'];
+        $codigos = $_POST['codigos'];    
+        $qtde_porcoes = $_POST['qtde_porcoes']; 
+        $video_modo_preparo = $_POST['video_modo_preparo'];
+        $outras_informacoes_refeicoes = $_POST['outras_informacoes_refeicoes'];
+    
+        //recuperando informacoes das fotos
+        $foto_01 = $_FILES['foto_01'];
+        $fo_01 = isset($_POST['fo_01']);
+    
+        $foto_02 = $_FILES['foto_02'];
+        $fo_02 = isset($_POST['fo_02']);
+    
+    
     
         //inserindo a refeição e tipo de refeição na tb_refeicao
-        $sqlstring_inserir_refeicao = "Insert into tb_refeicao (refeicao, cod_tipo_refeicao) values ('" . $refeicao . "','" . $tipo_refeicao . "')";
+        $sqlstring_inserir_refeicao = "Insert into tb_refeicao (refeicao, cod_tipo_refeicao, video_modo_preparo) values ('" . $refeicao . "','" . $tipo_refeicao . "','" . $video_modo_preparo . "')";
         $db->string_query($sqlstring_inserir_refeicao);
     
         //selecionando ultima refeição
         $sqlstring_ultimo_registro  = "select * from tb_refeicao order by cod_refeicao desc limit 1";
         $info_ultimo_registro = $db->sql_query($sqlstring_ultimo_registro); 
         $dados_ultimo_registro = mysql_fetch_array($info_ultimo_registro);
+    
+        // inserindo as fotos associadas com o codigo da refeicao
+        $sqlstring_alterar_foto  = "Update tb_refeicao set ";
+        if($foto_01['name'] != "")   $sqlstring_alterar_foto .= "foto_01_refeicao = '" . $dados_ultimo_registro['cod_refeicao'] . "_1_" . $foto_01['name'] . "', ";
+        if($fo_01 == 1)              $sqlstring_alterar_foto .= "foto_01_refeicao = 'avatar_refeicao.png', ";
+        if($foto_02['name'] != "")   $sqlstring_alterar_foto .= "foto_02_refeicao = '" . $dados_ultimo_registro['cod_refeicao'] . "_2_" . $foto_02['name'] . "', ";
+        if($fo_02 == 1)              $sqlstring_alterar_foto .= "foto_02_refeicao = 'avatar_refeicao.png', ";
+        $sqlstring_alterar_foto .= "outras_informacoes_refeicoes = '" . $outras_informacoes_refeicoes . "' ";
+        $sqlstring_alterar_foto .= "where cod_refeicao  = " . $dados_ultimo_registro['cod_refeicao'];
+
+        $db->string_query($sqlstring_alterar_foto); 
+
+    
+        // fazendo uplodas das fotos 01
+        $arquivo = $_FILES['foto_01'];  
+        
+        $destino = 'C:\Bitnami\\wampstack-5.5.28-0\\apache2\htdocs\\plataformanutris\\fotos_refeicoes\\';
+//        $destino  = '/home/engineercode/public_html/plataformanutris/fotos/';
+        $destino .= $dados_ultimo_registro['cod_refeicao'] . "_1_";
+        $destino .= $arquivo['name'];  
+
+        move_uploaded_file($arquivo['tmp_name'],$destino);
+
+        
+       
+        
+        // fazendo uplodas das fotos 02
+        $arquivo = $_FILES['foto_02']; 
+
+        $destino = 'C:\Bitnami\\wampstack-5.5.28-0\\apache2\htdocs\\plataformanutris\\fotos_refeicoes\\';
+//        $destino  = '/home/engineercode/public_html/plataformanutris/fotos/';
+        $destino .= $dados_ultimo_registro['cod_refeicao'] . "_2_";
+        $destino .= $arquivo['name'];  
+
+        move_uploaded_file($arquivo['tmp_name'],$destino);
+    
+    
              
         //inserindo os alimentos selecionados na refeição cadastrada anteriormente
         $contador = 0;
         while ($contador < sizeof($codigos))
         {
-        $sqlstring_inserir_alimentos_refeicao = "Insert into tb_refeicao_alimento (cod_refeicao, cod_alimento) values ('" . $dados_ultimo_registro['cod_refeicao'] . "','" . $codigos[$contador]  . "')";
+        $sqlstring_inserir_alimentos_refeicao = "Insert into tb_refeicao_alimento (cod_refeicao, cod_alimento, qtde_porcoes) values ('" . $dados_ultimo_registro['cod_refeicao'] . "','" . $codigos[$contador]  . "', '" . $qtde_porcoes[$contador] . "')";
         $db->string_query($sqlstring_inserir_alimentos_refeicao);    
         $contador++;
         }
@@ -125,7 +174,7 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
     <div class="row">
         <div class="col-md-12" style="border:1px solid #eee; border-left:5px solid #18A689; border-right:2px solid #18A689;">            
         <br/>
-        <form method="post" action="">    
+        <form method="post" action="" enctype="multipart/form-data">    
         <!-- inicio - tipo de refeição -->
         <div id="titulo_refeicao" name="titulo_refeicao" class="form-group col-md-6">
             <label for="refeicao">Refeição <span class="glyphicon glyphicon-asterisk fonte_verde_claro fonte_muito_pequena"></span></label>
@@ -148,19 +197,137 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
             </select>
         </div>
         <!-- fim - tipo de refeição --> 
+            
+        <!-- inicio - video - modo de preparo -->
+        <div id="v_modo_preparo" name="v_modo_preparo" class="form-group col-md-12">
+            <label for="video_modo_preparo">Vídeo - Modo de Preparo </label>
+            <input type="text" class="form-control" name="video_modo_preparo" id="video_modo_preparo" required>            
+        </div>
+        <!-- fim - video - modo de preparo -->
+            
+            
+            
+            
+        <!-- inicio - outras informações refeicoes -->
+        <div id="outras_informacoes" name="outras_informacoes" class="form-group col-md-6">
+            <label for="outras_informacoes_refeicoes">Outras Informações </label>
+            <textarea rows="10" name="outras_informacoes_refeicoes" id="outras_informacoes_refeicoes" class="form-control text-uppercase"></textarea>
+        </div>
+        <!-- fim - video - modo de preparo -->
+            
+            
+            
+            
+        <!-- inicio - campo foto 01 refeicao -->    
+        <div class="col-md-3">
+             <!-- inicio - barra de título e botao "x" para remover a foto do paciente - capo oculto para saber se insere avatar ou não -->
+             <div class="col-md-8 fonte_branca padding_top_05 fundo_verde_claro altura_30"><span class="glyphicon glyphicon-camera"></span> FOTO </div>
+             <div class="col-md-4 direito fonte_branca padding_top_05 fundo_verde_claro altura_30"> 
+             <a href="#" onclick="document.getElementById('f_1').innerHTML = '<br/><label for=\'uploadImage1\'><img src=\'fotos/avatar_refeicao.png\' class=\'img-responsive margin_auto\' width=150 height=200  id=\'uploadPreview1\'></label><input id=\'uploadImage1\' type=\'file\' name=\'foto_01\' onchange=\'pre_visualizacao1()\' style=\'display:none\'><input type=hidden name=fo_01 id=fo_01 value=0>'">
+             <span class="glyphicon glyphicon-remove fonte_branca"></span>
+             </a>
+             </div>
+             <!-- fim - barra de título e botao "x" para remover a foto do paciente -->
+            
+             <div class="col-md-12 form-group centralizado borda_cinza altura_210  borda_inferior_verde_claro" id="f_1">
+                <br/>
+                <?php                  
+                if($dados_objetivo_programa['foto_01'] != "" and $dados_objetivo_programa['foto_01'] != "avatar_refeicao.png") 
+                {  
+                 ?> 
+                <label for="uploadImage1"><img src="fotos/<?php print $dados_objetivo_programa['foto_01'] ?>" class="img-responsive margin_auto" width=150 height=200  id="uploadPreview1"/></label>   
+                <input id="uploadImage1" type="file" name="foto_01" onchange="pre_visualizacao1();" style="display:none"/>                
+                <?php
+                }                
+                else if($dados_objetivo_programa['foto_01'] == "" or $dados_objetivo_programa['foto_01'] == "avatar_refeicao.png") 
+                {
+                 ?>
+                 <label for="uploadImage1"><img src="img/avatar_refeicao.png" class="img-responsive margin_auto" width=150 height=200  id="uploadPreview1"/></label>   
+                <input id="uploadImage1" type="file" name="foto_01" onchange="pre_visualizacao1();" style="display:none"/>
+                 <?php
+                }
+                 ?>
+                 <br/><br/>                 
+             </div>
+            
+        </div>
+                      
+            <script type="text/javascript">
+            function pre_visualizacao1() {
+                var oFReader = new FileReader();
+                oFReader.readAsDataURL(document.getElementById("uploadImage1").files[0]);
+
+                oFReader.onload = function (oFREvent) {
+                    document.getElementById("uploadPreview1").src = oFREvent.target.result;
+                };
+            };
+            </script> 
+            <!-- fim - campo foto 01 refeicao -->    
+            
+            
+            
+            
+            
+            
+            <!-- inicio - campo foto 02 refeicao -->    
+        <div class="col-md-3">
+             <!-- inicio - barra de título e botao "x" para remover a foto do paciente - capo oculto para saber se insere avatar ou não -->
+             <div class="col-md-8 fonte_branca padding_top_05 fundo_verde_claro altura_30"><span class="glyphicon glyphicon-camera"></span> FOTO </div>
+             <div class="col-md-4 direito fonte_branca padding_top_05 fundo_verde_claro altura_30"> 
+             <a href="#" onclick="document.getElementById('f_2').innerHTML = '<br/><label for=\'uploadImage2\'><img src=\'fotos/avatar_refeicao.png\' class=\'img-responsive margin_auto\' width=150 height=200  id=\'uploadPreview2\'></label><input id=\'uploadImage2\' type=\'file\' name=\'foto_02\' onchange=\'pre_visualizacao2()\' style=\'display:none\'><input type=hidden name=fo_02 id=fo_02 value=0>'">
+             <span class="glyphicon glyphicon-remove fonte_branca"></span>
+             </a>
+             </div>
+             <!-- fim - barra de título e botao "x" para remover a foto do paciente -->
+            
+             <div class="col-md-12 form-group centralizado borda_cinza altura_210  borda_inferior_verde_claro" id="f_2">
+                <br/>
+                <?php                  
+                if($dados_objetivo_programa['foto_02'] != "" and $dados_objetivo_programa['foto_02'] != "avatar_refeicao.png") 
+                {  
+                 ?> 
+                <label for="uploadImage2"><img src="fotos/<?php print $dados_objetivo_programa['foto_02'] ?>" class="img-responsive margin_auto" width=150 height=200  id="uploadPreview2"/></label>   
+                <input id="uploadImage2" type="file" name="foto_02" onchange="pre_visualizacao2();" style="display:none"/>                
+                <?php
+                }                
+                else if($dados_objetivo_programa['foto_02'] == "" or $dados_objetivo_programa['foto_02'] == "avatar_refeicao.png") 
+                {
+                 ?>
+                 <label for="uploadImage2"><img src="img/avatar_refeicao.png" class="img-responsive margin_auto" width=150 height=200  id="uploadPreview2"/></label>   
+                <input id="uploadImage2" type="file" name="foto_02" onchange="pre_visualizacao2();" style="display:none"/>
+                 <?php
+                }
+                 ?>
+                 <br/><br/>                 
+             </div>
+            
+        </div>
+                      
+            <script type="text/javascript">
+            function pre_visualizacao2() {
+                var oFReader = new FileReader();
+                oFReader.readAsDataURL(document.getElementById("uploadImage2").files[0]);
+
+                oFReader.onload = function (oFREvent) {
+                    document.getElementById("uploadPreview2").src = oFREvent.target.result;
+                };
+            };
+            </script> 
+            <!-- fim - campo foto 02 refeicao --> 
+            
         
         
         <!-- inicio - alimentos dessa refeição -->            
         <div class="form-group col-md-12">
             <label for="alimento_refeicao">Alimentos dessa refeição </label>
             <div id="alimentos_refeicao" name="alimentos_refeicao">
-                <div class="col-md-6 fundo_verde_claro fonte_branca padding_top_10 padding_bottom_10">Alimento</div>
-                <div class="col-md-3 fundo_verde_claro fonte_branca padding_top_10 padding_bottom_10">Grupo</div>
-                <div class="col-md-1 fundo_verde_claro fonte_branca padding_top_10 padding_bottom_10">Peso</div>
-                <div class="col-md-1 fundo_verde_claro fonte_branca padding_top_10 padding_bottom_10">Calorias</div>
+                <div class="col-md-6 fundo_verde_claro fonte_branca padding_top_10 padding_bottom_10">Alimento</div>                
+                <div class="col-md-1 fundo_verde_claro fonte_branca padding_top_10 padding_bottom_10">Porções</div>
+                <div class="col-md-1 fundo_verde_claro fonte_branca padding_top_10 padding_bottom_10 direito">Peso</div>
+                <div class="col-md-1 fundo_verde_claro fonte_branca padding_top_10 padding_bottom_10 direito">T. Peso</div>                
+                <div class="col-md-1 fundo_verde_claro fonte_branca padding_top_10 padding_bottom_10 direito">Calorias</div>
+                <div class="col-md-1 fundo_verde_claro fonte_branca padding_top_10 padding_bottom_10 direito">T. Cal</div>
                 <div class="col-md-1 fundo_verde_claro fonte_branca padding_top_10 padding_bottom_10 centralizado fonte_branca"><span class="glyphicon glyphicon-minus" alt="Remover Alimento da Refeição" title="Remover Alimento da Refeição"></span></div>
-                
-                
             </div>
          </div>
         <!-- fim - alimentos dessa refeição --> 
@@ -170,9 +337,8 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         <!-- inicio - peso total e calorias totais -->           
          <div class="form-group col-md-12">            
             <div id="totais" name="totais">
-                <div class="col-md-9 padding_top_10 padding_bottom_10"><input type="text" name="alimento" id="alimento" class="form-group margin_00 sem_borda fundo_transparente negrito" value="Totais" readonly></div>
-                <div class="col-md-1"><input type="text" name="total_peso" id="total_peso" class="form-group margin_00 esquerda fonte_verde_claro fundo_transparente sem_borda " value="0.000" readonly></div>
-                <div class="col-md-1"><input type="text" name="total_caloria" id="total_caloria" class="form-group margin_00 esquerda fonte_verde_claro fundo_transparente sem_borda "  value="0.000" readonly></div>
+                <div class="col-md-10 padding_top_10 padding_bottom_10"><input type="text" name="alimento" id="alimento" class="form-group margin_00 sem_borda fundo_transparente negrito" value="Totais" readonly></div>
+                <div class="col-md-1"><input type="text" name="total_caloria" id="total_caloria" class="form-group largura_100 margin_00 direito fonte_verde_claro fundo_transparente sem_borda "  value="0" readonly></div>
             </div>
          </div>        
         <!-- fim - peso total e calorias totais --> 

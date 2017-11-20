@@ -178,8 +178,8 @@ $linhas_refeicoes = $db->sql_linhas($info_refeicoes);
                         ?>
                         
                     </td>
-                    <td class="direito"><?php print $dados_peso_caloria['total_peso'] ?></td>                    
-                    <td class="direito"><?php print number_format($dados_peso_caloria['total_caloria'],3) ?></td>                    
+                    <td class="direito"><?php print number_format($dados_peso_caloria['total_peso'],1) ?></td>                    
+                    <td class="direito"><?php print number_format($dados_peso_caloria['total_caloria'],0) ?></td>                    
                     <td class="centralizado">
                         <a href="01_2_alteracao_refeicao.php?cod=<?php print  base64_encode($dados_refeicoes['cod_refeicao']) ?>" alt="Editar Refeição" title="Editar Refeição">
                         <span class="glyphicon glyphicon-edit fonte_pequena"></span>

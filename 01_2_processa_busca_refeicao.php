@@ -47,8 +47,8 @@ if($linhas_refeicoes > 0)
     <div id="alimentos_refeicao" name="alimentos_refeicao">
         <div class="col-md-6 padding_top_10 padding_bottom_10 text-uppercase borda_inferior "><?php print $dados_refeicoes['alimento'] ?></div>
         <div class="col-md-3 padding_top_10 padding_bottom_10 text-uppercase borda_inferior"><?php print $dados_refeicoes['medida_caseira'] ?></div>
-        <div class="col-md-1 padding_top_10 padding_bottom_10 borda_inferior"><?php print $dados_refeicoes['peso'] ?></div>
-        <div class="col-md-1 padding_top_10 padding_bottom_10 borda_inferior"><?php print number_format($dados_refeicoes['caloria'],3) ?></div>
+        <div class="col-md-1 padding_top_10 padding_bottom_10 borda_inferior"><?php print number_format($dados_refeicoes['peso'],1) ?></div>
+        <div class="col-md-1 padding_top_10 padding_bottom_10 borda_inferior"><?php print number_format($dados_refeicoes['caloria'],0) ?></div>
         <div class="col-md-1 padding_top_10 padding_bottom_10 centralizado borda_inferior">
             <a href="#" class="link_detalhes" onclick="javascript:inserir_alimento('<?php print $dados_refeicoes['cod_alimento'] ?>','<?php print $dados_refeicoes['alimento'] ?>','<?php print $dados_refeicoes['peso'] ?>','<?php print $dados_refeicoes['caloria'] ?>','<?php print $dados_refeicoes['medida_caseira'] ?>')">
             <span class="glyphicon glyphicon-plus-sign" alt="Adicionar Alimento da Refeição" title="Adicionar Alimento da Refeição"></span>

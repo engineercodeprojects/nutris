@@ -77,10 +77,51 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         if($quarta_3  != "")    $dias_semana_3 = $dias_semana_3 . ";" . $quarta_3;
         if($quinta_3  != "")    $dias_semana_3 = $dias_semana_3 . ";" . $quinta_3;
         if($sexta_3  != "")     $dias_semana_3 = $dias_semana_3 . ";" . $sexta_3;
+        if($sabado_3  != "")    $dias_semana_3 = $dias_semana_3 . ";" . $sabado_3;
+    
+//        if($sabado_3  != "" and $dias_semana_3 != "")       $dias_semana_3 = $dias_semana_3 . ";" . $sabado_3;
+//        if($sabado_3  != "" and $dias_semana_3 == "")                        $dias_senana_3 = $sabado_3;
         
-        if($sabado_3  != "" and $dias_semana_3 != "")       $dias_semana_3 = $dias_semana_3 . ";" . $sabado_3;
-        if($sabado_3  != "" and $dias_semana_3 == "")                        $dias_senana_3 = $sabado_3;
+    
+        $qual_atividade_fisica_4 = $_POST['qual_atividade_fisica_1_4'];
+        $domingo_4 = $_POST['chk_domingo_1_4'];
+        $segunda_4 = $_POST['chk_segunda_1_4'];
+        $terca_4 = $_POST['chk_terca_1_4'];
+        $quarta_4 = $_POST['chk_quarta_1_4'];
+        $quinta_4 = $_POST['chk_quinta_1_4'];
+        $sexta_4 = $_POST['chk_sexta_1_4'];
+        $sabado_4 = $_POST['chk_sabado_1_4'];
+        $horario_inicio_atividade_4 = $_POST['horario_inicio_atividade_fisica_1_4'];
+        $horario_termino_atividade_4 = $_POST['horario_termino_atividade_fisica_1_4'];
         
+        if($domingo_4 != "")    $dias_semana_4 = ";" . $domingo_4;
+        if($segunda_4 != "")    $dias_semana_4 = $dias_semana_4 . ";" . $segunda_4;
+        if($terca_4  != "")     $dias_semana_4 = $dias_semana_4 . ";" . $terca_4;
+        if($quarta_4  != "")    $dias_semana_4 = $dias_semana_4 . ";" . $quarta_4;
+        if($quinta_4  != "")    $dias_semana_4 = $dias_semana_4 . ";" . $quinta_4;
+        if($sexta_4  != "")     $dias_semana_4 = $dias_semana_4 . ";" . $sexta_4;
+        if($sabado_4  != "")    $dias_semana_4 = $dias_semana_4 . ";" . $sabado_4;
+    
+    
+        $qual_atividade_fisica_5 = $_POST['qual_atividade_fisica_1_5'];
+        $domingo_5 = $_POST['chk_domingo_1_5'];
+        $segunda_5 = $_POST['chk_segunda_1_5'];
+        $terca_5 = $_POST['chk_terca_1_5'];
+        $quarta_5 = $_POST['chk_quarta_1_5'];
+        $quinta_5 = $_POST['chk_quinta_1_5'];
+        $sexta_5 = $_POST['chk_sexta_1_5'];
+        $sabado_5 = $_POST['chk_sabado_1_5'];
+        $horario_inicio_atividade_5 = $_POST['horario_inicio_atividade_fisica_1_5'];
+        $horario_termino_atividade_5 = $_POST['horario_termino_atividade_fisica_1_5'];
+        
+        if($domingo_5 != "")    $dias_semana_5 = ";" . $domingo_5;
+        if($segunda_5 != "")    $dias_semana_5 = $dias_semana_5 . ";" . $segunda_5;
+        if($terca_5  != "")     $dias_semana_5 = $dias_semana_5 . ";" . $terca_5;
+        if($quarta_5  != "")    $dias_semana_5 = $dias_semana_5 . ";" . $quarta_5;
+        if($quinta_5  != "")    $dias_semana_5 = $dias_semana_5 . ";" . $quinta_5;
+        if($sexta_5  != "")     $dias_semana_5 = $dias_semana_5 . ";" . $sexta_5;
+        if($sabado_5  != "")    $dias_semana_5 = $dias_semana_5 . ";" . $sabado_5;
+    
         /*
         NÃO DEVE SER INSERIDO ; QUANDO FOR UNICO NUMERO DIFERENTE DE DOMINGO
         */
@@ -97,7 +138,15 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         $sqlstring_atualizar_atividades_fisicas .= "qual_atividade_3 = '" . $qual_atividade_fisica_3 . "', ";
         $sqlstring_atualizar_atividades_fisicas .= "dias_semana_3 = '" . $dias_semana_3 . "', ";
         $sqlstring_atualizar_atividades_fisicas .= "inicio_3 = '" . $horario_inicio_atividade_3 . "', ";
-        $sqlstring_atualizar_atividades_fisicas .= "termino_3 = '" . $horario_termino_atividade_3 . "' ";
+        $sqlstring_atualizar_atividades_fisicas .= "termino_3 = '" . $horario_termino_atividade_3 . "', ";
+        $sqlstring_atualizar_atividades_fisicas .= "qual_atividade_4 = '" . $qual_atividade_fisica_4 . "', ";
+        $sqlstring_atualizar_atividades_fisicas .= "dias_semana_4 = '" . $dias_semana_4 . "', ";
+        $sqlstring_atualizar_atividades_fisicas .= "inicio_4 = '" . $horario_inicio_atividade_4 . "', ";
+        $sqlstring_atualizar_atividades_fisicas .= "termino_4 = '" . $horario_termino_atividade_4 . "', ";
+        $sqlstring_atualizar_atividades_fisicas .= "qual_atividade_5 = '" . $qual_atividade_fisica_5 . "', ";
+        $sqlstring_atualizar_atividades_fisicas .= "dias_semana_5 = '" . $dias_semana_5 . "', ";
+        $sqlstring_atualizar_atividades_fisicas .= "inicio_5 = '" . $horario_inicio_atividade_5 . "', ";
+        $sqlstring_atualizar_atividades_fisicas .= "termino_5 = '" . $horario_termino_atividade_5 . "' ";
         $sqlstring_atualizar_atividades_fisicas .= "where cod_paciente = " . $_SESSION['cod_paciente_selecionado'];
         
         $db->string_query($sqlstring_atualizar_atividades_fisicas); 
@@ -138,7 +187,7 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         $sqlstring_atualizar_antopometria .= "medicamento_recomendado = '" . $medicamento_recomendado . "', ";
         $sqlstring_atualizar_antopometria .= "doencas_passadas = '" . $doencas_passadas . "', ";
         $sqlstring_atualizar_antopometria .= "historico_familiar = '" . $historico_familiar . "', ";        
-        $sqlstring_atualizar_antopometria .= "historico_familiar = '" . $outras_informacoes_anamnese . "' ";        
+        $sqlstring_atualizar_antopometria .= "outras_informacoes_anamnese = '" . $outras_informacoes_anamnese . "' ";        
         $sqlstring_atualizar_antopometria .= "where cod_paciente = " . $_SESSION['cod_paciente_selecionado'];
         
         $db->string_query($sqlstring_atualizar_antopometria); 
@@ -166,6 +215,8 @@ $dados_atividades_fisicas = mysql_fetch_array($info_atividades_fisicas);
 $dias_semana_1_ = explode(";",$dados_atividades_fisicas['dias_semana_1']);
 $dias_semana_2_ = explode(";",$dados_atividades_fisicas['dias_semana_2']);
 $dias_semana_3_ = explode(";",$dados_atividades_fisicas['dias_semana_3']);
+$dias_semana_4_ = explode(";",$dados_atividades_fisicas['dias_semana_4']);
+$dias_semana_5_ = explode(";",$dados_atividades_fisicas['dias_semana_5']);
 
 // recuperando informações para preencher o formulário em caso de alteração anamnese paciente - histórico paciente
 $sqlstring_historico_paciente  = "select tb_historico_paciente.*, tb_paciente.nome_paciente from tb_historico_paciente ";
@@ -272,6 +323,14 @@ $dados_historico_paciente = mysql_fetch_array($info_historico_paciente);
                             <a href="#" id="btn_mais_2" name="btn_mais_2" onclick="exibir_ocultar_atividades_fisicas(4)" style="display:none">
                             <span class="glyphicon glyphicon-plus-sign fonte_verde_claro fonte_muito_grande"></span>
                             </a>
+                        
+                            <a href="#" id="btn_mais_3" name="btn_mais_3" onclick="exibir_ocultar_atividades_fisicas(7)" style="display:none">
+                            <span class="glyphicon glyphicon-plus-sign fonte_verde_claro fonte_muito_grande"></span>
+                            </a>
+                        
+                            <a href="#" id="btn_mais_4" name="btn_mais_4" onclick="exibir_ocultar_atividades_fisicas(8)" style="display:none">
+                            <span class="glyphicon glyphicon-plus-sign fonte_verde_claro fonte_muito_grande"></span>
+                            </a>
                                                 
                             <a href="#" id="btn_mais_morto" name="btn_mais_morto"  style="display:none">
                             <span class="glyphicon glyphicon-plus-sign fonte_cinza fonte_muito_grande"></span>
@@ -282,6 +341,14 @@ $dados_historico_paciente = mysql_fetch_array($info_historico_paciente);
                             </a>
                             
                             <a href="#" id="btn_menos_2" name="btn_menos_2"  onclick="exibir_ocultar_atividades_fisicas(6)"  style="display:none">
+                            <span class="glyphicon glyphicon-minus-sign fonte_verde_claro fonte_muito_grande"></span>
+                            </a>
+                        
+                            <a href="#" id="btn_menos_3" name="btn_menos_3"  onclick="exibir_ocultar_atividades_fisicas(10)"  style="display:none">
+                            <span class="glyphicon glyphicon-minus-sign fonte_verde_claro fonte_muito_grande"></span>
+                            </a>
+                        
+                            <a href="#" id="btn_menos_4" name="btn_menos_4"  onclick="exibir_ocultar_atividades_fisicas(9)"  style="display:none">
                             <span class="glyphicon glyphicon-minus-sign fonte_verde_claro fonte_muito_grande"></span>
                             </a>
                         
@@ -670,9 +737,271 @@ $dados_historico_paciente = mysql_fetch_array($info_historico_paciente);
                         </div>
                             <!-- fim - horário termino atividade física -->   
                         <!-- fim - painel atividade física 3 -->
+                     </div>
+                    <!-- fim - camada display - atividade 3 -->
+                        
+                        
+                        
+                        
+                         <!-- inicio - camada display - atividade 4 -->
+                    <div class="col-md-12" id="atividade_fisica_1_4" name="atividade_fisica_1_4" style="display:none">                    
+                        
+                        <!-- inicio - qual atividade física 4 -->
+                        <div class="form-group col-md-4">
+                            <label for="qual_atividade">Qual?</label>
+                            <input type="text" class="form-control" name="qual_atividade_fisica_1_4" id="qual_atividade_fisica_1_4" value="<?php print $dados_atividades_fisicas['qual_atividade_4'] ?>" maxlength="40">
+                        </div>
+                        <!-- fim - qual atividade física -->
 
-                </div>
-                <!-- fim - camada display - atividade 3 -->
+                        <!-- inicio - dias da semana da atividade física -->
+                        <div class="form-group col-md-4">
+                            <label for="pratica_atividade_fisica">Dias da Semana</label>
+                            <br/>
+                            <label class="checkbox-inline">
+                              <?php 
+                                if(array_search('0', $dias_semana_4_) != "")                                     
+                                {                                    
+                                    print '<input type="checkbox" name="chk_domingo_1_4" id="chk_domingo_1_4" value="0" checked> D';
+                                }
+                                else 
+                                {
+                                    print '<input type="checkbox" name="chk_domingo_1_4" id="chk_domingo_1_4" value="0"> D';
+                                }
+                                ?>
+                            </label>
+
+                            <label class="checkbox-inline">                                
+                                <?php                                     
+                                if(array_search('1', $dias_semana_4_) != "") 
+                                {
+                                    print '<input type="checkbox" name="chk_segunda_1_4" id="chk_segunda_1_4" value="1" checked> S';
+                                }
+                                else 
+                                {
+                                    print '<input type="checkbox" name="chk_segunda_1_4" id="chk_segunda_1_4" value="1"> S';
+                                }                                
+                                ?>
+                            </label>
+
+                            <label class="checkbox-inline">
+                                <?php                                     
+                                if(array_search('2', $dias_semana_4_) != "") 
+                                {
+                                    print '<input type="checkbox" name="chk_terca_1_4" id="chk_terca_1_4" value="2" checked> T';
+                                }
+                                else 
+                                {
+                                    print '<input type="checkbox" name="chk_terca_1_4" id="chk_terca_1_4" value="2"> T';
+                                }                                
+                                ?>                              
+                            </label>
+
+                            <label class="checkbox-inline">
+                                <?php                                     
+                                if(array_search('3', $dias_semana_4_) != "") 
+                                {
+                                    print '<input type="checkbox" name="chk_quarta_1_4" id="chk_quarta_1_4" value="3" checked> Q';
+                                }
+                                else 
+                                {
+                                    print '<input type="checkbox" name="chk_quarta_1_4" id="chk_quarta_1_4" value="3"> Q';
+                                }                                
+                                ?>                               
+                            </label>
+
+                            <label class="checkbox-inline">
+                                <?php                                     
+                                if(array_search('4', $dias_semana_4_) != "") 
+                                {
+                                    print '<input type="checkbox" name="chk_quinta_1_4" id="chk_quinta_1_4" value="4" checked> Q';
+                                }
+                                else 
+                                {
+                                    print '<input type="checkbox" name="chk_quinta_1_4" id="chk_quinta_1_4" value="4"> Q';
+                                }                                
+                                ?>
+                            </label>
+
+                            <label class="checkbox-inline">
+                                <?php                                     
+                                if(array_search('5', $dias_semana_4_) != "") 
+                                {
+                                    print '<input type="checkbox" name="chk_sexta_1_4" id="chk_sexta_1_4" value="5" checked> S';
+                                }
+                                else 
+                                {
+                                    print '<input type="checkbox" name="chk_sexta_1_4" id="chk_sexta_1_4" value="5"> S';
+                                }                                
+                                ?>
+                            </label>
+
+                            <label class="checkbox-inline">
+                                <?php                                     
+                                if(array_search('6', $dias_semana_4_) != "") 
+                                {
+                                    print '<input type="checkbox" name="chk_sabado_1_4" id="chk_sabado_1_4" value="6" checked> S';
+                                }
+                                else 
+                                {
+                                    print '<input type="checkbox" name="chk_sabado_1_4" id="chk_sabado_1_4" value="6"> S';
+                                }                                
+                                ?>                              
+                            </label>
+                        </div>
+                            <!-- fim - dias da semana da atividade física -->
+
+                        
+                        <!-- inicio - horário início atividade física -->                    
+                        <div class="form-group col-md-2">
+                            <label for="horario_inicio_atividade_fisica">Início</label>
+                            <input type="time" class="form-control" name="horario_inicio_atividade_fisica_1_4" id="horario_inicio_atividade_fisica_1_4" value="<?php print $dados_atividades_fisicas['inicio_4'] ?>">
+                        </div>
+                        <!-- fim - horário início atividade física -->
+
+                        <!-- inicio - horário termino atividade física -->
+                        <div class="form-group col-md-2">
+                            <label for="horario_termino_atividade_fisica">Término</label>
+                            <input type="time" class="form-control" name="horario_termino_atividade_fisica_1_4" id="horario_termino_atividade_fisica_1_4"  value="<?php print $dados_atividades_fisicas['termino_4'] ?>">
+                        </div>
+                            <!-- fim - horário termino atividade física -->   
+                        <!-- fim - painel atividade física 4 -->
+                    </div>
+                    <!-- fim - camada display - atividade 4 -->
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    <!-- inicio - camada display - atividade 5 -->
+                    <div class="col-md-12" id="atividade_fisica_1_5" name="atividade_fisica_1_5" style="display:none">                    
+                        
+                        <!-- inicio - qual atividade física 5 -->
+                        <div class="form-group col-md-4">
+                            <label for="qual_atividade">Qual?</label>
+                            <input type="text" class="form-control" name="qual_atividade_fisica_1_5" id="qual_atividade_fisica_1_5" value="<?php print $dados_atividades_fisicas['qual_atividade_5'] ?>" maxlength="40">
+                        </div>
+                        <!-- fim - qual atividade física -->
+
+                        <!-- inicio - dias da semana da atividade física -->
+                        <div class="form-group col-md-4">
+                            <label for="pratica_atividade_fisica">Dias da Semana</label>
+                            <br/>
+                            <label class="checkbox-inline">
+                              <?php 
+                                if(array_search('0', $dias_semana_5_) != "")                                     
+                                {                                    
+                                    print '<input type="checkbox" name="chk_domingo_1_5" id="chk_domingo_1_5" value="0" checked> D';
+                                }
+                                else 
+                                {
+                                    print '<input type="checkbox" name="chk_domingo_1_5" id="chk_domingo_1_5" value="0"> D';
+                                }
+                                ?>
+                            </label>
+
+                            <label class="checkbox-inline">                                
+                                <?php                                     
+                                if(array_search('1', $dias_semana_5_) != "") 
+                                {
+                                    print '<input type="checkbox" name="chk_segunda_1_5" id="chk_segunda_1_5" value="1" checked> S';
+                                }
+                                else 
+                                {
+                                    print '<input type="checkbox" name="chk_segunda_1_5" id="chk_segunda_1_5" value="1"> S';
+                                }                                
+                                ?>
+                            </label>
+
+                            <label class="checkbox-inline">
+                                <?php                                     
+                                if(array_search('2', $dias_semana_5_) != "") 
+                                {
+                                    print '<input type="checkbox" name="chk_terca_1_5" id="chk_terca_1_5" value="2" checked> T';
+                                }
+                                else 
+                                {
+                                    print '<input type="checkbox" name="chk_terca_1_5" id="chk_terca_1_5" value="2"> T';
+                                }                                
+                                ?>                              
+                            </label>
+
+                            <label class="checkbox-inline">
+                                <?php                                     
+                                if(array_search('3', $dias_semana_5_) != "") 
+                                {
+                                    print '<input type="checkbox" name="chk_quarta_1_5" id="chk_quarta_1_5" value="3" checked> Q';
+                                }
+                                else 
+                                {
+                                    print '<input type="checkbox" name="chk_quarta_1_5" id="chk_quarta_1_5" value="3"> Q';
+                                }                                
+                                ?>                               
+                            </label>
+
+                            <label class="checkbox-inline">
+                                <?php                                     
+                                if(array_search('4', $dias_semana_5_) != "") 
+                                {
+                                    print '<input type="checkbox" name="chk_quinta_1_5" id="chk_quinta_1_5" value="4" checked> Q';
+                                }
+                                else 
+                                {
+                                    print '<input type="checkbox" name="chk_quinta_1_5" id="chk_quinta_1_5" value="4"> Q';
+                                }                                
+                                ?>
+                            </label>
+
+                            <label class="checkbox-inline">
+                                <?php                                     
+                                if(array_search('5', $dias_semana_5_) != "") 
+                                {
+                                    print '<input type="checkbox" name="chk_sexta_1_5" id="chk_sexta_1_5" value="5" checked> S';
+                                }
+                                else 
+                                {
+                                    print '<input type="checkbox" name="chk_sexta_1_5" id="chk_sexta_1_5" value="5"> S';
+                                }                                
+                                ?>
+                            </label>
+
+                            <label class="checkbox-inline">
+                                <?php                                     
+                                if(array_search('6', $dias_semana_5_) != "") 
+                                {
+                                    print '<input type="checkbox" name="chk_sabado_1_5" id="chk_sabado_1_5" value="6" checked> S';
+                                }
+                                else 
+                                {
+                                    print '<input type="checkbox" name="chk_sabado_1_5" id="chk_sabado_1_5" value="6"> S';
+                                }                                
+                                ?>                              
+                            </label>
+                        </div>
+                            <!-- fim - dias da semana da atividade física -->
+
+                        
+                        <!-- inicio - horário início atividade física -->                    
+                        <div class="form-group col-md-2">
+                            <label for="horario_inicio_atividade_fisica">Início</label>
+                            <input type="time" class="form-control" name="horario_inicio_atividade_fisica_1_5" id="horario_inicio_atividade_fisica_1_5" value="<?php print $dados_atividades_fisicas['inicio_5'] ?>">
+                        </div>
+                        <!-- fim - horário início atividade física -->
+
+                        <!-- inicio - horário termino atividade física -->
+                        <div class="form-group col-md-2">
+                            <label for="horario_termino_atividade_fisica">Término</label>
+                            <input type="time" class="form-control" name="horario_termino_atividade_fisica_1_5" id="horario_termino_atividade_fisica_1_5"  value="<?php print $dados_atividades_fisicas['termino_5'] ?>">
+                        </div>
+                            <!-- fim - horário termino atividade física -->   
+                        <!-- fim - painel atividade física 5 -->
+                    </div>
+                    <!-- fim - camada display - atividade 5 -->
+                        
+                
+                    
                     
                 </div>                
             </div>
@@ -977,10 +1306,18 @@ $dados_historico_paciente = mysql_fetch_array($info_historico_paciente);
     if($dados_atividades_fisicas['atividade_fisica_sn'] == 1)
     {  
         ?><script>document.getElementById('opt_atividade_fisica_s').checked = true;</script><?php
-        if($dados_atividades_fisicas['qual_atividade_3'] != NULL)
+        if($dados_atividades_fisicas['qual_atividade_5'] != NULL)
+        {
+            ?> <script>exibir_ocultar_atividades_fisicas(8);</script> <?php
+        }
+        else if($dados_atividades_fisicas['qual_atividade_4'] != NULL)
+        {
+            ?> <script>exibir_ocultar_atividades_fisicas(9);</script> <?php
+        } 
+        else if($dados_atividades_fisicas['qual_atividade_3'] != NULL)
         {
             ?> <script>exibir_ocultar_atividades_fisicas(4);</script> <?php
-        }    
+        }   
         else if($dados_atividades_fisicas['qual_atividade_2'] != NULL)
         {
             ?><script>exibir_ocultar_atividades_fisicas(3); </script> <?php

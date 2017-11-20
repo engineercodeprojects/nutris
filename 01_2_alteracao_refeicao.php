@@ -161,16 +161,136 @@ $dados_refeicao_selecionada = mysql_fetch_array($info_refeicao_selecionada);
             </select>
         </div>
         <!-- fim - tipo de refeição --> 
+            
+            
+        <!-- inicio - video - modo de preparo -->
+        <div id="v_modo_preparo" name="v_modo_preparo" class="form-group col-md-12">
+            <label for="video_modo_preparo">Vídeo - Modo de Preparo</label>
+            <input type="text" class="form-control" name="video_modo_preparo" id="video_modo_preparo" value="<?php print $dados_refeicao_selecionada['video_modo_preparo'] ?>" maxlength=255 required>            
+        </div>
+        <!-- fim - video - modo de preparo -->
         
+            
+        <!-- inicio - outras informações refeicoes -->
+        <div id="outras_informacoes" name="outras_informacoes" class="form-group col-md-6">
+            <label for="outras_informacoes_refeicoes">Outras Informações </label>
+            <textarea rows="10" name="outras_informacoes_refeicoes" id="outras_informacoes_refeicoes" class="form-control text-uppercase"><?php print $dados_refeicao_selecionada['outras_informacoes_refeicoes'] ?></textarea>
+        </div>
+        <!-- fim - video - modo de preparo -->
+         
+            
+            
+            
+        <!-- inicio - campo foto 01 refeicao -->    
+        <div class="col-md-3">
+             <!-- inicio - barra de título e botao "x" para remover a foto do paciente - capo oculto para saber se insere avatar ou não -->
+             <div class="col-md-8 fonte_branca padding_top_05 fundo_verde_claro altura_30"><span class="glyphicon glyphicon-camera"></span> FOTO </div>
+             <div class="col-md-4 direito fonte_branca padding_top_05 fundo_verde_claro altura_30"> 
+             <a href="#" onclick="document.getElementById('f_1').innerHTML = '<br/><label for=\'uploadImage1\'><img src=\'fotos/avatar_refeicao.png\' class=\'img-responsive margin_auto\' width=150 height=200  id=\'uploadPreview1\'></label><input id=\'uploadImage1\' type=\'file\' name=\'foto_01\' onchange=\'pre_visualizacao1()\' style=\'display:none\'><input type=hidden name=fo_01 id=fo_01 value=0>'">
+             <span class="glyphicon glyphicon-remove fonte_branca"></span>
+             </a>
+             </div>
+             <!-- fim - barra de título e botao "x" para remover a foto do paciente -->
+            
+             <div class="col-md-12 form-group centralizado borda_cinza altura_210  borda_inferior_verde_claro" id="f_1">
+                <br/>
+                <?php                  
+                if($dados_refeicao_selecionada['foto_01_refeicao'] != "" and $dados_refeicao_selecionada['foto_01_refeicao'] != "avatar_refeicao.png") 
+                {  
+                 ?> 
+                <label for="uploadImage1"><img src="fotos_refeicoes/<?php print $dados_refeicao_selecionada['foto_01_refeicao'] ?>" class="img-responsive margin_auto" width=150 height=200  id="uploadPreview1"/></label>   
+                <input id="uploadImage1" type="file" name="foto_01" onchange="pre_visualizacao1();" style="display:none"/>                
+                <?php
+                }                
+                else if($dados_refeicao_selecionada['foto_01_refeicao'] == "" or $dados_refeicao_selecionada['foto_01_refeicao'] == "avatar_refeicao.png") 
+                {
+                 ?>
+                 <label for="uploadImage1"><img src="img/avatar_refeicao.png" class="img-responsive margin_auto" width=150 height=200  id="uploadPreview1"/></label>   
+                <input id="uploadImage1" type="file" name="foto_01" onchange="pre_visualizacao1();" style="display:none"/>
+                 <?php
+                }
+                 ?>
+                 <br/><br/>                 
+             </div>
+            
+        </div>
+                      
+            <script type="text/javascript">
+            function pre_visualizacao1() {
+                var oFReader = new FileReader();
+                oFReader.readAsDataURL(document.getElementById("uploadImage1").files[0]);
+
+                oFReader.onload = function (oFREvent) {
+                    document.getElementById("uploadPreview1").src = oFREvent.target.result;
+                };
+            };
+            </script> 
+            <!-- fim - campo foto 01 refeicao -->    
+            
+            
+            
+            
+            
+            
+            <!-- inicio - campo foto 02 refeicao -->    
+        <div class="col-md-3">
+             <!-- inicio - barra de título e botao "x" para remover a foto do paciente - capo oculto para saber se insere avatar ou não -->
+             <div class="col-md-8 fonte_branca padding_top_05 fundo_verde_claro altura_30"><span class="glyphicon glyphicon-camera"></span> FOTO </div>
+             <div class="col-md-4 direito fonte_branca padding_top_05 fundo_verde_claro altura_30"> 
+             <a href="#" onclick="document.getElementById('f_2').innerHTML = '<br/><label for=\'uploadImage2\'><img src=\'fotos/avatar_refeicao.png\' class=\'img-responsive margin_auto\' width=150 height=200  id=\'uploadPreview2\'></label><input id=\'uploadImage2\' type=\'file\' name=\'foto_02\' onchange=\'pre_visualizacao2()\' style=\'display:none\'><input type=hidden name=fo_02 id=fo_02 value=0>'">
+             <span class="glyphicon glyphicon-remove fonte_branca"></span>
+             </a>
+             </div>
+             <!-- fim - barra de título e botao "x" para remover a foto do paciente -->
+            
+             <div class="col-md-12 form-group centralizado borda_cinza altura_210  borda_inferior_verde_claro" id="f_2">
+                <br/>
+                <?php                  
+                if($dados_refeicao_selecionada['foto_02_refeicao'] != "" and $dados_refeicao_selecionada['foto_02_refeicao'] != "avatar_refeicao.png") 
+                {  
+                 ?> 
+                <label for="uploadImage2"><img src="fotos_refeicoes/<?php print $dados_refeicao_selecionada['foto_02_refeicao'] ?>" class="img-responsive margin_auto" width=150 height=200  id="uploadPreview2"/></label>   
+                <input id="uploadImage2" type="file" name="foto_02" onchange="pre_visualizacao2();" style="display:none"/>                
+                <?php
+                }                
+                else if($dados_refeicao_selecionada['foto_02_refeicao'] == "" or $dados_refeicao_selecionada['foto_02_refeicao'] == "avatar_refeicao.png") 
+                {
+                 ?>
+                 <label for="uploadImage2"><img src="img/avatar_refeicao.png" class="img-responsive margin_auto" width=150 height=200  id="uploadPreview2"/></label>   
+                <input id="uploadImage2" type="file" name="foto_02" onchange="pre_visualizacao2();" style="display:none"/>
+                 <?php
+                }
+                 ?>
+                 <br/><br/>                 
+             </div>
+            
+        </div>
+                      
+            <script type="text/javascript">
+            function pre_visualizacao2() {
+                var oFReader = new FileReader();
+                oFReader.readAsDataURL(document.getElementById("uploadImage2").files[0]);
+
+                oFReader.onload = function (oFREvent) {
+                    document.getElementById("uploadPreview2").src = oFREvent.target.result;
+                };
+            };
+            </script> 
+            <!-- fim - campo foto 02 refeicao --> 
+            
+            
+            
         
         <!-- inicio - alimentos dessa refeição -->            
         <div class="form-group col-md-12">
             <label for="alimento_refeicao">Alimentos dessa refeição </label>
             <div id="alimentos_refeicao" name="alimentos_refeicao">
-                <div class="col-md-6 fundo_verde_claro fonte_branca padding_top_10 padding_bottom_10">Alimento</div>
-                <div class="col-md-3 fundo_verde_claro fonte_branca padding_top_10 padding_bottom_10">Grupo</div>
-                <div class="col-md-1 fundo_verde_claro fonte_branca padding_top_10 padding_bottom_10">Peso</div>
-                <div class="col-md-1 fundo_verde_claro fonte_branca padding_top_10 padding_bottom_10">Calorias</div>
+                <div class="col-md-6 fundo_verde_claro fonte_branca padding_top_10 padding_bottom_10">Alimento</div>                
+                <div class="col-md-1 fundo_verde_claro fonte_branca padding_top_10 padding_bottom_10">Porções</div>
+                <div class="col-md-1 fundo_verde_claro fonte_branca padding_top_10 padding_bottom_10 direito">Peso</div>
+                <div class="col-md-1 fundo_verde_claro fonte_branca padding_top_10 padding_bottom_10 direito">T. Peso</div>                
+                <div class="col-md-1 fundo_verde_claro fonte_branca padding_top_10 padding_bottom_10 direito">Calorias</div>
+                <div class="col-md-1 fundo_verde_claro fonte_branca padding_top_10 padding_bottom_10 direito">T. Cal</div>
                 <div class="col-md-1 fundo_verde_claro fonte_branca padding_top_10 padding_bottom_10 centralizado fonte_branca"><span class="glyphicon glyphicon-minus" alt="Remover Alimento da Refeição" title="Remover Alimento da Refeição"></span></div>
                    
                 
@@ -178,7 +298,7 @@ $dados_refeicao_selecionada = mysql_fetch_array($info_refeicao_selecionada);
                 
                 <?php
                 // informações da refeição selecionada pelo usuário
-                $sqlstring_alimentos_refeicao_selecionada   = "select tb_alimento.cod_alimento, tb_alimento.alimento, tb_alimento.medida_caseira, tb_alimento.peso, tb_alimento.caloria from tb_alimento ";
+                $sqlstring_alimentos_refeicao_selecionada   = "select tb_alimento.cod_alimento, tb_alimento.alimento, tb_refeicao_alimento.qtde_porcoes, tb_alimento.peso, tb_alimento.caloria from tb_alimento ";
                 $sqlstring_alimentos_refeicao_selecionada  .= "inner join tb_refeicao_alimento on tb_refeicao_alimento.cod_alimento = tb_alimento.cod_alimento ";
                 $sqlstring_alimentos_refeicao_selecionada  .= "where cod_refeicao = " . $_SESSION['cod_refeicao_selecionada'];
                 $info_alimentos_refeicao_selecionada = $db->sql_query($sqlstring_alimentos_refeicao_selecionada); 
@@ -189,11 +309,61 @@ $dados_refeicao_selecionada = mysql_fetch_array($info_refeicao_selecionada);
                 
                 <div id='<?php print $dados_alimentos_refeicao_selecionada['cod_alimento'] ?>'>
                 <div><input type=hidden name=codigos[] id=codigos[] value='<?php print $dados_alimentos_refeicao_selecionada['cod_alimento'] ?>'></div>
-                <div class='col-md-6 borda_inferior padding_top_05 padding_bottom_05'><input type=text value='<?php print $dados_alimentos_refeicao_selecionada['alimento'] ?>' class='form-group largura_100 margin_00 sem_borda fundo_transparente fonte_pequena'></div>
-                <div class='col-md-3 borda_inferior padding_top_05 padding_bottom_05'><input type=text value='<?php print $dados_alimentos_refeicao_selecionada['medida_caseira'] ?>' class='form-group largura_100 margin_00 sem_borda fundo_transparente fonte_pequena text-uppercase'></div>
-                <div class='col-md-1 borda_inferior padding_top_05 padding_bottom_05'><input type=text value='<?php print number_format($dados_alimentos_refeicao_selecionada['peso'],2) ?>' class='form-group esquerda margin_00 sem_borda fundo_transparente fonte_pequena'></div>
-                <div class='col-md-1 borda_inferior padding_top_05 padding_bottom_05'><input type=text value='<?php print number_format($dados_alimentos_refeicao_selecionada['caloria'],2) ?>' class='form-group esquerda margin_00 sem_borda fundo_transparente fonte_pequena'></div>
-                <div class='col-md-1 borda_inferior padding_top_05 padding_bottom_05 fonte_verde_claro centralizado'><a href='#' class='link_detalhes' onclick="javascript:remover_alimento(<?php print $dados_alimentos_refeicao_selecionada['cod_alimento'] ?>,<?php print $dados_alimentos_refeicao_selecionada['peso'] ?>,<?php print $dados_alimentos_refeicao_selecionada['caloria'] ?>)"><span class='glyphicon glyphicon-minus-sign'></span></a></div>
+                <div class='col-md-6 borda_inferior padding_top_05 padding_bottom_05'><input type=text value='<?php print $dados_alimentos_refeicao_selecionada['alimento'] ?>' class='form-group largura_100 margin_00 sem_borda fundo_transparente esquerdo fonte_pequena'></div>
+                    
+                    <div class='col-md-1 borda_inferior padding_top_05 padding_bottom_05'>
+                        <select name='qtde_porcoes[]' id='qtde_porcoes_<?php print $dados_alimentos_refeicao_selecionada['cod_alimento'] ?>' class='form-group largura_100 margin_00 sem_borda fundo_transparente fonte_pequena' onchange=calcula_total('qtde_porcoes_<?php print $dados_alimentos_refeicao_selecionada['cod_alimento'] ?>','peso_alimento_<?php print $dados_alimentos_refeicao_selecionada['cod_alimento'] ?>','peso_total_alimento_<?php print $dados_alimentos_refeicao_selecionada['cod_alimento'] ?>','caloria_alimento_<?php print $dados_alimentos_refeicao_selecionada['cod_alimento'] ?>','caloria_total_alimento_<?php print $dados_alimentos_refeicao_selecionada['cod_alimento'] ?>')>
+                        <?php
+                        $contador = 1;
+                        while($contador <= 10)
+                        {
+                            if($contador < 10)
+                            {
+                                if($dados_alimentos_refeicao_selecionada['qtde_porcoes'] == $contador)
+                                {                                
+                                ?>
+                                <option value=<?php print $contador ?> selected> <?php print "0" . $contador ?> </option>
+                                <?php
+                                }
+                                else
+                                {
+                                ?>
+                                <option value=<?php print $contador ?>> <?php print "0" . $contador ?> </option>
+                                <?php  
+                                }
+                            }
+                             else
+                             {
+                                 if($dados_alimentos_refeicao_selecionada['qtde_porcoes'] == $contador)
+                                {                                
+                                ?>
+                                <option value=<?php print $contador ?> selected> <?php print $contador ?> </option>
+                                <?php
+                                }
+                                else
+                                {
+                                ?>
+                                <option value=<?php print $contador ?>> <?php print $contador ?> </option>
+                                <?php
+                                }
+                        
+                             }
+                        $contador++;
+                        }                            
+                        ?>
+                        
+                        </select>
+                    </div>
+                
+                <div class='col-md-1 borda_inferior padding_top_05 padding_bottom_05'><input type=text value='<?php print number_format($dados_alimentos_refeicao_selecionada['peso'],1) ?>' class='form-group largura_100 direito margin_00 sem_borda fundo_transparente fonte_pequena' name = 'peso_alimento_<?php print $dados_alimentos_refeicao_selecionada['cod_alimento'] ?>' id='peso_alimento_<?php print $dados_alimentos_refeicao_selecionada['cod_alimento'] ?>' readonly></div>
+                    
+                <div class='col-md-1 borda_inferior padding_top_05 padding_bottom_05'><input type=text value='<?php print number_format(($dados_alimentos_refeicao_selecionada['qtde_porcoes']*$dados_alimentos_refeicao_selecionada['peso']),1) ?>' class='form-group largura_100 direito margin_00 sem_borda fundo_transparente fonte_pequena text-uppercase' name='peso_total_alimento_<?php print $dados_alimentos_refeicao_selecionada['cod_alimento'] ?>' id='peso_total_alimento_<?php print $dados_alimentos_refeicao_selecionada['cod_alimento'] ?>' readonly></div>
+                    
+                <div class='col-md-1 borda_inferior padding_top_05 padding_bottom_05'><input type=text value='<?php print number_format($dados_alimentos_refeicao_selecionada['caloria'],0) ?>' class='form-group largura_100 direito margin_00 sem_borda fundo_transparente fonte_pequena' name='caloria_alimento_<?php print $dados_alimentos_refeicao_selecionada['cod_alimento'] ?>' id='caloria_alimento_<?php print $dados_alimentos_refeicao_selecionada['cod_alimento'] ?>' readonly></div>
+                    
+                <div class='col-md-1 borda_inferior padding_top_05 padding_bottom_05'><input type=text value='<?php print $dados_alimentos_refeicao_selecionada['qtde_porcoes']*$dados_alimentos_refeicao_selecionada['caloria'] ?>' class='form-group largura_100 direito margin_00 sem_borda fundo_transparente fonte_pequena' name='caloria_total_alimento_<?php print $dados_alimentos_refeicao_selecionada['cod_alimento'] ?>' id='caloria_total_alimento_<?php print $dados_alimentos_refeicao_selecionada['cod_alimento'] ?>' readonly></div>
+                    
+                <div class='col-md-1 borda_inferior padding_top_05 padding_bottom_05 fonte_verde_claro centralizado'><a href='#' class='link_detalhes' onclick="javascript:remover_alimento(<?php print $dados_alimentos_refeicao_selecionada['cod_alimento'] ?>,<?php print $dados_alimentos_refeicao_selecionada['caloria'] ?>)"><span class='glyphicon glyphicon-minus-sign'></span></a></div>
                 
                 </div>
                 
@@ -208,21 +378,32 @@ $dados_refeicao_selecionada = mysql_fetch_array($info_refeicao_selecionada);
         
             
                 <?php
-                $sqlstring_peso_caloria  = "select tb_refeicao_alimento.cod_refeicao, tb_alimento.alimento, tb_alimento.peso, tb_alimento.caloria, sum(peso) as total_peso, sum(caloria) as total_caloria from tb_refeicao_alimento ";
-                $sqlstring_peso_caloria .= "inner join tb_alimento on tb_alimento.cod_alimento = tb_refeicao_alimento.cod_alimento ";
-                $sqlstring_peso_caloria .= "where cod_refeicao = " . $_SESSION['cod_refeicao_selecionada'] . " ";
-                $sqlstring_peso_caloria .= "group by cod_refeicao";
+                $sqlstring_caloria  = "select tb_refeicao_alimento.qtde_porcoes, tb_alimento.caloria from tb_refeicao_alimento ";
+                $sqlstring_caloria .= "inner join tb_alimento on tb_alimento.cod_alimento = tb_refeicao_alimento.cod_alimento ";
+                $sqlstring_caloria .= "where cod_refeicao = " . $_SESSION['cod_refeicao_selecionada'];
+                
+                $info_caloria = $db->sql_query($sqlstring_caloria);
+                $linhas_caloria = $db->sql_linhas($info_caloria);
             
-                $info_peso_caloria = $db->sql_query($sqlstring_peso_caloria);
-                $dados_peso_caloria = mysql_fetch_array($info_peso_caloria);
+               
+            
+                $contador = 0;
+                $calorias = 0;            
+                while($contador < $linhas_caloria)
+                {
+                $dados_caloria=mysql_fetch_array($info_caloria);    
+                $calorias = $calorias + ($dados_caloria['qtde_porcoes']*$dados_caloria['caloria']);
+                $contador++;
+                }
+                
                 ?>
             
         <!-- inicio - peso total e calorias totais -->           
          <div class="form-group col-md-12">            
             <div id="totais" name="totais">
-                <div class="col-md-9 padding_top_10 padding_bottom_10"><input type="text" name="alimento" id="alimento" class="form-group margin_00 sem_borda fundo_transparente negrito" value="Totais" readonly></div>
-                <div class="col-md-1"><input type="text" name="total_peso" id="total_peso" class="form-group margin_00 esquerda fonte_verde_claro fundo_transparente sem_borda " value=<?php print number_format($dados_peso_caloria['total_peso'],2) ?> readonly></div>
-                <div class="col-md-1"><input type="text" name="total_caloria" id="total_caloria" class="form-group margin_00 esquerda fonte_verde_claro fundo_transparente sem_borda "  value=<?php print number_format($dados_peso_caloria['total_caloria'],2) ?> readonly></div>
+                <div class="col-md-10 padding_top_10 padding_bottom_10"><input type="text" name="alimento" id="alimento" class="form-group margin_00 sem_borda fundo_transparente negrito" value="Totais" readonly></div>
+                
+                <div class="col-md-1"><input type="text" name="total_caloria" id="total_caloria" class="form-group largura_100 margin_00 direito fonte_verde_claro fundo_transparente sem_borda "  value=<?php print $calorias ?> readonly></div>
             </div>
          </div>        
         <!-- fim - peso total e calorias totais --> 

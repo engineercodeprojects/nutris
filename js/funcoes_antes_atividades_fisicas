@@ -468,32 +468,14 @@ function nova_pesquisa(destino)
 function exibir_ocultar_atividades_fisicas(acao)
 {
     
-    // onclick option SIM clicado
+    
     if(acao == 1)
         {
         document.getElementById("atividade_fisica_1_1").style.display = "inline-block";
         document.getElementById("atividade_fisica_1_2").style.display = "none";
-        document.getElementById("atividade_fisica_1_3").style.display = "none";
-        document.getElementById("atividade_fisica_1_4").style.display = "none";
-        document.getElementById("atividade_fisica_1_5").style.display = "none";
-            
         document.getElementById("qual_atividade_fisica_1_2").value = "";
         document.getElementById("horario_inicio_atividade_fisica_1_2").value = "";
         document.getElementById("horario_termino_atividade_fisica_1_2").value = "";
-            
-        document.getElementById("qual_atividade_fisica_1_3").value = "";
-        document.getElementById("horario_inicio_atividade_fisica_1_3").value = "";
-        document.getElementById("horario_termino_atividade_fisica_1_3").value = "";
-            
-        document.getElementById("qual_atividade_fisica_1_4").value = "";
-        document.getElementById("horario_inicio_atividade_fisica_1_4").value = "";
-        document.getElementById("horario_termino_atividade_fisica_1_4").value = "";
-            
-        document.getElementById("qual_atividade_fisica_1_5").value = "";
-        document.getElementById("horario_inicio_atividade_fisica_1_5").value = "";
-        document.getElementById("horario_termino_atividade_fisica_1_5").value = "";
-            
-            
         document.getElementById("chk_domingo_1_2").checked = false;
         document.getElementById("chk_segunda_1_2").checked = false;
         document.getElementById("chk_terca_1_2").checked = false;
@@ -503,7 +485,10 @@ function exibir_ocultar_atividades_fisicas(acao)
         document.getElementById("chk_sabado_1_2").checked = false;
         document.getElementById("chk_domingo_1_2").checked = false;
             
-            
+        document.getElementById("atividade_fisica_1_3").style.display = "none";
+        document.getElementById("qual_atividade_fisica_1_3").value = "";
+        document.getElementById("horario_inicio_atividade_fisica_1_3").value = "";
+        document.getElementById("horario_termino_atividade_fisica_1_3").value = "";
         document.getElementById("chk_domingo_1_3").checked = false;
         document.getElementById("chk_segunda_1_3").checked = false;
         document.getElementById("chk_terca_1_3").checked = false;
@@ -512,67 +497,19 @@ function exibir_ocultar_atividades_fisicas(acao)
         document.getElementById("chk_sexta_1_3").checked = false;
         document.getElementById("chk_sabado_1_3").checked = false;
         document.getElementById("chk_domingo_1_3").checked = false;
-            
-            
-        document.getElementById("chk_domingo_1_4").checked = false;
-        document.getElementById("chk_segunda_1_4").checked = false;
-        document.getElementById("chk_terca_1_4").checked = false;
-        document.getElementById("chk_quarta_1_4").checked = false;
-        document.getElementById("chk_quinta_1_4").checked = false;
-        document.getElementById("chk_sexta_1_4").checked = false;
-        document.getElementById("chk_sabado_1_4").checked = false;
-        document.getElementById("chk_domingo_1_4").checked = false;
-            
-        document.getElementById("chk_domingo_1_5").checked = false;
-        document.getElementById("chk_segunda_1_5").checked = false;
-        document.getElementById("chk_terca_1_4").checked = false;
-        document.getElementById("chk_quarta_1_4").checked = false;
-        document.getElementById("chk_quinta_1_4").checked = false;
-        document.getElementById("chk_sexta_1_5").checked = false;
-        document.getElementById("chk_sabado_1_5").checked = false;
-        document.getElementById("chk_domingo_1_5").checked = false;
-        
         document.getElementById("btn_mais_1").style.display = "inline-block";
         document.getElementById("btn_mais_2").style.display = "none";
-        document.getElementById("btn_mais_3").style.display = "none";
-        document.getElementById("btn_mais_4").style.display = "none";
         document.getElementById("btn_mais_morto").style.display = "none";        
-        
         document.getElementById("btn_menos_1").style.display = "none";
         document.getElementById("btn_menos_2").style.display = "none";   
-        document.getElementById("btn_menos_3").style.display = "none";   
-        document.getElementById("btn_menos_4").style.display = "none";   
         document.getElementById("btn_menos_morto").style.display = "inline-block";
         }
-    // option NÂO clicado
     if(acao == 2)
         {
         document.getElementById("atividade_fisica_1_1").style.display = "none";
-        document.getElementById("atividade_fisica_1_2").style.display = "none";
-        document.getElementById("atividade_fisica_1_3").style.display = "none";
-        document.getElementById("atividade_fisica_1_4").style.display = "none";
-        document.getElementById("atividade_fisica_1_5").style.display = "none";
-            
         document.getElementById("qual_atividade_fisica_1_1").value = "";
         document.getElementById("horario_inicio_atividade_fisica_1_1").value = "";
         document.getElementById("horario_termino_atividade_fisica_1_1").value = "";
-            
-        document.getElementById("qual_atividade_fisica_1_2").value = "";
-        document.getElementById("horario_inicio_atividade_fisica_1_2").value = "";
-        document.getElementById("horario_termino_atividade_fisica_1_2").value = "";
-            
-        document.getElementById("qual_atividade_fisica_1_3").value = "";
-        document.getElementById("horario_inicio_atividade_fisica_1_3").value = "";
-        document.getElementById("horario_termino_atividade_fisica_1_3").value = "";
-            
-        document.getElementById("qual_atividade_fisica_1_4").value = "";
-        document.getElementById("horario_inicio_atividade_fisica_1_4").value = "";
-        document.getElementById("horario_termino_atividade_fisica_1_4").value = "";
-            
-        document.getElementById("qual_atividade_fisica_1_5").value = "";
-        document.getElementById("horario_inicio_atividade_fisica_1_5").value = "";
-        document.getElementById("horario_termino_atividade_fisica_1_5").value = "";
-            
         document.getElementById("chk_domingo_1_1").checked = false;
         document.getElementById("chk_segunda_1_1").checked = false;
         document.getElementById("chk_terca_1_1").checked = false;
@@ -582,6 +519,10 @@ function exibir_ocultar_atividades_fisicas(acao)
         document.getElementById("chk_sabado_1_1").checked = false;
         document.getElementById("chk_domingo_1_1").checked = false;
             
+        document.getElementById("atividade_fisica_1_2").style.display = "none";
+        document.getElementById("qual_atividade_fisica_1_2").value = "Pratica ";
+        document.getElementById("horario_inicio_atividade_fisica_1_2").value = "";
+        document.getElementById("horario_termino_atividade_fisica_1_2").value = "";
         document.getElementById("chk_domingo_1_2").checked = false;
         document.getElementById("chk_segunda_1_2").checked = false;
         document.getElementById("chk_terca_1_2").checked = false;
@@ -591,7 +532,10 @@ function exibir_ocultar_atividades_fisicas(acao)
         document.getElementById("chk_sabado_1_2").checked = false;
         document.getElementById("chk_domingo_1_2").checked = false;
             
-            
+        document.getElementById("atividade_fisica_1_3").style.display = "none";
+        document.getElementById("qual_atividade_fisica_1_3").value = "";
+        document.getElementById("horario_inicio_atividade_fisica_1_3").value = "";
+        document.getElementById("horario_termino_atividade_fisica_1_3").value = "";
         document.getElementById("chk_domingo_1_3").checked = false;
         document.getElementById("chk_segunda_1_3").checked = false;
         document.getElementById("chk_terca_1_3").checked = false;
@@ -602,34 +546,11 @@ function exibir_ocultar_atividades_fisicas(acao)
         document.getElementById("chk_domingo_1_3").checked = false;
             
             
-        document.getElementById("chk_domingo_1_4").checked = false;
-        document.getElementById("chk_segunda_1_4").checked = false;
-        document.getElementById("chk_terca_1_4").checked = false;
-        document.getElementById("chk_quarta_1_4").checked = false;
-        document.getElementById("chk_quinta_1_4").checked = false;
-        document.getElementById("chk_sexta_1_4").checked = false;
-        document.getElementById("chk_sabado_1_4").checked = false;
-        document.getElementById("chk_domingo_1_4").checked = false;
-            
-        document.getElementById("chk_domingo_1_5").checked = false;
-        document.getElementById("chk_segunda_1_5").checked = false;
-        document.getElementById("chk_terca_1_4").checked = false;
-        document.getElementById("chk_quarta_1_4").checked = false;
-        document.getElementById("chk_quinta_1_4").checked = false;
-        document.getElementById("chk_sexta_1_5").checked = false;
-        document.getElementById("chk_sabado_1_5").checked = false;
-        document.getElementById("chk_domingo_1_5").checked = false;
-        
         document.getElementById("btn_mais_1").style.display = "none";
         document.getElementById("btn_mais_2").style.display = "none";
-        document.getElementById("btn_mais_3").style.display = "none";
-        document.getElementById("btn_mais_4").style.display = "none";
         document.getElementById("btn_mais_morto").style.display = "none";        
-        
         document.getElementById("btn_menos_1").style.display = "none";
-        document.getElementById("btn_menos_2").style.display = "none";   
-        document.getElementById("btn_menos_3").style.display = "none";   
-        document.getElementById("btn_menos_4").style.display = "none";   
+        document.getElementById("btn_menos_2").style.display = "none";        
         document.getElementById("btn_menos_morto").style.display = "none";
         }
     if(acao == 3)
@@ -637,33 +558,23 @@ function exibir_ocultar_atividades_fisicas(acao)
         document.getElementById("atividade_fisica_1_1").style.display = "inline-block"; 
         document.getElementById("atividade_fisica_1_2").style.display = "inline-block";
         document.getElementById("atividade_fisica_1_3").style.display = "none";
-        
         document.getElementById("btn_mais_1").style.display = "none";
+        document.getElementById("btn_menos_morto").style.display = "none";
         document.getElementById("btn_mais_2").style.display = "inline-block";
-        document.getElementById("btn_mais_3").style.display = "none";
-        document.getElementById("btn_mais_morto").style.display = "none";
-        
         document.getElementById("btn_menos_1").style.display = "inline-block";
         document.getElementById("btn_menos_2").style.display = "none";    
-        document.getElementById("btn_menos_3").style.display = "none";    
-        document.getElementById("btn_menos_morto").style.display = "none";    
-        
-        
+        document.getElementById("btn_mais_morto").style.display = "none";
         }
     if(acao == 4)
         {
         document.getElementById("atividade_fisica_1_1").style.display = "inline-block"; 
         document.getElementById("atividade_fisica_1_2").style.display = "inline-block";
         document.getElementById("atividade_fisica_1_3").style.display = "inline-block";    
-            
         document.getElementById("btn_mais_1").style.display = "none";
         document.getElementById("btn_mais_2").style.display = "none";            
-        document.getElementById("btn_mais_3").style.display = "inline-block";            
-        document.getElementById("btn_mais_morto").style.display = "none";
-            
+        document.getElementById("btn_mais_morto").style.display = "inline-block";
         document.getElementById("btn_menos_1").style.display = "none";
         document.getElementById("btn_menos_2").style.display = "inline-block";
-        document.getElementById("btn_menos_3").style.display = "none";
         document.getElementById("btn_menos_morto").style.display = "none";
         }
     if(acao == 5)
@@ -673,7 +584,6 @@ function exibir_ocultar_atividades_fisicas(acao)
         document.getElementById("qual_atividade_fisica_1_2").value = "";
         document.getElementById("horario_inicio_atividade_fisica_1_2").value = "";
         document.getElementById("horario_termino_atividade_fisica_1_2").value = "";
-            
         document.getElementById("chk_domingo_1_2").checked = false;
         document.getElementById("chk_segunda_1_2").checked = false;
         document.getElementById("chk_terca_1_2").checked = false;
@@ -686,19 +596,12 @@ function exibir_ocultar_atividades_fisicas(acao)
             
             
             
-        document.getElementById("atividade_fisica_1_3").style.display = "none"; 
-            
-            
+        document.getElementById("atividade_fisica_1_3").style.display = "none";    
         document.getElementById("btn_mais_1").style.display = "inline-block";
         document.getElementById("btn_mais_2").style.display = "none";            
-        document.getElementById("btn_mais_3").style.display = "none";            
-        document.getElementById("btn_mais_4").style.display = "none";            
         document.getElementById("btn_mais_morto").style.display = "none";
-        
         document.getElementById("btn_menos_1").style.display = "none";
         document.getElementById("btn_menos_2").style.display = "none";
-        document.getElementById("btn_menos_3").style.display = "none";
-        document.getElementById("btn_menos_4").style.display = "none";
         document.getElementById("btn_menos_morto").style.display = "inline-block";
         }
     if(acao == 6)
@@ -706,12 +609,9 @@ function exibir_ocultar_atividades_fisicas(acao)
         document.getElementById("atividade_fisica_1_1").style.display = "inline-block"; 
         document.getElementById("atividade_fisica_1_2").style.display = "inline-block";
         document.getElementById("atividade_fisica_1_3").style.display = "none";
-            
         document.getElementById("qual_atividade_fisica_1_3").value = "";
         document.getElementById("horario_inicio_atividade_fisica_1_3").value = "";
         document.getElementById("horario_termino_atividade_fisica_1_3").value = "";
-            
-            
         document.getElementById("chk_domingo_1_3").checked = false;
         document.getElementById("chk_segunda_1_3").checked = false;
         document.getElementById("chk_terca_1_3").checked = false;
@@ -722,127 +622,14 @@ function exibir_ocultar_atividades_fisicas(acao)
         document.getElementById("chk_domingo_1_3").checked = false;
             
         
-            
         document.getElementById("btn_mais_1").style.display = "none";
-        document.getElementById("btn_mais_2").style.display = "inline-block";
-        document.getElementById("btn_mais_3").style.display = "none";            
-        document.getElementById("btn_mais_4").style.display = "none";            
+        document.getElementById("btn_mais_2").style.display = "inline-block";            
         document.getElementById("btn_mais_morto").style.display = "none";
-            
         document.getElementById("btn_menos_1").style.display = "inline-block";
         document.getElementById("btn_menos_2").style.display = "none";
-        document.getElementById("btn_menos_3").style.display = "none";
-        document.getElementById("btn_menos_4").style.display = "none";
         document.getElementById("btn_menos_morto").style.display = "none";
         }
-        if(acao == 7)
-        {
-        document.getElementById("atividade_fisica_1_1").style.display = "inline-block"; 
-        document.getElementById("atividade_fisica_1_2").style.display = "inline-block";
-        document.getElementById("atividade_fisica_1_3").style.display = "inline-block";    
-        document.getElementById("atividade_fisica_1_4").style.display = "inline-block";    
-        document.getElementById("atividade_fisica_1_5").style.display = "none";    
-            
-        document.getElementById("btn_mais_1").style.display = "none";
-        document.getElementById("btn_mais_2").style.display = "none";            
-        document.getElementById("btn_mais_3").style.display = "none";            
-        document.getElementById("btn_mais_4").style.display = "inline-block";            
-        document.getElementById("btn_mais_morto").style.display = "none";
-            
-        document.getElementById("btn_menos_1").style.display = "none";
-        document.getElementById("btn_menos_2").style.display = "none";
-        document.getElementById("btn_menos_3").style.display = "inline-block";
-        document.getElementById("btn_menos_4").style.display = "none";
-        document.getElementById("btn_menos_morto").style.display = "none";
-        }
-        if(acao == 8)
-        {
-        document.getElementById("atividade_fisica_1_1").style.display = "inline-block"; 
-        document.getElementById("atividade_fisica_1_2").style.display = "inline-block";
-        document.getElementById("atividade_fisica_1_3").style.display = "inline-block";    
-        document.getElementById("atividade_fisica_1_4").style.display = "inline-block";    
-        document.getElementById("atividade_fisica_1_5").style.display = "inline-block";    
-            
-        document.getElementById("btn_mais_1").style.display = "none";
-        document.getElementById("btn_mais_2").style.display = "none";            
-        document.getElementById("btn_mais_3").style.display = "none";            
-        document.getElementById("btn_mais_4").style.display = "none";            
-        document.getElementById("btn_mais_morto").style.display = "inline-block";
-            
-        document.getElementById("btn_menos_1").style.display = "none";
-        document.getElementById("btn_menos_2").style.display = "none";
-        document.getElementById("btn_menos_3").style.display = "none";
-        document.getElementById("btn_menos_4").style.display = "inline-block";
-        document.getElementById("btn_menos_morto").style.display = "none";
-        }
-        //btn menos 4 - mostra as 4 atividades fisicas oculta e apaga as informacoes da quinta atividade fisica
-        if(acao == 9)
-        {
-        document.getElementById("atividade_fisica_1_1").style.display = "inline-block"; 
-        document.getElementById("atividade_fisica_1_2").style.display = "inline-block";
-        document.getElementById("atividade_fisica_1_3").style.display = "inline-block";    
-        document.getElementById("atividade_fisica_1_4").style.display = "inline-block";    
-        document.getElementById("atividade_fisica_1_5").style.display = "none";  
-            
-        document.getElementById("qual_atividade_fisica_1_5").value = "";
-        document.getElementById("horario_inicio_atividade_fisica_1_5").value = "";
-        document.getElementById("horario_termino_atividade_fisica_1_5").value = "";
-            
-        document.getElementById("chk_domingo_1_5").checked = false;
-        document.getElementById("chk_segunda_1_5").checked = false;
-        document.getElementById("chk_terca_1_5").checked = false;
-        document.getElementById("chk_quarta_1_5").checked = false;
-        document.getElementById("chk_quinta_1_5").checked = false;
-        document.getElementById("chk_sexta_1_5").checked = false;
-        document.getElementById("chk_sabado_1_5").checked = false;
-        document.getElementById("chk_domingo_1_5").checked = false;
-            
-        document.getElementById("btn_mais_1").style.display = "none";
-        document.getElementById("btn_mais_2").style.display = "none";            
-        document.getElementById("btn_mais_3").style.display = "none";            
-        document.getElementById("btn_mais_4").style.display = "inline-block";            
-        document.getElementById("btn_mais_morto").style.display = "none";
-            
-        document.getElementById("btn_menos_1").style.display = "none";
-        document.getElementById("btn_menos_2").style.display = "none";
-        document.getElementById("btn_menos_3").style.display = "inline-block";
-        document.getElementById("btn_menos_4").style.display = "none";
-        document.getElementById("btn_menos_morto").style.display = "none";
-        }
-        if(acao == 10)
-        {
-        document.getElementById("atividade_fisica_1_1").style.display = "inline-block"; 
-        document.getElementById("atividade_fisica_1_2").style.display = "inline-block";
-        document.getElementById("atividade_fisica_1_3").style.display = "inline-block";    
-        document.getElementById("atividade_fisica_1_4").style.display = "none";    
-        document.getElementById("atividade_fisica_1_5").style.display = "none"; 
-            
-        document.getElementById("qual_atividade_fisica_1_4").value = "";
-        document.getElementById("horario_inicio_atividade_fisica_1_4").value = "";
-        document.getElementById("horario_termino_atividade_fisica_1_4").value = "";
-            
-        document.getElementById("chk_domingo_1_4").checked = false;
-        document.getElementById("chk_segunda_1_4").checked = false;
-        document.getElementById("chk_terca_1_4").checked = false;
-        document.getElementById("chk_quarta_1_4").checked = false;
-        document.getElementById("chk_quinta_1_4").checked = false;
-        document.getElementById("chk_sexta_1_4").checked = false;
-        document.getElementById("chk_sabado_1_4").checked = false;
-        document.getElementById("chk_domingo_1_4").checked = false;
-            
-            
-        document.getElementById("btn_mais_1").style.display = "none";
-        document.getElementById("btn_mais_2").style.display = "none";            
-        document.getElementById("btn_mais_3").style.display = "inline-block";            
-        document.getElementById("btn_mais_4").style.display = "none";            
-        document.getElementById("btn_mais_morto").style.display = "none";
-            
-        document.getElementById("btn_menos_1").style.display = "none";
-        document.getElementById("btn_menos_2").style.display = "inline-block";
-        document.getElementById("btn_menos_3").style.display = "none";
-        document.getElementById("btn_menos_4").style.display = "none";
-        document.getElementById("btn_menos_morto").style.display = "none";
-        }
+        
     
 }
 
@@ -1113,28 +900,22 @@ $(function(){
 
 
 
-//conteudo += "<div id=" + codigo + ">";
-//        conteudo += "<div><input type=hidden name=codigos[] id=codigos[] value='" + codigo + "'></div>";
-//        conteudo += "<div class='col-md-5 borda_inferior padding_top_05 padding_bottom_05'><input type=text value='" + alimento + "' class='form-group largura_100 margin_00 sem_borda fundo_transparente fonte_pequena'></div>";
-//        conteudo += "<div class='col-md-3 borda_inferior padding_top_05 padding_bottom_05'><input type=text value='" + medida_caseira + "' class='form-group largura_100 margin_00 sem_borda fundo_transparente fonte_pequena text-uppercase'></div>";
-//        
-//        conteudo += "<div class='col-md-1 borda_inferior padding_top_05 padding_bottom_05'><input type=text value='0' class='form-group largura_100 margin_00 sem_borda fundo_transparente fonte_pequena text-uppercase'></div>";
-//        
-//        conteudo += "<div class='col-md-1 borda_inferior padding_top_05 padding_bottom_05'><input type=text value=" + parseFloat(peso).toFixed(1) + " class='form-group esquerda margin_00 sem_borda fundo_transparente fonte_pequena'></div>";
-//        conteudo += "<div class='col-md-1 borda_inferior padding_top_05 padding_bottom_05'><input type=text value=" + parseFloat(caloria).toFixed(0) + " class='form-group esquerda margin_00 sem_borda fundo_transparente fonte_pequena'></div>";
-//        conteudo += "<div class='col-md-1 borda_inferior padding_top_05 padding_bottom_05 fonte_verde_claro centralizado'><a href='#' class='link_detalhes' onclick=javascript:remover_alimento('" +  codigo + "','" + peso + "','" + caloria + "')><span class='glyphicon glyphicon-minus-sign'></span></a></div>";
-//        conteudo += "</div>";
 
-//<input type=number name='qtde_porcoes' id='qtde_porcoes_" + codigo + "' value='1' class='form-group largura_100 margin_00 sem_borda fundo_transparente fonte_pequena text-uppercase' onblur=calcula_total('qtde_porcoes_" + codigo + "','peso_alimento_" + codigo + "','peso_total_alimento_" + codigo + "')>
+
+
 
 
 // função utilizada para acrescentar alimentos na refeição
 //peso_geral = 0; 
 //caloria_geral=0;
 function inserir_alimento(codigo, alimento, peso, caloria, medida_caseira)
-    {   
+    {  
+        peso_geral = parseFloat(document.getElementById('total_peso').value);
+        peso_geral = (parseFloat(peso_geral) + parseFloat(peso)).toFixed(3);
+        document.getElementById('total_peso').value = peso_geral;
+        
         caloria_geral = parseFloat(document.getElementById('total_caloria').value);
-        caloria_geral = (parseFloat(caloria_geral) + parseFloat(caloria)).toFixed(0);
+        caloria_geral = (parseFloat(caloria_geral) + parseFloat(caloria)).toFixed(3);
         document.getElementById('total_caloria').value = caloria_geral;
         
         conteudo  = document.getElementById('alimentos_refeicao').innerHTML;  
@@ -1142,75 +923,33 @@ function inserir_alimento(codigo, alimento, peso, caloria, medida_caseira)
         conteudo += "<div id=" + codigo + ">";
         conteudo += "<div><input type=hidden name=codigos[] id=codigos[] value='" + codigo + "'></div>";
         conteudo += "<div class='col-md-6 borda_inferior padding_top_05 padding_bottom_05'><input type=text value='" + alimento + "' class='form-group largura_100 margin_00 sem_borda fundo_transparente fonte_pequena'></div>";
-        
-        conteudo += "<div class='col-md-1 borda_inferior padding_top_05 padding_bottom_05'><select name='qtde_porcoes[]' id='qtde_porcoes_" + codigo + "' value='1' class='form-group largura_100 borda_verde_claro margin_00 fundo_transparente fonte_pequena text-uppercase' onchange=calcula_total('qtde_porcoes_" + codigo + "','peso_alimento_" + codigo + "','peso_total_alimento_" + codigo + "','caloria_alimento_" + codigo + "','caloria_total_alimento_" + codigo + "')><option value='1'>01</option><option value='2'>02</option><option value='3'>03</option><option value='4'>04</option><option value='5'>05</option><option value='6'>06</option><option value='7'>07</option><option value='8'>08</option><option value='9'>09</option><option value='10'>10</option></select></div>";
-        
-        conteudo += "<div class='col-md-1 borda_inferior padding_top_05 padding_bottom_05'><input type=text value=" + parseFloat(peso).toFixed(1) + " class='form-group largura_100 direito margin_00 sem_borda fundo_transparente fonte_pequena' name='peso_alimento' id='peso_alimento_" + codigo + "' readonly></div>";
-        
-        conteudo += "<div class='col-md-1 borda_inferior padding_top_05 padding_bottom_05'><input type=text value=" + parseFloat(peso).toFixed(1) + " class='form-group largura_100 direito margin_00 sem_borda fundo_transparente fonte_pequena' name='peso_total_alimento' id='peso_total_alimento_" + codigo + "' readonly></div>";
-        
-        conteudo += "<div class='col-md-1 borda_inferior padding_top_05 padding_bottom_05'><input type=text value=" + parseFloat(caloria).toFixed(0) + " class='form-group largura_100 direito margin_00 sem_borda fundo_transparente fonte_pequena' name='caloria_alimento' id='caloria_alimento_" + codigo + "' readonly></div>";
-        
-        conteudo += "<div class='col-md-1 borda_inferior padding_top_05 padding_bottom_05'><input type=text value=" + parseFloat(caloria).toFixed(0) + " class='form-group largura_100 direito margin_00 sem_borda fundo_transparente fonte_pequena' name='caloria_total_alimento' id='caloria_total_alimento_" + codigo + "' ></div>";
-        
-        conteudo += "<div class='col-md-1 borda_inferior padding_top_05 padding_bottom_05 fonte_verde_claro centralizado'><a href='#' class='link_detalhes' onclick=javascript:remover_alimento('" +  codigo + "',document.getElementById('caloria_total_alimento_" + codigo + "').value)><span class='glyphicon glyphicon-minus-sign'></span></a></div>";
+        conteudo += "<div class='col-md-3 borda_inferior padding_top_05 padding_bottom_05'><input type=text value='" + medida_caseira + "' class='form-group largura_100 margin_00 sem_borda fundo_transparente fonte_pequena text-uppercase'></div>";
+        conteudo += "<div class='col-md-1 borda_inferior padding_top_05 padding_bottom_05'><input type=text value=" + parseFloat(peso).toFixed(3) + " class='form-group esquerda margin_00 sem_borda fundo_transparente fonte_pequena'></div>";
+        conteudo += "<div class='col-md-1 borda_inferior padding_top_05 padding_bottom_05'><input type=text value=" + parseFloat(caloria).toFixed(3) + " class='form-group esquerda margin_00 sem_borda fundo_transparente fonte_pequena'></div>";
+        conteudo += "<div class='col-md-1 borda_inferior padding_top_05 padding_bottom_05 fonte_verde_claro centralizado'><a href='#' class='link_detalhes' onclick=javascript:remover_alimento('" +  codigo + "','" + peso + "','" + caloria + "')><span class='glyphicon glyphicon-minus-sign'></span></a></div>";
         conteudo += "</div>";
         
         document.getElementById('alimentos_refeicao').innerHTML = conteudo;
     }
 
 
-// função que calcula os valores de peso total alimento / caloria total alimento / caloria total da refeição
-function calcula_total(qtde,peso,peso_total, caloria, caloria_total)
-{   
-    peso_alimento = document.getElementById(peso).value;
-    caloria_alimento = document.getElementById(caloria).value;
-    qtde_porcoes = document.getElementById(qtde).value;
-    
-    valor_total_peso_alimento = parseFloat(peso_alimento)*parseFloat(qtde_porcoes);
-    document.getElementById(peso_total).value = parseFloat(valor_total_peso_alimento).toFixed(1);
-    
-    //caloria_total_atual antes de atualizar
-    caloria_total_alimento_atual = document.getElementById(caloria_total).value;
-    //fazendo a atualizacao do valor total da caloria do alimento
-    valor_total_caloria_alimento = parseFloat(caloria_alimento)*parseFloat(qtde_porcoes);
-    document.getElementById(caloria_total).value = parseFloat(valor_total_caloria_alimento).toFixed(0);
-    //caloria_total_atualizada 
-    caloria_total_alimento_atualizada = document.getElementById(caloria_total).value;
-    
-    //atualizando o valor das calorias da refeição
-    if(caloria_total_alimento_atual < caloria_total_alimento_atualizada)
-        {
-        caloria_total_caloria_alimento = parseFloat(caloria_total_alimento_atualizada) - parseFloat(caloria_total_alimento_atual);        
-        caloria_geral = document.getElementById('total_caloria').value;
-        caloria_geral = (parseFloat(caloria_geral) + parseFloat(caloria_total_caloria_alimento)).toFixed(0);
-        document.getElementById('total_caloria').value = caloria_geral;
-        }        
-    else
-        {
-        caloria_total_caloria_alimento = parseFloat(caloria_total_alimento_atual) - parseFloat(caloria_total_alimento_atualizada);    
-        caloria_geral = document.getElementById('total_caloria').value;
-        caloria_geral = (parseFloat(caloria_geral) - parseFloat(caloria_total_caloria_alimento)).toFixed(0);
-        document.getElementById('total_caloria').value = caloria_geral;
-        }
-        
-    
-    
-}
+
+
 
 
 // função utilizada para remover alimentos da refeição
-function remover_alimento(codigo,caloria)
-{   
-    //removendo o alimento selecionado
-    document.getElementById(codigo).remove();        
-    //recuperando o valor total de calorias do campo de caloria geral
-    caloria_geral = document.getElementById('total_caloria').value;
-    //subtraindo da caloria geral o valor de caloria do alimento selecionado
-    caloria_geral = (parseFloat(caloria_geral) - parseFloat(caloria)).toFixed(0);
-    //exibindo a informacao na tela
-    document.getElementById('total_caloria').value = caloria_geral;
+function remover_alimento(codigo,peso,caloria)
+{    
     
+    document.getElementById(codigo).remove();
+    
+    peso_geral = document.getElementById('total_peso').value;
+    peso_geral = (parseFloat(peso_geral) - parseFloat(peso)).toFixed(3);
+    document.getElementById('total_peso').value = peso_geral;
+    
+    caloria_geral = document.getElementById('total_caloria').value;
+    caloria_geral = (parseFloat(caloria_geral) - parseFloat(caloria)).toFixed(3);
+    document.getElementById('total_caloria').value = caloria_geral;
 }
 
 

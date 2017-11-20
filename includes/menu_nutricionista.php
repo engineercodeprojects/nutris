@@ -146,8 +146,7 @@
         <div class="link"><img src="img/icone_reeducacoes_lateral.png"></div>
         </a>
         
-<!--        <a href="01_lista_programas.php" alt="Lista de Programas" title="Lista de Programas">-->
-        <a href="">
+        <a href="01_lista_programas.php" alt="Lista de Programas" title="Lista de Programas">        
         <div class="link"><img src="img/icone_programas_lateral.png"></div>
         </a>
         
@@ -203,8 +202,7 @@
             </div>
         </a>
         
-<!--        <a href="01_lista_programas.php" alt="Lista de Programas" title="Lista de Programas">-->
-            <a href="">
+        <a href="01_lista_programas.php" alt="Lista de Programas" title="Lista de Programas">            
             <div class="link"  style='padding-top:20px'><img src="img/icone_programas_lateral.png" align=left class="img-responsive"> <span class="padding_left_60">PROGRAMAS</span> 
             </div>
         </a>
