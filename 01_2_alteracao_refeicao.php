@@ -21,29 +21,89 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         //recuperando informações da refeição
         $refeicao = $_POST['refeicao'];
         $tipo_refeicao = $_POST['tipo_refeicao'];
-        $codigos = $_POST['codigos'];
+        $codigos = $_POST['codigos'];    
+        $qtde_porcoes = $_POST['qtde_porcoes']; 
+        $video_modo_preparo = $_POST['video_modo_preparo'];
+        $outras_informacoes_refeicoes = $_POST['outras_informacoes_refeicoes'];
     
-        //inserindo a refeição e tipo de refeição na tb_refeicao
-        $sqlstring_atualizar_refeicao = "update tb_refeicao set refeicao = '" .  $refeicao . "', cod_tipo_refeicao = '" . $tipo_refeicao . "' where cod_refeicao = " . $_SESSION['cod_refeicao_selecionada'];
+        //recuperando informacoes das fotos
+        $foto_01 = $_FILES['foto_01'];
+        $fo_01 = isset($_POST['fo_01']);
+    
+        $foto_02 = $_FILES['foto_02'];
+        $fo_02 = isset($_POST['fo_02']);
+    
+    
+        //inserindo informacoes principais na tb_refeicao
+        $sqlstring_atualizar_refeicao  = "update tb_refeicao set ";
+        $sqlstring_atualizar_refeicao .= "refeicao = '" .  $refeicao . "', ";
+        $sqlstring_atualizar_refeicao .= "video_modo_preparo = '" .  $video_modo_preparo . "', ";        
+        $sqlstring_atualizar_refeicao .= " cod_tipo_refeicao = '" . $tipo_refeicao . "' ";
+        $sqlstring_atualizar_refeicao .= " where cod_refeicao = " . $_SESSION['cod_refeicao_selecionada'];
         $db->string_query($sqlstring_atualizar_refeicao);
+    
+    
+        // inserindo as fotos associadas com o codigo da refeicao
+        $sqlstring_alterar_foto  = "Update tb_refeicao set ";
+        if($foto_01['name'] != "")   $sqlstring_alterar_foto .= "foto_01_refeicao = '" . $_SESSION['cod_refeicao_selecionada'] . "_1_" . $foto_01['name'] . "', ";
+        if($fo_01 == 1)              $sqlstring_alterar_foto .= "foto_01_refeicao = 'avatar_refeicao.png', ";
+        if($foto_02['name'] != "")   $sqlstring_alterar_foto .= "foto_02_refeicao = '" . $_SESSION['cod_refeicao_selecionada'] . "_2_" . $foto_02['name'] . "', ";
+        if($fo_02 == 1)              $sqlstring_alterar_foto .= "foto_02_refeicao = 'avatar_refeicao.png', ";
+        $sqlstring_alterar_foto .= "outras_informacoes_refeicoes = '" . $outras_informacoes_refeicoes . "' ";
+        $sqlstring_alterar_foto .= "where cod_refeicao  = " .  $_SESSION['cod_refeicao_selecionada'];
+
+        $db->string_query($sqlstring_alterar_foto); 
+
+    
+        // fazendo uplodas das fotos 01
+        $arquivo = $_FILES['foto_01'];  
+        
+        $destino = 'C:\Bitnami\\wampstack-5.5.28-0\\apache2\htdocs\\plataformanutris\\fotos_refeicoes\\';
+//        $destino  = '/home/engineercode/public_html/plataformanutris/fotos/';
+        $destino .= $_SESSION['cod_refeicao_selecionada'] . "_1_";
+        $destino .= $arquivo['name'];  
+
+        move_uploaded_file($arquivo['tmp_name'],$destino);
+
+        
+       
+        
+        // fazendo uplodas das fotos 02
+        $arquivo = $_FILES['foto_02']; 
+
+        $destino = 'C:\Bitnami\\wampstack-5.5.28-0\\apache2\htdocs\\plataformanutris\\fotos_refeicoes\\';
+//        $destino  = '/home/engineercode/public_html/plataformanutris/fotos/';
+        $destino .= $_SESSION['cod_refeicao_selecionada'] . "_2_";
+        $destino .= $arquivo['name'];  
+
+        move_uploaded_file($arquivo['tmp_name'],$destino);
+    
+    
+    
+        
+    
+    
+    
     
         //excluindo os alimentos dessa refeição
         $sqlstring_excluir_alimentos  = "delete from tb_refeicao_alimento where cod_refeicao = " . $_SESSION['cod_refeicao_selecionada'];
         $info_excluir_alimentos = $db->sql_query($sqlstring_excluir_alimentos); 
         
-             
+          
         //atualizando os alimentos selecionados na refeição cadastrada anteriormente
         $contador = 0;
         while ($contador < sizeof($codigos))
         {
-        $sqlstring_inserir_alimentos_refeicao = "Insert into tb_refeicao_alimento (cod_refeicao, cod_alimento) values ('" . $_SESSION['cod_refeicao_selecionada'] . "','" . $codigos[$contador]  . "')";
+        $sqlstring_inserir_alimentos_refeicao = "Insert into tb_refeicao_alimento (cod_refeicao, cod_alimento, qtde_porcoes) values ('" .  $_SESSION['cod_refeicao_selecionada'] . "','" . $codigos[$contador]  . "', '" . $qtde_porcoes[$contador] . "')";
         $db->string_query($sqlstring_inserir_alimentos_refeicao);    
         $contador++;
         }
+        
+        
     
         //preparando modal para informar o sucesso da exclusão
         $titulo = "Cadastro de Refeição";
-        $mensagem = "A refeição foi com sucesso!";
+        $mensagem = "A refeição foi atualizada com sucesso!";
         $btn_esquerda = "Nova Refeição";
         $btn_esquerda_destino = "01_2_cadastro_refeicao.php";
         $btn_direita = "Lista de Refeições";
@@ -135,7 +195,7 @@ $dados_refeicao_selecionada = mysql_fetch_array($info_refeicao_selecionada);
     <div class="row">
         <div class="col-md-12" style="border:1px solid #eee; border-left:5px solid #18A689; border-right:2px solid #18A689;">            
         <br/>
-        <form method="post" action="">    
+        <form method="post" action="" enctype="multipart/form-data">     
         <!-- inicio - tipo de refeição -->
         <div id="titulo_refeicao" name="titulo_refeicao" class="form-group col-md-6">
             <label for="refeicao">Refeição <span class="glyphicon glyphicon-asterisk fonte_verde_claro fonte_muito_pequena"></span></label>

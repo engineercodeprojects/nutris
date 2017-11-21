@@ -53,6 +53,7 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         $refrigerantes = $_POST['refrigerantes'];
         $fast_food = $_POST['fast_food'];
         $cafe = $_POST['cafe'];
+        $outras_informacoes_avaliacao_nutricional = $_POST['outras_informacoes_avaliacao_nutricional'];
         
         
         
@@ -81,7 +82,8 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         $sqlstring_atualizar_habito_alimentar .= "doces_biscoitos_chocolates = '" . $doces_biscoitos_chocolates . "', ";        
         $sqlstring_atualizar_habito_alimentar .= "refrigerante = '" . $refrigerantes . "', ";        
         $sqlstring_atualizar_habito_alimentar .= "fast_food = '" . $fast_food . "', ";        
-        $sqlstring_atualizar_habito_alimentar .= "cafe = '" . $cafe . "' ";        
+        $sqlstring_atualizar_habito_alimentar .= "cafe = '" . $cafe . "', ";        
+        $sqlstring_atualizar_habito_alimentar .= "outras_informacoes_avaliacao_nutricional = '" . $outras_informacoes_avaliacao_nutricional . "' ";        
         $sqlstring_atualizar_habito_alimentar .= "where cod_paciente = " . $_SESSION['cod_paciente_selecionado'];
         
         $db->string_query($sqlstring_atualizar_habito_alimentar);
@@ -244,7 +246,8 @@ $dados_habitos_alimentares = mysql_fetch_array($info_habitos_alimentares);
               <!-- fim - não gosta de comer -->    
           <!-- fim - linha 3 -->    
                 
-          <div class="well well-sm fundo_transparente fonte_verde_escuro sem_borda"> Frequência de consumo dos alimentos abaixo</div>
+            
+          <div class="well well-sm fundo_transparente fonte_verde_escuro sem_borda negrito"> Frequência de consumo dos alimentos abaixo</div>
                 
             
           <div class="table-responsive">
@@ -433,11 +436,27 @@ $dados_habitos_alimentares = mysql_fetch_array($info_habitos_alimentares);
             </table>
           </div>
             
+                
+                
+                
+                
+          <!-- inicio outras informações -->
+  <div class="form-group col-md-12">
+    <label for="outras_informacoes_avaliacao_nutricional">Outras Informações </label>
+    <textarea rows=5 class="form-control" name="outras_informacoes_avaliacao_nutricional" id="outras_informacoes_avaliacao_nutricional"><?php print $dados_habitos_alimentares['outras_informacoes_avaliacao_nutricional'] ?></textarea>
+  </div>
+  <!-- fim outras informações -->
+                
+                
        
     </div>              
     <!-- fim - painel hábitos alimentares -->
     
-            
+       
+
+              
+              
+              
     </div>
     <!-- fim - habitos alimentares -->
        
@@ -445,7 +464,7 @@ $dados_habitos_alimentares = mysql_fetch_array($info_habitos_alimentares);
     <br/>
     <!-- inicio - botao para Salvar Hábito Alimentar -->
     <div class="col-md-12  direito">
-        <button type="submit" class="btn btn_verde_claro">Salvar Hábito Alimentar </button>    
+        <button type="submit" class="btn btn_verde_claro">Salvar Avaliação Nutricional </button>    
         <button type="button" class="btn btn_verde_claro" onclick="location.href='01_lista_pacientes.php'">Cancelar </button>    
     </div>
     <!-- fim - botão para Salvar Hábito Alimentar -->            

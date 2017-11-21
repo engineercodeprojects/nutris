@@ -131,7 +131,7 @@ $linhas_refeicoes = $db->sql_linhas($info_refeicoes);
                 <td class="largura_05 fundo_verde_claro"><input type=checkbox name="marcar" id="marcar" onclick="marcar_desmarcar_todos()"></td>                
                 <td class="largura_35 fundo_verde_claro">Refeição</td>                
                 <td class="largura_35 fundo_verde_claro">Alimentos</td>
-                <td class="largura_10 fundo_verde_claro direito">Peso</td>
+                
                 <td class="largura_10 fundo_verde_claro direito">Calorias</td>                
                 <td class="largura_05  fundo_verde_claro centralizado"><span class="glyphicon glyphicon-edit fonte_pequena"  alt="Editar Refeição" title="Detalhes da Refeição"></span></td>    
 
@@ -152,7 +152,7 @@ $linhas_refeicoes = $db->sql_linhas($info_refeicoes);
                     $dados_peso_caloria = mysql_fetch_array($info_peso_caloria);
                         
                     // selecionando os alimentos dessa refeição
-                    $sqlstring_alimentos_refeicao  = "select tb_alimento.alimento from tb_refeicao_alimento ";
+                    $sqlstring_alimentos_refeicao  = "select tb_alimento.alimento, tb_alimento.caloria, tb_refeicao_alimento.qtde_porcoes from tb_refeicao_alimento ";
                     $sqlstring_alimentos_refeicao .= "inner join tb_alimento on tb_alimento.cod_alimento = tb_refeicao_alimento.cod_alimento ";
                     $sqlstring_alimentos_refeicao .= "where cod_refeicao = '" . $dados_refeicoes['cod_refeicao'] . "'";                    
                     
@@ -164,22 +164,25 @@ $linhas_refeicoes = $db->sql_linhas($info_refeicoes);
                     <td><input type=checkbox name="excluir[]" value="<?php print $dados_refeicoes['cod_refeicao'] ?>"></input></td>                    
                     <td class="text-uppercase"><?php print $dados_refeicoes['tipo_refeicao'] . " - " . $dados_refeicoes['refeicao'] ?></td>                    
                     <td class="text-lowercase fonte_pequena">
-                        <?php                         
+                        <?php 
+                        $caloria_total = 0;
                         $contador_alimentos_refeicoes = 1;
                         while($dados_alimentos_refeicao=mysql_fetch_array($info_alimentos_refeicao))
                         { 
                             if($contador_alimentos_refeicoes == $linhas_alimentos_refeicoes)
-                                print $dados_alimentos_refeicao['alimento'];                        
+                                print $dados_alimentos_refeicao['qtde_porcoes'] . " - " . $dados_alimentos_refeicao['alimento'];                        
                             else
-                                print $dados_alimentos_refeicao['alimento'] . "<span class='fonte_grande'>,</span> &nbsp; ";                        
+                                print $dados_alimentos_refeicao['qtde_porcoes'] . " - " .  $dados_alimentos_refeicao['alimento'] . "<span class='fonte_grande'>,</span> &nbsp; ";                        
                             
+                            $caloria_total = $caloria_total + ($dados_alimentos_refeicao['caloria']*$dados_alimentos_refeicao['qtde_porcoes']);
+                                
                             $contador_alimentos_refeicoes++;
                         }                        
                         ?>
                         
                     </td>
-                    <td class="direito"><?php print number_format($dados_peso_caloria['total_peso'],1) ?></td>                    
-                    <td class="direito"><?php print number_format($dados_peso_caloria['total_caloria'],0) ?></td>                    
+                                       
+                    <td class="direito"><?php print $caloria_total; ?></td>                    
                     <td class="centralizado">
                         <a href="01_2_alteracao_refeicao.php?cod=<?php print  base64_encode($dados_refeicoes['cod_refeicao']) ?>" alt="Editar Refeição" title="Editar Refeição">
                         <span class="glyphicon glyphicon-edit fonte_pequena"></span>

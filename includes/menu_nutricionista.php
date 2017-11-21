@@ -141,8 +141,7 @@
         <div class="link"><img src="img/icone_refeicoes_lateral.png"></div>
         </a>
         
-<!--        <a href="01_lista_reeducaacoes.php" alt="Lista de Reeducações" title="Lista de Reeducações">-->
-        <a href="">
+        <a href="01_lista_reeducacoes.php" alt="Lista de Reeducações" title="Lista de Reeducações">        
         <div class="link"><img src="img/icone_reeducacoes_lateral.png"></div>
         </a>
         
@@ -196,8 +195,7 @@
         </a>
         
         
-<!--        <a href="01_lista_reeducacoes.php" alt="Lista de Reeducações" title="Lista de Reeducações">-->
-            <a href="">
+        <a href="01_lista_reeducacoes.php" alt="Lista de Reeducações" title="Lista de Reeducações">            
             <div class="link" style='padding-top:25px'><img src="img/icone_reeducacoes_lateral.png" align=left class="img-responsive"> <span class="padding_left_60">REEDUCAÇÕES</span> 
             </div>
         </a>
