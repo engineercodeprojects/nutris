@@ -75,6 +75,7 @@ a.link_branco:active    {text-decoration:none; color:#fff }
 .fonte_muito_grande     {font-size: 1.2em}
 .fonte_exibe_calorias   {font-size: 1.5em}
 .fonte_icone_sucesso    {font-size: 2em}
+.fonte_peso_altura      {font-size:5em}
 
 
 /* altura */
@@ -102,6 +103,8 @@ a.link_branco:active    {text-decoration:none; color:#fff }
 .altura_200             {height: 200px}
 .altura_205             {height: 205px}
 .altura_210             {height: 210px}
+.altura_215             {height: 215px}
+.altura_220             {height: 220px}
 .altura_250             {height: 250px}
 .altura_300             {height: 300px}
 .altura_400             {height: 400px}

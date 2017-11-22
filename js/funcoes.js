@@ -929,12 +929,14 @@ function calculo_peso_ideal()
 //calcular o CAQ
 function calcular_caq()
 {
-    
+   
     abd = parseFloat(document.getElementById('abdome').value);
     qdr = parseFloat (document.getElementById('quadril').value);
     sxo = document.getElementById('sexo').value;
     ida = parseInt(document.getElementById('anos').value);
-        
+   
+
+    
     if(abd > 0  && qdr > 0)
         {
             document.getElementById('res_caq').value = (Math.ceil((abd/qdr)*100)/100).toFixed(2);
@@ -1059,6 +1061,126 @@ function calcular_caq()
 }
 
 
+
+// calculo do caq ideal antropometria
+function calcular_caq_ideal()
+{
+    sxo = document.getElementById('sexo').value;
+    ida = parseInt(document.getElementById('anos').value);
+    
+    if(sxo == "M")
+    {
+        if(ida < 20)
+            document.getElementById('classificacao_caq_ideal').value = "Não Classificado";
+
+        else if(ida >=20 && ida < 30)
+            document.getElementById('classificacao_caq_ideal').value = "Menor do que 0.83";
+        else if(ida >=30 && ida < 40)
+            document.getElementById('classificacao_caq_ideal').value = "Menor do que 0.84";
+        else if(ida >=40 && ida < 50)
+            document.getElementById('classificacao_caq_ideal').value = "Menor do que 0.88";
+        else if(ida >=50 && ida < 60)
+            document.getElementById('classificacao_caq_ideal').value = "Menor do que 0.90";
+        else if(ida >=60 && ida < 70)
+            document.getElementById('classificacao_caq_ideal').value = "Menor do que 0.91";
+    }
+    else
+    {
+        if(ida < 20)
+            document.getElementById('classificacao_caq_ideal').value = "Não Classificado";
+
+        else if(ida >=20 && ida < 30)
+            document.getElementById('classificacao_caq_ideal').value = "Menor do que 0.71";
+        else if(ida >=30 && ida < 40)
+            document.getElementById('classificacao_caq_ideal').value = "Menor do que 0.72";
+        else if(ida >=40 && ida < 50)
+            document.getElementById('classificacao_caq_ideal').value = "Menor do que 0.73";
+        else if(ida >=50 && ida < 60)
+            document.getElementById('classificacao_caq_ideal').value = "Menor do que 0.74";
+        else if(ida >=60 && ida < 70)
+            document.getElementById('classificacao_caq_ideal').value = "Menor do que 0.76";
+    }
+        
+}
+
+
+
+//definindo o sexo na caixa do caq - antropometria
+function carrega_sexo_idade()
+{
+    sxo = document.getElementById('sexo').value;
+    ida = parseInt(document.getElementById('anos').value);
+    
+    if(sxo == "F")
+        document.getElementById('sexo_caq_ideal').value = 'Feminino';
+    else
+        document.getElementById('sexo_caq_ideal').value = 'Masculino';
+        
+    document.getElementById('idade_caq_ideal').value = ida;
+    
+}
+
+
+//calcular densidade
+function calcular_gordura()
+{
+    
+    //recuperando valores subescapular / suprailiaca / coxa (dobras cutanes)
+    prt = document.getElementById('protocolo').value;
+    sub = parseFloat(document.getElementById('subescapular').value);
+    sil = parseFloat(document.getElementById('suprailiaca').value);
+    cox = parseFloat(document.getElementById('coxa_dobras').value);
+    abd = parseFloat(document.getElementById('abdominal').value);
+    tri = parseFloat(document.getElementById('triceps').value);
+    ida = parseInt(document.getElementById('anos').value);
+    
+    
+    //calculando a densidade
+    dens = 1.1665-0.07063*(Math.log(sub+sil+cox)/Math.log(10));    
+    
+    if(prt == "protocolo_A")
+    {
+    gordura = (5.05/dens-4.59)/100;    
+    }        
+    else
+    {
+    gordura = 0.29669*(abd+sil+tri+cox)-0.0043*(abd+sil+tri+cox)*(abd+sil+tri+cox)+0.02963*ida+1.4072;
+    }
+        
+    
+    document.getElementById('gordura').value = gordura.toFixed(4) + "%";
+    
+    
+}
+
+
+
+
+//calcular a gordura absoluta e gordura absoluta ideal
+function calcular_gordura_absoluta()
+{
+    //recuperando peso e gordura
+    pes = parseFloat(document.getElementById('peso').value);
+    gordura = parseFloat(document.getElementById('gordura').value);
+    
+    //calculando a gordura absoluta
+    gordura_absoluta = pes*(gordura/100);
+    document.getElementById('gordura_absoluta').value = gordura_absoluta;
+    
+    //calculando a massa magra
+    massa_magra = pes-gordura_absoluta;
+    document.getElementById('massa_magra').value = massa_magra;
+    
+    //calculando a gordura absoluta ideal
+    gordura_absoluta_ideal_min = pes*0.2;
+    gordura_absoluta_ideal_max = pes*0.25;    
+    document.getElementById('gordura_absoluta_ideal').value = "Entre " + gordura_absoluta_ideal_min + " e " + gordura_absoluta_ideal_max;
+    
+    //calculando a massa magra ideal
+    massa_magra_ideal_min = pes*0.75;
+    massa_magra_ideal_max = pes*0.8;    
+    document.getElementById('massa_magra_ideal').value = "Entre " + massa_magra_ideal_min + " e " + massa_magra_ideal_max;
+}
 
 
 //funcao para modificar o status estrela paciente

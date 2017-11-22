@@ -99,7 +99,7 @@ $dados_paciente = mysql_fetch_array($info_paciente);
                         <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
                         <a href="01_1_cadastro_paciente_avaliacao.php">Avaliação Nutricional</a>
                         <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>                        
-                        <a href="01_1_cadastro_paciente_objetivo.php">Objetivo</a>
+                        <a href="01_1_cadastro_paciente_antropometria.php">Antropometria</a>
                         <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>  
                         <span class="fonte_verde_claro">Prescrição de Dieta</span>
                     </span> 
