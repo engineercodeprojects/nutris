@@ -22,7 +22,7 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         $caloria = $_POST['caloria'];
         $medida_caseira = $_POST['medida_caseira'];
         $cod_grupo = $_POST['grupo_alimentos'];
-        
+        $cod_unidade_medida = $_POST['unidade_medida'];
 
         // atualiza na tb_alimento os dados do alimento
         $sqlstring_atualizar_alimentos  = "update tb_alimento set ";
@@ -30,6 +30,7 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         $sqlstring_atualizar_alimentos .= "peso = '" . $peso . "', ";
         $sqlstring_atualizar_alimentos .= "caloria = '" . $caloria . "', ";
         $sqlstring_atualizar_alimentos .= "medida_caseira = '" . $medida_caseira . "', ";
+        $sqlstring_atualizar_alimentos .= "cod_unidade_medida = '" . $cod_unidade_medida . "', ";
         $sqlstring_atualizar_alimentos .= "cod_grupo = '" . $cod_grupo . "' ";        
         $sqlstring_atualizar_alimentos .= "where cod_alimento = " . $_SESSION['cod_alimento_selecionado'];
 
@@ -53,7 +54,9 @@ if(isset($_GET['cod_alimento']))
     $_SESSION['cod_alimento_selecionado'] = base64_decode($_GET['cod_alimento']);
 
 
-$sqlstring_alimento_selecionado = "Select * from tb_alimento where cod_alimento = " . $_SESSION['cod_alimento_selecionado'];   
+$sqlstring_alimento_selecionado  = "Select * from tb_alimento ";
+$sqlstring_alimento_selecionado .= "inner join tb_unidade_medida on tb_unidade_medida.cod_unidade_medida = tb_alimento.cod_unidade_medida ";
+$sqlstring_alimento_selecionado .= "where cod_alimento = " . $_SESSION['cod_alimento_selecionado'];   
 $info_alimento_selecionado = $db->sql_query($sqlstring_alimento_selecionado);
 $dados_alimento_selecionado = mysql_fetch_array($info_alimento_selecionado);
 
@@ -122,7 +125,7 @@ $dados_alimento_selecionado = mysql_fetch_array($info_alimento_selecionado);
             
             <!-- inicio - linha 1 -->
               <!-- inicio alimento -->
-              <div class="form-group col-md-8">
+              <div class="form-group col-md-6">
                 <label for="alimento">Alimento  <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
                 <input type="text" class="form-control" name="alimento" id="alimento" value="<?php print $dados_alimento_selecionado['alimento'] ?>" required maxlength="100">
               </div>
@@ -130,19 +133,43 @@ $dados_alimento_selecionado = mysql_fetch_array($info_alimento_selecionado);
                 
               <!-- inicio peso -->    
               <div class="form-group col-md-2"> 
-                <label for="peso">Peso (gramas)  <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
-                <input type="text" class="form-control" name="peso" id="peso" value="<?php print number_format($dados_alimento_selecionado['peso'],2) ?>" maxlength="6" required>
+                <label for="peso">Peso <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
+                <input type="text" class="form-control" name="peso" id="peso" value="<?php print number_format($dados_alimento_selecionado['peso'],1) ?>" maxlength="6" required>
               </div>
               <!-- fim peso -->
                 
+                
+                
+              <!-- inicio unidade de medida -->    
+              <div class="form-group col-md-4"> 
+                <label for="unidade_medida">Unidade Medida  <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
+                <select class="form-control" name="unidade_medida" id="unidade_medida" required>
+                <?php
+                $sqlstring_unidade_medida  = "Select * from tb_unidade_medida ";                                
+                $info_unidade_medida = $db->sql_query($sqlstring_unidade_medida);
+                while($dados_unidade_medida = mysql_fetch_array($info_unidade_medida))
+                {
+                    if($dados_unidade_medida['cod_unidade_medida'] == $dados_alimento_selecionado['cod_unidade_medida'])
+                    {
+                ?>
+                    <option value="<?php print $dados_unidade_medida['cod_unidade_medida'] ?>" selected><?php print $dados_unidade_medida['sigla'] . " - " .  $dados_unidade_medida['unidade_medida'] ?> </option>    
+                <?php
+                    }
+                    else
+                    {
+                    ?>
+                    <option value="<?php print $dados_unidade_medida['cod_unidade_medida'] ?>"><?php print $dados_unidade_medida['sigla'] . " - " .  $dados_unidade_medida['unidade_medida'] ?> </option>    
+                    <?php
+                    }
+                }
+                ?>
+                </select>
+              </div>
+              <!-- fim unidade de medida -->
+                
               
                 
-              <!-- inicio caloria -->    
-              <div class="form-group col-md-2"> 
-                <label for="caloria">Caloria (kcal)  <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
-                <input type="text" class="form-control" name="caloria" id="caloria" value="<?php print number_format($dados_alimento_selecionado['caloria'],2) ?>" maxlength="6" required>
-              </div>
-              <!-- fim caloria -->
+             
                 
             <!-- fim - linha 2 -->
               
@@ -150,17 +177,24 @@ $dados_alimento_selecionado = mysql_fetch_array($info_alimento_selecionado);
             <!-- inicio - linha 2 -->
               
 
-
+               <!-- inicio caloria -->    
+              <div class="form-group col-md-2"> 
+                <label for="caloria">Caloria (kcal)  <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
+                <input type="text" class="form-control" name="caloria" id="caloria" value="<?php print number_format($dados_alimento_selecionado['caloria'],0) ?>" maxlength="6" required>
+              </div>
+              <!-- fim caloria -->
+                
+                
               <!-- inicio medida caseira -->
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-5">
                 <label for="sexo">Medida Caseira  <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
-                <input type="text" class="form-control" name="medida_caseira" id="medida_caseira" value="<?php print $dados_alimento_selecionado['medida_caseira'] ?>" maxlength="50" required>
+                <input type="text" class="form-control text-uppercase" name="medida_caseira" id="medida_caseira" value="<?php print $dados_alimento_selecionado['medida_caseira'] ?>" maxlength="50" required>
               </div>
               <!-- fim medida caseira -->            
               
               
               <!-- inicio - grupo de alimentos -->
-                <div id="grupo_alim" name="grupo_alim" class="form-group col-md-6">
+                <div id="grupo_alim" name="grupo_alim" class="form-group col-md-5">
                     <label for="grupo_alimentos">Grupo</label>
                     <select name="grupo_alimentos" id="grupo_alimentos" class="form-control text-uppercase">
                       <?php

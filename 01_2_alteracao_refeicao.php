@@ -58,8 +58,8 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         // fazendo uplodas das fotos 01
         $arquivo = $_FILES['foto_01'];  
         
-        $destino = 'C:\Bitnami\\wampstack-5.5.28-0\\apache2\htdocs\\plataformanutris\\fotos_refeicoes\\';
-//        $destino  = '/home/engineercode/public_html/plataformanutris/fotos/';
+//        $destino = 'C:\Bitnami\\wampstack-5.5.28-0\\apache2\htdocs\\plataformanutris\\fotos_refeicoes\\';
+        $destino  = '/home/engineercode/public_html/plataformanutris/fotos_refeicoes/';
         $destino .= $_SESSION['cod_refeicao_selecionada'] . "_1_";
         $destino .= $arquivo['name'];  
 
@@ -71,8 +71,8 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         // fazendo uplodas das fotos 02
         $arquivo = $_FILES['foto_02']; 
 
-        $destino = 'C:\Bitnami\\wampstack-5.5.28-0\\apache2\htdocs\\plataformanutris\\fotos_refeicoes\\';
-//        $destino  = '/home/engineercode/public_html/plataformanutris/fotos/';
+//        $destino = 'C:\Bitnami\\wampstack-5.5.28-0\\apache2\htdocs\\plataformanutris\\fotos_refeicoes\\';
+        $destino  = '/home/engineercode/public_html/plataformanutris/fotos_refeicoes/';
         $destino .= $_SESSION['cod_refeicao_selecionada'] . "_2_";
         $destino .= $arquivo['name'];  
 

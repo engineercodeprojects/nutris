@@ -456,7 +456,7 @@ a.link_branco:active    {text-decoration:none; color:#fff }
 .borda_cinza            {border:1px solid #ddd}
 .borda_cinza_inferior   {border-bottom:1px solid #ddd}
 .borda_inferior_verde_claro {border-bottom:3px solid #18A689}
-
+.borda_direita          {border-right:1px solid #18A689}
 
 
 .borda_esquerda_grossa  {border-left:5px solid #0A4438}

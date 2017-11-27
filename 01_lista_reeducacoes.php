@@ -186,7 +186,7 @@ $linhas_reeducacoes = $db->sql_linhas($info_reeducacoes);
                 
                     <td class="direito fonte_pequena">
                         <a href="01_7_alteracao_reeducacao.php?cod_reeducacao=<?php print  base64_encode($dados_reeducacoes['cod_reeducacao']) ?>" alt="Detalhes da Reeducação" title="Detalhes da Reeducação">
-                        <?php print $caloria_total; ?>
+                        <?php print $caloria_total; ?> kcal
                         </a>
                     </td>   
                 

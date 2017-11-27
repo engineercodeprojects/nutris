@@ -20,6 +20,7 @@ if(isset($busca))
 {
     $sqlstring_alimentos  = "Select * from tb_alimento ";
     $sqlstring_alimentos .= "inner join tb_grupo on tb_alimento.cod_grupo = tb_grupo.cod_grupo "; 
+    $sqlstring_alimentos .= "inner join tb_unidade_medida on tb_alimento.cod_unidade_medida = tb_unidade_medida.cod_unidade_medida "; 
     $sqlstring_alimentos .= "where alimento like '%" . $busca . "%' and tb_alimento.cod_status = 1 ";       
     $sqlstring_alimentos .= "order by alimento "; 
 }
@@ -27,6 +28,7 @@ else
 {
     $sqlstring_alimentos  = "Select * from tb_alimento ";
     $sqlstring_alimentos .= "inner join tb_grupo on tb_alimento.cod_grupo = tb_grupo.cod_grupo "; 
+    $sqlstring_alimentos .= "inner join tb_unidade_medida on tb_alimento.cod_unidade_medida = tb_unidade_medida.cod_unidade_medida "; 
     $sqlstring_alimentos .= "where tb_alimento.cod_status = 1 "; 
     $sqlstring_alimentos .= "order by alimento "; 
 }
@@ -130,11 +132,12 @@ $linhas_alimentos = $db->sql_linhas($info_alimentos);
             <table class="table table-responsive table-hover">
                 <tr class="fonte_branca">
                 <td class="largura_05 fundo_verde_claro"><input type=checkbox name="marcar" id="marcar" onclick="marcar_desmarcar_todos()"></td>
-                <td class="largura_50 fundo_verde_claro">Alimento</td>                
+                <td class="largura_40 fundo_verde_claro">Alimento</td>                
                 <td class="largura_30 fundo_verde_claro">Medida Caseira</td>                       
                 <td class="largura_05 fundo_verde_claro centralizado">Peso</td>
-                <td class="largura_05 fundo_verde_claro centralizado">Caloria</td>              
-                <td class="largura_05  fundo_verde_claro centralizado"><span class="glyphicon glyphicon-edit fonte_pequena"  alt="Detalhes do Alimento" title="Detalhes do Alimento"></span></td>
+                <td class="largura_05 fundo_verde_claro esquerdo">&nbsp;</td>
+                <td class="largura_10 fundo_verde_claro direito">Caloria</td>              
+                <td class="largura_10  fundo_verde_claro centralizado"><span class="glyphicon glyphicon-edit fonte_pequena"  alt="Detalhes do Alimento" title="Detalhes do Alimento"></span></td>
                 </tr>
                                 
                 <?php
@@ -160,13 +163,20 @@ $linhas_alimentos = $db->sql_linhas($info_alimentos);
                 
                     <td class="direito fonte_pequena">
                         <a href="01_4_alteracao_alimento.php?cod_alimento=<?php print  base64_encode($dados_alimentos['cod_alimento']) ?>" alt="Detalhes do Alimento" title="Detalhes do Alimento">
-                        <?php print number_format($dados_alimentos['peso'], 2) ?>
+                        <?php print number_format($dados_alimentos['peso'], 1)  ?>
                         </a>
-                    </td>   
+                    </td>
+                
+                
+                    <td class="esquerdo fonte_pequena">
+                        <a href="01_4_alteracao_alimento.php?cod_alimento=<?php print  base64_encode($dados_alimentos['cod_alimento']) ?>" alt="Detalhes do Alimento" title="Detalhes do Alimento">
+                        <?php print $dados_alimentos['sigla'] ?>
+                        </a>
+                    </td>
                 
                     <td class="direito fonte_pequena">
                         <a href="01_4_alteracao_alimento.php?cod_alimento=<?php print  base64_encode($dados_alimentos['cod_alimento']) ?>" alt="Detalhes do Alimento" title="Detalhes do Alimento">
-                        <?php print number_format($dados_alimentos['caloria'], 2) ?>
+                        <?php print number_format($dados_alimentos['caloria'], 0) . " kcal" ?>
                         </a>
                     </td>   
                 

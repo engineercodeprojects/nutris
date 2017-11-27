@@ -39,7 +39,9 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         $telefone_comercial = $_POST['telefone_comercial'];
         $celular = $_POST['celular'];
         $email = $_POST['email'];
-        $data_nascimento = date("Y/m/d", strtotime($_POST['data_nascimento']));
+        $data_nascimento = $_POST['data_nascimento'];    
+        $parteData = explode("/", $data_nascimento);    
+        $data_nascimento = $parteData[2] . "-" . $parteData[1] . "-" . $parteData[0];
         $sexo = $_POST['sexo'];
         $peso = $_POST['peso'];
         $altura = $_POST['altura'];
@@ -114,7 +116,11 @@ $dados_paciente_selecionado = mysql_fetch_array($info_paciente_selecionado);
   <script src="js/funcoes.js"></script>
 <body class="margin_00">
 
-<?php include "includes/menu_nutricionista.php" ?>     
+<?php 
+    include "includes/menu_nutricionista.php";
+    include "includes/cabecalho_paciente.php";
+        
+?>     
     
 <div class="container-fluid">
     
@@ -127,22 +133,9 @@ $dados_paciente_selecionado = mysql_fetch_array($info_paciente_selecionado);
           <div class="panel panel-default margin_top_20 sem_borda padding_top_25">
             <div class="panel-body borda_verde_escuro col-md-12" style="border:0px solid #fff; border-left:0px solid #0A4438;">                 
                     <span class="glyphicon glyphicon-tag fonte_verde_claro"></span>
-                    <span class=" fonte_verde_claro fonte_muito_grande negrito">PACIENTE DADOS PESSOAIS</span>:
-                    <span class=" fonte_verde_claro fonte_muito_grande"><?php print $dados_paciente_selecionado['nome_paciente'] ?></span>
-                    <br/>
-                    <span class="fonte_pequena">
-                        <span class="fonte_verde_claro">Dados Pessoais</span>
-                        <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
-                        <a href="01_1_cadastro_paciente_anamnese.php">Anamnese</a>
-                        <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
-                        <a href="01_1_cadastro_paciente_avaliacao.php">Avaliação Nutricional</a>
-                        <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
-                        <a href="01_1_cadastro_paciente_antropometria.php">Antropometria</a>
-                        <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
-                        <a href="01_3_cadastro_dieta.php">Prescrição de Dieta</a>
-                        
-                    </span> 
-                    <br/><br/>
+                    <span class=" fonte_verde_claro fonte_muito_grande negrito">DADOS PESSOAIS</span>                    
+                    <br/><br/>                    
+                    
                     <span class="glyphicon glyphicon-asterisk fonte_verde_claro fonte_muito_pequena"></span> <span>campos com preenchimento obrigatório</span>
             </div>
           </div>

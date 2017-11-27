@@ -16,8 +16,9 @@ ini_set('default_charset','UTF-8');
 $busca = mysql_real_escape_string($_POST['palavra']);
 
 
-$sqlstring_refeicoes  = "select tb_alimento.cod_alimento, tb_alimento.alimento, tb_alimento.peso, tb_alimento.caloria, tb_alimento.medida_caseira, tb_grupo.grupo, tb_grupo.descricao_grupo from tb_alimento ";
+$sqlstring_refeicoes  = "select tb_alimento.cod_alimento, tb_alimento.alimento, tb_alimento.peso, tb_alimento.caloria, tb_alimento.medida_caseira, tb_unidade_medida.sigla, tb_grupo.grupo, tb_grupo.descricao_grupo from tb_alimento ";
 $sqlstring_refeicoes .= "inner join tb_grupo on tb_alimento.cod_grupo = tb_grupo.cod_grupo ";
+$sqlstring_refeicoes .= "inner join tb_unidade_medida on tb_unidade_medida.cod_unidade_medida = tb_alimento.cod_unidade_medida ";
 $sqlstring_refeicoes .= "where tb_alimento.alimento like '%" . $busca . "%' or tb_grupo.grupo like '%" . $busca . "%' or tb_grupo.descricao_grupo like '%" . $busca . "%'";
 
 $info_refeicoes = $db->sql_query($sqlstring_refeicoes);
@@ -47,8 +48,8 @@ if($linhas_refeicoes > 0)
     <div id="alimentos_refeicao" name="alimentos_refeicao">
         <div class="col-md-6 padding_top_10 padding_bottom_10 text-uppercase borda_inferior "><?php print $dados_refeicoes['alimento'] ?></div>
         <div class="col-md-3 padding_top_10 padding_bottom_10 text-uppercase borda_inferior"><?php print $dados_refeicoes['medida_caseira'] ?></div>
-        <div class="col-md-1 padding_top_10 padding_bottom_10 borda_inferior"><?php print number_format($dados_refeicoes['peso'],1) ?></div>
-        <div class="col-md-1 padding_top_10 padding_bottom_10 borda_inferior"><?php print number_format($dados_refeicoes['caloria'],0) ?></div>
+        <div class="col-md-1 padding_top_10 padding_bottom_10 borda_inferior"><?php print number_format($dados_refeicoes['peso'],1) . " " . $dados_refeicoes['sigla'] ?></div>
+        <div class="col-md-1 padding_top_10 padding_bottom_10 borda_inferior"><?php print number_format($dados_refeicoes['caloria'],0) ?> kcal</div>
         <div class="col-md-1 padding_top_10 padding_bottom_10 centralizado borda_inferior">
             <a href="#" class="link_detalhes" onclick="javascript:inserir_alimento('<?php print $dados_refeicoes['cod_alimento'] ?>','<?php print $dados_refeicoes['alimento'] ?>','<?php print $dados_refeicoes['peso'] ?>','<?php print $dados_refeicoes['caloria'] ?>','<?php print $dados_refeicoes['medida_caseira'] ?>')">
             <span class="glyphicon glyphicon-plus-sign" alt="Adicionar Alimento da Refeição" title="Adicionar Alimento da Refeição"></span>

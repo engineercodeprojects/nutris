@@ -40,8 +40,25 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         $tempo = $_POST['tempo_programa'];
         $peso = $_POST['peso'];
         $altura = $_POST['altura'];
-        $abdome = $_POST['abdome'];
-        $quadril = $_POST['quadril'];
+        
+        $perimetro_abdomem = $_POST['perimetro_abdomem'];
+        $perimetro_quadril = $_POST['perimetro_quadril'];
+        $perimetro_coxa = $_POST['perimetro_coxa'];
+        $perimetro_perna_medial = $_POST['perimetro_perna_medial'];
+        $perimetro_antebraco = $_POST['perimetro_antebraco'];
+    
+        $dobras_triceps = $_POST['dobras_triceps'];
+        $dobras_subescapular = $_POST['dobras_subescapular'];
+        $dobras_abdominal = $_POST['dobras_abdominal'];
+        $dobras_suprailiaca = $_POST['dobras_suprailiaca'];
+        $dobras_coxa = $_POST['dobras_coxa'];
+        $dobras_perna_medial = $_POST['dobras_perna_medial'];
+    
+        $diametro_punho = $_POST['diametro_punho'];
+        $diametro_umero = $_POST['diametro_umero'];
+        $diametro_femur = $_POST['diametro_femur'];
+        $diametro_tornozelo = $_POST['diametro_tornozelo'];
+    
         
         
        
@@ -60,11 +77,25 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         if($fo_04 == 1)              $sqlstring_alterar_objetivo .= "foto_04 = 'avatar.png', ";
         $sqlstring_alterar_objetivo .= "cod_objetivo_programa = '" . $objetivo . "', ";
         $sqlstring_alterar_objetivo .= "cod_tempo_programa = '" . $tempo . "', ";
-        $sqlstring_alterar_objetivo .= "peso = '" . $peso . "', ";
-        $sqlstring_alterar_objetivo .= "altura = '" . $altura . "', ";
-        $sqlstring_alterar_objetivo .= "abdome = '" . $abdome . "', ";
-        $sqlstring_alterar_objetivo .= "quadril = '" . $quadril . "' ";
+        $sqlstring_alterar_objetivo .= "peso_paciente = '" . $peso . "', ";
+        $sqlstring_alterar_objetivo .= "altura_paciente = '" . $altura . "', ";
+        $sqlstring_alterar_objetivo .= "perimetro_abdomem = '" . $perimetro_abdomem . "', ";
+        $sqlstring_alterar_objetivo .= "perimetro_quadril = '" . $perimetro_quadril . "', ";
+        $sqlstring_alterar_objetivo .= "perimetro_coxa = '" . $perimetro_coxa . "', ";
+        $sqlstring_alterar_objetivo .= "perimetro_perna_medial = '" . $perimetro_perna_medial . "', ";
+        $sqlstring_alterar_objetivo .= "perimetro_antebraco = '" . $perimetro_antebraco . "', ";
+        $sqlstring_alterar_objetivo .= "dobras_triceps = '" . $dobras_triceps . "', ";
+        $sqlstring_alterar_objetivo .= "dobras_subescapular = '" . $dobras_subescapular . "', ";
+        $sqlstring_alterar_objetivo .= "dobras_abdominal = '" . $dobras_abdominal . "', ";
+        $sqlstring_alterar_objetivo .= "dobras_suprailiaca = '" . $dobras_suprailiaca . "', ";
+        $sqlstring_alterar_objetivo .= "dobras_coxa = '" . $dobras_coxa . "', ";
+        $sqlstring_alterar_objetivo .= "dobras_perna_medial = '" . $dobras_perna_medial . "', ";
+        $sqlstring_alterar_objetivo .= "diametro_punho = '" . $diametro_punho . "', ";
+        $sqlstring_alterar_objetivo .= "diametro_umero = '" . $diametro_umero . "', ";
+        $sqlstring_alterar_objetivo .= "diametro_femur = '" . $diametro_femur . "', ";
+        $sqlstring_alterar_objetivo .= "diametro_tornozelo = '" . $diametro_tornozelo . "' ";
         $sqlstring_alterar_objetivo .= "where cod_paciente  = " . $_SESSION['cod_paciente_selecionado'];
+        $sqlstring_alterar_objetivo .= " and cod_consulta = " . $_SESSION['cod_consulta_selecionada'];
 
         $db->string_query($sqlstring_alterar_objetivo); 
 
@@ -128,13 +159,16 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
 
 
 //recuperando o paciente selecionado caso o clique venha da listagem de pacientes
-if(isset($_GET['cod']))
-    $_SESSION['cod_paciente_selecionado'] = base64_decode($_GET['cod']);
+if(isset($_GET['cod_consulta']))
+    //$_SESSION['cod_paciente_selecionado'] = base64_decode($_GET['cod']);
+    $_SESSION['cod_consulta_selecionada'] = base64_decode($_GET['cod_consulta']);
 
 
-$sqlstring_objetivo_programa  = "select tb_objetivo_paciente.*, tb_paciente.nome_paciente, tb_paciente.sexo, TIMESTAMPDIFF(YEAR, tb_paciente.data_nascimento, current_date) as anos,tb_paciente.data_nascimento from tb_objetivo_paciente ";
+//$sqlstring_objetivo_programa  = "select tb_objetivo_paciente.*, tb_paciente.*, TIMESTAMPDIFF(YEAR, tb_paciente.data_nascimento, current_date) as anos from tb_objetivo_paciente ";
+$sqlstring_objetivo_programa  = "select tb_objetivo_paciente.*, tb_paciente.*, TIMESTAMPDIFF(day, tb_paciente.data_nascimento, current_date)/365 as anos from tb_objetivo_paciente ";
 $sqlstring_objetivo_programa .= "inner join tb_paciente on tb_paciente.cod_paciente = tb_objetivo_paciente.cod_paciente ";
 $sqlstring_objetivo_programa .= "where tb_objetivo_paciente.cod_paciente = " . $_SESSION['cod_paciente_selecionado'];
+$sqlstring_objetivo_programa .= " and tb_objetivo_paciente.cod_consulta = " . $_SESSION['cod_consulta_selecionada'];
 $info_objetivo_programa = $db->sql_query($sqlstring_objetivo_programa);
 $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
 
@@ -146,7 +180,7 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>NUTRIS - Plataforma Nutricional</title>
+    <title>Nutris - Plataforma Nutricional</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -176,8 +210,8 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
           <div class="panel panel-default margin_top_20 sem_borda padding_top_25">
             <div class="panel-body borda_verde_escuro col-md-12" style="border:0px solid #eee; border-left:0px solid #0A4438;">                 
                     <span class="glyphicon glyphicon-screenshot fonte_verde_claro"></span>
-                    <span class=" fonte_verde_claro fonte_muito_grande negrito">PACIENTE ANTROPOMETRIA</span>:
-                    <span class=" fonte_verde_claro fonte_muito_grande"><?php print $dados_objetivo_programa['nome_paciente'] ?></span>
+                    <span class=" fonte_verde_claro fonte_muito_grande negrito">ANTROPOMETRIA</span>:
+                    <span class=" fonte_verde_claro fonte_muito_grande"><?php print date('d/m/Y', strtotime($dados_objetivo_programa['data_objetivo_paciente'])) ?></span>
                     <br/>
                     <span class="fonte_pequena">
                         <a href="01_1_alteracao_paciente_dados_pessoais.php">Dados Pessoais</a>
@@ -208,8 +242,8 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
         
         <div class="col-md-3">
              <!-- inicio - barra de título e botao "x" para remover a foto do paciente - capo oculto para saber se insere avatar ou não -->
-             <div class="col-md-8 fonte_branca padding_top_05 fundo_verde_claro altura_30"><span class="glyphicon glyphicon-camera"></span> ANTES - FRENTE </div>
-             <div class="col-md-4 direito fonte_branca padding_top_05 fundo_verde_claro altura_30"> 
+             <div class="col-xs-10 col-md-8 fonte_branca padding_top_05 fundo_verde_claro altura_30"><span class="glyphicon glyphicon-camera"></span> ANTES - FRENTE </div>
+             <div class="col-xs-2 col-md-4 direito fonte_branca padding_top_05 fundo_verde_claro altura_30"> 
              <a href="#" onclick="document.getElementById('f_1').innerHTML = '<br/><label for=\'uploadImage1\'><img src=\'fotos/avatar.png\' class=\'img-responsive margin_auto\' width=150 height=200  id=\'uploadPreview1\'></label><input id=\'uploadImage1\' type=\'file\' name=\'foto_01\' onchange=\'pre_visualizacao1()\' style=\'display:none\'><input type=hidden name=fo_01 id=fo_01 value=0>'">
              <span class="glyphicon glyphicon-remove fonte_branca"></span>
              </a>
@@ -422,7 +456,8 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
                 <!-- inicio - peso -->
                 <div id="d_peso" name="d_peso" class="form-group col-md-6">
                     <label for="l_peso">Peso (kg) </label>
-                    <input type="text" class="form-control altura_220 centralizado fonte_peso_altura fundo_verde_claro fonte_branca" name="peso" id="peso" value="100" onblur="calcular_imc()"> 
+                    <input type="text" class="form-control altura_220 centralizado fonte_peso_altura fundo_verde_claro fonte_branca" name="peso" id="peso" value="<?php print $dados_objetivo_programa['peso_paciente'] ?>" onblur="funcoes()"> 
+<!--                    <input type="text" class="form-control altura_220 centralizado fonte_peso_altura fundo_verde_claro fonte_branca" name="peso" id="peso" value="100" onblur="calcular_imc();funcoes()"> -->
                 </div>
                 <!-- fim - peso -->
                 
@@ -430,7 +465,8 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
                  <!-- inicio - estatura -->
                 <div id="d_estatura" name="d_estatura" class="form-group col-md-6">
                     <label for="l_estatura">Estatura (cm)</label>
-                    <input type="text" class="form-control altura_220 centralizado fonte_peso_altura fundo_verde_claro fonte_branca" name="altura" id="altura" value="188" onblur="calcular_imc()"> 
+                    <input type="text" class="form-control altura_220 centralizado fonte_peso_altura fundo_verde_claro fonte_branca" name="altura" id="altura" value="<?php print  $dados_objetivo_programa['altura_paciente'] ?>" onblur="funcoes()"> 
+<!--                    <input type="text" class="form-control altura_220 centralizado fonte_peso_altura fundo_verde_claro fonte_branca" name="altura" id="altura" value="188" onblur="calcular_imc();"> -->
                 </div>
                 <!-- fim - estatura -->
                 
@@ -446,37 +482,37 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
                 <!-- inicio - abdomem -->
                 <div id="d_abdomem" name="d_abdomem" class="form-group col-md-6">
                     <label for="l_abdomem">Abdomem</label>
-                    <input type="text" class="form-control" name="abdome" id="abdome" onblur="calcular_caq()" value="1"> 
+                    <input type="text" class="form-control" name="perimetro_abdomem" id="perimetro_abdomem" value="<?php print  $dados_objetivo_programa['perimetro_abdomem'] ?>"> 
                 </div>
                 <!-- fim - abdomem -->
                 
                 <!-- inicio - quadril -->
                 <div id="d_quadril" name="d_quadril" class="form-group col-md-6">
                     <label for="l_quadril">Quadril</label>
-                    <input type="text" class="form-control" name="quadril" id="quadril" onblur="calcular_caq()" value="1"> 
+                    <input type="text" class="form-control" name="perimetro_quadril" id="perimetro_quadril" value="<?php print  $dados_objetivo_programa['perimetro_quadril'] ?>"> 
                 </div>
                 <!-- fim - quadril -->
                 
                 <!-- inicio - coxa -->
                 <div id="d_coxa" name="d_coxa" class="form-group col-md-6">
                     <label for="l_coxa">Coxa</label>
-                    <input type="text" class="form-control" name="coxa" id="coxa" value="<?php print $dados_objetivo_programa['peso'] ?>"> 
+                    <input type="text" class="form-control" name="perimetro_coxa" id="perimetro_coxa" value="<?php print  $dados_objetivo_programa['perimetro_coxa'] ?>"> 
                 </div>
                 <!-- fim - coxa -->
                 
                 <!-- inicio - perna medial -->
-                <div id="d_perna_medial1" name="d_perna_medial1" class="form-group col-md-6">
-                    <label for="l_perna_medial1">Perna Medial</label>
-                    <input type="text" class="form-control" name="perna_medial1" id="perna_medial1" value="<?php print $dados_objetivo_programa['peso'] ?>"> 
+                <div id="d_perna_medial" name="d_perna_medial" class="form-group col-md-6">
+                    <label for="l_perna_medial">Perna Medial</label>
+                    <input type="text" class="form-control" name="perimetro_perna_medial" id="perimetro_perna_medial" value="<?php print  $dados_objetivo_programa['perimetro_perna_medial'] ?>"> 
                 </div>
                 <!-- fim - perna medial -->
                 
-                <!-- inicio - perna medial -->
-                <div id="d_perna_medial" name="d_perna_medial" class="form-group col-md-12">
-                    <label for="l_perna_medial">Perna Medial</label>
-                    <input type="text" class="form-control" name="perna_medial" id="perna_medial" value="<?php print $dados_objetivo_programa['peso'] ?>"> 
+                <!-- inicio - antebraco -->
+                <div id="d_antebraco" name="d_antebraco" class="form-group col-md-12">
+                    <label for="l_antebraco">Antebraço</label>
+                    <input type="text" class="form-control" name="perimetro_antebraco" id="perimetro_antebraco" value="<?php print  $dados_objetivo_programa['perimetro_antebraco'] ?>"> 
                 </div>
-                <!-- fim - perna medial -->
+                <!-- fim - perna antebraco -->
             </div>
             <!-- fim dobras -->
              
@@ -487,47 +523,47 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
             <!-- inicio  diametros -->
             <div class="col-md-6 padding_top_30">
             <!-- titulo medidas -->
-                <div class="col-md-12 negrito padding_bottom_20">Dobras Cutâneas (cm)</div>
+                <div class="col-md-12 negrito padding_bottom_20">Dobras Cutâneas (mm)</div>
                 
                 <!-- inicio - triceps -->
                 <div id="d_triceps" name="d_triceps" class="form-group col-md-4">
                     <label for="l_triceps">Tríceps</label>
-                    <input type="text" class="form-control" name="triceps" id="triceps" value="1"> 
+                    <input type="text" class="form-control" name="dobras_triceps" id="dobras_triceps" value="<?php print  $dados_objetivo_programa['dobras_triceps'] ?>"> 
                 </div>
                 <!-- fim - triceps -->
                 
                 <!-- inicio - subescapular -->
                 <div id="d_subescapular" name="d_subescapular" class="form-group col-md-4">
                     <label for="l_subescapular">Subescapular</label>
-                    <input type="text" class="form-control" name="subescapular" id="subescapular" value="2"> 
+                    <input type="text" class="form-control" name="dobras_subescapular" id="dobras_subescapular" value="<?php print  $dados_objetivo_programa['dobras_subescapular'] ?>"> 
                 </div>
                 <!-- fim - subescapular -->
                 
                 <!-- inicio - abdominal -->
                 <div id="d_abdominal" name="d_abdominal" class="form-group col-md-4">
                     <label for="l_abdominal">Abdominal</label>
-                    <input type="text" class="form-control" name="abdominal" id="abdominal" value="3"> 
+                    <input type="text" class="form-control" name="dobras_abdominal" id="dobras_abdominal" value="<?php print  $dados_objetivo_programa['dobras_abdominal'] ?>"> 
                 </div>
                 <!-- fim - abdominal -->
                 
                 <!-- inicio - suprailíaca -->
                 <div id="d_suprailiaca" name="d_suprailiaca" class="form-group col-md-4">
                     <label for="l_suprailiaca">Suprailíaca</label>
-                    <input type="text" class="form-control" name="suprailiaca" id="suprailiaca" value="4"> 
+                    <input type="text" class="form-control" name="dobras_suprailiaca" id="dobras_suprailiaca" value="<?php print  $dados_objetivo_programa['dobras_suprailiaca'] ?>"> 
                 </div>
                 <!-- fim - suprailíaca -->
                 
                 <!-- inicio - coxa -->
                 <div id="d_coxa_dobras" name="d_coxa_dobras" class="form-group col-md-4">
                     <label for="l_coxa_dobras">Coxa</label>
-                    <input type="text" class="form-control" name="coxa_dobras" id="coxa_dobras" value="5"> 
+                    <input type="text" class="form-control" name="dobras_coxa" id="dobras_coxa" value="<?php print  $dados_objetivo_programa['dobras_coxa'] ?>"> 
                 </div>
                 <!-- fim - coxa -->
                 
                 <!-- inicio - perna medial -->
                 <div id="d_perna_medial" name="d_perna_medial" class="form-group col-md-4">
                     <label for="l_perna_medial">Perna Medial</label>
-                    <input type="text" class="form-control" name="perna_medial" id="perna_medial" value="6"> 
+                    <input type="text" class="form-control" name="dobras_perna_medial" id="dobras_perna_medial" value="<?php print  $dados_objetivo_programa['dobras_perna_medial'] ?>"> 
                 </div>
                 <!-- fim - perna medial -->
                 
@@ -548,30 +584,32 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
                 <!-- inicio - punho -->
                 <div id="d_punho" name="d_punho" class="form-group col-md-6">
                     <label for="l_punho">Punho</label>
-                    <input type="text" class="form-control" name="punho" id="punho" value="<?php print $dados_objetivo_programa['peso'] ?>"> 
+                    <input type="text" class="form-control" name="diametro_punho" id="diametro_punho" value="<?php print  $dados_objetivo_programa['diametro_punho'] ?>"> 
                 </div>
                 <!-- fim - punho -->
                 
                 <!-- inicio - umero -->
                 <div id="d_umero" name="d_umero" class="form-group col-md-6">
                     <label for="l_umero">Úmero</label>
-                    <input type="text" class="form-control" name="umero" id="umero" value="<?php print $dados_objetivo_programa['peso'] ?>"> 
+                    <input type="text" class="form-control" name="diametro_umero" id="diametro_umero" value="<?php print  $dados_objetivo_programa['diametro_umero'] ?>"> 
                 </div>
                 <!-- fim - umero -->
                 
                 <!-- inicio - femur -->
                 <div id="d_femur" name="d_femur" class="form-group col-md-6">
                     <label for="l_femur">Fêmur</label>
-                    <input type="text" class="form-control" name="femur" id="femur" value="<?php print $dados_objetivo_programa['peso'] ?>"> 
+                    <input type="text" class="form-control" name="diametro_femur" id="diametro_femur" value="<?php print  $dados_objetivo_programa['diametro_femur'] ?>"> 
                 </div>
                 <!-- fim - femur -->
                 
                 <!-- inicio - tornozelo -->
                 <div id="d_tornozelo" name="d_tornozelo" class="form-group col-md-6">
                     <label for="l_tornozelo">Tornozelo</label>
-                    <input type="text" class="form-control" name="tornozelo" id="tornozelo" value="<?php print $dados_objetivo_programa['peso'] ?>"> 
+                    <input type="text" class="form-control" name="diametro_tornozelo" id="diametro_tornozelo" value="<?php print  $dados_objetivo_programa['diametro_tornozelo'] ?>"> 
                 </div>
                 <!-- fim - perna tornozelo -->
+                
+                
             
             </div>
             <!-- fim  perimetros -->
@@ -616,18 +654,26 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
                 
                 
             <!-- inicio -  imc ideal -->
-            <div id="d_imc_ideal" name="d_imc_ideal" class="form-group col-md-3">
+            <div id="d_imc_ideal" name="d_imc_ideal" class="form-group col-md-2">
                 <label for="l_imc_ideal">IMC ideal</label>
                 <input type="text" class="form-control" value="24.9" style="background-color:#18A689; color:#fff" name="imc_ideal" id="imc_ideal" readonly>
             </div>
             <!-- fim - imc ideal -->
                 
-            <!-- inicio -  peso ideal -->
-            <div id="d_peso_ideal" name="d_peso_ideal" class="form-group col-md-3">
-                <label for="l_peso_ideal">Peso ideal</label>
-                <input type="text" class="form-control" style="background-color:#18A689; color:#fff" name="peso_ideal" id="peso_ideal" readonly>
+            <!-- inicio -  peso ideal teorico superior -->
+            <div id="d_peso_ideal_teorico_superior" name="d_peso_ideal_teorico_superior" class="form-group col-md-2">
+                <label for="l_peso_ideal_teorico_superior">Peso ideal Superior</label>
+                <input type="text" class="form-control" style="background-color:#18A689; color:#fff" name="peso_ideal_teorico_superior" id="peso_ideal_teorico_superior" readonly>
             </div>            
-            <!-- fim - peso ideal -->
+            <!-- fim - peso ideal teorico superior -->
+                
+                
+            <!-- inicio -  peso ideal teorico inferior -->
+            <div id="d_peso_ideal_teorico_inferior" name="d_peso_ideal_teorico_inferior" class="form-group col-md-2">
+                <label for="l_peso_ideal_teorico_inferior">Peso Ideal Inferior</label>
+                <input type="text" class="form-control" style="background-color:#18A689; color:#fff" name="peso_ideal_teorico_inferior" id="peso_ideal_teorico_inferior" readonly>
+            </div>            
+            <!-- fim - peso ideal teorico inferior -->
                 
               
                 
@@ -681,13 +727,13 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
                 
                 
             
-                
+              
             <!-- inicio - protocolo -->
-            <div id="d_protocolos" name="d_protocolos" class="form-group col-md-6">
+            <div id="d_protocolos" name="d_protocolos" class="form-group col-md-12 padding_top_30">
                 <label for="l_protocolos">Protocolo</label>
-                <select class="form-control" style="border:1px solid #18A689;"  name="protocolo" id="protocolo" onchange="calcular_gordura()"> 
+                <select class="form-control" style="border:1px solid #18A689;"  name="protocolo" id="protocolo" onchange="funcoes()"> 
                     <option value="protocolo_A">Protocolo A - Guedes, 1996</option>
-                    <option value="protocolo_B">Protocolo B - Jackson & Pollock, 1985</option>
+                    <option value="protocolo_B" selected>Protocolo B - Jackson & Pollock, 1985</option>
                 </select>
            </div>
             <!-- fim - protocolo -->  
@@ -695,49 +741,84 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
                 
                 
                 
-            <!-- inicio - gordura-->
-            <div id="d_gordura" name="d_gordura" class="form-group col-md-6">
-                <label for="l_gordura">Gordura Corporal</label>
-                <input type="text" class="form-control" style="background-color:#18A689; color:#fff"  name="gordura" id="gordura" readonly> 
+            <!-- inicio - gordura corporal porcentagem -->
+            <div id="d_gordura_corporal_porcentagem" name="d_gordura_corporal_porcentagem" class="form-group col-md-3">
+                <label for="l_gordura_corporal_porcentagem">Gordura Corporal %</label>
+                <input type="text" class="form-control" style="border:1px solid #18A689; background-color:#fff; color:#18A689"  name="gordura_corporal_porcentagem" id="gordura_corporal_porcentagem" readonly> 
            </div>
-            <!-- fim - gordura -->
+            <!-- fim - gordura corporal porcentagem -->
                 
-                
-                
-                
-                
-                
-            <!-- inicio - gordura-->
-            <div id="d_gordura_absoluta" name="d_gordura_absoluta" class="form-group col-md-3">
-                <label for="l_gordura_absoluta">Gordura Absoluta</label>
-                <input type="text" class="form-control" style="border:1px solid #18A689; background-color:#fff; color:#18A689"  name="gordura_absoluta" id="gordura_absoluta" readonly> 
+            <!-- inicio - gordura corporal kg -->
+            <div id="d_gordura_corporal_quilo" name="d_gordura_corporal_quilo" class="form-group col-md-3">
+                <label for="l_gordura_corporal_quilo">Gordura Corporal (kg)</label>
+                <input type="text" class="form-control" style="border:1px solid #18A689; background-color:#fff; color:#18A689"  name="gordura_corporal_quilo" id="gordura_corporal_quilo" readonly> 
            </div>
-            <!-- fim - gordura -->
+            <!-- fim - gordura corporal kg -->
                 
+                
+                
+            
+            <!-- inicio - gordura ideal %-->
+            <div id="d_gordura_corporal_porcentagem_ideal" name="d_gordura_corporal_porcentagem_ideal" class="form-group col-md-3 ">
+                <label for="l_gordura_corporal_porcentagem_ideal">Gordura Corporal Ideal %</label>
+                <input type="text" class="form-control" style="background-color:#18A689; color:#fff"  name="gordura_corporal_porcentagem_ideal" id="gordura_corporal_porcentagem_ideal" readonly> 
+           </div>
+            <!-- fim - gordura ideal %-->
+                
+                
+            <!-- inicio - gordura peso %-->
+            <div id="d_gordura_corporal_quilo_ideal" name="d_gordura_corporal_quilo_ideal" class="form-group col-md-3 ">
+                <label for="l_gordura_corporal_porcentagem_ideal">Gordura Corporal Ideal (kg)</label>
+                <input type="text" class="form-control" style="background-color:#18A689; color:#fff"  name="gordura_corporal_quilo_ideal" id="gordura_corporal_quilo_ideal" readonly> 
+           </div>
+            <!-- fim - gordura peso %-->
+                
+                
+                           
                 
             <!-- inicio - massa magra -->
-            <div id="d_massa_magra" name="d_massa_magra" class="form-group col-md-3">
+            <div id="d_massa_magra" name="d_massa_magra" class="form-group col-md-6">
                 <label for="l_massa_magra">Massa Magra</label>
                 <input type="text" class="form-control" style="border:1px solid #18A689; background-color:#fff; color:#18A689"  name="massa_magra" id="massa_magra" readonly> 
            </div>
             <!-- fim - massa magra -->
                 
-                
-            <!-- inicio - gordura-->
-            <div id="d_gordura_absoluta_ideal" name="d_gordura_absoluta_ideal" class="form-group col-md-3">
-                <label for="l_gordura">Gordura Absoluta Ideal</label>
-                <input type="text" class="form-control" style="background-color:#18A689; color:#fff"  name="gordura_absoluta_ideal" id="gordura_absoluta_ideal" readonly> 
-           </div>
-            <!-- fim - gordura -->
-                
+                           
             <!-- inicio - massa magra ideal -->
-            <div id="d_massa_magra_ideal" name="d_massa_magra_ideal" class="form-group col-md-3">
+            <div id="d_massa_magra_ideal" name="d_massa_magra_ideal" class="form-group col-md-6">
                 <label for="l_massa_magra_ideal">Massa Magra Ideal</label>
                 <input type="text" class="form-control" style="background-color:#18A689; color:#fff"  name="massa_magra_ideal" id="massa_magra_ideal" readonly> 
            </div>
             <!-- fim - massa magra ideal -->
                 
                 
+                
+                
+            <!-- inicio - protocolo C e D-->
+            <div id="d_protocolo_c_d" name="d_protocolo_c_d" class="form-group col-md-6 padding_top_30">
+                <label for="l_protocolo_c_d">Protocolo</label>
+                <select class="form-control" style="border:1px solid #18A689;"  name="protocolo_cd" id="protocolo_cd" onchange="funcoes()"> 
+                    <option value="protocolo_C">Protocolo C - Martin, Spenst, Drinkwater and Clarys, 1990</option>
+                    <option value="protocolo_D">Protocolo D - Martin, 1991</option>
+                </select>
+           </div>
+            <!-- fim - protocolo C e D -->  
+                
+                
+            <!-- inicio - massa muscular -->
+            <div id="d_massa_muscular" name="d_massa_muscular" class="form-group col-md-6 padding_top_30">
+                <label for="l_massa_muscular">Massa Muscular</label>
+                <input type="text" class="form-control" style="background-color:#18A689; color:#fff"  name="massa_muscular" id="massa_muscular" readonly> 
+           </div>
+            <!-- fim - massa muscular -->
+                
+                
+          <!-- inicio - massa ossea -->
+            <div id="d_massa_ossea" name="d_massa_ossea" class="form-group col-md-6 padding_top_30 ocultar">
+                <label for="l_massa_ossea">Massa Ossea</label>
+                <input type="text" class="form-control" style="background-color:#18A689; color:#fff"  name="massa_ossea" id="massa_ossea" readonly> 
+           </div>
+            <!-- fim - massa ossea -->
                 
                
         </div>
@@ -794,14 +875,22 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
    
 
     <script>
-         
+    function funcoes()
+    {
         calcular_imc();
-        calculo_peso_ideal();
         
         calcular_caq();
         calcular_caq_ideal();
         carrega_sexo_idade();
-        
+       
         calcular_gordura();
-        calcular_gordura_absoluta();
+
+        calcular_massa_muscular();
+
+//        calculo_peso_ideal();
+    }
+        
+        
+    funcoes();
+        
     </script>

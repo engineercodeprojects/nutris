@@ -22,11 +22,12 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         $caloria = $_POST['caloria'];
         $medida_caseira = $_POST['medida_caseira'];
         $cod_grupo = $_POST['grupo_alimentos'];
+        $cod_unidade_medida = $_POST['unidade_medida'];
         
 
         // inserindo na tb_alimento os dados do alimento
-        $sqlstring_inserir_alimentos  = "insert into tb_alimento (alimento, peso, caloria, medida_caseira, cod_grupo) values ";        
-        $sqlstring_inserir_alimentos .= "('" . $alimento . "','" . $peso . "','" . $caloria . "','" . $medida_caseira . "','" . $cod_grupo . "')";
+        $sqlstring_inserir_alimentos  = "insert into tb_alimento (alimento, peso, caloria, medida_caseira, cod_grupo, cod_unidade_medida) values ";        
+        $sqlstring_inserir_alimentos .= "('" . $alimento . "','" . $peso . "','" . $caloria . "','" . $medida_caseira . "','" . $cod_grupo . "','" . $cod_unidade_medida . "')";
 
         $db->string_query($sqlstring_inserir_alimentos); 
 
@@ -106,9 +107,9 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
             
             <!-- inicio - linha 1 -->
               <!-- inicio alimento -->
-              <div class="form-group col-md-8">
+              <div class="form-group col-md-6">
                 <label for="alimento">Alimento  <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
-                <input type="text" class="form-control" name="alimento" id="alimento" required maxlength="100">
+                <input type="text" class="form-control text-uppercase" name="alimento" id="alimento" required maxlength="100">
               </div>
               <!-- fim alimento -->
                 
@@ -120,31 +121,50 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
               <!-- fim peso -->
                 
               
-                
-              <!-- inicio caloria -->    
-              <div class="form-group col-md-2"> 
-                <label for="caloria">Caloria (kcal)  <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
-                <input type="text" class="form-control" name="caloria" id="caloria"  maxlength="6" required>
+               <!-- inicio unidade de medida -->    
+              <div class="form-group col-md-4"> 
+                <label for="unidade_medida">Unidade Medida  <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
+                <select class="form-control" name="unidade_medida" id="unidade_medida" required>
+                <?php
+                $sqlstring_unidade_medida  = "Select * from tb_unidade_medida ";                                
+                $info_unidade_medida = $db->sql_query($sqlstring_unidade_medida);
+                while($dados_unidade_medida = mysql_fetch_array($info_unidade_medida))
+                {
+                ?>                
+                <option value="<?php print $dados_unidade_medida['cod_unidade_medida'] ?>"><?php print $dados_unidade_medida['sigla'] . " - " .  $dados_unidade_medida['unidade_medida'] ?> </option>    
+                <?php
+                }
+                ?>
+                </select>
               </div>
-              <!-- fim caloria -->
+              <!-- fim unidade de medida -->
+              
                 
             <!-- fim - linha 2 -->
               
 
             <!-- inicio - linha 2 -->
               
-
+              
+                
+              <!-- inicio caloria -->    
+              <div class="form-group col-md-2"> 
+                <label for="caloria">Caloria (kcal)  <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
+                <input type="text" class="form-control" name="caloria" id="caloria"  maxlength="6" required>
+              </div>
+              <!-- fim caloria -->    
+            
 
               <!-- inicio medida caseira -->
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-5">
                 <label for="sexo">Medida Caseira  <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
-                <input type="text" class="form-control" name="medida_caseira" id="medida_caseira"  maxlength="50" required>
+                <input type="text" class="form-control text-uppercase" name="medida_caseira" id="medida_caseira"  maxlength="50" required>
               </div>
               <!-- fim medida caseira -->            
               
               
               <!-- inicio - grupo de alimentos -->
-                <div id="grupo_alim" name="grupo_alim" class="form-group col-md-6">
+                <div id="grupo_alim" name="grupo_alim" class="form-group col-md-5">
                     <label for="grupo_alimentos">Grupo <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
                     <select name="grupo_alimentos" id="grupo_alimentos" class="form-control text-uppercase">
                       <?php

@@ -885,8 +885,8 @@ function calcular_imc()
     
     if(peso > 0  && altura > 0)
         {
-            document.getElementById('res_imc').value = (Math.ceil((peso/(Math.pow((altura/100),2)))*100)/100).toFixed(2);            
-            classificacao = parseFloat(Math.ceil((peso/(Math.pow((altura/100),2)))*100)/100);
+            document.getElementById('res_imc').value = (Math.floor((peso/(Math.pow((altura/100),2)))*100)/100).toFixed(2);            
+            classificacao = parseFloat(Math.floor((peso/(Math.pow((altura/100),2)))*100)/100);
             if(classificacao < 18.5)                           
                 document.getElementById('classificacao').value = 'Abaixo do Peso';                                
             else if(classificacao >= 18.5 && classificacao < 25)                
@@ -918,20 +918,38 @@ function exibir_imc(peso, altura)
 
 
 function calculo_peso_ideal()
-                    {
-                    imc_ideal = parseFloat(document.getElementById('imc_ideal').value);
-                    altura = parseFloat(document.getElementById('altura').value);                        
-                    peso_ideal = (imc_ideal * Math.pow((altura/100),2)).toFixed(2);
-                    document.getElementById('peso_ideal').value = peso_ideal;
-                    }
+{
+    //recuperando informacoes        
+    sxo = document.getElementById('sexo').value;
+    gordura_absoluta = parseFloat(document.getElementById('gordura_absoluta').value);
+
+    //calculando a massa
+    massa = peso - gordura_absoluta;
+
+    if(sxo == 'M')
+    {
+        peso_ideal_teorico_superior = massa/0.87;
+        peso_ideal_teorico_inferior = massa/0.83;    
+    }
+    else
+    {
+        peso_ideal_teorico_superior = massa/0.77;
+        peso_ideal_teorico_inferior = massa/0.73;
+    }
+    
+    
+    
+    document.getElementById('peso_ideal_teorico_superior').value = peso_ideal_teorico_superior.toFixed(2);
+    document.getElementById('peso_ideal_teorico_inferior').value = peso_ideal_teorico_inferior.toFixed(2);
+}
 
 
 //calcular o CAQ
 function calcular_caq()
 {
    
-    abd = parseFloat(document.getElementById('abdome').value);
-    qdr = parseFloat (document.getElementById('quadril').value);
+    abd = parseFloat(document.getElementById('perimetro_abdomem').value);
+    qdr = parseFloat (document.getElementById('perimetro_quadril').value);
     sxo = document.getElementById('sexo').value;
     ida = parseInt(document.getElementById('anos').value);
    
@@ -939,7 +957,7 @@ function calcular_caq()
     
     if(abd > 0  && qdr > 0)
         {
-            document.getElementById('res_caq').value = (Math.ceil((abd/qdr)*100)/100).toFixed(2);
+            document.getElementById('res_caq').value = (Math.floor((abd/qdr)*100)/100).toFixed(2);
             caq = parseFloat(document.getElementById('res_caq').value);
             
             if(sxo == "M")
@@ -1109,14 +1127,15 @@ function calcular_caq_ideal()
 function carrega_sexo_idade()
 {
     sxo = document.getElementById('sexo').value;
-    ida = parseInt(document.getElementById('anos').value);
+    ida = parseFloat(document.getElementById('anos').value);
+    
     
     if(sxo == "F")
         document.getElementById('sexo_caq_ideal').value = 'Feminino';
     else
         document.getElementById('sexo_caq_ideal').value = 'Masculino';
         
-    document.getElementById('idade_caq_ideal').value = ida;
+    document.getElementById('idade_caq_ideal').value = ida.toFixed(2);
     
 }
 
@@ -1127,32 +1146,133 @@ function calcular_gordura()
     
     //recuperando valores subescapular / suprailiaca / coxa (dobras cutanes)
     prt = document.getElementById('protocolo').value;
-    sub = parseFloat(document.getElementById('subescapular').value);
-    sil = parseFloat(document.getElementById('suprailiaca').value);
-    cox = parseFloat(document.getElementById('coxa_dobras').value);
-    abd = parseFloat(document.getElementById('abdominal').value);
-    tri = parseFloat(document.getElementById('triceps').value);
-    ida = parseInt(document.getElementById('anos').value);
-    
-    
-    //calculando a densidade
-    dens = 1.1665-0.07063*(Math.log(sub+sil+cox)/Math.log(10));    
-    
-    if(prt == "protocolo_A")
-    {
-    gordura = (5.05/dens-4.59)/100;    
-    }        
-    else
-    {
-    gordura = 0.29669*(abd+sil+tri+cox)-0.0043*(abd+sil+tri+cox)*(abd+sil+tri+cox)+0.02963*ida+1.4072;
-    }
+    tri = parseFloat(document.getElementById('dobras_triceps').value);
+    abd = parseFloat(document.getElementById('dobras_abdominal').value);
+    sil = parseFloat(document.getElementById('dobras_suprailiaca').value);
+    cox = parseFloat(document.getElementById('dobras_coxa').value);
         
+    peso = parseFloat(document.getElementById('peso').value);
     
-    document.getElementById('gordura').value = gordura.toFixed(4) + "%";
+    ida = parseFloat(document.getElementById('anos').value);
+    sxo = document.getElementById('sexo').value;
     
     
-}
+    if(prt == 'protocolo_B')
+    {
+        // feminino
+        if(sxo == 'F')
+        {
+            //gordura corporal porcentagem
+            porcentagem_gordura = 0.29669*(tri + abd + sil + cox) - 0.00043*(tri + abd + sil + cox)*(tri + abd + sil + cox) + 0.02963*ida+1.4072;
+            document.getElementById('gordura_corporal_porcentagem').value = porcentagem_gordura.toFixed(2); 
 
+            //goradura corporal porcentagem ideal
+            document.getElementById('gordura_corporal_porcentagem_ideal').value = "ENTRE 20.00% e 25.00%";
+
+
+            //gordura corporal quilos ou gordura absoluta
+            gordura_corporal_quilo = (peso*porcentagem_gordura)/100;
+            document.getElementById('gordura_corporal_quilo').value = gordura_corporal_quilo.toFixed(2); 
+
+            //gordura corporal quilos ideal ou gordura absoluta ideal
+            document.getElementById('gordura_corporal_quilo_ideal').value = "ENTRE " + (peso*0.2).toFixed(2) + " e " + (peso*0.25).toFixed(2);
+
+
+
+            //massa magra
+            massa_magra = peso-gordura_corporal_quilo;
+            document.getElementById('massa_magra').value = massa_magra.toFixed(2);
+
+            //massa magra ideal
+            document.getElementById('massa_magra_ideal').value = "ENTRE " + (peso*0.75).toFixed(2) + " e " + (peso*0.8).toFixed(2);
+        }
+        //masculino
+        else if(sxo == 'M')
+        {
+            //gordura corporal porcentagem
+            porcentagem_gordura = 0.29288*(tri + abd + sil + cox) - 0.0005*(tri + abd + sil + cox)*(tri + abd + sil + cox) + 0.15845*ida-5.76377;
+            document.getElementById('gordura_corporal_porcentagem').value = porcentagem_gordura.toFixed(2); 
+
+            //goradura corporal porcentagem ideal
+            document.getElementById('gordura_corporal_porcentagem_ideal').value = "ENTRE 13.00% e 17.00%";
+
+
+            //gordura corporal quilos ou gordura absoluta
+            gordura_corporal_quilo = (peso*porcentagem_gordura)/100;
+            document.getElementById('gordura_corporal_quilo').value = gordura_corporal_quilo.toFixed(2); 
+
+            //gordura corporal quilos ideal ou gordura absoluta ideal
+            document.getElementById('gordura_corporal_quilo_ideal').value = "ENTRE " + (peso*0.13).toFixed(2) + " e " + (peso*0.17).toFixed(2);
+
+
+
+            //massa magra
+            massa_magra = peso-gordura_corporal_quilo;
+            document.getElementById('massa_magra').value = massa_magra.toFixed(2);
+
+            //massa magra ideal
+            document.getElementById('massa_magra_ideal').value = "ENTRE " + (peso*0.85).toFixed(2) + " e " + (peso*0.88).toFixed(2);
+        }
+    }
+    else if(prt == 'protocolo_A')
+    {
+    // feminino
+        if(sxo == 'F')
+        {
+            //gordura corporal porcentagem
+            porcentagem_gordura = 0.29669*(tri + abd + sil + cox) - 0.00043*(tri + abd + sil + cox)*(tri + abd + sil + cox) + 0.02963*ida+1.4072;
+            document.getElementById('gordura_corporal_porcentagem').value = ''; 
+
+            //goradura corporal porcentagem ideal
+            document.getElementById('gordura_corporal_porcentagem_ideal').value = '';
+
+
+            //gordura corporal quilos ou gordura absoluta
+            gordura_corporal_quilo = (peso*porcentagem_gordura)/100;
+            document.getElementById('gordura_corporal_quilo').value = ''; 
+
+            //gordura corporal quilos ideal ou gordura absoluta ideal
+            document.getElementById('gordura_corporal_quilo_ideal').value = '';
+
+
+
+            //massa magra
+            massa_magra = peso-gordura_corporal_quilo;
+            document.getElementById('massa_magra').value = '';
+
+            //massa magra ideal
+            document.getElementById('massa_magra_ideal').value = '';
+        }
+        //masculino
+        else if(sxo == 'M')
+        {
+            //gordura corporal porcentagem
+            porcentagem_gordura = 0.29288*(tri + abd + sil + cox) - 0.0005*(tri + abd + sil + cox)*(tri + abd + sil + cox) + 0.15845*ida-5.76377;
+            document.getElementById('gordura_corporal_porcentagem').value = ''; 
+
+            //goradura corporal porcentagem ideal
+            document.getElementById('gordura_corporal_porcentagem_ideal').value = '';
+
+
+            //gordura corporal quilos ou gordura absoluta
+            gordura_corporal_quilo = (peso*porcentagem_gordura)/100;
+            document.getElementById('gordura_corporal_quilo').value = ''; 
+
+            //gordura corporal quilos ideal ou gordura absoluta ideal
+            document.getElementById('gordura_corporal_quilo_ideal').value = '';
+
+
+
+            //massa magra
+            massa_magra = peso-gordura_corporal_quilo;
+            document.getElementById('massa_magra').value = '';
+
+            //massa magra ideal
+            document.getElementById('massa_magra_ideal').value = '';
+        }  
+    }
+   
+}
 
 
 
@@ -1181,6 +1301,48 @@ function calcular_gordura_absoluta()
     massa_magra_ideal_max = pes*0.8;    
     document.getElementById('massa_magra_ideal').value = "Entre " + massa_magra_ideal_min + " e " + massa_magra_ideal_max;
 }
+
+
+//calcular massa muscular
+function calcular_massa_muscular()
+{
+    protocolo_cd = document.getElementById('protocolo_cd').value;
+    altura = parseFloat(document.getElementById('altura').value);
+    perimetro_coxa = parseFloat(document.getElementById('perimetro_coxa').value);
+    dobras_coxa = parseFloat(document.getElementById('dobras_coxa').value);
+    perimetro_antebraco = parseFloat(document.getElementById('perimetro_antebraco').value);
+    perimetro_perna_medial = parseFloat(document.getElementById('perimetro_perna_medial').value);
+    dobras_perna_medial = parseFloat(document.getElementById('dobras_perna_medial').value);
+    
+    diametro_punho = parseFloat(document.getElementById('diametro_punho').value);
+    diametro_umero = parseFloat(document.getElementById('diametro_umero').value);
+    diametro_femur = parseFloat(document.getElementById('diametro_femur').value);
+    diametro_tornozelo = parseFloat(document.getElementById('diametro_tornozelo').value);
+    
+    if(protocolo_cd == 'protocolo_C')
+    {
+    massa_muscular = (altura(0.0553*(perimetro_coxa-3.1416*(dobras_coxa/10))*(perimetro_coxa-3.1416*(dobras_coxa/10)) + 0.0987*perimetro_antebraco * perimetro_antebraco + 0.0331 * (perimetro_perna_medial - 3.1416 * (dobras_perna_medial/10)) * (perimetro_perna_medial - 3.1416 * (dobras_perna_medial/10))) - 2445 )/1000;
+    
+    document.getElementById('massa_muscular').value = massa_muscular.toFixed(4);    
+    
+    document.getElementById('d_massa_muscular').style.display = "inline-block";
+    document.getElementById('d_massa_ossea').style.display = "none";
+    }
+    else
+    {
+        
+    massa_ossea = 0.00006 * altura * (Math.pow(diametro_punho + diametro_umero + diametro_femur + diametro_tornozelo),2);
+        
+    document.getElementById('massa_ossea').value = massa_ossea.toFixed(4); 
+        
+    document.getElementById('d_massa_muscular').style.display = "none";
+    document.getElementById('d_massa_ossea').style.display = "inline-block";
+    }
+    
+    
+}
+
+
 
 
 //funcao para modificar o status estrela paciente

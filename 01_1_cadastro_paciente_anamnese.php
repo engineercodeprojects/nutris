@@ -205,8 +205,9 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
     }
 
 //recuperando o paciente selecionado caso o clique venha da listagem de pacientes
-if(isset($_GET['cod']))
-    $_SESSION['cod_paciente_selecionado'] = base64_decode($_GET['cod']);
+if(isset($_GET['cod_consulta']))
+    //$_SESSION['cod_paciente_selecionado'] = base64_decode($_GET['cod']);
+    $_SESSION['cod_consulta_selecionada'] = base64_decode($_GET['cod_consulta']);
     
 $sqlstring_atividades_fisicas = "select * from tb_atividade_fisica where cod_paciente = " . $_SESSION['cod_paciente_selecionado'];
 $info_atividades_fisicas = $db->sql_query($sqlstring_atividades_fisicas);
@@ -219,9 +220,10 @@ $dias_semana_4_ = explode(";",$dados_atividades_fisicas['dias_semana_4']);
 $dias_semana_5_ = explode(";",$dados_atividades_fisicas['dias_semana_5']);
 
 // recuperando informações para preencher o formulário em caso de alteração anamnese paciente - histórico paciente
-$sqlstring_historico_paciente  = "select tb_historico_paciente.*, tb_paciente.nome_paciente from tb_historico_paciente ";
+$sqlstring_historico_paciente  = "select tb_historico_paciente.*, tb_paciente.* from tb_historico_paciente ";
 $sqlstring_historico_paciente .= "inner join tb_paciente on tb_paciente.cod_paciente = tb_historico_paciente.cod_paciente ";
 $sqlstring_historico_paciente .= "where tb_historico_paciente.cod_paciente = " . $_SESSION['cod_paciente_selecionado'];
+$sqlstring_historico_paciente .= " and tb_historico_paciente.cod_consulta = " . $_SESSION['cod_consulta_selecionada'];
 $info_historico_paciente = $db->sql_query($sqlstring_historico_paciente);
 $dados_historico_paciente = mysql_fetch_array($info_historico_paciente);
 
@@ -233,7 +235,7 @@ $dados_historico_paciente = mysql_fetch_array($info_historico_paciente);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>NUTRIS - Plataforma Nutricional</title>
+    <title>Nutris - Plataforma Nutricional</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -249,7 +251,11 @@ $dados_historico_paciente = mysql_fetch_array($info_historico_paciente);
   <script src="js/funcoes.js"></script>
 <body class="margin_00">
 
-<?php include "includes/menu_nutricionista.php" ?>     
+<?php 
+    include "includes/menu_nutricionista.php";
+    include "includes/cabecalho_paciente_anamnese.php";
+        
+?>     
 
 <!-- inicio container fluid -->
 <div class="container-fluid">
@@ -263,12 +269,10 @@ $dados_historico_paciente = mysql_fetch_array($info_historico_paciente);
           <div class="panel panel-default margin_top_20 sem_borda padding_top_25">
             <div class="panel-body borda_verde_escuro col-md-12" style="border:0px solid #eee; border-left:0px solid #0A4438;">                 
                     <span class="glyphicon glyphicon-heart-empty fonte_verde_claro"></span>
-                    <span class=" fonte_verde_claro fonte_muito_grande negrito">PACIENTE ANAMNESE</span>: 
-                    <span class="fonte_verde_claro fonte_muito_grande"><?php print $dados_historico_paciente['nome_paciente'] ?></span>
+                    <span class=" fonte_verde_claro fonte_muito_grande negrito">CONSULTA ANAMNESE</span>: 
+                    <span class="fonte_verde_claro fonte_muito_grande"><?php print date('d/m/Y', strtotime($dados_historico_paciente['data_historico_paciente'])) ?></span>
                     <br/>
-                    <span class="fonte_pequena">
-                        <a href="01_1_alteracao_paciente_dados_pessoais.php">Dados Pessoais</a>
-                        <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
+                    <span class="fonte_pequena">                        
                         <span class="fonte_verde_claro">Anamnese</span>
                         <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
                         <a href="01_1_cadastro_paciente_avaliacao.php">Avaliação Nutricional</a>

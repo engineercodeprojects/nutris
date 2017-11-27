@@ -40,8 +40,8 @@ else
             <p><?php print $mensagem ?></p>
       
       <div class="modal-footer">
-        <button type="button" class="btn btn-default fonte_branca" onclick="location.href='<?php print $btn_esquerda_destino ?>'"><?php print $btn_esquerda ?></button>
-        <button type="button" class="btn btn-primary fonte_branca" onclick="location.href='<?php print $btn_direita_destino ?>'"><?php print $btn_direita ?></button>
+        <button type="button" class="btn  btn_verde_claro fonte_branca" onclick="location.href='<?php print $btn_esquerda_destino ?>'"><?php print $btn_esquerda ?></button>
+        <button type="button" class="btn btn_verde_claro fonte_branca" onclick="location.href='<?php print $btn_direita_destino ?>'"><?php print $btn_direita ?></button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

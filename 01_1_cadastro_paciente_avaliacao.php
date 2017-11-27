@@ -101,12 +101,14 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
 }
 
 //recuperando o paciente selecionado caso o clique venha da listagem de pacientes
-if(isset($_GET['cod']))
-    $_SESSION['cod_paciente_selecionado'] = base64_decode($_GET['cod']);
+if(isset($_GET['cod_consulta']))
+    //$_SESSION['cod_paciente_selecionado'] = base64_decode($_GET['cod']);
+    $_SESSION['cod_consulta_selecionada'] = base64_decode($_GET['cod_consulta']);
     
-$sqlstring_habitos_alimentares  = "select tb_habito_alimentar.*, tb_paciente.nome_paciente from tb_habito_alimentar ";
+$sqlstring_habitos_alimentares  = "select tb_habito_alimentar.*, tb_paciente.* from tb_habito_alimentar ";
 $sqlstring_habitos_alimentares .= "inner join tb_paciente on tb_paciente.cod_paciente = tb_habito_alimentar.cod_paciente ";
 $sqlstring_habitos_alimentares .= "where tb_habito_alimentar.cod_paciente = " . $_SESSION['cod_paciente_selecionado'];
+$sqlstring_habitos_alimentares .= " and tb_habito_alimentar.cod_consulta = " . $_SESSION['cod_consulta_selecionada'];
 $info_habitos_alimentares = $db->sql_query($sqlstring_habitos_alimentares);
 $dados_habitos_alimentares = mysql_fetch_array($info_habitos_alimentares);
 
@@ -117,7 +119,7 @@ $dados_habitos_alimentares = mysql_fetch_array($info_habitos_alimentares);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>NUTRIS - Plataforma Nutricional</title>
+    <title>Nutris - Plataforma Nutricional</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -133,10 +135,13 @@ $dados_habitos_alimentares = mysql_fetch_array($info_habitos_alimentares);
   <script src="js/funcoes.js"></script>
 <body class="margin_00">
 
-<?php include "includes/menu_nutricionista.php" ?>     
+<?php 
+    include "includes/menu_nutricionista.php";
+    include "includes/cabecalho_paciente_avaliacao.php";
+?>     
 
 <!-- inicio container fluid -->
-<div class="container-fluid">
+<div class="container-fluid" onclick="recua_menu(10)">
     
    <!-- inicio da div que envolve todo conteúdo da página centralizando o conteudo - 1 coluna a esquerda e 1 coluna a esquerda -->
    <div class="col-md-offset-1 col-md-10">
@@ -147,12 +152,10 @@ $dados_habitos_alimentares = mysql_fetch_array($info_habitos_alimentares);
           <div class="panel panel-default margin_top_20 sem_borda padding_top_25">
             <div class="panel-body borda_verde_escuro col-md-12" style="border:0px solid #eee; border-left:0px solid #0A4438;">                 
                     <span class="glyphicon glyphicon-th-list fonte_verde_claro"></span>
-                    <span class=" fonte_verde_claro fonte_muito_grande negrito">PACIENTE AVALIAÇÃO NUTRICIONAL</span>:
-                    <span class=" fonte_verde_claro fonte_muito_grande"><?php print $dados_habitos_alimentares['nome_paciente'] ?></span>
+                    <span class=" fonte_verde_claro fonte_muito_grande negrito">AVALIAÇÃO NUTRICIONAL</span>:
+                    <span class=" fonte_verde_claro fonte_muito_grande"><?php print date('d/m/Y', strtotime($dados_habitos_alimentares['data_habito_alimentar'])) ?></span>
                     <br/>
-                    <span class="fonte_pequena">
-                        <a href="01_1_alteracao_paciente_dados_pessoais.php">Dados Pessoais</a>
-                        <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
+                    <span class="fonte_pequena">                        
                         <a href="01_1_cadastro_paciente_anamnese.php">Anamnese</a>
                         <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
                         <span class="fonte_verde_claro">Avaliação Nutricional</span>

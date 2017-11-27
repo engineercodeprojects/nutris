@@ -162,7 +162,13 @@ $linhas_refeicoes = $db->sql_linhas($info_refeicoes);
 
                     <tr>
                     <td><input type=checkbox name="excluir[]" value="<?php print $dados_refeicoes['cod_refeicao'] ?>"></input></td>                    
-                    <td class="text-uppercase"><?php print $dados_refeicoes['tipo_refeicao'] . " - " . $dados_refeicoes['refeicao'] ?></td>                    
+                
+                    <td class="text-uppercase">
+                        <a href="01_2_alteracao_refeicao.php?cod=<?php print  base64_encode($dados_refeicoes['cod_refeicao']) ?>" alt="Editar Refeição" title="Editar Refeição">
+                        <?php print $dados_refeicoes['tipo_refeicao'] . " - " . $dados_refeicoes['refeicao'] ?>
+                        </a>
+                    </td>                    
+                
                     <td class="text-lowercase fonte_pequena">
                         <?php 
                         $caloria_total = 0;
@@ -170,9 +176,26 @@ $linhas_refeicoes = $db->sql_linhas($info_refeicoes);
                         while($dados_alimentos_refeicao=mysql_fetch_array($info_alimentos_refeicao))
                         { 
                             if($contador_alimentos_refeicoes == $linhas_alimentos_refeicoes)
+                            {
+                                ?>
+                                <a href="01_2_alteracao_refeicao.php?cod=<?php print  base64_encode($dados_refeicoes['cod_refeicao']) ?>" alt="Editar Refeição" title="Editar Refeição">
+                                <?php
                                 print $dados_alimentos_refeicao['qtde_porcoes'] . " - " . $dados_alimentos_refeicao['alimento'];                        
+                                ?>
+                                </a>
+                                <?php
+                            }
                             else
-                                print $dados_alimentos_refeicao['qtde_porcoes'] . " - " .  $dados_alimentos_refeicao['alimento'] . "<span class='fonte_grande'>,</span> &nbsp; ";                        
+                            {
+                                ?>                                
+                                <a href="01_2_alteracao_refeicao.php?cod=<?php print  base64_encode($dados_refeicoes['cod_refeicao']) ?>" alt="Editar Refeição" title="Editar Refeição">
+                                <?php
+                                print $dados_alimentos_refeicao['qtde_porcoes'] . " - " .  $dados_alimentos_refeicao['alimento'] . "<span class='fonte_grande'>,</span> &nbsp; ";       
+                                ?>
+                                </a>
+                                <?php
+                            }
+                             
                             
                             $caloria_total = $caloria_total + ($dados_alimentos_refeicao['caloria']*$dados_alimentos_refeicao['qtde_porcoes']);
                                 
@@ -182,7 +205,12 @@ $linhas_refeicoes = $db->sql_linhas($info_refeicoes);
                         
                     </td>
                                        
-                    <td class="direito"><?php print $caloria_total; ?></td>                    
+                    <td class="direito">
+                        <a href="01_2_alteracao_refeicao.php?cod=<?php print  base64_encode($dados_refeicoes['cod_refeicao']) ?>" alt="Editar Refeição" title="Editar Refeição">
+                        <?php print $caloria_total; ?> kcal
+                        </a>
+                    </td>   
+                
                     <td class="centralizado">
                         <a href="01_2_alteracao_refeicao.php?cod=<?php print  base64_encode($dados_refeicoes['cod_refeicao']) ?>" alt="Editar Refeição" title="Editar Refeição">
                         <span class="glyphicon glyphicon-edit fonte_pequena"></span>

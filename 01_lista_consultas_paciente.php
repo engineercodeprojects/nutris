@@ -18,18 +18,21 @@ ini_set('default_charset','UTF-8');
 $busca = $_GET['busca'];
 if(isset($busca))
 {
-    $sqlstring_pacientes  = "Select tb_paciente.cod_paciente, tb_paciente.nome_paciente, tb_objetivo_paciente.peso_paciente, tb_objetivo_paciente.altura_paciente from tb_paciente ";
-    $sqlstring_pacientes .= "inner join tb_objetivo_paciente on tb_paciente.cod_paciente = tb_objetivo_paciente.cod_paciente "; 
-    $sqlstring_pacientes .= "where nome_paciente like '%" . $busca . "%'";       
+    $sqlstring_paciente_selecionado  = "Select tb_paciente.*, tb_objetivo_paciente.peso_paciente, tb_objetivo_paciente.altura_paciente from tb_paciente ";
+    $sqlstring_paciente_selecionado .= "inner join tb_objetivo_paciente on tb_paciente.cod_paciente = tb_objetivo_paciente.cod_paciente "; 
+    $sqlstring_paciente_selecionado .= "where nome_paciente like '%" . $busca . "%'";       
 }
 else    
 {
-    $sqlstring_pacientes  = "Select tb_paciente.cod_paciente, tb_paciente.nome_paciente, tb_objetivo_paciente.peso_paciente, tb_objetivo_paciente.altura_paciente from tb_paciente ";
-    $sqlstring_pacientes .= "inner join tb_objetivo_paciente on tb_paciente.cod_paciente = tb_objetivo_paciente.cod_paciente";
+    
 }
 
-$info_pacientes = $db->sql_query($sqlstring_pacientes);
-$linhas_pacientes = $db->sql_linhas($info_pacientes);
+$sqlstring_paciente_selecionado  = "Select tb_paciente.*, tb_objetivo_paciente.peso_paciente, tb_objetivo_paciente.altura_paciente from tb_paciente ";
+$sqlstring_paciente_selecionado .= "inner join tb_objetivo_paciente on tb_paciente.cod_paciente = tb_objetivo_paciente.cod_paciente";
+
+$info_paciente_selecionado = $db->sql_query($sqlstring_paciente_selecionado);
+$dados_paciente_selecionado = mysql_fetch_array($info_paciente_selecionado);
+$linhas_paciente_selecionado = $db->sql_linhas($info_paciente_selecionado);
 
 ?>    
 <html>    
@@ -56,35 +59,42 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
 
 <?php 
     include "includes/menu_nutricionista.php";
+    include "includes/cabecalho_paciente.php";
 ?>     
     
 
     
 <div class="container-fluid" onclick="recua_menu(10)">
     
-    <!-- inicio - titulo da lista de pacientes -->  
-    <div class="row">
-        <div class="well fundo_transparente fonte_verde_claro sem_borda col-md-offset-1 col-md-10 padding_top_50">
-            <h3><span class="glyphicon glyphicon-user fonte_muito_pequena"></span> PACIENTES</h3>            
-        </div>
-    </div>
-    <!-- fim - titulo da lista de pacientes -->
     
-    
-    
-    <!-- inicio - painel dados pessoais -->
+    <!-- inicio - painel consultas -->
     <div class="panel panel-default sem_borda col-md-offset-1 col-md-10">
       <div class="panel-body" style="border:0px solid #fff">
+          
+          
+         <!-- inicio - titulo do formulário -->  
+        <div class="row">
+            <!-- inicio - painel dados pessoais -->
+              <div class="panel panel-default margin_top_20 sem_borda padding_top_25">
+                <div class="panel-body borda_verde_escuro col-md-12" style="border:0px solid #fff; border-left:0px solid #0A4438;">                 
+                        <span class="glyphicon glyphicon-list-alt fonte_verde_claro"></span>
+                        <span class=" fonte_verde_claro fonte_muito_grande negrito">CONSULTAS</span>                    
+                        <br/><br/>
+                </div>
+               </div>
+        </div>
+        <!-- fim - titulo da lista de consultas -->
+          
 
-        <!--  inicio - busca simples -->
+        <!--  inicio - consultas -->
         <div class="row">
           <form name="form_pesquisa" id="form_pesquisa" class="padding_bottom_20 form-inline" style="white-space: nowrap">          
-              <input type="text" name="busca" id="busca" class="form-control" style="width:90%;" placeholder="NOME DO PACIENTE">
-              <button type="button" class="btn btn_verde_claro fonte_branca largura_05" alt="Exibe os pacientes com nomes contendo o valor digitado na busca"  title="Exibe os pacientes com nomes contendo o valor digitado na busca" onclick="nova_pesquisa('01_lista_pacientes.php?busca=')"> 
+              <input type="text" name="busca" id="busca" class="form-control" style="width:90%;" placeholder="DATA DA CONSULTA">
+              <button type="button" class="btn btn_verde_claro fonte_branca largura_05" alt="Exibe as consultas com datas iguais ou superior a data digitada na busca"  title="Exibe as consultas com datas iguais ou superior a data digitada na busca" onclick="nova_pesquisa('01_lista_consultas_paciente.php?busca=')"> 
                   <span class="glyphicon glyphicon-search"></span> 
               </button>
               
-              <button type="button" class="btn btn_verde_claro fonte_branca largura_05" alt="Exibe todos os pacientes cadastrados"  title="Exibe todos os pacientes cadastrados"  onclick="nova_pesquisa('01_lista_pacientes.php')"> 
+              <button type="button" class="btn btn_verde_claro fonte_branca largura_05" alt="Exibe todas as consultas cadastradas"  title="Exibe todas as consultas cadastradas"  onclick="nova_pesquisa('01_lista_consultas_paciente.php')"> 
                   <span class="glyphicon glyphicon-th-list"></span> 
               </button>
           </form>  
@@ -93,30 +103,35 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
           
           
           
-        <!--  inicio - cabecalho da tabela - excluir/adicionar/qtde pacientes -->
+        <!--  inicio - cabecalho da tabela - excluir/adicionar/qtde consultas -->
         <div class="row  padding_bottom_20 padding_left_00">
             <div class="col-md-2">          
                 <span class="glyphicon glyphicon-trash fonte_verde_claro"></span> 
-                <a href="#" onClick="document.getElementById('formul').submit();"> Excluir Selecionados </a>
+                <a href="#" onClick="document.getElementById('formul').submit();"> Excluir Selecionadas </a>
             </div>
 
             <div class="col-md-2">          
-                <a href="01_1_cadastro_paciente_dados_pessoais.php" alt="Cadastro de Paciente" title="Cadastro de Paciente">
-                <span class="glyphicon glyphicon-plus-sign fonte_verde_claro"></span> Novo Paciente
+                <a href="01_1_cadastro_consulta.php" alt="Cadastro de Consulta" title="Cadastro de Consulta">
+                <span class="glyphicon glyphicon-plus-sign fonte_verde_claro"></span> Nova Consulta
                 </a>
             </div>
 
             <div class="col-md-8 direito">          
                 <span class="glyphicon glyphicon-user verde_escuro fonte_verde_claro"></span> 
                 <?php 
-                    if($linhas_pacientes > 1)
-                        print $linhas_pacientes . " pacientes";
+                $sqlstring_consultas_paciente  = "Select * from tb_consulta ";                
+                $sqlstring_consultas_paciente .= "where cod_paciente = " . $_SESSION['cod_paciente_selecionado'];
+                $info_consultas_paciente = $db->sql_query($sqlstring_consultas_paciente);
+                $linhas_consultas_paciente = $db->sql_linhas($info_consultas_paciente);
+                
+                    if($linhas_consultas_paciente > 1)
+                        print $linhas_consultas_paciente . " consultas";
                     else
-                        print $linhas_pacientes . " paciente";                
+                        print $linhas_consultas_paciente . " consulta";                
                 ?> 
             </div>
         </div>
-        <!--  fim - cabecalho da tabela - excluir/adicionar/qtde pacientes -->
+        <!--  fim - cabecalho da tabela - excluir/adicionar/qtde consultas -->
           
           
           
@@ -126,9 +141,9 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
             <table class="table table-responsive table-hover">
                 <tr class="fonte_branca">
                 <td class="largura_05 fundo_verde_claro"><input type=checkbox name="marcar" id="marcar" onclick="marcar_desmarcar_todos()"></td>
-                <td class="largura_45 fundo_verde_claro">Paciente</td>                
+                <td class="largura_10 fundo_verde_claro">Data</td>                
+                <td class="largura_30 fundo_verde_claro esquerdo">Programa</td>
                 <td class="largura_10 fundo_verde_claro direito">Peso</td>
-                <td class="largura_10 fundo_verde_claro direito">Altura</td>
                 <td class="largura_10 fundo_verde_claro direito">IMC</td>                
                 <td class="largura_05  fundo_verde_claro centralizado"><span class="glyphicon glyphicon-heart-empty fonte_pequena"  alt="Anamnese" title="Anamnese"></span></td>
                 <td class="largura_05  fundo_verde_claro centralizado"><span class="glyphicon glyphicon-th-list fonte_pequena"  alt="Avaliação Nutricional" title="Avaliação Nutricional"></span></td>
@@ -136,52 +151,52 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
                 </tr>
                                 
                 <?php
-                if($linhas_pacientes > 0)
+                if($linhas_consultas_paciente > 0)
                 {
-                    while($dados_pacientes=mysql_fetch_array($info_pacientes))
+                    while($dados_consultas_paciente=mysql_fetch_array($info_consultas_paciente))
                     {
                     ?>
 
                     <tr>
-                    <td><input type=checkbox name="excluir[]" value="<?php print $dados_pacientes['cod_paciente'] ?>"></input></td>
+                    <td><input type=checkbox name="excluir[]" value="<?php print $dados_consultas_paciente['cod_consulta'] ?>"></input></td>
                     <td class="text-uppercase">
-                        <a href="01_1_detalhes_paciente.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Detalhes do Paciente" title="Detalhes do Paciente">
-                        <?php print $dados_pacientes['nome_paciente'] ?>
+                        <a href="01_1_detalhes_paciente.php?cod=<?php print  base64_encode($dados_consultas_paciente['cod_consulta']) ?>" alt="Detalhes da Consulta" title="Detalhes da Consulta">
+                        <?php print date('d/m/Y', strtotime($dados_consultas_paciente['data_consulta']))  ?>
                         </a>
                     </td>
                 
-                    <td class="direito">
-                        <a href="01_detalhes_paciente.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Detalhes do Paciente" title="Detalhes do Paciente">
-                        <?php print number_format($dados_pacientes['peso_paciente'],2) ?>
+                    <td class="esquerdo">
+                        <a href="01_1_detalhes_paciente.php?cod=<?php print  base64_encode($dados_consultas_paciente['cod_consulta']) ?>" alt="Detalhes da Consulta" title="Detalhes da Consulta">
+                        <?php print date('d/m/Y', strtotime($dados_consultas_paciente['data_consulta']))  ?>
                         </a>        
                     </td>
                 
                     <td class="direito">
                         <a href="01_detalhes_paciente.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Detalhes do Paciente" title="Detalhes do Paciente">
-                        <?php print $dados_pacientes['altura_paciente'] ?>
+                        100
                         </a>
                     </td>
                 
                     <td class="direito">
                         <a href="01_detalhes_paciente.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Detalhes do Paciente" title="Detalhes do Paciente">
-                        <script> exibir_imc(<?php print $dados_pacientes['peso'] ?>,<?php print $dados_pacientes['altura'] ?>); </script>
+                        200
                         </a>
                     </td>
                     
                     <td class="centralizado">
-                        <a href="01_1_cadastro_paciente_anamnese.php?cod=<?php print base64_encode($dados_pacientes['cod_paciente']) ?>;&alt=<?php print base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Anamnese" title="Anamnese">
+                        <a href="01_1_cadastro_paciente_anamnese.php?cod_consulta=<?php print base64_encode($dados_consultas_paciente['cod_consulta']) ?>" alt="Anamnese" title="Anamnese">
                         <span class="glyphicon glyphicon-heart-empty fonte_pequena"></span>
                         </a>
                     </td>
                 
                     <td class="centralizado">
-                        <a href="01_1_cadastro_paciente_avaliacao.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Avaliação Nutricional" title="Avaliação Nutricional">
+                        <a href="01_1_cadastro_paciente_avaliacao.php?cod_consulta=<?php print  base64_encode($dados_consultas_paciente['cod_consulta']) ?>" alt="Avaliação Nutricional" title="Avaliação Nutricional">
                         <span class="glyphicon glyphicon-th-list fonte_pequena"></span>
                         </a>
                     </td>
                 
                     <td class="centralizado">
-                        <a href="01_1_cadastro_paciente_antropometria.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Antropometria" title="Antropometria">
+                        <a href="01_1_cadastro_paciente_antropometria.php?cod_consulta=<?php print  base64_encode($dados_consultas_paciente['cod_consulta']) ?>" alt="Antropometria" title="Antropometria">
                         <span class="glyphicon glyphicon-screenshot fonte_pequena"></span>
                         </a>
                     </td>
