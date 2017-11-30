@@ -76,10 +76,10 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         $numero_botoes = 2;
         $titulo = "Paciente - Dados Pessoais";
         $mensagem = "Os dados pessoais de <strong>" . $nome_paciente . "</strong> foram cadastrados com sucesso!";
-        $btn_esquerda = "Anamnese";
-        $btn_esquerda_destino = "01_1_cadastro_paciente_anamnese.php";
-        $btn_direita = "Lista de Pacientes";
-        $btn_direita_destino = "01_lista_pacientes.php";
+        $btn_esquerda = "Lista Geral de Pacientes";
+        $btn_esquerda_destino = "01_lista_pacientes.php";
+        $btn_direita = "Informações do Paciente";
+        $btn_direita_destino = "01_1_detalhes_paciente.php";
         $btn_x = "01_lista_pacientes.php";
     }
 
@@ -157,14 +157,14 @@ $dados_paciente_selecionado = mysql_fetch_array($info_paciente_selecionado);
               <!-- inicio nome paciente -->
               <div class="form-group col-md-8">
                 <label for="nomecompleto">Nome Completo  <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
-                <input type="text" class="form-control" name="nome_paciente" id="nome_paciente" value="<?php print $dados_paciente_selecionado['nome_paciente'] ?>" required maxlength="100">
+                <input type="text" class="form-control text-uppercase" name="nome_paciente" id="nome_paciente" value="<?php print $dados_paciente_selecionado['nome_paciente'] ?>" required maxlength="100">
               </div>
               <!-- fim nome paciente -->
 
               <!-- inicio profissao -->    
               <div class="form-group col-md-4">
                 <label for="profissao">Profissão  <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
-                <input type="text" class="form-control" name="profissao" id="profissao" value="<?php print $dados_paciente_selecionado['profissao'] ?>" required maxlength="40">
+                <input type="text" class="form-control text-uppercase" name="profissao" id="profissao" value="<?php print $dados_paciente_selecionado['profissao'] ?>" required maxlength="40">
               </div>
               <!-- inicio profissao -->
           <!-- fim - linha 1 -->
@@ -175,7 +175,7 @@ $dados_paciente_selecionado = mysql_fetch_array($info_paciente_selecionado);
               <!-- inicio endereco -->    
               <div class="form-group col-md-5">
                 <label for="endereco">Endereço  <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
-                <input type="text" class="form-control" name="endereco" id="endereco" value="<?php print $dados_paciente_selecionado['endereco'] ?>" required maxlength="60">
+                <input type="text" class="form-control text-uppercase" name="endereco" id="endereco" value="<?php print $dados_paciente_selecionado['endereco'] ?>" required maxlength="60">
               </div>
               <!-- fim endereco -->
 
@@ -191,7 +191,7 @@ $dados_paciente_selecionado = mysql_fetch_array($info_paciente_selecionado);
               <!-- inicio complemento -->    
               <div class="form-group col-md-2">
                 <label for="complemento">Complemento</label>
-                <input type="text" class="form-control" name="complemento" id="complemento" value="<?php print $dados_paciente_selecionado['complemento'] ?>" maxlength="25">
+                <input type="text" class="form-control text-uppercase" name="complemento" id="complemento" value="<?php print $dados_paciente_selecionado['complemento'] ?>" maxlength="25">
               </div>
               <!-- fim complemento -->
 
@@ -199,7 +199,7 @@ $dados_paciente_selecionado = mysql_fetch_array($info_paciente_selecionado);
               <!-- inicio bairro -->    
               <div class="form-group col-md-3">
                 <label for="bairro">Bairro   <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
-                <input type="text" class="form-control" name="bairro" id="bairro" value="<?php print $dados_paciente_selecionado['bairro'] ?>" required maxlength="30">
+                <input type="text" class="form-control text-uppercase" name="bairro" id="bairro" value="<?php print $dados_paciente_selecionado['bairro'] ?>" required maxlength="30">
               </div>
               <!-- fim bairro -->
           <!-- fim - linha 2 --> 
@@ -222,7 +222,7 @@ $dados_paciente_selecionado = mysql_fetch_array($info_paciente_selecionado);
               <!-- inicio cidade -->    
               <div class="form-group col-md-4">
                 <label for="cidade">Cidade   <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
-                <input type="text" class="form-control" name="cidade" id="cidade" value="<?php print $dados_paciente_selecionado['cidade'] ?>" required maxlength="40">
+                <input type="text" class="form-control text-uppercase" name="cidade" id="cidade" value="<?php print $dados_paciente_selecionado['cidade'] ?>" required maxlength="40">
               </div>
               <!-- fim cidade -->
 
@@ -257,7 +257,7 @@ $dados_paciente_selecionado = mysql_fetch_array($info_paciente_selecionado);
               <!-- inicio email -->    
               <div class="form-group col-md-6">
                 <label for="email">e-mail</label>
-                <input type="text" class="form-control" name="email" id="email" value="<?php print $dados_paciente_selecionado['email'] ?>" maxlength="100">
+                <input type="text" class="form-control text-lowercase" name="email" id="email" value="<?php print $dados_paciente_selecionado['email'] ?>" maxlength="100">
               </div>
               <!-- fim email -->
 
@@ -273,7 +273,7 @@ $dados_paciente_selecionado = mysql_fetch_array($info_paciente_selecionado);
               <!-- inicio sexo -->
               <div class="form-group col-md-3">
                 <label for="sexo">Sexo  <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
-                <select class="form-control" name="sexo" id="sexo">
+                <select class="form-control text-uppercase" name="sexo" id="sexo">
                     <?php
                     if($dados_paciente_selecionado['sexo'] == "F")
                     {
@@ -300,7 +300,7 @@ $dados_paciente_selecionado = mysql_fetch_array($info_paciente_selecionado);
               <!-- inicio outros -->    
               <div class="form-group col-md-12">
                 <label for="outros">Outros</label>
-                <textarea class="form-control" rows="3" name="outros" id="paciente"><?php print $dados_paciente_selecionado['outros'] ?></textarea>
+                <textarea class="form-control text-uppercase" rows="3" name="outros" id="paciente"><?php print $dados_paciente_selecionado['outros'] ?></textarea>
               </div>
               <!-- fim outros -->
           <!-- fim - linha 5 -->

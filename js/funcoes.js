@@ -921,10 +921,10 @@ function calculo_peso_ideal()
 {
     //recuperando informacoes        
     sxo = document.getElementById('sexo').value;
-    gordura_absoluta = parseFloat(document.getElementById('gordura_absoluta').value);
+    gordura_corporal_quilo = parseFloat(document.getElementById('gordura_corporal_quilo').value);
 
     //calculando a massa
-    massa = peso - gordura_absoluta;
+    massa = peso - gordura_corporal_quilo;
 
     if(sxo == 'M')
     {
@@ -1150,6 +1150,7 @@ function calcular_gordura()
     abd = parseFloat(document.getElementById('dobras_abdominal').value);
     sil = parseFloat(document.getElementById('dobras_suprailiaca').value);
     cox = parseFloat(document.getElementById('dobras_coxa').value);
+    sub = parseFloat(document.getElementById('dobras_subescapular').value);
         
     peso = parseFloat(document.getElementById('peso').value);
     
@@ -1219,56 +1220,62 @@ function calcular_gordura()
     // feminino
         if(sxo == 'F')
         {
+            //calculando densidade
+            dens = 1.1665-0.07063*(Math.log(sub + sil + cox)/Math.log(10));
+            
+            
             //gordura corporal porcentagem
-            porcentagem_gordura = 0.29669*(tri + abd + sil + cox) - 0.00043*(tri + abd + sil + cox)*(tri + abd + sil + cox) + 0.02963*ida+1.4072;
-            document.getElementById('gordura_corporal_porcentagem').value = ''; 
+            porcentagem_gordura = (5.05 / dens - 4.59)*100;
+            document.getElementById('gordura_corporal_porcentagem').value = porcentagem_gordura.toFixed(2); 
 
             //goradura corporal porcentagem ideal
-            document.getElementById('gordura_corporal_porcentagem_ideal').value = '';
-
+            document.getElementById('gordura_corporal_porcentagem_ideal').value = 'ENTRE 20.00% e 25.00%';
 
             //gordura corporal quilos ou gordura absoluta
             gordura_corporal_quilo = (peso*porcentagem_gordura)/100;
-            document.getElementById('gordura_corporal_quilo').value = ''; 
+            document.getElementById('gordura_corporal_quilo').value = gordura_corporal_quilo.toFixed(2); 
 
             //gordura corporal quilos ideal ou gordura absoluta ideal
-            document.getElementById('gordura_corporal_quilo_ideal').value = '';
+            document.getElementById('gordura_corporal_quilo_ideal').value = 'ENTRE ' + (peso * 0.2).toFixed(2)  + " e " + (peso * 0.25).toFixed(2);
 
 
 
             //massa magra
             massa_magra = peso-gordura_corporal_quilo;
-            document.getElementById('massa_magra').value = '';
+            document.getElementById('massa_magra').value = massa_magra.toFixed(2);
 
             //massa magra ideal
-            document.getElementById('massa_magra_ideal').value = '';
+            document.getElementById('massa_magra_ideal').value = 'ENTRE ' + (peso * 0.75).toFixed(2) + " e " + (peso *0.8).toFixed(2);
         }
         //masculino
         else if(sxo == 'M')
         {
+            //calculando densidade
+            dens = 1.17136-0.06706*(Math.log(tri + sil + abd)/Math.log(10));
+            
+            
             //gordura corporal porcentagem
-            porcentagem_gordura = 0.29288*(tri + abd + sil + cox) - 0.0005*(tri + abd + sil + cox)*(tri + abd + sil + cox) + 0.15845*ida-5.76377;
-            document.getElementById('gordura_corporal_porcentagem').value = ''; 
+            porcentagem_gordura = (4.95 / dens - 4.5)*100;
+            document.getElementById('gordura_corporal_porcentagem').value = porcentagem_gordura.toFixed(2); 
 
             //goradura corporal porcentagem ideal
-            document.getElementById('gordura_corporal_porcentagem_ideal').value = '';
-
+            document.getElementById('gordura_corporal_porcentagem_ideal').value = 'ENTRE 13.00% e 17.00%';
 
             //gordura corporal quilos ou gordura absoluta
             gordura_corporal_quilo = (peso*porcentagem_gordura)/100;
-            document.getElementById('gordura_corporal_quilo').value = ''; 
+            document.getElementById('gordura_corporal_quilo').value = gordura_corporal_quilo.toFixed(2); 
 
             //gordura corporal quilos ideal ou gordura absoluta ideal
-            document.getElementById('gordura_corporal_quilo_ideal').value = '';
+            document.getElementById('gordura_corporal_quilo_ideal').value = 'ENTRE ' + (peso * 0.13).toFixed(2)  + " e " + (peso * 0.17).toFixed(2);
 
 
 
             //massa magra
             massa_magra = peso-gordura_corporal_quilo;
-            document.getElementById('massa_magra').value = '';
+            document.getElementById('massa_magra').value = massa_magra.toFixed(2);
 
             //massa magra ideal
-            document.getElementById('massa_magra_ideal').value = '';
+            document.getElementById('massa_magra_ideal').value = 'ENTRE ' + (peso * 0.85).toFixed(2) + " e " + (peso *0.88).toFixed(2);
         }  
     }
    
@@ -1319,11 +1326,14 @@ function calcular_massa_muscular()
     diametro_femur = parseFloat(document.getElementById('diametro_femur').value);
     diametro_tornozelo = parseFloat(document.getElementById('diametro_tornozelo').value);
     
+    
+    
+    
     if(protocolo_cd == 'protocolo_C')
     {
-    massa_muscular = (altura(0.0553*(perimetro_coxa-3.1416*(dobras_coxa/10))*(perimetro_coxa-3.1416*(dobras_coxa/10)) + 0.0987*perimetro_antebraco * perimetro_antebraco + 0.0331 * (perimetro_perna_medial - 3.1416 * (dobras_perna_medial/10)) * (perimetro_perna_medial - 3.1416 * (dobras_perna_medial/10))) - 2445 )/1000;
+    massa_muscular = (altura*(0.0553*(perimetro_coxa-3.1416*(dobras_coxa/10))*(perimetro_coxa-3.1416*(dobras_coxa/10)) + 0.0987*perimetro_antebraco * perimetro_antebraco + 0.0331 * (perimetro_perna_medial - 3.1416 * (dobras_perna_medial/10)) * (perimetro_perna_medial - 3.1416 * (dobras_perna_medial/10))) - 2445 )/1000;
     
-    document.getElementById('massa_muscular').value = massa_muscular.toFixed(4);    
+    document.getElementById('massa_muscular').value = massa_muscular.toFixed(2);    
     
     document.getElementById('d_massa_muscular').style.display = "inline-block";
     document.getElementById('d_massa_ossea').style.display = "none";
@@ -1331,9 +1341,9 @@ function calcular_massa_muscular()
     else
     {
         
-    massa_ossea = 0.00006 * altura * (Math.pow(diametro_punho + diametro_umero + diametro_femur + diametro_tornozelo),2);
+    massa_ossea = 0.00006 * altura * (diametro_punho + diametro_umero + diametro_femur + diametro_tornozelo) * (diametro_punho + diametro_umero + diametro_femur + diametro_tornozelo);
         
-    document.getElementById('massa_ossea').value = massa_ossea.toFixed(4); 
+    document.getElementById('massa_ossea').value = massa_ossea.toFixed(2); 
         
     document.getElementById('d_massa_muscular').style.display = "none";
     document.getElementById('d_massa_ossea').style.display = "inline-block";
@@ -1501,6 +1511,11 @@ function remover_alimento(codigo,caloria)
 
 
 
-
+//trocando virgula por ponto
+function troca_virgula_ponto(campo)
+{
+    valor_atual = document.getElementById(campo).value;
+    document.getElementById(campo).value = valor_atual.replace(",", ".");
+}
 
 

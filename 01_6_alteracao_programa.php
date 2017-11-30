@@ -16,6 +16,17 @@ ini_set('default_charset','UTF-8');
 //atualizando os dados caso o formulario tenha sido enviado
 if( $_SERVER['REQUEST_METHOD']=='POST')
     {
+    
+    function filter( $dados )
+        {
+            if(isset($dados))
+            {
+            $arr = Array();
+            foreach( $dados AS $dado ) $arr[] = (int)$dado;
+            return $arr;
+            }
+        }
+    
         //recuperando as informações do formulário
         $programa = $_POST['programa'];
         $objetivo_programa = $_POST['objetivo_programa']; 
@@ -23,6 +34,20 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         $descricao_programa = $_POST['descricao_programa'];
         $outras_informacoes_programa = $_POST['outras_informacoes_programa'];
         
+        //recuperando as reeducações associadas ao programa
+        $arr = filter( $_POST['reeducacoes'] );
+    
+        if(sizeof($arr) > 0)
+        {
+            $contador = 0;
+            $tamanho = sizeof($arr);
+            
+            while($contador < $tamanho)
+            {
+                $reeducacoes = $reeducacoes . ";" . $arr[$contador];                
+                $contador++;
+            }
+        }
 
         // atualiza na tb_alimento os dados do alimento
         $sqlstring_atualizar_programas  = "update tb_programa set ";
@@ -30,6 +55,7 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         $sqlstring_atualizar_programas .= "cod_objetivo_programa = '" . $objetivo_programa . "', ";
         $sqlstring_atualizar_programas .= "cod_tempo_programa = '" . $duracao_programa . "', ";
         $sqlstring_atualizar_programas .= "descricao_programa = '" . $descricao_programa . "', ";
+        $sqlstring_atualizar_programas .= "reeducacoes_programa = '" . $reeducacoes . "', ";
         $sqlstring_atualizar_programas .= "outras_informacoes_programa = '" . $outras_informacoes_programa . "' ";        
         $sqlstring_atualizar_programas .= "where cod_programa = " . $_SESSION['cod_programa_selecionado'];
 
@@ -59,7 +85,6 @@ $sqlstring_programa_selecionado .= "inner join tb_tempo on tb_programa.cod_tempo
 $sqlstring_programa_selecionado .= "where cod_programa = " . $_SESSION['cod_programa_selecionado'];   
 $info_programa_selecionado = $db->sql_query($sqlstring_programa_selecionado);
 $dados_programa_selecionado = mysql_fetch_array($info_programa_selecionado);
-
 
 ?>    
 <html>    
@@ -98,7 +123,7 @@ $dados_programa_selecionado = mysql_fetch_array($info_programa_selecionado);
             <div class="panel-body borda_verde_escuro col-md-12" style="border:0px solid #fff; border-left:0px solid #0A4438;">                 
                     <span class="glyphicon glyphicon-apple fonte_verde_claro"></span>
                     <span class=" fonte_verde_claro fonte_muito_grande negrito">PROGRAMAS</span>:
-                    <span class=" fonte_verde_claro fonte_muito_grande"><?php print $dados_programa_selecionado['programa'] ?></span>
+                    <span class=" fonte_verde_claro fonte_muito_grande text-uppercase"><?php print $dados_programa_selecionado['programa'] ?></span>
                     <br/>
                     <span class="fonte_pequena">
                         <a href="01_lista_programas.php"><span class="fonte_verde_claro">Programas</span></a>
@@ -113,7 +138,7 @@ $dados_programa_selecionado = mysql_fetch_array($info_programa_selecionado);
     <!-- fim - titulo do formulário -->
        
        
-    <form method="post" action="">
+    <form name="formul" method="post" action="">
     <!-- inicio - cadastro programa -->  
     <div class="row">
         
@@ -183,6 +208,61 @@ $dados_programa_selecionado = mysql_fetch_array($info_programa_selecionado);
               <!-- fim descricao programa --> 
                 
               
+               
+            <!-- inicio descricao programa -->
+              <div class="form-group col-md-12">
+                <label for="reeducacoes_programa">Selecione as reeducações alimentares para este programa  <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
+                
+              <?php 
+                $reeducacoes = explode(';',$dados_programa_selecionado['reeducacoes_programa']);
+                $tamanho_reeducacoes = sizeof($reeducacoes);
+    
+    
+                $sqlstring_reeducacoes  = "select * from tb_reeducacao where cod_status = 1";                
+                $info_reeducacoes = $db->sql_query($sqlstring_reeducacoes);
+               ?>
+                
+                <table class="table table-responsive table-striped">
+                 
+                <tr>
+                <td class="largura_05 fundo_verde_claro"><input type=checkbox name="marcar" id="marcar" onclick="marcar_desmarcar_todos()"></td>
+                <td class="largura_95 fundo_verde_claro fonte_branca">Reeducação</td>
+                </tr>
+                    
+                <?php
+                while($dados_reeducacoes = mysql_fetch_array($info_reeducacoes))
+                {
+                    $checkado = 0;
+                    print "<tr>";
+                    
+                    $contador = 0;                       
+                    while($contador < $tamanho_reeducacoes)
+                    {
+                        if($reeducacoes[$contador] == $dados_reeducacoes['cod_reeducacao'])                        
+                        {
+                        print "<td><input type=checkbox name='reeducacoes[]' value='" . $dados_reeducacoes['cod_reeducacao'] . "' checked></input></td>";  
+                        print "<td class='text-uppercase'>" . $dados_reeducacoes['reeducacao'] . "</td>";       
+                        $checkado = 1;
+                        }                            
+                        $contador++;
+                    }
+                    
+                    if($checkado == 0)
+                    {
+                    print "<td><input type=checkbox name='reeducacoes[]' value='" . $dados_reeducacoes['cod_reeducacao'] . "'></input></td>";
+                    print "<td class='text-uppercase'>" . $dados_reeducacoes['reeducacao'] . "</td>";           
+                    }
+                    
+                    print "</tr>";                
+                }
+                
+              ?>
+                    
+                </table>
+                  
+              </div>
+              <!-- fim descricao programa -->
+                
                 
             
               <!-- inicio descricao programa -->

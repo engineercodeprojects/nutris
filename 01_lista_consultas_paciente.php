@@ -20,7 +20,7 @@ if(isset($busca))
 {
     $sqlstring_paciente_selecionado  = "Select tb_paciente.*, tb_objetivo_paciente.peso_paciente, tb_objetivo_paciente.altura_paciente from tb_paciente ";
     $sqlstring_paciente_selecionado .= "inner join tb_objetivo_paciente on tb_paciente.cod_paciente = tb_objetivo_paciente.cod_paciente "; 
-    $sqlstring_paciente_selecionado .= "where nome_paciente like '%" . $busca . "%'";       
+    $sqlstring_paciente_selecionado .= "where nome_paciente like '%" . $busca . "%' and tb_paciente.cod_pacinete  = " . $_SESSION['cod_paciente_selecionado'];       
 }
 else    
 {
@@ -28,7 +28,8 @@ else
 }
 
 $sqlstring_paciente_selecionado  = "Select tb_paciente.*, tb_objetivo_paciente.peso_paciente, tb_objetivo_paciente.altura_paciente from tb_paciente ";
-$sqlstring_paciente_selecionado .= "inner join tb_objetivo_paciente on tb_paciente.cod_paciente = tb_objetivo_paciente.cod_paciente";
+$sqlstring_paciente_selecionado .= "inner join tb_objetivo_paciente on tb_paciente.cod_paciente = tb_objetivo_paciente.cod_paciente ";
+$sqlstring_paciente_selecionado .= "where tb_paciente.cod_paciente  = " . $_SESSION['cod_paciente_selecionado'];
 
 $info_paciente_selecionado = $db->sql_query($sqlstring_paciente_selecionado);
 $dados_paciente_selecionado = mysql_fetch_array($info_paciente_selecionado);
@@ -142,12 +143,13 @@ $linhas_paciente_selecionado = $db->sql_linhas($info_paciente_selecionado);
                 <tr class="fonte_branca">
                 <td class="largura_05 fundo_verde_claro"><input type=checkbox name="marcar" id="marcar" onclick="marcar_desmarcar_todos()"></td>
                 <td class="largura_10 fundo_verde_claro">Data</td>                
-                <td class="largura_30 fundo_verde_claro esquerdo">Programa</td>
+                <td class="largura_25 fundo_verde_claro esquerdo">Programa</td>
                 <td class="largura_10 fundo_verde_claro direito">Peso</td>
                 <td class="largura_10 fundo_verde_claro direito">IMC</td>                
-                <td class="largura_05  fundo_verde_claro centralizado"><span class="glyphicon glyphicon-heart-empty fonte_pequena"  alt="Anamnese" title="Anamnese"></span></td>
+                <td class="largura_05 fundo_verde_claro centralizado"><span class="glyphicon glyphicon-heart-empty fonte_pequena"  alt="Anamnese" title="Anamnese"></span></td>
                 <td class="largura_05  fundo_verde_claro centralizado"><span class="glyphicon glyphicon-th-list fonte_pequena"  alt="Avaliação Nutricional" title="Avaliação Nutricional"></span></td>
                 <td class="largura_05  fundo_verde_claro centralizado"><span class="glyphicon glyphicon-screenshot fonte_pequena"  alt="Antropometria" title="Antropometria"></span></td>
+                <td class="largura_05  fundo_verde_claro centralizado"><img src="img/icone_reeducacoes_lateral.png"></td>
                 </tr>
                                 
                 <?php
@@ -198,6 +200,12 @@ $linhas_paciente_selecionado = $db->sql_linhas($info_paciente_selecionado);
                     <td class="centralizado">
                         <a href="01_1_cadastro_paciente_antropometria.php?cod_consulta=<?php print  base64_encode($dados_consultas_paciente['cod_consulta']) ?>" alt="Antropometria" title="Antropometria">
                         <span class="glyphicon glyphicon-screenshot fonte_pequena"></span>
+                        </a>
+                    </td>
+                
+                    <td class="centralizado">
+                        <a href="01_1_cadastro_paciente_prescricao.php?cod_consulta=<?php print  base64_encode($dados_consultas_paciente['cod_consulta']) ?>" alt="Antropometria" title="Antropometria">
+                        <img src="img/icone_reeducacoes_consulta_detalhes.png" alt="Reeducação" title="Reeducação">
                         </a>
                     </td>
                 

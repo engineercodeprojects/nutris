@@ -16,17 +16,43 @@ ini_set('default_charset','UTF-8');
 //atualizando os dados caso o formulario tenha sido enviado
 if( $_SERVER['REQUEST_METHOD']=='POST')
     {
+    function filter( $dados )
+        {
+            if(isset($dados))
+            {
+            $arr = Array();
+            foreach( $dados AS $dado ) $arr[] = (int)$dado;
+            return $arr;
+            }
+        }
+    
         //recuperando as informações do formulário
         $programa = $_POST['programa'];
         $objetivo_programa = $_POST['objetivo_programa']; 
         $duracao_programa = $_POST['duracao_programa'];
         $descricao_programa = $_POST['descricao_programa'];
         $outras_informacoes_programa = $_POST['outras_informacoes_programa'];
+    
+        //recuperando as reeducações associadas ao programa
+        $arr = filter( $_POST['reeducacoes'] );
+    
+        if(sizeof($arr) > 0)
+        {
+            $contador = 0;
+            $tamanho = sizeof($arr);
+            
+            while($contador < $tamanho)
+            {
+                $reeducacoes = $reeducacoes . ";" . $arr[$contador];                
+                $contador++;
+            }
+        }
+   
         
 
         // inserindo na tb_alimento os dados do alimento
-        $sqlstring_inserir_programa  = "insert into tb_programa (programa, cod_objetivo_programa, cod_tempo_programa, descricao_programa, outras_informacoes_programa) values ";        
-        $sqlstring_inserir_programa .= "('" . $programa . "','" . $objetivo_programa . "','" . $duracao_programa . "','" . $descricao_programa . "','" . $outras_informacoes_programa . "')";
+        $sqlstring_inserir_programa  = "insert into tb_programa (programa, cod_objetivo_programa, cod_tempo_programa, descricao_programa, reeducacoes_programa, outras_informacoes_programa) values ";        
+        $sqlstring_inserir_programa .= "('" . $programa . "','" . $objetivo_programa . "','" . $duracao_programa . "','" . $descricao_programa . "','" . $reeducacoes . "','" . $outras_informacoes_programa . "')";
 
         $db->string_query($sqlstring_inserir_programa); 
 
@@ -94,7 +120,7 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
     <!-- fim - titulo do formulário -->
        
        
-    <form method="post" action="">
+    <form method="post" name="formul" action="">
     <!-- inicio - cadastro programa -->  
     <div class="row">
         
@@ -108,14 +134,14 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
               <!-- inicio programa -->
               <div class="form-group col-md-4">
                 <label for="programa">Programa  <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
-                <input type="text" class="form-control" name="programa" id="programa" required maxlength="50">
+                <input type="text" class="form-control text-uppercase" name="programa" id="programa" required maxlength="50">
               </div>
               <!-- fim programa -->
                 
               <!-- inicio objetivo -->    
               <div class="form-group col-md-4">                 
                 <label for="objetivo_programa">Objetivo Programa  <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
-                <select name="objetivo_programa" id="objetivo_programa" class="form-control">
+                <select name="objetivo_programa" id="objetivo_programa" class="form-control text-uppercase">
                 <?php
                 $sqlstring_objetivos  = "Select * from tb_objetivo";
                 $info_objetivos = $db->sql_query($sqlstring_objetivos);                
@@ -133,7 +159,7 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
               <!-- inicio duração -->    
               <div class="form-group col-md-4">                 
                 <label for="duracao_programa">Duração do Programa  <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
-                <select name="duracao_programa" id="duracao_programa" class="form-control">
+                <select name="duracao_programa" id="duracao_programa" class="form-control text-uppercase">
                 <?php
                 $sqlstring_duracao  = "Select * from tb_tempo";
                 $info_duracao = $db->sql_query($sqlstring_duracao);                
@@ -156,15 +182,50 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
               <!-- inicio descricao programa -->
               <div class="form-group col-md-12">
                 <label for="descricao_programa">Descrição do Programa  <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
-                <textarea rows=5 class="form-control" name="descricao_programa" id="descricao_programa"></textarea>
+                <textarea rows=5 class="form-control text-uppercase" name="descricao_programa" id="descricao_programa"></textarea>
               </div>
               <!-- fim descricao programa -->            
               
               
+              <!-- inicio descricao programa -->
+              <div class="form-group col-md-12">
+                <label for="reeducacoes_programa">Selecione as reeducações alimentares para este programa  <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
+                
+              <?php                  
+                $sqlstring_reeducacoes  = "select * from tb_reeducacao where cod_status = 1";                
+                $info_reeducacoes = $db->sql_query($sqlstring_reeducacoes);
+               ?>
+                
+                <table class="table table-responsive table-striped">
+                 
+                <tr>
+                <td class="largura_05 fundo_verde_claro"><input type=checkbox name="marcar" id="marcar" onclick="marcar_desmarcar_todos()"></td>
+                <td class="largura_95 fundo_verde_claro fonte_branca">Reeducação</td>
+                </tr>
+                    
+                <?php
+                while($dados_reeducacoes = mysql_fetch_array($info_reeducacoes))
+                {
+                 print "<tr>";
+                 print "<td><input type=checkbox name='reeducacoes[]' value='" . $dados_reeducacoes['cod_reeducacao'] . "'></input></td>";
+                 print "<td class='text-uppercase'>" . $dados_reeducacoes['reeducacao'] . "</td>";
+                 print "</tr>";
+                }
+                
+              ?>
+                    
+                </table>
+                  
+              </div>
+              <!-- fim descricao programa -->            
+                
+                
+                
+                
               <!-- inicio outras informações -->
               <div class="form-group col-md-12">
                 <label for="outras_informacoes_programa">Outras Informações  <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
-                <textarea rows=5 class="form-control" name="outras_informacoes_programa" id="outras_informacoes_programa"></textarea>
+                <textarea rows=5 class="form-control text-uppercase" name="outras_informacoes_programa" id="outras_informacoes_programa"></textarea>
               </div>
               <!-- fim outras informações --> 
                 

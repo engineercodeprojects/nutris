@@ -196,7 +196,10 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
   <script src="js/funcoes.js"></script>
 <body class="margin_00">
 
-<?php include "includes/menu_nutricionista.php" ?>     
+<?php 
+    include "includes/menu_nutricionista.php";
+    include "includes/cabecalho_paciente_antropometria.php";
+?>     
 
 <!-- inicio container fluid -->
 <div class="container-fluid">
@@ -213,9 +216,7 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
                     <span class=" fonte_verde_claro fonte_muito_grande negrito">ANTROPOMETRIA</span>:
                     <span class=" fonte_verde_claro fonte_muito_grande"><?php print date('d/m/Y', strtotime($dados_objetivo_programa['data_objetivo_paciente'])) ?></span>
                     <br/>
-                    <span class="fonte_pequena">
-                        <a href="01_1_alteracao_paciente_dados_pessoais.php">Dados Pessoais</a>
-                        <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
+                    <span class="fonte_pequena">                        
                         <a href="01_1_cadastro_paciente_anamnese.php">Anamnese</a>
                         <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
                         <a href="01_1_cadastro_paciente_avaliacao.php">Avaliação Nutricional</a>
@@ -456,8 +457,7 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
                 <!-- inicio - peso -->
                 <div id="d_peso" name="d_peso" class="form-group col-md-6">
                     <label for="l_peso">Peso (kg) </label>
-                    <input type="text" class="form-control altura_220 centralizado fonte_peso_altura fundo_verde_claro fonte_branca" name="peso" id="peso" value="<?php print $dados_objetivo_programa['peso_paciente'] ?>" onblur="funcoes()"> 
-<!--                    <input type="text" class="form-control altura_220 centralizado fonte_peso_altura fundo_verde_claro fonte_branca" name="peso" id="peso" value="100" onblur="calcular_imc();funcoes()"> -->
+                    <input type="text" class="form-control altura_220 centralizado fonte_peso_altura fonte_verde_claro" name="peso" id="peso" value="<?php print $dados_objetivo_programa['peso_paciente'] ?>" onblur="funcoes(); troca_virgula_ponto('peso')" maxlength="7"> 
                 </div>
                 <!-- fim - peso -->
                 
@@ -465,8 +465,7 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
                  <!-- inicio - estatura -->
                 <div id="d_estatura" name="d_estatura" class="form-group col-md-6">
                     <label for="l_estatura">Estatura (cm)</label>
-                    <input type="text" class="form-control altura_220 centralizado fonte_peso_altura fundo_verde_claro fonte_branca" name="altura" id="altura" value="<?php print  $dados_objetivo_programa['altura_paciente'] ?>" onblur="funcoes()"> 
-<!--                    <input type="text" class="form-control altura_220 centralizado fonte_peso_altura fundo_verde_claro fonte_branca" name="altura" id="altura" value="188" onblur="calcular_imc();"> -->
+                    <input type="text" class="form-control altura_220 centralizado fonte_peso_altura fonte_verde_claro" name="altura" id="altura" value="<?php print  $dados_objetivo_programa['altura_paciente'] ?>" onblur="funcoes(); troca_virgula_ponto('altura')" maxlength="6"> 
                 </div>
                 <!-- fim - estatura -->
                 
@@ -482,35 +481,35 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
                 <!-- inicio - abdomem -->
                 <div id="d_abdomem" name="d_abdomem" class="form-group col-md-6">
                     <label for="l_abdomem">Abdomem</label>
-                    <input type="text" class="form-control" name="perimetro_abdomem" id="perimetro_abdomem" value="<?php print  $dados_objetivo_programa['perimetro_abdomem'] ?>"> 
+                    <input type="text" class="form-control" name="perimetro_abdomem" id="perimetro_abdomem" value="<?php print  $dados_objetivo_programa['perimetro_abdomem'] ?>" onblur="funcoes(); troca_virgula_ponto('perimetro_abdomem')" maxlength="5"> 
                 </div>
                 <!-- fim - abdomem -->
                 
                 <!-- inicio - quadril -->
                 <div id="d_quadril" name="d_quadril" class="form-group col-md-6">
                     <label for="l_quadril">Quadril</label>
-                    <input type="text" class="form-control" name="perimetro_quadril" id="perimetro_quadril" value="<?php print  $dados_objetivo_programa['perimetro_quadril'] ?>"> 
+                    <input type="text" class="form-control" name="perimetro_quadril" id="perimetro_quadril" value="<?php print  $dados_objetivo_programa['perimetro_quadril'] ?>"  onblur="funcoes(); troca_virgula_ponto('perimetro_quadril')" maxlength="5"> 
                 </div>
                 <!-- fim - quadril -->
                 
                 <!-- inicio - coxa -->
                 <div id="d_coxa" name="d_coxa" class="form-group col-md-6">
                     <label for="l_coxa">Coxa</label>
-                    <input type="text" class="form-control" name="perimetro_coxa" id="perimetro_coxa" value="<?php print  $dados_objetivo_programa['perimetro_coxa'] ?>"> 
+                    <input type="text" class="form-control" name="perimetro_coxa" id="perimetro_coxa" value="<?php print  $dados_objetivo_programa['perimetro_coxa'] ?>"  onblur="funcoes(); troca_virgula_ponto('perimetro_coxa')" maxlength="5"> 
                 </div>
                 <!-- fim - coxa -->
                 
                 <!-- inicio - perna medial -->
                 <div id="d_perna_medial" name="d_perna_medial" class="form-group col-md-6">
                     <label for="l_perna_medial">Perna Medial</label>
-                    <input type="text" class="form-control" name="perimetro_perna_medial" id="perimetro_perna_medial" value="<?php print  $dados_objetivo_programa['perimetro_perna_medial'] ?>"> 
+                    <input type="text" class="form-control" name="perimetro_perna_medial" id="perimetro_perna_medial" value="<?php print  $dados_objetivo_programa['perimetro_perna_medial'] ?>"  onblur="funcoes(); troca_virgula_ponto('perimetro_perna_medial')" maxlength="5"> 
                 </div>
                 <!-- fim - perna medial -->
                 
                 <!-- inicio - antebraco -->
                 <div id="d_antebraco" name="d_antebraco" class="form-group col-md-12">
                     <label for="l_antebraco">Antebraço</label>
-                    <input type="text" class="form-control" name="perimetro_antebraco" id="perimetro_antebraco" value="<?php print  $dados_objetivo_programa['perimetro_antebraco'] ?>"> 
+                    <input type="text" class="form-control" name="perimetro_antebraco" id="perimetro_antebraco" value="<?php print  $dados_objetivo_programa['perimetro_antebraco'] ?>"  onblur="funcoes(); troca_virgula_ponto('perimetro_antebraco')" maxlength="5"> 
                 </div>
                 <!-- fim - perna antebraco -->
             </div>
@@ -528,42 +527,42 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
                 <!-- inicio - triceps -->
                 <div id="d_triceps" name="d_triceps" class="form-group col-md-4">
                     <label for="l_triceps">Tríceps</label>
-                    <input type="text" class="form-control" name="dobras_triceps" id="dobras_triceps" value="<?php print  $dados_objetivo_programa['dobras_triceps'] ?>"> 
+                    <input type="text" class="form-control" name="dobras_triceps" id="dobras_triceps" value="<?php print  $dados_objetivo_programa['dobras_triceps'] ?>"  onblur="funcoes(); troca_virgula_ponto('dobras_triceps')" maxlength="5"> 
                 </div>
                 <!-- fim - triceps -->
                 
                 <!-- inicio - subescapular -->
                 <div id="d_subescapular" name="d_subescapular" class="form-group col-md-4">
                     <label for="l_subescapular">Subescapular</label>
-                    <input type="text" class="form-control" name="dobras_subescapular" id="dobras_subescapular" value="<?php print  $dados_objetivo_programa['dobras_subescapular'] ?>"> 
+                    <input type="text" class="form-control" name="dobras_subescapular" id="dobras_subescapular" value="<?php print  $dados_objetivo_programa['dobras_subescapular'] ?>"  onblur="funcoes(); troca_virgula_ponto('dobras_subescapular')" maxlength="5"> 
                 </div>
                 <!-- fim - subescapular -->
                 
                 <!-- inicio - abdominal -->
                 <div id="d_abdominal" name="d_abdominal" class="form-group col-md-4">
                     <label for="l_abdominal">Abdominal</label>
-                    <input type="text" class="form-control" name="dobras_abdominal" id="dobras_abdominal" value="<?php print  $dados_objetivo_programa['dobras_abdominal'] ?>"> 
+                    <input type="text" class="form-control" name="dobras_abdominal" id="dobras_abdominal" value="<?php print  $dados_objetivo_programa['dobras_abdominal'] ?>"   onblur="funcoes(); troca_virgula_ponto('dobras_abdominal')" maxlength="5"> 
                 </div>
                 <!-- fim - abdominal -->
                 
                 <!-- inicio - suprailíaca -->
                 <div id="d_suprailiaca" name="d_suprailiaca" class="form-group col-md-4">
                     <label for="l_suprailiaca">Suprailíaca</label>
-                    <input type="text" class="form-control" name="dobras_suprailiaca" id="dobras_suprailiaca" value="<?php print  $dados_objetivo_programa['dobras_suprailiaca'] ?>"> 
+                    <input type="text" class="form-control" name="dobras_suprailiaca" id="dobras_suprailiaca" value="<?php print  $dados_objetivo_programa['dobras_suprailiaca'] ?>"   onblur="funcoes(); troca_virgula_ponto('dobras_suprailiaca')" maxlength="5"> 
                 </div>
                 <!-- fim - suprailíaca -->
                 
                 <!-- inicio - coxa -->
                 <div id="d_coxa_dobras" name="d_coxa_dobras" class="form-group col-md-4">
                     <label for="l_coxa_dobras">Coxa</label>
-                    <input type="text" class="form-control" name="dobras_coxa" id="dobras_coxa" value="<?php print  $dados_objetivo_programa['dobras_coxa'] ?>"> 
+                    <input type="text" class="form-control" name="dobras_coxa" id="dobras_coxa" value="<?php print  $dados_objetivo_programa['dobras_coxa'] ?>"   onblur="funcoes(); troca_virgula_ponto('dobras_coxa')" maxlength="5"> 
                 </div>
                 <!-- fim - coxa -->
                 
                 <!-- inicio - perna medial -->
                 <div id="d_perna_medial" name="d_perna_medial" class="form-group col-md-4">
                     <label for="l_perna_medial">Perna Medial</label>
-                    <input type="text" class="form-control" name="dobras_perna_medial" id="dobras_perna_medial" value="<?php print  $dados_objetivo_programa['dobras_perna_medial'] ?>"> 
+                    <input type="text" class="form-control" name="dobras_perna_medial" id="dobras_perna_medial" value="<?php print  $dados_objetivo_programa['dobras_perna_medial'] ?>"   onblur="funcoes(); troca_virgula_ponto('dobras_perna_medial')" maxlength="5"> 
                 </div>
                 <!-- fim - perna medial -->
                 
@@ -584,28 +583,28 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
                 <!-- inicio - punho -->
                 <div id="d_punho" name="d_punho" class="form-group col-md-6">
                     <label for="l_punho">Punho</label>
-                    <input type="text" class="form-control" name="diametro_punho" id="diametro_punho" value="<?php print  $dados_objetivo_programa['diametro_punho'] ?>"> 
+                    <input type="text" class="form-control" name="diametro_punho" id="diametro_punho" value="<?php print  $dados_objetivo_programa['diametro_punho'] ?>"   onblur="funcoes(); troca_virgula_ponto('diametro_punho')" maxlength="5"> 
                 </div>
                 <!-- fim - punho -->
                 
                 <!-- inicio - umero -->
                 <div id="d_umero" name="d_umero" class="form-group col-md-6">
                     <label for="l_umero">Úmero</label>
-                    <input type="text" class="form-control" name="diametro_umero" id="diametro_umero" value="<?php print  $dados_objetivo_programa['diametro_umero'] ?>"> 
+                    <input type="text" class="form-control" name="diametro_umero" id="diametro_umero" value="<?php print  $dados_objetivo_programa['diametro_umero'] ?>"   onblur="funcoes(); troca_virgula_ponto('diametro_umero')" maxlength="5"> 
                 </div>
                 <!-- fim - umero -->
                 
                 <!-- inicio - femur -->
                 <div id="d_femur" name="d_femur" class="form-group col-md-6">
                     <label for="l_femur">Fêmur</label>
-                    <input type="text" class="form-control" name="diametro_femur" id="diametro_femur" value="<?php print  $dados_objetivo_programa['diametro_femur'] ?>"> 
+                    <input type="text" class="form-control" name="diametro_femur" id="diametro_femur" value="<?php print  $dados_objetivo_programa['diametro_femur'] ?>"   onblur="funcoes(); troca_virgula_ponto('diametro_femur')" maxlength="5"> 
                 </div>
                 <!-- fim - femur -->
                 
                 <!-- inicio - tornozelo -->
                 <div id="d_tornozelo" name="d_tornozelo" class="form-group col-md-6">
                     <label for="l_tornozelo">Tornozelo</label>
-                    <input type="text" class="form-control" name="diametro_tornozelo" id="diametro_tornozelo" value="<?php print  $dados_objetivo_programa['diametro_tornozelo'] ?>"> 
+                    <input type="text" class="form-control" name="diametro_tornozelo" id="diametro_tornozelo" value="<?php print  $dados_objetivo_programa['diametro_tornozelo'] ?>"   onblur="funcoes(); troca_virgula_ponto('diametro_tornozelo')" maxlength="5"> 
                 </div>
                 <!-- fim - perna tornozelo -->
                 
@@ -654,28 +653,12 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
                 
                 
             <!-- inicio -  imc ideal -->
-            <div id="d_imc_ideal" name="d_imc_ideal" class="form-group col-md-2">
+            <div id="d_imc_ideal" name="d_imc_ideal" class="form-group col-md-6">
                 <label for="l_imc_ideal">IMC ideal</label>
                 <input type="text" class="form-control" value="24.9" style="background-color:#18A689; color:#fff" name="imc_ideal" id="imc_ideal" readonly>
             </div>
             <!-- fim - imc ideal -->
                 
-            <!-- inicio -  peso ideal teorico superior -->
-            <div id="d_peso_ideal_teorico_superior" name="d_peso_ideal_teorico_superior" class="form-group col-md-2">
-                <label for="l_peso_ideal_teorico_superior">Peso ideal Superior</label>
-                <input type="text" class="form-control" style="background-color:#18A689; color:#fff" name="peso_ideal_teorico_superior" id="peso_ideal_teorico_superior" readonly>
-            </div>            
-            <!-- fim - peso ideal teorico superior -->
-                
-                
-            <!-- inicio -  peso ideal teorico inferior -->
-            <div id="d_peso_ideal_teorico_inferior" name="d_peso_ideal_teorico_inferior" class="form-group col-md-2">
-                <label for="l_peso_ideal_teorico_inferior">Peso Ideal Inferior</label>
-                <input type="text" class="form-control" style="background-color:#18A689; color:#fff" name="peso_ideal_teorico_inferior" id="peso_ideal_teorico_inferior" readonly>
-            </div>            
-            <!-- fim - peso ideal teorico inferior -->
-                
-              
                 
                 
                 
@@ -795,7 +778,7 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
                 
                 
             <!-- inicio - protocolo C e D-->
-            <div id="d_protocolo_c_d" name="d_protocolo_c_d" class="form-group col-md-6 padding_top_30">
+            <div id="d_protocolo_c_d" name="d_protocolo_c_d" class="form-group col-md-12 padding_top_30">
                 <label for="l_protocolo_c_d">Protocolo</label>
                 <select class="form-control" style="border:1px solid #18A689;"  name="protocolo_cd" id="protocolo_cd" onchange="funcoes()"> 
                     <option value="protocolo_C">Protocolo C - Martin, Spenst, Drinkwater and Clarys, 1990</option>
@@ -806,20 +789,37 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
                 
                 
             <!-- inicio - massa muscular -->
-            <div id="d_massa_muscular" name="d_massa_muscular" class="form-group col-md-6 padding_top_30">
+            <div id="d_massa_muscular" name="d_massa_muscular" class="form-group col-md-6">
                 <label for="l_massa_muscular">Massa Muscular</label>
-                <input type="text" class="form-control" style="background-color:#18A689; color:#fff"  name="massa_muscular" id="massa_muscular" readonly> 
+                <input type="text" class="form-control" style="border:1px solid #18A689; background-color:#fff; color:#18A689"  name="massa_muscular" id="massa_muscular" readonly> 
            </div>
             <!-- fim - massa muscular -->
                 
                 
           <!-- inicio - massa ossea -->
-            <div id="d_massa_ossea" name="d_massa_ossea" class="form-group col-md-6 padding_top_30 ocultar">
+            <div id="d_massa_ossea" name="d_massa_ossea" class="form-group col-md-6  ocultar">
                 <label for="l_massa_ossea">Massa Ossea</label>
-                <input type="text" class="form-control" style="background-color:#18A689; color:#fff"  name="massa_ossea" id="massa_ossea" readonly> 
+                <input type="text" class="form-control" style="border:1px solid #18A689; background-color:#fff; color:#18A689"  name="massa_ossea" id="massa_ossea" readonly> 
            </div>
             <!-- fim - massa ossea -->
+             
                 
+                
+                
+            <!-- inicio -  peso ideal teorico superior -->
+            <div id="d_peso_ideal_teorico_superior" name="d_peso_ideal_teorico_superior" class="form-group col-md-3">
+                <label for="l_peso_ideal_teorico_superior">Peso ideal Superior</label>
+                <input type="text" class="form-control" style="border:1px solid #18A689; background-color:#fff; color:#18A689" name="peso_ideal_teorico_superior" id="peso_ideal_teorico_superior" readonly>
+            </div>            
+            <!-- fim - peso ideal teorico superior -->
+                
+                
+            <!-- inicio -  peso ideal teorico inferior -->
+            <div id="d_peso_ideal_teorico_inferior" name="d_peso_ideal_teorico_inferior" class="form-group col-md-3">
+                <label for="l_peso_ideal_teorico_inferior">Peso Ideal Inferior</label>
+                <input type="text" class="form-control" style="border:1px solid #18A689; background-color:#fff; color:#18A689" name="peso_ideal_teorico_inferior" id="peso_ideal_teorico_inferior" readonly>
+            </div>            
+            <!-- fim - peso ideal teorico inferior -->
                
         </div>
             
@@ -887,7 +887,7 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
 
         calcular_massa_muscular();
 
-//        calculo_peso_ideal();
+        calculo_peso_ideal();
     }
         
         

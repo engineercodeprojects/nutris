@@ -14,7 +14,8 @@ mysql_set_charset('utf8');
 ini_set('default_charset','UTF-8');
 
 //recuperando o paciente selecionado
-$_SESSION['cod_paciente_selecionado'] = base64_decode($_GET['cod']);
+if(isset($_GET['cod']))
+    $_SESSION['cod_paciente_selecionado'] = base64_decode($_GET['cod']);
 
 
 // armazena o valor digitado pelo usuário na caixa de busca

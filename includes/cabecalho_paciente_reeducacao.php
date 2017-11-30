@@ -39,9 +39,11 @@ ini_set('default_charset','UTF-8');
             
             <div class="col-md-1">
                 <?php 
-                if($dados_paciente_selecionado['foto_paciente'] != 'avatar_masculino.png' and $dados_paciente_selecionado['foto_paciente'] != 'avatar_feminino.png')
-                    print "<img src='fotos_usuarios/" . $dados_paciente_selecionado['foto_paciente'] . "' width='120' height='120' class='img-responsive margin_auto'>";
-                else if ($dados_paciente_selecionado['sexo'] == 'M')
+                print $dados_programa_paciente['foto_paciente'];
+                   
+                if($dados_programa_paciente['foto_paciente'] != 'avatar_masculino.png' and $dados_programa_paciente['foto_paciente'] != 'avatar_feminino.png')
+                    print "<img src='fotos_usuarios/" . $dados_programa_paciente['foto_paciente'] . "' width='120' height='120' class='img-responsive margin_auto'>";
+                else if ($dados_programa_paciente['sexo'] == 'M')
                     print "<img src='fotos_usuarios/avatar_masculino.png' align='left' width='95''>";
                 else
                     print "<img src='fotos_usuarios/avatar_feminino.png'  align='left' width='95'>";
@@ -50,11 +52,11 @@ ini_set('default_charset','UTF-8');
             
             
             <div class="col-md-8">
-                <h3 class="text-uppercase fonte_branca">&nbsp;&nbsp;<?php print $dados_paciente_selecionado['nome_paciente'] ?></h3>
+                <h3 class="text-uppercase fonte_branca">&nbsp;&nbsp;<?php print $dados_programa_paciente['nome_paciente'] ?></h3>
                 <h4 class="text-uppercase fonte_branca">&nbsp;&nbsp;
                     <?php 
                     // Separa em dia, mês e ano
-                    list($ano, $mes, $dia) = explode('-', $dados_paciente_selecionado['data_nascimento'] );
+                    list($ano, $mes, $dia) = explode('-', $dados_programa_paciente['data_nascimento'] );
 
                     // Descobre que dia é hoje e retorna a unix timestamp
                     $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
@@ -78,10 +80,10 @@ ini_set('default_charset','UTF-8');
                 </div>
             
                 <div class="col-md-9 esquerdo">
-                    <span class="fonte_muito_pequena">Paciente desde</span> <br/>
+                    <span class="fonte_muito_pequena">Última Reeducação</span> <br/>
                     <span class=" fonte_icone_sucesso fonte_branca  fonte_muito_grande">
                         <?php 
-                        list($ano, $mes, $dia) = explode('-', $dados_paciente_selecionado['data_cadastro_paciente']);
+                        list($ano, $mes, $dia) = explode('-', $dados_programa_paciente['data_inicio_programa']);
                         print  $dia."/".$mes."/".$ano ;
                         ?>
                     </span>                                        

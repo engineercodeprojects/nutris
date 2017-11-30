@@ -126,13 +126,13 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
             <table class="table table-responsive table-hover">
                 <tr class="fonte_branca">
                 <td class="largura_05 fundo_verde_claro"><input type=checkbox name="marcar" id="marcar" onclick="marcar_desmarcar_todos()"></td>
-                <td class="largura_45 fundo_verde_claro">Paciente</td>                
-                <td class="largura_10 fundo_verde_claro direito">Peso</td>
-                <td class="largura_10 fundo_verde_claro direito">Altura</td>
-                <td class="largura_10 fundo_verde_claro direito">IMC</td>                
-                <td class="largura_05  fundo_verde_claro centralizado"><span class="glyphicon glyphicon-heart-empty fonte_pequena"  alt="Anamnese" title="Anamnese"></span></td>
-                <td class="largura_05  fundo_verde_claro centralizado"><span class="glyphicon glyphicon-th-list fonte_pequena"  alt="Avaliação Nutricional" title="Avaliação Nutricional"></span></td>
-                <td class="largura_05  fundo_verde_claro centralizado"><span class="glyphicon glyphicon-screenshot fonte_pequena"  alt="Antropometria" title="Antropometria"></span></td>
+                <td class="largura_30 fundo_verde_claro">Paciente</td> 
+                <td class="largura_20 fundo_verde_claro centralizado">Programa <br/> de Treinamento</td> 
+                <td class="largura_10 fundo_verde_claro centralizado">Início <br/> do Tratamento</td> 
+                <td class="largura_10 fundo_verde_claro centralizado">Última <br/> Consulta</td> 
+                <td class="largura_10 fundo_verde_claro centralizado">Objetivo <br/> de Peso</td> 
+                <td class="largura_10 fundo_verde_claro centralizado">Último <br/> Peso</td>
+                <td class="largura_10 fundo_verde_claro centralizado">Último <br/> IMC</td>                
                 </tr>
                                 
                 <?php
@@ -150,39 +150,40 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
                         </a>
                     </td>
                 
-                    <td class="direito">
+                    <td class="centralizado">
                         <a href="01_detalhes_paciente.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Detalhes do Paciente" title="Detalhes do Paciente">
-                        <?php print number_format($dados_pacientes['peso_paciente'],2) ?>
+                        VERÃO
                         </a>        
                     </td>
                 
-                    <td class="direito">
+                    <td class="centralizado">
                         <a href="01_detalhes_paciente.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Detalhes do Paciente" title="Detalhes do Paciente">
-                        <?php print $dados_pacientes['altura_paciente'] ?>
+                        28/11/2017
                         </a>
                     </td>
                 
-                    <td class="direito">
+                    <td class="centralizado">
                         <a href="01_detalhes_paciente.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Detalhes do Paciente" title="Detalhes do Paciente">
-                        <script> exibir_imc(<?php print $dados_pacientes['peso'] ?>,<?php print $dados_pacientes['altura'] ?>); </script>
+                            28/11/2017
+<!--                        <script> exibir_imc(<?php print $dados_pacientes['peso'] ?>,<?php print $dados_pacientes['altura'] ?>); </script>-->
                         </a>
                     </td>
                     
                     <td class="centralizado">
                         <a href="01_1_cadastro_paciente_anamnese.php?cod=<?php print base64_encode($dados_pacientes['cod_paciente']) ?>;&alt=<?php print base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Anamnese" title="Anamnese">
-                        <span class="glyphicon glyphicon-heart-empty fonte_pequena"></span>
+                        75
                         </a>
                     </td>
                 
                     <td class="centralizado">
                         <a href="01_1_cadastro_paciente_avaliacao.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Avaliação Nutricional" title="Avaliação Nutricional">
-                        <span class="glyphicon glyphicon-th-list fonte_pequena"></span>
+                        82
                         </a>
                     </td>
                 
                     <td class="centralizado">
                         <a href="01_1_cadastro_paciente_antropometria.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Antropometria" title="Antropometria">
-                        <span class="glyphicon glyphicon-screenshot fonte_pequena"></span>
+                        27.9
                         </a>
                     </td>
                 

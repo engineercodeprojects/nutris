@@ -138,7 +138,7 @@ ini_set('default_charset','UTF-8');
               <!-- inicio endereco -->    
               <div class="form-group col-md-5">
                 <label for="endereco">Endereço <span class="glyphicon glyphicon-asterisk fonte_muito_pequena fonte_verde_claro"></span></label>
-                <input type="text" class="form-control" name="endereco" id="endereco" placeholder="Rua dos Nutrientes" required maxlength="60">
+                <input type="text" class="form-control text-uppercase" name="endereco" id="endereco" placeholder="Rua dos Nutrientes" required maxlength="60">
               </div>
               <!-- fim endereco -->
 
@@ -253,7 +253,7 @@ ini_set('default_charset','UTF-8');
               <!-- inicio outros -->    
               <div class="form-group col-md-12">
                 <label for="outros">Outros</label>
-                <textarea class="form-control" rows="3" name="outros" id="paciente"></textarea>
+                <textarea class="form-control text-uppercase" rows="3" name="outros" id="paciente"></textarea>
               </div>
               <!-- fim outros -->
           <!-- fim - linha 5 -->
