@@ -23,7 +23,9 @@ ini_set('default_charset','UTF-8');
         
         <div class="col-md-offset-1 col-md-10 text-uppercase direito fundo_verde_claro fonte_branca padding_10">
             <div class='col-md-12 direito'>
-            <span class="glyphicon glyphicon-star fonte_branca"></span> Acompanhamento
+            <span class="glyphicon glyphicon-star fonte_branca"></span> 
+                <a href="01_1_acompanhamento_nutricionista.php?cod=<?php print base64_encode($_SESSION['cod_paciente_selecionado']) ?>" class='link_branco'>Acompanhamento
+                </a>
                 
                 <span class="glyphicon glyphicon-list-alt padding_left_20"></span> 
                 <a href="01_lista_consultas_paciente.php?cod=<?php print base64_encode($_SESSION['cod_paciente_selecionado']) ?>" class='link_branco'>Consultas

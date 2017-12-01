@@ -7,6 +7,14 @@
       </div>
       <div class="modal-body">
           <?php
+            $sqlstring_reeducacao_selecionada   = "select * from tb_programa_paciente_reeducacao  ";                
+            $sqlstring_reeducacao_selecionada  .=  "where cod_paciente  = " . $_SESSION['cod_paciente_selecionado'] . " and ";
+            $sqlstring_reeducacao_selecionada  .=  "cod_consulta  = " . $_SESSION['cod_consulta_selecionada'] . " and ";
+            $sqlstring_reeducacao_selecionada  .=  "cod_programa  = " . $_SESSION['cod_programa_selecionado'] . " and ";
+            $sqlstring_reeducacao_selecionada  .=  "cod_dia_semana  = 1 ";
+            $info_reeducacao_selecionada = $db->sql_query($sqlstring_reeducacao_selecionada);            
+            $dados_reeducacao_selecionada = mysql_fetch_array($info_reeducacao_selecionada);
+          
             //selecionando as reeducações do programa do paciente
             $sqlstring_reeducacoes_programa   = "select * from tb_programa ";
             $sqlstring_reeducacoes_programa  .= "where cod_programa = " . $_SESSION['cod_programa_selecionado'];          
@@ -38,7 +46,13 @@
                   while($contador < $tamanho_reeducacoes_do_programa)
                   {
                       if($reeducacoes_do_programa[$contador] == $dados_reeducacoes['cod_reeducacao'])
+                      {
+                        if($dados_reeducacoes['cod_reeducacao'] == $dados_reeducacao_selecionada['cod_reeducacao'])
+                            print "<option value = " . $dados_reeducacoes['cod_reeducacao'] . " selected>" . $dados_reeducacoes['reeducacao'];
+                          else
                             print "<option value = " . $dados_reeducacoes['cod_reeducacao'] . ">" . $dados_reeducacoes['reeducacao'];
+                      }
+                          
                       
                       $contador++;
                   }                  
@@ -60,6 +74,16 @@
           
           <!--inicio  reeducação da segunda-feira -->
           <?php
+            $sqlstring_reeducacao_selecionada   = "select * from tb_programa_paciente_reeducacao  ";                
+            $sqlstring_reeducacao_selecionada  .=  "where cod_paciente  = " . $_SESSION['cod_paciente_selecionado'] . " and ";
+            $sqlstring_reeducacao_selecionada  .=  "cod_consulta  = " . $_SESSION['cod_consulta_selecionada'] . " and ";
+            $sqlstring_reeducacao_selecionada  .=  "cod_programa  = " . $_SESSION['cod_programa_selecionado'] . " and ";
+            $sqlstring_reeducacao_selecionada  .=  "cod_dia_semana  = 2 ";
+            $info_reeducacao_selecionada = $db->sql_query($sqlstring_reeducacao_selecionada);            
+            $dados_reeducacao_selecionada = mysql_fetch_array($info_reeducacao_selecionada);
+              
+              
+              
             $sqlstring_reeducacoes   = "select * from tb_reeducacao ";            
             $sqlstring_reeducacoes  .= "where cod_status = 1 ";
             $info_reeducacoes = $db->sql_query($sqlstring_reeducacoes);            
@@ -77,7 +101,12 @@
                   while($contador < $tamanho_reeducacoes_do_programa)
                   {
                       if($reeducacoes_do_programa[$contador] == $dados_reeducacoes['cod_reeducacao'])
+                      {
+                        if($dados_reeducacoes['cod_reeducacao'] == $dados_reeducacao_selecionada['cod_reeducacao'])
+                            print "<option value = " . $dados_reeducacoes['cod_reeducacao'] . " selected>" . $dados_reeducacoes['reeducacao'];
+                          else
                             print "<option value = " . $dados_reeducacoes['cod_reeducacao'] . ">" . $dados_reeducacoes['reeducacao'];
+                      }
                       
                       $contador++;
                   }                  
@@ -101,6 +130,14 @@
           
           <!--inicio  reeducação da terca-feira -->
           <?php
+            $sqlstring_reeducacao_selecionada   = "select * from tb_programa_paciente_reeducacao  ";                
+            $sqlstring_reeducacao_selecionada  .=  "where cod_paciente  = " . $_SESSION['cod_paciente_selecionado'] . " and ";
+            $sqlstring_reeducacao_selecionada  .=  "cod_consulta  = " . $_SESSION['cod_consulta_selecionada'] . " and ";
+            $sqlstring_reeducacao_selecionada  .=  "cod_programa  = " . $_SESSION['cod_programa_selecionado'] . " and ";
+            $sqlstring_reeducacao_selecionada  .=  "cod_dia_semana  = 3 ";
+            $info_reeducacao_selecionada = $db->sql_query($sqlstring_reeducacao_selecionada);            
+            $dados_reeducacao_selecionada = mysql_fetch_array($info_reeducacao_selecionada);
+              
             $sqlstring_reeducacoes   = "select * from tb_reeducacao ";            
             $sqlstring_reeducacoes  .= "where cod_status = 1 ";
             $info_reeducacoes = $db->sql_query($sqlstring_reeducacoes);            
@@ -118,7 +155,12 @@
                   while($contador < $tamanho_reeducacoes_do_programa)
                   {
                       if($reeducacoes_do_programa[$contador] == $dados_reeducacoes['cod_reeducacao'])
+                      {
+                        if($dados_reeducacoes['cod_reeducacao'] == $dados_reeducacao_selecionada['cod_reeducacao'])
+                            print "<option value = " . $dados_reeducacoes['cod_reeducacao'] . " selected>" . $dados_reeducacoes['reeducacao'];
+                          else
                             print "<option value = " . $dados_reeducacoes['cod_reeducacao'] . ">" . $dados_reeducacoes['reeducacao'];
+                      }
                       
                       $contador++;
                   }                  
@@ -140,6 +182,14 @@
           
           <!--inicio  reeducação da quarta-feira -->
           <?php
+            $sqlstring_reeducacao_selecionada   = "select * from tb_programa_paciente_reeducacao  ";                
+            $sqlstring_reeducacao_selecionada  .=  "where cod_paciente  = " . $_SESSION['cod_paciente_selecionado'] . " and ";
+            $sqlstring_reeducacao_selecionada  .=  "cod_consulta  = " . $_SESSION['cod_consulta_selecionada'] . " and ";
+            $sqlstring_reeducacao_selecionada  .=  "cod_programa  = " . $_SESSION['cod_programa_selecionado'] . " and ";
+            $sqlstring_reeducacao_selecionada  .=  "cod_dia_semana  = 4 ";
+            $info_reeducacao_selecionada = $db->sql_query($sqlstring_reeducacao_selecionada);            
+            $dados_reeducacao_selecionada = mysql_fetch_array($info_reeducacao_selecionada);
+              
             $sqlstring_reeducacoes   = "select * from tb_reeducacao ";            
             $sqlstring_reeducacoes  .= "where cod_status = 1 ";
             $info_reeducacoes = $db->sql_query($sqlstring_reeducacoes);            
@@ -157,7 +207,12 @@
                   while($contador < $tamanho_reeducacoes_do_programa)
                   {
                       if($reeducacoes_do_programa[$contador] == $dados_reeducacoes['cod_reeducacao'])
+                      {
+                        if($dados_reeducacoes['cod_reeducacao'] == $dados_reeducacao_selecionada['cod_reeducacao'])
+                            print "<option value = " . $dados_reeducacoes['cod_reeducacao'] . " selected>" . $dados_reeducacoes['reeducacao'];
+                          else
                             print "<option value = " . $dados_reeducacoes['cod_reeducacao'] . ">" . $dados_reeducacoes['reeducacao'];
+                      }
                       
                       $contador++;
                   }                  
@@ -181,6 +236,14 @@
           
           <!--inicio  reeducação da quinta-feira -->
           <?php
+            $sqlstring_reeducacao_selecionada   = "select * from tb_programa_paciente_reeducacao  ";                
+            $sqlstring_reeducacao_selecionada  .=  "where cod_paciente  = " . $_SESSION['cod_paciente_selecionado'] . " and ";
+            $sqlstring_reeducacao_selecionada  .=  "cod_consulta  = " . $_SESSION['cod_consulta_selecionada'] . " and ";
+            $sqlstring_reeducacao_selecionada  .=  "cod_programa  = " . $_SESSION['cod_programa_selecionado'] . " and ";
+            $sqlstring_reeducacao_selecionada  .=  "cod_dia_semana  = 5 ";
+            $info_reeducacao_selecionada = $db->sql_query($sqlstring_reeducacao_selecionada);            
+            $dados_reeducacao_selecionada = mysql_fetch_array($info_reeducacao_selecionada);
+              
             $sqlstring_reeducacoes   = "select * from tb_reeducacao ";            
             $sqlstring_reeducacoes  .= "where cod_status = 1 ";
             $info_reeducacoes = $db->sql_query($sqlstring_reeducacoes);            
@@ -198,7 +261,12 @@
                   while($contador < $tamanho_reeducacoes_do_programa)
                   {
                       if($reeducacoes_do_programa[$contador] == $dados_reeducacoes['cod_reeducacao'])
+                      {
+                        if($dados_reeducacoes['cod_reeducacao'] == $dados_reeducacao_selecionada['cod_reeducacao'])
+                            print "<option value = " . $dados_reeducacoes['cod_reeducacao'] . " selected>" . $dados_reeducacoes['reeducacao'];
+                          else
                             print "<option value = " . $dados_reeducacoes['cod_reeducacao'] . ">" . $dados_reeducacoes['reeducacao'];
+                      }
                       
                       $contador++;
                   }                  
@@ -219,6 +287,14 @@
           
           <!--inicio  reeducação da sexta-feira -->
           <?php
+            $sqlstring_reeducacao_selecionada   = "select * from tb_programa_paciente_reeducacao  ";                
+            $sqlstring_reeducacao_selecionada  .=  "where cod_paciente  = " . $_SESSION['cod_paciente_selecionado'] . " and ";
+            $sqlstring_reeducacao_selecionada  .=  "cod_consulta  = " . $_SESSION['cod_consulta_selecionada'] . " and ";
+            $sqlstring_reeducacao_selecionada  .=  "cod_programa  = " . $_SESSION['cod_programa_selecionado'] . " and ";
+            $sqlstring_reeducacao_selecionada  .=  "cod_dia_semana  = 6 ";
+            $info_reeducacao_selecionada = $db->sql_query($sqlstring_reeducacao_selecionada);            
+            $dados_reeducacao_selecionada = mysql_fetch_array($info_reeducacao_selecionada);
+              
             $sqlstring_reeducacoes   = "select * from tb_reeducacao ";            
             $sqlstring_reeducacoes  .= "where cod_status = 1 ";
             $info_reeducacoes = $db->sql_query($sqlstring_reeducacoes);            
@@ -236,7 +312,12 @@
                   while($contador < $tamanho_reeducacoes_do_programa)
                   {
                       if($reeducacoes_do_programa[$contador] == $dados_reeducacoes['cod_reeducacao'])
+                      {
+                        if($dados_reeducacoes['cod_reeducacao'] == $dados_reeducacao_selecionada['cod_reeducacao'])
+                            print "<option value = " . $dados_reeducacoes['cod_reeducacao'] . " selected>" . $dados_reeducacoes['reeducacao'];
+                          else
                             print "<option value = " . $dados_reeducacoes['cod_reeducacao'] . ">" . $dados_reeducacoes['reeducacao'];
+                      }
                       
                       $contador++;
                   }                  
@@ -260,6 +341,14 @@
           
           <!--inicio  reeducação da sabado -->
           <?php
+            $sqlstring_reeducacao_selecionada   = "select * from tb_programa_paciente_reeducacao  ";                
+            $sqlstring_reeducacao_selecionada  .=  "where cod_paciente  = " . $_SESSION['cod_paciente_selecionado'] . " and ";
+            $sqlstring_reeducacao_selecionada  .=  "cod_consulta  = " . $_SESSION['cod_consulta_selecionada'] . " and ";
+            $sqlstring_reeducacao_selecionada  .=  "cod_programa  = " . $_SESSION['cod_programa_selecionado'] . " and ";
+            $sqlstring_reeducacao_selecionada  .=  "cod_dia_semana  = 7 ";
+            $info_reeducacao_selecionada = $db->sql_query($sqlstring_reeducacao_selecionada);            
+            $dados_reeducacao_selecionada = mysql_fetch_array($info_reeducacao_selecionada);
+              
             $sqlstring_reeducacoes   = "select * from tb_reeducacao ";            
             $sqlstring_reeducacoes  .= "where cod_status = 1 ";
             $info_reeducacoes = $db->sql_query($sqlstring_reeducacoes);            
@@ -277,7 +366,12 @@
                   while($contador < $tamanho_reeducacoes_do_programa)
                   {
                       if($reeducacoes_do_programa[$contador] == $dados_reeducacoes['cod_reeducacao'])
+                      {
+                        if($dados_reeducacoes['cod_reeducacao'] == $dados_reeducacao_selecionada['cod_reeducacao'])
+                            print "<option value = " . $dados_reeducacoes['cod_reeducacao'] . " selected>" . $dados_reeducacoes['reeducacao'];
+                          else
                             print "<option value = " . $dados_reeducacoes['cod_reeducacao'] . ">" . $dados_reeducacoes['reeducacao'];
+                      }
                       
                       $contador++;
                   }                  

@@ -16,7 +16,6 @@ ini_set('default_charset','UTF-8');
 
 if( $_GET['reeducacoes'] == 1)
     { 
-    
     //inserindo a dieta de domingo
     $domingo = $_POST['domingo'];
     $sqlstring_alterar_programa_paciente_reeducacao   = "Update tb_programa_paciente_reeducacao set ";    
@@ -102,6 +101,42 @@ if( $_GET['reeducacoes'] == 1)
     $db->string_query($sqlstring_alterar_programa_paciente_reeducacao); 
     
     
+    //conhecendo quantos dias o programa irá durar
+    $sqlstring_programa_selec   = "Select * from tb_programa ";
+    $sqlstring_programa_selec  .= "inner join tb_programa_paciente on tb_programa.cod_programa = tb_programa_paciente.cod_programa ";
+    $sqlstring_programa_selec .= "where tb_programa_paciente.cod_programa  = " . $_SESSION['cod_programa_selecionado'];
+    $info_programa_selec = $db->sql_query($sqlstring_programa_selec);
+    $dados_programa_selec = mysql_fetch_array($info_programa_selec);
+    
+        //definindo o acompanhamento
+        $qtde_dias = $dados_programa_selec['cod_tempo_programa']*7;
+        $contador=1;        
+        while($contador<$qtde_dias)
+        {
+            $diasemana_numero = date('w', strtotime('+' . $contador . ' days', strtotime($dados_programa_selec['data_inicio_programa'])));
+            $diasemana_numero = $diasemana_numero + 1;
+            
+    // inserindo na tabela de acompanhamento
+    $contador_tipo_refeicao = 1;
+    while($contador_tipo_refeicao < 7)
+    {        
+
+    $sqlstring_inserir_acompanhamento  = "Insert into tb_acompanhamento (cod_paciente, cod_consulta, cod_programa, cod_reeducacao, cod_dia_semana, cod_tipo_refeicao, data_acompanhamento) values (";
+    $sqlstring_inserir_acompanhamento .= $_SESSION['cod_paciente_selecionado'] . ", ";
+    $sqlstring_inserir_acompanhamento .= $_SESSION['cod_consulta_selecionada'] . ", ";
+    $sqlstring_inserir_acompanhamento .= $_SESSION['cod_programa_selecionado'] . ", ";
+    $sqlstring_inserir_acompanhamento .= $domingo . ", ";
+    $sqlstring_inserir_acompanhamento .= $diasemana_numero . ", ";    
+    $sqlstring_inserir_acompanhamento .= $contador_tipo_refeicao . ", '"; 
+    $sqlstring_inserir_acompanhamento .= date('Y-m-d', strtotime('+' . $contador . ' days', strtotime($dados_programa_selec['data_inicio_programa']))) . "')";        
+
+    $db->string_query($sqlstring_inserir_acompanhamento);
+
+    $contador_tipo_refeicao++;
+    }
+            
+        $contador++;
+        }
     
     
     }
@@ -111,6 +146,7 @@ if( $_SERVER['REQUEST_METHOD']=='POST' and !isset($_GET['reeducacoes']) )
     {     
         $programa  = $_POST['programa'];
         $data_inicio_programa = $_POST['data_inicio_programa'];
+
         $parteData = explode("/", $data_inicio_programa);    
         $data_inicio_programa = $parteData[2] . "-" . $parteData[1] . "-" . $parteData[0];
     
