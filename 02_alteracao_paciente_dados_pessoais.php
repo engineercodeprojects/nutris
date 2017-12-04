@@ -115,11 +115,11 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         $numero_botoes = 2;
         $titulo = "Paciente - Dados Pessoais";
         $mensagem = "Os dados pessoais de <strong>" . $nome_paciente . "</strong> foram cadastrados com sucesso!";
-        $btn_esquerda = "Lista Geral de Pacientes";
-        $btn_esquerda_destino = "01_lista_pacientes.php";
-        $btn_direita = "Informações do Paciente";
-        $btn_direita_destino = "01_1_detalhes_paciente.php";
-        $btn_x = "01_lista_pacientes.php";
+        $btn_esquerda = "Reeducação";
+        $btn_esquerda_destino = "02_lista_acompanhamento_paciente.php";
+        $btn_direita = "Informações Gerais";
+        $btn_direita_destino = "02_paciente_index.php";
+        $btn_x = "02_paciente_index.php";
     }
 
 //recuperando o paciente selecionado caso o clique venha da listagem de pacientes
@@ -156,8 +156,8 @@ $dados_paciente_selecionado = mysql_fetch_array($info_paciente_selecionado);
 <body class="margin_00">
 
 <?php 
-    include "includes/menu_nutricionista.php";
-    include "includes/cabecalho_paciente.php";
+    include "includes/menu_paciente.php";
+    include "includes/cabecalho_paciente_cliente.php";
         
 ?>     
     
@@ -420,7 +420,7 @@ $dados_paciente_selecionado = mysql_fetch_array($info_paciente_selecionado);
             <!-- inicio - botoes salvar e cancelar anamnese -->      
             <div class="col-md-12  direito">
                 <button type="submit" class="btn btn_verde_claro">Salvar Dados Pessoais</button>    
-                <button type="button" class="btn btn_verde_claro" onclick="location.href='01_lista_pacientes.php'">Cancelar</button>    
+                <button type="button" class="btn btn_verde_claro" onclick="location.href='02_paciente_index.php'">Cancelar</button>    
             </div>
             <!-- inicio - botoes salvar e cancelar anamnese -->      
           <!-- fim - linha 6 -->

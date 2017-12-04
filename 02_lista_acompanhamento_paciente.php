@@ -114,26 +114,26 @@ $dados_paciente_selecionado = mysql_fetch_array($info_paciente_selecionado);
                     
                     
                     if($dados_estrela['estrelas'] == 6)
-                        print "<td> <img src='img/estrela_vazia.png' class='img-responsive margin_auto'> </td>";                    
+                        print "<td><a href='02_paciente_acompanhamento_detalhes_dia.php?dia=" . $dados_acompanha['data_acompanhamento'] . "'> <img src='img/estrela_vazia.png' class='img-responsive margin_auto'> </a></td>";                    
                     else if($dados_estrela['estrelas'] > 3)
-                        print "<td> <img src='img/estrela_25.png' class='img-responsive margin_auto'> </td>";                    
+                        print "<td><a href='02_paciente_acompanhamento_detalhes_dia.php?dia=" . $dados_acompanha['data_acompanhamento'] . "'> <img src='img/estrela_25.png' class='img-responsive margin_auto'> </a></td>";                    
                     else if($dados_estrela['estrelas'] == 3)
-                        print "<td> <img src='img/estrela_50.png' class='img-responsive margin_auto'> </td>";                    
+                        print "<td><a href='02_paciente_acompanhamento_detalhes_dia.php?dia=" . $dados_acompanha['data_acompanhamento'] . "'> <img src='img/estrela_50.png' class='img-responsive margin_auto'> </a></td>";                    
                     else if($dados_estrela['estrelas'] == 0)
-                        print "<td> <img src='img/estrela_cheia.png' class='img-responsive margin_auto'> </td>";                    
+                        print "<td><a href='02_paciente_acompanhamento_detalhes_dia.php?dia=" . $dados_acompanha['data_acompanhamento'] . "'> <img src='img/estrela_cheia.png' class='img-responsive margin_auto'> </a></td>";                    
                     else
-                        print "<td> <img src='img/estrela_75.png' class='img-responsive margin_auto'> </td>";                    
+                        print "<td><a href='02_paciente_acompanhamento_detalhes_dia.php?dia=" . $dados_acompanha['data_acompanhamento'] . "'> <img src='img/estrela_75.png' class='img-responsive margin_auto'> </a></td>";                    
                     
                     
                     print "<td> <a href='02_paciente_acompanhamento_detalhes_dia.php?dia=" . $dados_acompanha['data_acompanhamento'] . "'>" .  date('d/m/Y', strtotime($dados_acompanha['data_acompanhamento'])) . "</a></td>";
-                    print "<td class='text-uppercase'>" . $dados_acompanha['programa'] . "</td>";
+                    print "<td class='text-uppercase'> <a href='02_paciente_acompanhamento_detalhes_dia.php?dia=" . $dados_acompanha['data_acompanhamento'] . "'>" . $dados_acompanha['programa'] . "</a></td>";
                     
                     print "<td class='text-uppercase'>";
                     $sqlstring_reeduca   = "Select * from tb_reeducacao where cod_reeducacao = " . $dados_acompanha['cod_reeducacao'];                    
                     $info_reeduca = $db->sql_query($sqlstring_reeduca);    
                     $dados_reeduca=mysql_fetch_array($info_reeduca);
                     
-                    print $dados_reeduca['reeducacao'];
+                    print "<a href='02_paciente_acompanhamento_detalhes_dia.php?dia=" . $dados_acompanha['data_acompanhamento'] . "'>" . $dados_reeduca['reeducacao'] . "</a>";
                     
                     print "</td>";
                     
@@ -143,7 +143,7 @@ $dados_paciente_selecionado = mysql_fetch_array($info_paciente_selecionado);
                     $linhas_seguidas = $db->sql_linhas($info_seguidas);
                    
                     
-                    print "<td>"; 
+                    print "<td><a href='02_paciente_acompanhamento_detalhes_dia.php?dia=" . $dados_acompanha['data_acompanhamento'] . "'>"; 
                     //seguidas
                     $contador_linhas = 1;
                     $seguidas = 0;                    
@@ -226,8 +226,10 @@ $dados_paciente_selecionado = mysql_fetch_array($info_paciente_selecionado);
                         $contador_linhas++;                            
                     } 
                     
-                    print "</td>";                                        
-                    print "<td class='centralizado fonte_muito_grande'>" . $seguidas . " / " . $linhas_seguidas  .  "</td>";
+                    print "</a></td>";                                        
+                    
+                    print "<td class='centralizado fonte_muito_grande'>";
+                    print "<a href='02_paciente_acompanhamento_detalhes_dia.php?dia=" . $dados_acompanha['data_acompanhamento'] . "'>" . $seguidas . " / " . $linhas_seguidas  .  "</a></td>";
                     print "</tr>";
                 }
                 

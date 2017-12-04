@@ -69,6 +69,6 @@ while($contador_dia_semana < 8)
 $contador_dia_semana++;
 }
 
-header("01_1_cadastro_paciente_anamnese.php");
 
+header("Location: 01_1_cadastro_paciente_anamnese.php");
 ?>

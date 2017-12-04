@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php 
-//inicia a sessão
+//inicia sessão
 session_start();
 //include do arquivo que verifica se o usuário passou pelo login
 include_once('includes/verifica_logado.php');
@@ -8,20 +8,24 @@ include_once('includes/verifica_logado.php');
 include_once('conexao/connect_db.php');
 //instancia do banco de dados
 $db = BancoDeDados::getInstance();  
+
 // acentuação
 mysql_set_charset('utf8');
 ini_set('default_charset','UTF-8');
 
-
-
-//recuperando o paciente selecionado caso o clique venha da listagem de pacientes
+//recuperando o paciente selecionado
 if(isset($_GET['cod']))
     $_SESSION['cod_paciente_selecionado'] = base64_decode($_GET['cod']);
-    
-$sqlstring_paciente_selecionado  = "select * from tb_paciente ";
-$sqlstring_paciente_selecionado .= "where tb_paciente.cod_paciente = " . $_SESSION['cod_paciente_selecionado'];
+
+
+// armazena o valor digitado pelo usuário na caixa de busca
+$sqlstring_paciente_selecionado  = "Select * from tb_paciente where cod_paciente = " . $_SESSION['cod_paciente_selecionado'];    
+
+
 $info_paciente_selecionado = $db->sql_query($sqlstring_paciente_selecionado);
 $dados_paciente_selecionado = mysql_fetch_array($info_paciente_selecionado);
+$linhas_paciente = $db->sql_linhas($info_paciente_selecionado);
+
 ?>    
 <html>    
 <head>
@@ -41,20 +45,17 @@ $dados_paciente_selecionado = mysql_fetch_array($info_paciente_selecionado);
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>                       
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
-    <script src=js/estrelas.js></script> 
-    
   </head>    
+  <script src="js/funcoes.js"></script>
 <body class="margin_00">
 
-   
 <?php 
-    include "includes/menu_paciente.php";
-    include "includes/cabecalho_paciente_cliente.php";
-?>    
- 
+    include "includes/menu_nutricionista.php";
+    include "includes/cabecalho_paciente.php";
+?>     
+    
+    
+
 <!-- inicio do container fluid -->    
 <div class="container-fluid" onclick="recua_menu(10)">
     
@@ -70,6 +71,12 @@ $dados_paciente_selecionado = mysql_fetch_array($info_paciente_selecionado);
                 <div class="panel-body borda_verde_escuro col-md-12" style="border:0px solid #fff; border-left:0px solid #0A4438;">                 
                         <span class="glyphicon glyphicon-star-empty fonte_verde_claro"></span>
                         <span class=" fonte_verde_claro fonte_muito_grande negrito">ACOMPANHAMENTO</span>                    
+                        <br/>
+                    <span class="fonte_pequena">                        
+                        <a href="01_1_detalhes_paciente.php">Informações do Paciente</a>
+                        <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
+                        <span class="fonte_verde_claro">Acompanhamento</span>                        
+                    </span> 
                     <br/><br/>
                 </div>
                </div>
@@ -125,7 +132,7 @@ $dados_paciente_selecionado = mysql_fetch_array($info_paciente_selecionado);
                         print "<td> <img src='img/estrela_75.png' class='img-responsive margin_auto'> </td>";                    
                     
                     
-                    print "<td> <a href='02_paciente_acompanhamento_detalhes_dia.php?dia=" . $dados_acompanha['data_acompanhamento'] . "'>" .  date('d/m/Y', strtotime($dados_acompanha['data_acompanhamento'])) . "</a></td>";
+                    print "<td>" .  date('d/m/Y', strtotime($dados_acompanha['data_acompanhamento'])) . "</td>";
                     print "<td class='text-uppercase'>" . $dados_acompanha['programa'] . "</td>";
                     
                     print "<td class='text-uppercase'>";

@@ -100,21 +100,15 @@
     
         <a href=""><div class="link"><span class="glyphicon glyphicon-home padding_right_30 fonte_muito_grande"></span> </div></a>
         
-        <a href="02_lista_acompanhamento_paciente.php" alt="Acompanhamento" title="Acompanhamento">
-        <div class="link"><span class="glyphicon glyphicon-star padding_right_30 fonte_muito_grande"></span></div>
-        </a>
-        
-        <a href="02_alteracao_paciente_dados_pessoais.php" alt="Dados Pessoais" title="Dados Pessoais">
-        <div class="link"><span class="glyphicon glyphicon-tag padding_right_30 fonte_muito_grande"></span></div>
-        </a>
-        
-        <a href="02_hoje.php" alt="Reeducação de Hoje" title="Reeducação de Hoje">
-        <div class="link"><span class="glyphicon glyphicon-calendar padding_right_30 fonte_muito_grande"></span></div>
+        <a href="01_lista_refeicoes.php" alt="Lista de Refeições" title="Lista de Refeições">
+        <div class="link"><span class="glyphicon glyphicon-apple padding_right_30 fonte_muito_grande"></span></div>
         </a>
         
         <a href="logout.php" alt="Sair da Plataforma Nutris" title="Sair da Plataforma Nutris">
         <div class="link"><span class="glyphicon glyphicon-log-out padding_right_30 fonte_muito_grande"></span></div>
         </a>
+    
+
 
     </nav>
     
@@ -139,24 +133,12 @@
         </a>
         
         
-        <a href="02_lista_acompanhamento_paciente.php" alt="Acompanhamento" title="Acompanhamento">
+        <a href="01_lista_refeicoes.php" alt="Lista de Refeições" title="Lista de Refeições">
             <div class="link">
-                <span class="glyphicon glyphicon-star padding_right_30 fonte_muito_grande"></span> <span class="padding_left_30">ACOMPANHAMENTO</span> 
+                <span class="glyphicon glyphicon-apple padding_right_30 fonte_muito_grande"></span> <span class="padding_left_30">REFEIÇÕES</span> 
             </div>
         </a>
         
-        
-        <a href="02_alteracao_paciente_dados_pessoais.php" alt="Dados Pessoais" title="Dados Pessoais">
-            <div class="link">
-                <span class="glyphicon glyphicon-tag padding_right_30 fonte_muito_grande"></span> <span class="padding_left_30">DADOS PESSOAIS</span> 
-            </div>
-        </a>
-        
-        <a href="02_hoje.php" alt="Reeducação de Hoje" title="Reeducação de Hoje">
-            <div class="link">
-                <span class="glyphicon glyphicon-calendar padding_right_30 fonte_muito_grande"></span> <span class="padding_left_30">HOJE</span> 
-            </div>
-        </a>
         
         
         <a href="logout.php" alt="Sair da Plataforma Nutris" title="Sair da Plataforma Nutris">

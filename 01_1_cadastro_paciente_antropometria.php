@@ -39,6 +39,7 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         $objetivo = $_POST['objetivo_paciente'];
         $tempo = $_POST['tempo_programa'];
         $peso = $_POST['peso'];
+        $objetivo_peso_paciente = $_POST['objetivo_peso_paciente'];
         $altura = $_POST['altura'];
         
         $perimetro_abdomem = $_POST['perimetro_abdomem'];
@@ -63,7 +64,6 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         
        
         
-        print "<center>foto poeea" . $foto . "</center>";
         
         // insere na tb_objetivo paciente as informações sobre o objetivo do páciente
         $sqlstring_alterar_objetivo  = "Update tb_objetivo_paciente set ";
@@ -78,6 +78,7 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         $sqlstring_alterar_objetivo .= "cod_objetivo_programa = '" . $objetivo . "', ";
         $sqlstring_alterar_objetivo .= "cod_tempo_programa = '" . $tempo . "', ";
         $sqlstring_alterar_objetivo .= "peso_paciente = '" . $peso . "', ";
+        $sqlstring_alterar_objetivo .= "objetivo_peso_paciente = '" . $objetivo_peso_paciente . "', ";
         $sqlstring_alterar_objetivo .= "altura_paciente = '" . $altura . "', ";
         $sqlstring_alterar_objetivo .= "perimetro_abdomem = '" . $perimetro_abdomem . "', ";
         $sqlstring_alterar_objetivo .= "perimetro_quadril = '" . $perimetro_quadril . "', ";
@@ -446,6 +447,13 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
        
        
        <br/>
+       
+      
+
+       
+      <br/> 
+       
+       
     <!-- inicio - medidas -->
     <div class="row">
         <div class="col-md-12" style="border:1px solid #eee; border-left:5px solid #18A689; border-right:2px solid #18A689;">            
@@ -618,7 +626,12 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
               
                 
             
-                
+            <!-- inicio objetivo de peso -->
+            <div class="col-md-12 padding_top_20 padding_bottom_20">
+             <label for="l_objetivo_peso">Objetivo Peso (kg) </label>
+                    <input type="text" class="form-control fonte_verde_claro" name="objetivo_peso_paciente" id="objetivo_peso_paciente" value="<?php print $dados_objetivo_programa['objetivo_peso_paciente'] ?>" onblur="funcoes(); troca_virgula_ponto('peso')" maxlength="7">  
+            </div>
+            <!-- fim objetivo de peso -->    
                 
             
                 

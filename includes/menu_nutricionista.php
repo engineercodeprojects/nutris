@@ -129,7 +129,7 @@
 
     <nav>
     
-        <a href="#" alt="Dashboard Nutricionista" title="Dashboard Nutricionista">
+        <a href="00_index_nutricionista.php" alt="Dashboard Nutricionista" title="Dashboard Nutricionista">
         <div class="link"><img src="img/icone_home_lateral.png"></div>
         </a>
         
@@ -177,7 +177,7 @@
             <?php print $_SESSION['nome_apelido'];?> 
         </div>
         
-        <a href="#">
+        <a href="00_index_nutricionista.php">
             <div class="link padding_top_05"><img src="img/icone_home_lateral.png" align=left class="img-responsive"> <span class="padding_left_60">HOME</span> 
             </div>
         </a>

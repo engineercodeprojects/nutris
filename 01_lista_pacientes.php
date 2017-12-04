@@ -17,17 +17,13 @@ ini_set('default_charset','UTF-8');
 // armazena o valor digitado pelo usuário na caixa de busca
 $busca = $_GET['busca'];
 if(isset($busca))
-{
-    $sqlstring_pacientes  = "Select tb_paciente.cod_paciente, tb_paciente.nome_paciente, tb_objetivo_paciente.peso_paciente, tb_objetivo_paciente.altura_paciente from tb_paciente ";
-    $sqlstring_pacientes .= "inner join tb_objetivo_paciente on tb_paciente.cod_paciente = tb_objetivo_paciente.cod_paciente "; 
-    $sqlstring_pacientes .= "where nome_paciente like '%" . $busca . "%'";       
+{   
+    $sqlstring_pacientes  = "Select * from tb_paciente ";
+    $sqlstring_pacientes .= "where nome_paciente like '%" . $busca . "%' and cod_status = 1";       
 }
 else    
 {
-//    $sqlstring_pacientes  = "Select tb_paciente.cod_paciente, tb_paciente.nome_paciente, tb_objetivo_paciente.peso_paciente, tb_objetivo_paciente.altura_paciente from tb_paciente ";
-//    $sqlstring_pacientes .= "inner join tb_objetivo_paciente on tb_paciente.cod_paciente = tb_objetivo_paciente.cod_paciente";
-    
-    
+
     $sqlstring_pacientes  = "Select * from tb_paciente ";
     $sqlstring_pacientes .= "where cod_status = 1 ";
 }
@@ -188,25 +184,42 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
                             
                             print date('d/m/Y', strtotime($dados_ultima_consulta['data_consulta']));
                             ?>
-<!--                        <script> exibir_imc(<?php print $dados_pacientes['peso'] ?>,<?php print $dados_pacientes['altura'] ?>); </script>-->
                         </a>
                     </td>
                     
                     <td class="centralizado">
                         <a href="01_1_cadastro_paciente_anamnese.php?cod=<?php print base64_encode($dados_pacientes['cod_paciente']) ?>;&alt=<?php print base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Anamnese" title="Anamnese">
-                        75
+                        <?php
+                        //ultimo peso do paciente
+                        $sqlstring_ultimo_peso  = "Select * from tb_objetivo_paciente ";                            
+                        $sqlstring_ultimo_peso .= "where cod_paciente = " .$dados_pacientes['cod_paciente'];
+                        $sqlstring_ultimo_peso .= " order by cod_consulta desc limit 1";
+                        $info_ultimo_peso = $db->sql_query($sqlstring_ultimo_peso);
+                        $dados_ultimo_peso=mysql_fetch_array($info_ultimo_peso);
+                         
+                        print $dados_ultimo_peso['objetivo_peso_paciente'];
+                        ?>
                         </a>
                     </td>
                 
                     <td class="centralizado">
                         <a href="01_1_cadastro_paciente_avaliacao.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Avaliação Nutricional" title="Avaliação Nutricional">
-                        82
+                        <?php
+                        //ultimo peso do paciente
+                        $sqlstring_ultimo_peso  = "Select * from tb_objetivo_paciente ";                            
+                        $sqlstring_ultimo_peso .= "where cod_paciente = " .$dados_pacientes['cod_paciente'];
+                        $sqlstring_ultimo_peso .= " order by cod_consulta desc limit 1";
+                        $info_ultimo_peso = $db->sql_query($sqlstring_ultimo_peso);
+                        $dados_ultimo_peso=mysql_fetch_array($info_ultimo_peso);
+                         
+                        print $dados_ultimo_peso['peso_paciente'];
+                        ?>
                         </a>
                     </td>
                 
                     <td class="centralizado">
                         <a href="01_1_cadastro_paciente_antropometria.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Antropometria" title="Antropometria">
-                        27.9
+                        <script>exibir_imc(<?php print $dados_ultimo_peso['peso_paciente'] ?>,<?php print $dados_ultimo_peso['altura_paciente'] ?>);</script>
                         </a>
                     </td>
                 
@@ -292,6 +305,9 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
             
         $sqlstring_programa_paciente = "delete from tb_programa_paciente where cod_paciente IN(".implode(',', $arr ).")";
         $info_programa_paciente = $db->sql_query($sqlstring_programa_paciente);
+            
+        $sqlstring_consulta = "delete from tb_consulta where cod_paciente IN(".implode(',', $arr ).")";
+        $info_consulta = $db->sql_query($sqlstring_consulta);
             
         $sqlstring_paciente = "delete from tb_paciente where cod_paciente IN(".implode(',', $arr ).")";
         $info_paciente = $db->sql_query($sqlstring_paciente);

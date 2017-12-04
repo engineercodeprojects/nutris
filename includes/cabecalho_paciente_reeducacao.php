@@ -44,7 +44,7 @@ ini_set('default_charset','UTF-8');
                 print $dados_programa_paciente['foto_paciente'];
                    
                 if($dados_programa_paciente['foto_paciente'] != 'avatar_masculino.png' and $dados_programa_paciente['foto_paciente'] != 'avatar_feminino.png')
-                    print "<img src='fotos_usuarios/" . $dados_programa_paciente['foto_paciente'] . "' width='120' height='120' class='img-responsive margin_auto'>";
+                    print "<img src='fotos/" . $dados_programa_paciente['foto_paciente'] . "' width='120' height='120' class='img-responsive margin_auto'>";
                 else if ($dados_programa_paciente['sexo'] == 'M')
                     print "<img src='fotos_usuarios/avatar_masculino.png' align='left' width='95''>";
                 else

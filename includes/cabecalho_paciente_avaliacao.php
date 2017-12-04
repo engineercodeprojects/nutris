@@ -44,7 +44,7 @@ ini_set('default_charset','UTF-8');
                 print $dados_habitos_alimentares['foto_paciente'];
                    
                 if($dados_habitos_alimentares['foto_paciente'] != 'avatar_masculino.png' and $dados_habitos_alimentares['foto_paciente'] != 'avatar_feminino.png')
-                    print "<img src='fotos_usuarios/" . $dados_habitos_alimentares['foto_paciente'] . "' width='120' height='120' class='img-responsive margin_auto'>";
+                    print "<img src='fotos/" . $dados_habitos_alimentares['foto_paciente'] . "' width='120' height='120' class='img-responsive margin_auto'>";
                 else if ($dados_habitos_alimentares['sexo'] == 'M')
                     print "<img src='fotos_usuarios/avatar_masculino.png' align='left' width='95''>";
                 else

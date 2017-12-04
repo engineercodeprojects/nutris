@@ -21,31 +21,13 @@ ini_set('default_charset','UTF-8');
     <div class="row fundo_verde_claro">
         
         
-        <div class="col-md-offset-1 col-md-10 text-uppercase direito fundo_verde_claro fonte_branca padding_10">
-            <div class='col-md-12 direito'>
-            <span class="glyphicon glyphicon-star fonte_branca"></span> 
-                <a href="01_1_acompanhamento_nutricionista.php?cod=<?php print base64_encode($_SESSION['cod_paciente_selecionado']) ?>" class='link_branco'>Acompanhamento
-                </a>
-                
-                <span class="glyphicon glyphicon-list-alt padding_left_20"></span> 
-                <a href="01_lista_consultas_paciente.php?cod=<?php print base64_encode($dados_objetivo_programa['cod_paciente']) ?>" class='link_branco'>Consultas
-                </a>
-                
-                <span class="glyphicon glyphicon-tag padding_left_20"></span> 
-                <a href="01_1_alteracao_paciente_dados_pessoais.php?cod=<?php print base64_encode($dados_objetivo_programa['cod_paciente']) ?>" class='link_branco'>Dados Pessoais</a>
-            </div>
-        </div>
-        
-        
         <div class="well fundo_transparente fonte_verde_claro sem_borda col-md-offset-1 col-md-10">
             
             <div class="col-md-1">
                 <?php 
-                print $dados_objetivo_programa['foto_paciente'];
-                   
-                if($dados_objetivo_programa['foto_paciente'] != 'avatar_masculino.png' and $dados_objetivo_programa['foto_paciente'] != 'avatar_feminino.png')
-                    print "<img src='fotos/" . $dados_objetivo_programa['foto_paciente'] . "' width='120' height='120' class='img-responsive margin_auto'>";
-                else if ($dados_objetivo_programa['sexo'] == 'M')
+                if($dados_paciente_selecionado['foto_paciente'] != 'avatar_masculino.png' and $dados_paciente_selecionado['foto_paciente'] != 'avatar_feminino.png')
+                    print "<img src='fotos_usuarios/" . $dados_paciente_selecionado['foto_paciente'] . "' width='120' height='120' class='img-responsive margin_auto'>";
+                else if ($dados_paciente_selecionado['sexo'] == 'M')
                     print "<img src='fotos_usuarios/avatar_masculino.png' align='left' width='95''>";
                 else
                     print "<img src='fotos_usuarios/avatar_feminino.png'  align='left' width='95'>";
@@ -54,11 +36,11 @@ ini_set('default_charset','UTF-8');
             
             
             <div class="col-md-8">
-                <h3 class="text-uppercase fonte_branca">&nbsp;&nbsp;<?php print $dados_objetivo_programa['nome_paciente'] ?></h3>
+                <h3 class="text-uppercase fonte_branca">&nbsp;&nbsp;<?php print $dados_paciente_selecionado['nome_paciente'] ?></h3>
                 <h4 class="text-uppercase fonte_branca">&nbsp;&nbsp;
                     <?php 
                     // Separa em dia, mês e ano
-                    list($ano, $mes, $dia) = explode('-', $dados_objetivo_programa['data_nascimento'] );
+                    list($ano, $mes, $dia) = explode('-', $dados_paciente_selecionado['data_nascimento'] );
 
                     // Descobre que dia é hoje e retorna a unix timestamp
                     $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
@@ -82,16 +64,10 @@ ini_set('default_charset','UTF-8');
                 </div>
             
                 <div class="col-md-9 esquerdo">
-                    <span class="fonte_muito_pequena">Última Antropometria</span> <br/>
+                    <span class="fonte_muito_pequena">Paciente desde</span> <br/>
                     <span class=" fonte_icone_sucesso fonte_branca  fonte_muito_grande">
                         <?php 
-                        //recuperando a data da última antropometria
-                        $sqlstring_ultima_antropometria  = "select tb_objetivo_paciente.data_objetivo_paciente from tb_objetivo_paciente ";
-                        $sqlstring_ultima_antropometria .= "where tb_objetivo_paciente.cod_paciente = " . $_SESSION['cod_paciente_selecionado'];                
-                        $sqlstring_ultima_antropometria .= " order by cod_objetivo_paciente desc limit 1";
-                        $info_ultima_antropometria = $db->sql_query($sqlstring_ultima_antropometria);
-                        $dados_ultima_antropometria = mysql_fetch_array($info_ultima_antropometria);
-                        list($ano, $mes, $dia) = explode('-', $dados_ultima_antropometria['data_objetivo_paciente']);
+                        list($ano, $mes, $dia) = explode('-', $dados_paciente_selecionado['data_cadastro_paciente']);
                         print  $dia."/".$mes."/".$ano ;
                         ?>
                     </span>                                        

@@ -168,13 +168,10 @@ $linhas_paciente_selecionado = $db->sql_linhas($info_paciente_selecionado);
                     <tr>
                     <td><input type=checkbox name="excluir[]" value="<?php print $dados_consultas_paciente['cod_consulta'] ?>"></input></td>
                     <td class="text-uppercase">
-                        <a href="01_1_detalhes_paciente.php?cod=<?php print  base64_encode($dados_consultas_paciente['cod_consulta']) ?>" alt="Detalhes da Consulta" title="Detalhes da Consulta">
-                        <?php print date('d/m/Y', strtotime($dados_consultas_paciente['data_consulta']))  ?>
-                        </a>
+                        <?php print date('d/m/Y', strtotime($dados_consultas_paciente['data_consulta']))  ?>                        
                     </td>
                 
                     <td class="esquerdo text-uppercase">
-                        <a href="01_1_detalhes_paciente.php?cod=<?php print  base64_encode($dados_consultas_paciente['cod_consulta']) ?>" alt="Detalhes da Consulta" title="Detalhes da Consulta">
                         <?php 
                         //programa no qual o paciente foi inserido durante a consulta    
                         $sqlstring_programa_paciente   = "select * from tb_programa_paciente ";
@@ -186,8 +183,7 @@ $linhas_paciente_selecionado = $db->sql_linhas($info_paciente_selecionado);
                         $dados_programa_paciente = mysql_fetch_array($info_programa_paciente);
                         
                         print $dados_programa_paciente['programa'];
-                        ?>
-                        </a>        
+                        ?>                        
                     </td>
                 
                     <td class="direito">
