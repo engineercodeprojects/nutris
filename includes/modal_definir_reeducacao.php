@@ -38,7 +38,7 @@
           <div class="col-md-12">
               <label name="l_domingo" id="l_domingo">Domingo</label>
           <select class="form-control text-uppercase" name="domingo" id="domingo">
-              <option value="0">selecione a reeducação</option>
+<!--              <option value="0">selecione a reeducação</option>-->
             <?php
               while($dados_reeducacoes = mysql_fetch_array($info_reeducacoes))
               {
@@ -93,7 +93,7 @@
           <div class="col-md-6 padding_top_10">
           <label name="l_segunda_feira" id="l_segunda_feira">Segunda-feira</label>
           <select class="form-control text-uppercase" name="segunda_feira" id="segunda_feira">
-              <option value="0">selecione a reeducação</option>
+<!--              <option value="0">selecione a reeducação</option>-->
             <?php
               while($dados_reeducacoes = mysql_fetch_array($info_reeducacoes))
               {
@@ -147,7 +147,7 @@
           <div class="col-md-6 padding_top_10">
           <label name="l_terca_feira" id="l_terca_feira">Terça-feira</label>
           <select class="form-control text-uppercase" name="terca_feira" id="terca_feira">
-              <option value="0">selecione a reeducação</option>
+<!--              <option value="0">selecione a reeducação</option>-->
             <?php
               while($dados_reeducacoes = mysql_fetch_array($info_reeducacoes))
               {
@@ -199,7 +199,7 @@
           <div class="col-md-6 padding_top_10">
           <label name="l_quarta_feira" id="l_quarta_feira">Quarta-feira</label>
           <select class="form-control text-uppercase" name="quarta_feira" id="quarta_feira">
-              <option value="0">selecione a reeducação</option>
+<!--              <option value="0">selecione a reeducação</option>-->
             <?php
               while($dados_reeducacoes = mysql_fetch_array($info_reeducacoes))
               {
@@ -253,7 +253,7 @@
           <div class="col-md-6 padding_top_10">
           <label name="l_quinta_feira" id="l_quinta_feira">Quinta-feira</label>
           <select class="form-control text-uppercase" name="quinta_feira" id="quinta_feira">
-              <option value="0">selecione a reeducação</option>
+<!--              <option value="0">selecione a reeducação</option>-->
             <?php
               while($dados_reeducacoes = mysql_fetch_array($info_reeducacoes))
               {
@@ -304,7 +304,7 @@
           <div class="col-md-6 padding_top_10">
           <label name="l_sexta_feira" id="l_sexta_feira">Sexta-feira</label>
           <select class="form-control text-uppercase" name="sexta_feira" id="sexta_feira">
-              <option value="0">selecione a reeducação</option>
+<!--              <option value="0">selecione a reeducação</option>-->
             <?php
               while($dados_reeducacoes = mysql_fetch_array($info_reeducacoes))
               {
@@ -358,7 +358,7 @@
           <div class="col-md-6 padding_top_10">
           <label name="l_sabado" id="l_sabado">Sábado</label>
           <select class="form-control text-uppercase" name="sabado" id="sabado">
-              <option value="0">selecione a reeducação</option>
+<!--              <option value="0">selecione a reeducação</option>-->
             <?php
               while($dados_reeducacoes = mysql_fetch_array($info_reeducacoes))
               {

@@ -85,19 +85,20 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         $sqlstring_atualizar_habito_alimentar .= "cafe = '" . $cafe . "', ";        
         $sqlstring_atualizar_habito_alimentar .= "outras_informacoes_avaliacao_nutricional = '" . $outras_informacoes_avaliacao_nutricional . "' ";        
         $sqlstring_atualizar_habito_alimentar .= "where cod_paciente = " . $_SESSION['cod_paciente_selecionado'];
+        $sqlstring_atualizar_habito_alimentar .= " and cod_consulta = " . $_SESSION['cod_consulta_selecionada'];
         
         $db->string_query($sqlstring_atualizar_habito_alimentar);
         
       
         //preparando informações para carregar no modal
         $numero_botoes = 2;
-        $titulo = "Paciente - Hábitos Alimentares";
-        $mensagem = "Os hábitos alimentares foram cadastrados com sucesso!";
-        $btn_esquerda = "Objetivo";
-        $btn_esquerda_destino = "01_1_cadastro_paciente_objetivo.php";
-        $btn_direita = "Lista de Pacientes";
-        $btn_direita_destino = "01_lista_pacientes.php";
-        $btn_x = "01_lista_pacientes.php";
+        $titulo = "Paciente - Avaliação Nutricional";
+        $mensagem = "A avaliação nutricional foi cadastrada com sucesso!";
+        $btn_esquerda = "Antropomentria";
+        $btn_esquerda_destino = "01_1_cadastro_paciente_antropometria.php";
+        $btn_direita = "Informações do Paciente";
+        $btn_direita_destino = "01_1_detalhes_paciente.php";
+        $btn_x = "01_1_detalhes_paciente.php";
 }
 
 //recuperando o paciente selecionado caso o clique venha da listagem de pacientes
@@ -155,14 +156,16 @@ $dados_habitos_alimentares = mysql_fetch_array($info_habitos_alimentares);
                     <span class=" fonte_verde_claro fonte_muito_grande negrito">AVALIAÇÃO NUTRICIONAL</span>:
                     <span class=" fonte_verde_claro fonte_muito_grande"><?php print date('d/m/Y', strtotime($dados_habitos_alimentares['data_habito_alimentar'])) ?></span>
                     <br/>
-                    <span class="fonte_pequena">                        
+                    <span class="fonte_pequena">  
+                         <a href="01_lista_consultas_paciente.php">Consultas</a>
+                        <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
                         <a href="01_1_cadastro_paciente_anamnese.php">Anamnese</a>
                         <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
                         <span class="fonte_verde_claro">Avaliação Nutricional</span>
                         <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
                         <a href="01_1_cadastro_paciente_antropometria.php">Antropometria</a>
                         <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
-                        <a href="01_3_cadastro_dieta.php">Prescrição de Dieta</a>
+                        <a href="01_1_cadastro_paciente_prescricao.php">Reeducação Alimentar</a>
                         
                     </span> 
                     <br/><br/>                    

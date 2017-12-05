@@ -50,6 +50,7 @@ a.link_branco:active    {text-decoration:none; color:#fff }
 
 /* cor de fundo */
 .fundo_transparente     {background-color:rgba(0,0,0,.0)}
+.fundo_verde_agua       {background-color:#d7fcf2}
 .fundo_branco           {background-color:#fff}
 .fundo_verde_escuro     {background-color:#0A4438}
 .fundo_verde_claro      {background-color:#18A689}

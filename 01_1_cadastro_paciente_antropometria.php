@@ -148,13 +148,13 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         
         //preparando informações para carregar no modal
         $numero_botoes = 2;
-        $titulo = "Paciente - Objetivo do Programa";
-        $mensagem = "O objetivo do programa foi cadastrado com sucesso!";
-        $btn_esquerda = "Prescrição de Dieta  ";
-        $btn_esquerda_destino = "01_3_cadastro_dieta.php";        
-        $btn_direita = "Lista de Pacientes";
-        $btn_direita_destino = "01_lista_pacientes.php";        
-        $btn_x = "01_lista_pacientes.php";
+        $titulo = "Paciente - Antropometria";
+        $mensagem = "A antropometria foi cadastrada com sucesso!";
+        $btn_esquerda = "Reeducação Alimentar  ";
+        $btn_esquerda_destino = "01_1_cadastro_paciente_prescricao.php";        
+        $btn_direita = "Informações do Paciente";
+        $btn_direita_destino = "01_1_detalhes_paciente.php";        
+        $btn_x = "01_1_detalhes_paciente.php";
 }
 
 
@@ -216,14 +216,17 @@ $dados_objetivo_programa = mysql_fetch_array($info_objetivo_programa);
                     <span class=" fonte_verde_claro fonte_muito_grande negrito">ANTROPOMETRIA</span>:
                     <span class=" fonte_verde_claro fonte_muito_grande"><?php print date('d/m/Y', strtotime($dados_objetivo_programa['data_objetivo_paciente'])) ?></span>
                     <br/>
-                    <span class="fonte_pequena">                        
+                    <span class="fonte_pequena">
+                         <a href="01_lista_consultas_paciente.php">Consultas</a>
+                        <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
                         <a href="01_1_cadastro_paciente_anamnese.php">Anamnese</a>
                         <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
                         <a href="01_1_cadastro_paciente_avaliacao.php">Avaliação Nutricional</a>
                         <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
-                        <span class="fonte_verde_claro">Antropometria</span>
+                        <span class="fonte_verde_claro">Antropometria</span>                        
                         <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
-                        <a href="01_3_cadastro_dieta.php">Prescrição de Dieta</a>
+                        <a href="01_1_cadastro_paciente_prescricao.php">Reeducação Alimentar</a>
+                        
                         
                     </span> 
                     <br/><br/>                    

@@ -396,6 +396,34 @@ ini_set('default_charset','UTF-8');
         $sqlstring_inserir_objetivo_paciente .= "values ('" . $_SESSION['cod_paciente_selecionado'] . "','" .  $_SESSION['cod_consulta_selecionada'] . "','" . date('Y-m-d') . "')";
         $db->string_query($sqlstring_inserir_objetivo_paciente); 
         
+        
+        // inserindo o paciente na tb_objetivo_paciente
+        $sqlstring_inserir_programa_paciente  = "Insert into tb_programa_paciente (cod_paciente, cod_consulta, cod_programa,  data_inicio_programa) ";
+        $sqlstring_inserir_programa_paciente .= "values ('" . $_SESSION['cod_paciente_selecionado'] . "','" .  $_SESSION['cod_consulta_selecionada'] . "',2,'" . date('Y-m-d') . "')";
+        $db->string_query($sqlstring_inserir_programa_paciente); 
+        
+        
+        //atualizacoes
+        
+        $sqlstring_ultimo_programa_paciente = "Select * from tb_programa_paciente order by cod_programa desc limit 1";
+        $info_ultimo_programa_paciente = $db->sql_query($sqlstring_ultimo_programa_paciente);
+        $dados_ultimo_programa_paciente = mysql_fetch_array($info_ultimo_programa_paciente);
+        
+        
+        //inserindo a dieta do paciente inicialmente sem refeições definidas
+        $contador_dia_semana=1;
+        while($contador_dia_semana < 8)
+        {
+            $sqlstring_inserir_dieta  = "Insert into tb_programa_paciente_reeducacao (cod_paciente, cod_consulta, cod_dia_semana, cod_programa, cod_reeducacao, data_reeducacao) values ";
+            $sqlstring_inserir_dieta .= "(" . $_SESSION['cod_paciente_selecionado'] . "," . $_SESSION['cod_consulta_selecionada'] . "," . $contador_dia_semana . "," . $dados_ultimo_programa_paciente['cod_programa'] . ", 0 ,'" . date('Y-m-d') . "')";
+            $db->string_query($sqlstring_inserir_dieta);             
+         
+        $contador_dia_semana++;
+        }
+        
+        //atualizacoes
+        
+        
         //inserindo a dieta do paciente inicialmente sem refeições definidas
         $contador_dia_semana=1;
         while($contador_dia_semana < 8)

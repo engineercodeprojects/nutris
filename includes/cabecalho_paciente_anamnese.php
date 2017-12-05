@@ -23,7 +23,9 @@ ini_set('default_charset','UTF-8');
         
         <div class="col-md-offset-1 col-md-10 text-uppercase direito fundo_verde_claro fonte_branca padding_10">
             <div class='col-md-12 direito'>
-            <span class="glyphicon glyphicon-star fonte_branca"></span> Acompanhamento
+            <span class="glyphicon glyphicon-star fonte_branca"></span> 
+                <a href="01_1_acompanhamento_nutricionista.php?cod=<?php print base64_encode($_SESSION['cod_paciente_selecionado']) ?>" class='link_branco'>Acompanhamento
+                </a>
                 
                 <span class="glyphicon glyphicon-list-alt padding_left_20"></span> 
                 <a href="01_lista_consultas_paciente.php?cod=<?php print base64_encode($_SESSION['cod_paciente_selecionado']) ?>" class='link_branco'>Consultas
@@ -83,7 +85,13 @@ ini_set('default_charset','UTF-8');
                     <span class="fonte_muito_pequena">Última Anamnese</span> <br/>
                     <span class=" fonte_icone_sucesso fonte_branca  fonte_muito_grande">
                         <?php 
-                        list($ano, $mes, $dia) = explode('-', $dados_historico_paciente['data_historico_paciente']);
+                        //recuperando a data da última anamnese
+                        $sqlstring_ultima_anamnese  = "select tb_historico_paciente.data_historico_paciente from tb_historico_paciente ";                        
+                        $sqlstring_ultima_anamnese .= "where tb_historico_paciente.cod_paciente = " . $_SESSION['cod_paciente_selecionado'];
+                        $sqlstring_ultima_anamnese .= " order by cod_historico_paciente desc limit 1";
+                        $info_ultima_anamnese = $db->sql_query($sqlstring_ultima_anamnese);
+                        $dados_ultima_anamnese = mysql_fetch_array($info_ultima_anamnese);
+                        list($ano, $mes, $dia) = explode('-', $dados_ultima_anamnese['data_historico_paciente']);
                         print  $dia."/".$mes."/".$ano ;
                         ?>
                     </span>                                        

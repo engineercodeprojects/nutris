@@ -148,6 +148,7 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         $sqlstring_atualizar_atividades_fisicas .= "inicio_5 = '" . $horario_inicio_atividade_5 . "', ";
         $sqlstring_atualizar_atividades_fisicas .= "termino_5 = '" . $horario_termino_atividade_5 . "' ";
         $sqlstring_atualizar_atividades_fisicas .= "where cod_paciente = " . $_SESSION['cod_paciente_selecionado'];
+        $sqlstring_atualizar_atividades_fisicas .= " and  cod_consulta = " . $_SESSION['cod_consulta_selecionada'];
         
         $db->string_query($sqlstring_atualizar_atividades_fisicas); 
         
@@ -189,6 +190,7 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         $sqlstring_atualizar_antopometria .= "historico_familiar = '" . $historico_familiar . "', ";        
         $sqlstring_atualizar_antopometria .= "outras_informacoes_anamnese = '" . $outras_informacoes_anamnese . "' ";        
         $sqlstring_atualizar_antopometria .= "where cod_paciente = " . $_SESSION['cod_paciente_selecionado'];
+        $sqlstring_atualizar_antopometria .= " and cod_consulta = " . $_SESSION['cod_consulta_selecionada'];
         
         $db->string_query($sqlstring_atualizar_antopometria); 
        
@@ -199,9 +201,9 @@ if( $_SERVER['REQUEST_METHOD']=='POST')
         $mensagem = "A anamnese foi cadastrada com sucesso!";
         $btn_esquerda = "Avaliação Nutricional";
         $btn_esquerda_destino = "01_1_cadastro_paciente_avaliacao.php";
-        $btn_direita = "Lista de Pacientes";
-        $btn_direita_destino = "01_lista_pacientes.php";
-        $btn_x = "01_lista_pacientes.php";
+        $btn_direita = "Informações do Paciente";
+        $btn_direita_destino = "01_1_detalhes_paciente.php";
+        $btn_x = "01_1_detalhes_paciente.php";
     }
 
 //recuperando o paciente selecionado caso o clique venha da listagem de pacientes
@@ -209,7 +211,9 @@ if(isset($_GET['cod_consulta']))
     //$_SESSION['cod_paciente_selecionado'] = base64_decode($_GET['cod']);
     $_SESSION['cod_consulta_selecionada'] = base64_decode($_GET['cod_consulta']);
     
-$sqlstring_atividades_fisicas = "select * from tb_atividade_fisica where cod_paciente = " . $_SESSION['cod_paciente_selecionado'];
+$sqlstring_atividades_fisicas  = "select * from tb_atividade_fisica ";
+$sqlstring_atividades_fisicas .= "where cod_paciente = " . $_SESSION['cod_paciente_selecionado'];
+$sqlstring_atividades_fisicas .= " and cod_consulta = " . $_SESSION['cod_consulta_selecionada'];
 $info_atividades_fisicas = $db->sql_query($sqlstring_atividades_fisicas);
 $dados_atividades_fisicas = mysql_fetch_array($info_atividades_fisicas);
 
@@ -273,13 +277,15 @@ $dados_historico_paciente = mysql_fetch_array($info_historico_paciente);
                     <span class="fonte_verde_claro fonte_muito_grande"><?php print date('d/m/Y', strtotime($dados_historico_paciente['data_historico_paciente'])) ?></span>
                     <br/>
                     <span class="fonte_pequena">                        
+                        <a href="01_lista_consultas_paciente.php">Consultas</a>
+                        <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
                         <span class="fonte_verde_claro">Anamnese</span>
                         <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
                         <a href="01_1_cadastro_paciente_avaliacao.php">Avaliação Nutricional</a>
                         <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
                         <a href="01_1_cadastro_paciente_antropometria.php">Antropometria</a>  
                         <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
-                        <a href="01_3_cadastro_dieta.php">Prescrição de Dieta</a>
+                        <a href="01_1_cadastro_paciente_prescricao.php">Reeducação Alimentar</a>
                     </span> 
                     <br/><br/>
             </div>
@@ -1273,7 +1279,7 @@ $dados_historico_paciente = mysql_fetch_array($info_historico_paciente);
             <!-- inicio - botao para Salvar Dados Pessoais -->
             <div class="col-md-12  direito">
                 <button type="submit" class="btn btn_verde_claro">Salvar Anamnese </button>    
-                <button type="button" class="btn btn_verde_claro" onclick="location.href='01_lista_pacientes.php'">Cancelar </button>    
+                <button type="button" class="btn btn_verde_claro" onclick="location.href='01_1_detalhes_paciente.php'">Cancelar </button>    
             </div>
             <!-- fim - botão para Salvar Dados Pessoais -->            
         </div>

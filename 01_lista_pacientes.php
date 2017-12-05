@@ -24,8 +24,12 @@ if(isset($busca))
 }
 else    
 {
-    $sqlstring_pacientes  = "Select tb_paciente.cod_paciente, tb_paciente.nome_paciente, tb_objetivo_paciente.peso_paciente, tb_objetivo_paciente.altura_paciente from tb_paciente ";
-    $sqlstring_pacientes .= "inner join tb_objetivo_paciente on tb_paciente.cod_paciente = tb_objetivo_paciente.cod_paciente";
+//    $sqlstring_pacientes  = "Select tb_paciente.cod_paciente, tb_paciente.nome_paciente, tb_objetivo_paciente.peso_paciente, tb_objetivo_paciente.altura_paciente from tb_paciente ";
+//    $sqlstring_pacientes .= "inner join tb_objetivo_paciente on tb_paciente.cod_paciente = tb_objetivo_paciente.cod_paciente";
+    
+    
+    $sqlstring_pacientes  = "Select * from tb_paciente ";
+    $sqlstring_pacientes .= "where cod_status = 1 ";
 }
 
 $info_pacientes = $db->sql_query($sqlstring_pacientes);
@@ -150,21 +154,40 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
                         </a>
                     </td>
                 
-                    <td class="centralizado">
+                    <td class="centralizado text-uppercase">
                         <a href="01_detalhes_paciente.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Detalhes do Paciente" title="Detalhes do Paciente">
-                        VERÃO
+                        <?php
+                        //ultimo programa que fez parte
+                        $sqlstring_ultimo_programa  = "Select * from tb_programa_paciente ";
+                        $sqlstring_ultimo_programa .= "inner join tb_programa on tb_programa_paciente.cod_programa = tb_programa.cod_programa ";
+                        $sqlstring_ultimo_programa .= "where cod_paciente = " .$dados_pacientes['cod_paciente'];
+                        $sqlstring_ultimo_programa .= " order by cod_consulta desc limit 1";
+                        $info_ultimo_programa = $db->sql_query($sqlstring_ultimo_programa);
+                        $dados_ultimo_programa=mysql_fetch_array($info_ultimo_programa);
+                        
+                        print $dados_ultimo_programa['programa'];
+                        ?>
                         </a>        
                     </td>
                 
                     <td class="centralizado">
                         <a href="01_detalhes_paciente.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Detalhes do Paciente" title="Detalhes do Paciente">
-                        28/11/2017
+                        <?php print date('d/m/Y', strtotime($dados_ultimo_programa['data_inicio_programa'])) ?>
                         </a>
                     </td>
                 
                     <td class="centralizado">
                         <a href="01_detalhes_paciente.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Detalhes do Paciente" title="Detalhes do Paciente">
-                            28/11/2017
+                            <?php
+                            //ultima consulta                            
+                            $sqlstring_ultima_consulta  = "Select * from tb_consulta ";                            
+                            $sqlstring_ultima_consulta .= "where cod_paciente = " .$dados_pacientes['cod_paciente'];
+                            $sqlstring_ultima_consulta .= " order by cod_consulta desc limit 1";
+                            $info_ultima_consulta = $db->sql_query($sqlstring_ultima_consulta);
+                            $dados_ultima_consulta=mysql_fetch_array($info_ultima_consulta);
+                            
+                            print date('d/m/Y', strtotime($dados_ultima_consulta['data_consulta']));
+                            ?>
 <!--                        <script> exibir_imc(<?php print $dados_pacientes['peso'] ?>,<?php print $dados_pacientes['altura'] ?>); </script>-->
                         </a>
                     </td>
@@ -261,8 +284,19 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
         $sqlstring_usuario = "delete from tb_usuario where cod_usuario IN(".implode(',', $arr ).")";
         $info_usuario = $db->sql_query($sqlstring_usuario);
 
+        $sqlstring_acompanhamento = "delete from tb_acompanhamento where cod_paciente IN(".implode(',', $arr ).")";
+        $info_acompanhamento = $db->sql_query($sqlstring_acompanhamento);    
+        
+        $sqlstring_programa_paciente_reeducacao = "delete from tb_programa_paciente_reeducacao where cod_paciente IN(".implode(',', $arr ).")";
+        $info_programa_paciente_reeducacao = $db->sql_query($sqlstring_programa_paciente_reeducacao);
+            
+        $sqlstring_programa_paciente = "delete from tb_programa_paciente where cod_paciente IN(".implode(',', $arr ).")";
+        $info_programa_paciente = $db->sql_query($sqlstring_programa_paciente);
+            
         $sqlstring_paciente = "delete from tb_paciente where cod_paciente IN(".implode(',', $arr ).")";
         $info_paciente = $db->sql_query($sqlstring_paciente);
+            
+        
            
         
         //preparando modal para informar o sucesso da exclusão

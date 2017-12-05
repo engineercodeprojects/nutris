@@ -134,6 +134,12 @@ $dados_paciente_selecionado = mysql_fetch_array($info_paciente_selecionado);
             <div class="panel-body borda_verde_escuro col-md-12" style="border:0px solid #fff; border-left:0px solid #0A4438;">                 
                     <span class="glyphicon glyphicon-tag fonte_verde_claro"></span>
                     <span class=" fonte_verde_claro fonte_muito_grande negrito">DADOS PESSOAIS</span>                    
+                    <br/>
+                    <span class="fonte_pequena">                        
+                        <a href="01_1_detalhes_paciente.php">Informações do Paciente</a>
+                        <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
+                        <span class="fonte_verde_claro">Dados Pessoais</span>                        
+                    </span> 
                     <br/><br/>                    
                     
                     <span class="glyphicon glyphicon-asterisk fonte_verde_claro fonte_muito_pequena"></span> <span>campos com preenchimento obrigatório</span>

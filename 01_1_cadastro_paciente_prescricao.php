@@ -89,7 +89,7 @@ if( $_GET['reeducacoes'] == 1)
     $db->string_query($sqlstring_alterar_programa_paciente_reeducacao); 
     
     
-    //inserindo a dieta de sexta-feira
+    //inserindo a dieta de sabado
     $sabado = $_POST['sabado'];
     $sqlstring_alterar_programa_paciente_reeducacao   = "Update tb_programa_paciente_reeducacao set ";    
     $sqlstring_alterar_programa_paciente_reeducacao  .= " cod_programa = " . $_SESSION['cod_programa_selecionado'] . ", ";
@@ -101,20 +101,106 @@ if( $_GET['reeducacoes'] == 1)
     $db->string_query($sqlstring_alterar_programa_paciente_reeducacao); 
     
     
+    //verificando o programa de acompanhamento atual do paciente
+    $sqlstring_programa_acompanhamento_atual  = "Select * from tb_acompanhamento ";    
+    $sqlstring_programa_acompanhamento_atual .= "where cod_paciente  = " . $_SESSION['cod_paciente_selecionado'];
+    $sqlstring_programa_acompanhamento_atual .= " and cod_consulta  = " . $_SESSION['cod_consulta_selecionada'];
+    $sqlstring_programa_acompanhamento_atual .= " order by data_acompanhamento desc limit 1";
+    $info_programa_acompanhamento_atual = $db->sql_query($sqlstring_programa_acompanhamento_atual);
+    $dados_programa_acompanhamento_atual = mysql_fetch_array($info_programa_acompanhamento_atual);
+    
+    
+    
+    
+    //é executado para atualizar a prescrição do programa sem alterar o prazo de termino
+    $data_inicial = $_SESSION['data_programa_selecionado'];
+    $data_inicial = explode("/",$data_inicial);
+    $data_inicial = $data_inicial[2]."-".$data_inicial[1]."-".$data_inicial[0];
+        
+    $data_final =  date('Y-m-d', strtotime($dados_programa_acompanhamento_atual['data_acompanhamento']));
+    
+    if($dados_programa_acompanhamento_atual['cod_programa'] == $_SESSION['cod_programa_selecionado'] and $data_inicial <= $data_final)
+    {
+    
+        
+        $diferenca = (strtotime($data_final) - strtotime($data_inicial))/86400 ;
+  
+        //print "<center>" . $data_inicial . " - "  . $data_final . " - " . $diferenca . " - " .  $dias . "</center>";
+       
+        
+        
+        $contador = 0;        
+        while($contador <= $diferenca)
+        {
+            $diasemana_numero = date('w', strtotime('+' . $contador . ' days', strtotime($data_inicial)));
+            $diasemana_numero = $diasemana_numero + 1;
+        
+            
+            //definindo a reeducação a ser redefinida
+            if($diasemana_numero == 1)  $reeducacao_atualizada = $domingo;
+            if($diasemana_numero == 2)  $reeducacao_atualizada = $segunda_feira;
+            if($diasemana_numero == 3)  $reeducacao_atualizada = $terca_feira;
+            if($diasemana_numero == 4)  $reeducacao_atualizada = $quarta_feira;
+            if($diasemana_numero == 5)  $reeducacao_atualizada = $quinta_feira;
+            if($diasemana_numero == 6)  $reeducacao_atualizada = $sexta_feira;
+            if($diasemana_numero == 7)  $reeducacao_atualizada = $sabado;
+                    
+            
+            
+            $contador_tipo_refeicao = 1;
+            while($contador_tipo_refeicao < 7)
+            { 
+            // apenas atualizara a dieta sem alterar o prazo do programa    
+            $sqlstring_atualizar_prescricao   = "update tb_acompanhamento set ";
+            $sqlstring_atualizar_prescricao  .= "cod_reeducacao = " . $reeducacao_atualizada;
+            $sqlstring_atualizar_prescricao  .= " where cod_paciente = " . $_SESSION['cod_paciente_selecionado'];
+            $sqlstring_atualizar_prescricao  .= " and cod_consulta = " . $_SESSION['cod_consulta_selecionada'];
+            $sqlstring_atualizar_prescricao  .= " and cod_dia_semana = " . $diasemana_numero;
+            $sqlstring_atualizar_prescricao  .= " and cod_tipo_refeicao = " . $contador_tipo_refeicao;
+            $sqlstring_atualizar_prescricao  .= " and data_acompanhamento = '" . date('Y-m-d', strtotime('+' . $contador . ' days', strtotime($data_inicial))) . "'";
+             
+            $info_atualizar_prescricao = $db->string_query($sqlstring_atualizar_prescricao);
+            $linhas_prescricao = $db->sql_linhas($info_atualizar_prescricao);
+                
+            $contador_tipo_refeicao++;
+            }
+        $contador++;
+        }
+        
+    }
+    //é executado para alterar o programa do paciente e automaticamente o prazo de término
+    else
+    {
+    
     //conhecendo quantos dias o programa irá durar
     $sqlstring_programa_selec   = "Select * from tb_programa ";
     $sqlstring_programa_selec  .= "inner join tb_programa_paciente on tb_programa.cod_programa = tb_programa_paciente.cod_programa ";
     $sqlstring_programa_selec .= "where tb_programa_paciente.cod_programa  = " . $_SESSION['cod_programa_selecionado'];
+    $sqlstring_programa_selec .= " and tb_programa_paciente.cod_paciente  = " . $_SESSION['cod_paciente_selecionado'];
     $info_programa_selec = $db->sql_query($sqlstring_programa_selec);
     $dados_programa_selec = mysql_fetch_array($info_programa_selec);
     
+        
+    
+        //deletando o acompanhamento da data em questão em diante
+        $sqlstring_ = "delete from tb_acompanhamento where cod_paciente = " . $_SESSION['cod_paciente_selecionado']  . " and data_acompanhamento >= '" . $data_inicial . "'";
+        $info_ = $db->sql_query($sqlstring_);
+    
         //definindo o acompanhamento
         $qtde_dias = $dados_programa_selec['cod_tempo_programa']*7;
-        $contador=1;        
+        $contador=0;        
         while($contador<$qtde_dias)
         {
             $diasemana_numero = date('w', strtotime('+' . $contador . ' days', strtotime($dados_programa_selec['data_inicio_programa'])));
             $diasemana_numero = $diasemana_numero + 1;
+            
+            if($diasemana_numero == 1)  $reeducacao = $domingo;
+            if($diasemana_numero == 2)  $reeducacao = $segunda_feira;
+            if($diasemana_numero == 3)  $reeducacao = $terca_feira;
+            if($diasemana_numero == 4)  $reeducacao = $quarta_feira;
+            if($diasemana_numero == 5)  $reeducacao = $quinta_feira;
+            if($diasemana_numero == 6)  $reeducacao = $sexta_feira;
+            if($diasemana_numero == 7)  $reeducacao = $sabado;
             
     // inserindo na tabela de acompanhamento
     $contador_tipo_refeicao = 1;
@@ -125,10 +211,10 @@ if( $_GET['reeducacoes'] == 1)
     $sqlstring_inserir_acompanhamento .= $_SESSION['cod_paciente_selecionado'] . ", ";
     $sqlstring_inserir_acompanhamento .= $_SESSION['cod_consulta_selecionada'] . ", ";
     $sqlstring_inserir_acompanhamento .= $_SESSION['cod_programa_selecionado'] . ", ";
-    $sqlstring_inserir_acompanhamento .= $domingo . ", ";
+    $sqlstring_inserir_acompanhamento .= $reeducacao . ", ";
     $sqlstring_inserir_acompanhamento .= $diasemana_numero . ", ";    
     $sqlstring_inserir_acompanhamento .= $contador_tipo_refeicao . ", '"; 
-    $sqlstring_inserir_acompanhamento .= date('Y-m-d', strtotime('+' . $contador . ' days', strtotime($dados_programa_selec['data_inicio_programa']))) . "')";        
+    $sqlstring_inserir_acompanhamento .= date('Y-m-d', strtotime('+' . $contador . ' days', strtotime($data_inicial))) . "')";        
 
     $db->string_query($sqlstring_inserir_acompanhamento);
 
@@ -138,7 +224,7 @@ if( $_GET['reeducacoes'] == 1)
         $contador++;
         }
     
-    
+    }
     }
 
 
@@ -161,6 +247,7 @@ if( $_SERVER['REQUEST_METHOD']=='POST' and !isset($_GET['reeducacoes']) )
         $db->string_query($sqlstring_alterar_programa_paciente); 
 
         $_SESSION['cod_programa_selecionado'] = $programa;
+        $_SESSION['data_programa_selecionado'] = $_POST['data_inicio_programa'];
         
 }
 
@@ -223,7 +310,9 @@ $dados_programa_paciente = mysql_fetch_array($info_programa_paciente);
                     <span class=" fonte_verde_claro fonte_muito_grande negrito">Reeducação Alimentar</span>:
                     <span class=" fonte_verde_claro fonte_muito_grande"><?php print date('d/m/Y', strtotime($dados_programa_paciente['data_inicio_programa'])) ?></span>
                     <br/>
-                    <span class="fonte_pequena">                        
+                    <span class="fonte_pequena">    
+                         <a href="01_lista_consultas_paciente.php">Consultas</a>
+                        <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
                         <a href="01_1_cadastro_paciente_anamnese.php">Anamnese</a>
                         <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
                         <a href="01_1_cadastro_paciente_avaliacao.php">Avaliação Nutricional</a>
@@ -260,7 +349,7 @@ $dados_programa_paciente = mysql_fetch_array($info_programa_paciente);
                     $info_programas = $db->sql_query($sqlstring_programas);
                     while($dados_programas = mysql_fetch_array($info_programas))
                     {
-                        if($dados_programas['cod_programa'] == $dados_programa['cod_programa_paciente'])
+                        if($dados_programas['cod_programa'] == $dados_programa_paciente['cod_programa'])
                             print "<option value=" . $dados_programas['cod_programa'] . " selected>" . $dados_programas['programa'] . " - " . $dados_programas['objetivo'] . " - " . $dados_programas['tempo'] . "</option>";
                         else
                             print "<option value=" . $dados_programas['cod_programa'] . ">" . $dados_programas['programa'] . " - " . $dados_programas['objetivo'] . " - " . $dados_programas['tempo'] . "</option>";

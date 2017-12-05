@@ -71,7 +71,13 @@ $linhas_paciente = $db->sql_linhas($info_paciente_selecionado);
                 <div class="panel-body borda_verde_escuro col-md-12" style="border:0px solid #fff; border-left:0px solid #0A4438;">                 
                         <span class="glyphicon glyphicon-star-empty fonte_verde_claro"></span>
                         <span class=" fonte_verde_claro fonte_muito_grande negrito">ACOMPANHAMENTO</span>                    
-                        <br/><br/>
+                        <br/>
+                    <span class="fonte_pequena">                        
+                        <a href="01_1_detalhes_paciente.php">Informações do Paciente</a>
+                        <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
+                        <span class="fonte_verde_claro">Acompanhamento</span>                        
+                    </span> 
+                    <br/><br/>
                 </div>
                </div>
         </div>
@@ -87,6 +93,8 @@ $linhas_paciente = $db->sql_linhas($info_paciente_selecionado);
                 <tr class="fundo_verde_claro fonte_branca">
                 <td class="largura_10 centralizado">Status</td>
                 <td class="largura_10">Data</td>
+                <td class="largura_10">Programa</td>
+                <td class="largura_10">Reeducaçõa</td>
                 <td class="largura_80">Refeições</td>
                 <td class="largura_70">Calorias</td>
                 </tr>
@@ -94,14 +102,139 @@ $linhas_paciente = $db->sql_linhas($info_paciente_selecionado);
             
                 <?php
                 // selecionando o acompanhamento
-                $sqlstring_acompanha  = "Select * from tb_acompanhamento where cod_paciente = " . $_SESSION['cod_paciente_selecionado'];    
+                $sqlstring_acompanha   = "Select * from tb_acompanhamento ";
+                $sqlstring_acompanha  .= "inner join tb_programa on tb_programa.cod_programa = tb_acompanhamento.cod_programa ";
+                $sqlstring_acompanha  .= "where cod_paciente = " . $_SESSION['cod_paciente_selecionado'] . " group by data_acompanhamento";    
                 $info_acompanha = $db->sql_query($sqlstring_acompanha);
                 
                 while($dados_acompanha = mysql_fetch_array($info_acompanha))
                 {
-                    print "<tr>";
-                    print "<td><img src='img/estrela_vazia.png' class='img-responsive margin_auto'></td>";                    
+                    if($dados_acompanha['data_acompanhamento'] == date('Y-m-d'))
+                        print "<tr class='fundo_verde_agua'>";
+                    else
+                        print "<tr>";
+                    
+                    //montando a estrela
+                    $sqlstring_estrela = "select count(status) as estrelas from tb_acompanhamento where status='estrela_vazia.png' and data_acompanhamento = '" . $dados_acompanha['data_acompanhamento'] . "' and cod_paciente = " . $_SESSION['cod_paciente_selecionado'] . " group by data_acompanhamento order by data_acompanhamento, cod_tipo_refeicao";
+                    $info_estrela = $db->sql_query($sqlstring_estrela);
+                    $dados_estrela = mysql_fetch_array($info_estrela);
+                    
+                    
+                    if($dados_estrela['estrelas'] == 6)
+                        print "<td> <img src='img/estrela_vazia.png' class='img-responsive margin_auto'> </td>";                    
+                    else if($dados_estrela['estrelas'] > 3)
+                        print "<td> <img src='img/estrela_25.png' class='img-responsive margin_auto'> </td>";                    
+                    else if($dados_estrela['estrelas'] == 3)
+                        print "<td> <img src='img/estrela_50.png' class='img-responsive margin_auto'> </td>";                    
+                    else if($dados_estrela['estrelas'] == 0)
+                        print "<td> <img src='img/estrela_cheia.png' class='img-responsive margin_auto'> </td>";                    
+                    else
+                        print "<td> <img src='img/estrela_75.png' class='img-responsive margin_auto'> </td>";                    
+                    
+                    
                     print "<td>" .  date('d/m/Y', strtotime($dados_acompanha['data_acompanhamento'])) . "</td>";
+                    print "<td class='text-uppercase'>" . $dados_acompanha['programa'] . "</td>";
+                    
+                    print "<td class='text-uppercase'>";
+                    $sqlstring_reeduca   = "Select * from tb_reeducacao where cod_reeducacao = " . $dados_acompanha['cod_reeducacao'];                    
+                    $info_reeduca = $db->sql_query($sqlstring_reeduca);    
+                    $dados_reeduca=mysql_fetch_array($info_reeduca);
+                    
+                    print $dados_reeduca['reeducacao'];
+                    
+                    print "</td>";
+                    
+                    //quais refeicoes foram seguidas e quais não foram seguidas
+                    $sqlstring_seguidas = "select * from tb_acompanhamento where data_acompanhamento = '" . $dados_acompanha['data_acompanhamento'] . "' and cod_paciente = " . $_SESSION['cod_paciente_selecionado'];
+                    $info_seguidas = $db->sql_query($sqlstring_seguidas);
+                    $linhas_seguidas = $db->sql_linhas($info_seguidas);
+                   
+                    
+                    print "<td>"; 
+                    //seguidas
+                    $contador_linhas = 1;
+                    $seguidas = 0;                    
+                    while($dados_seguidas = mysql_fetch_array($info_seguidas))
+                    {
+                        if($dados_seguidas['cod_tipo_refeicao'] == 1 and $dados_seguidas['status'] == 'estrela_cheia.png')
+                        {
+                            print "<span class='fonte_muito_pequena fonte_verde_claro text-uppercase'>Café da Manhã</span>";
+                            $seguidas++;
+                        }                            
+                        else if($dados_seguidas['cod_tipo_refeicao'] == 1 and $dados_seguidas['status'] != 'estrela_cheia.png')
+                        {
+                            print "<span class='fonte_muito_pequena fonte_cinza text-uppercase'>Café da Manhã</span>";
+                        }
+                            
+                        
+                        
+                        if($dados_seguidas['cod_tipo_refeicao'] == 2 and $dados_seguidas['status'] == 'estrela_cheia.png')
+                        {
+                            print "<span class='fonte_muito_pequena fonte_verde_claro text-uppercase'>Lanche da Manhã</span>";
+                            $seguidas++;
+                        }                            
+                        else if($dados_seguidas['cod_tipo_refeicao'] == 2 and $dados_seguidas['status'] != 'estrela_cheia.png')
+                        {
+                            print "<span class='fonte_muito_pequena fonte_cinza text-uppercase'>Lanche da Manhã</span>";                            
+                        }
+                            
+                        
+                        
+                        if($dados_seguidas['cod_tipo_refeicao'] == 3 and $dados_seguidas['status'] == 'estrela_cheia.png')
+                        {
+                            print "<span class='fonte_muito_pequena fonte_verde_claro text-uppercase'>Almoço</span>";
+                            $seguidas++;
+                        }                            
+                        else if($dados_seguidas['cod_tipo_refeicao'] == 3 and $dados_seguidas['status'] != 'estrela_cheia.png')
+                        {
+                            print "<span class='fonte_muito_pequena fonte_cinza text-uppercase'>Almoço</span>";                            
+                        }
+                            
+                        
+                        
+                        if($dados_seguidas['cod_tipo_refeicao'] == 4 and $dados_seguidas['status'] == 'estrela_cheia.png')
+                        {
+                            print "<span class='fonte_muito_pequena fonte_verde_claro text-uppercase'>Café da Tarde</span>";
+                            $seguidas++;
+                        }                            
+                        else if($dados_seguidas['cod_tipo_refeicao'] == 4 and $dados_seguidas['status'] != 'estrela_cheia.png')
+                        {
+                            print "<span class='fonte_muito_pequena fonte_cinza text-uppercase'>Café da Tarde</span>";
+                        }
+                            
+                                                
+                        if($dados_seguidas['cod_tipo_refeicao'] == 5 and $dados_seguidas['status'] == 'estrela_cheia.png')
+                        {
+                            print "<span class='fonte_muito_pequena fonte_verde_claro text-uppercase'>Jantar</span>";
+                            $seguidas++;
+                        }                            
+                        else if($dados_seguidas['cod_tipo_refeicao'] == 5 and $dados_seguidas['status'] != 'estrela_cheia.png')
+                        {
+                            print "<span class='fonte_muito_pequena fonte_cinza text-uppercase'>Jantar</span>";
+                        }
+                            
+                        
+                        if($dados_seguidas['cod_tipo_refeicao'] == 6 and $dados_seguidas['status'] == 'estrela_cheia.png')
+                        {
+                            print "<span class='fonte_muito_pequena fonte_verde_claro text-uppercase'>Ceia</span>";
+                            $seguidas++;
+                        }                            
+                        else if($dados_seguidas['cod_tipo_refeicao'] == 6 and $dados_seguidas['status'] != 'estrela_cheia.png')
+                        {
+                            print "<span class='fonte_muito_pequena fonte_cinza text-uppercase'>Ceia</span>";
+                        }
+                            
+                        
+                        
+                        if($linhas_seguidas > 1)
+                            if($contador_linhas < $linhas_seguidas)
+                                print " - ";
+                        
+                        $contador_linhas++;                            
+                    } 
+                    
+                    print "</td>";                                        
+                    print "<td class='centralizado fonte_muito_grande'>" . $seguidas . " / " . $linhas_seguidas  .  "</td>";
                     print "</tr>";
                 }
                 

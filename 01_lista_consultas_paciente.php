@@ -80,7 +80,13 @@ $linhas_paciente_selecionado = $db->sql_linhas($info_paciente_selecionado);
                 <div class="panel-body borda_verde_escuro col-md-12" style="border:0px solid #fff; border-left:0px solid #0A4438;">                 
                         <span class="glyphicon glyphicon-list-alt fonte_verde_claro"></span>
                         <span class=" fonte_verde_claro fonte_muito_grande negrito">CONSULTAS</span>                    
-                        <br/><br/>
+                        <br/>
+                    <span class="fonte_pequena">                        
+                        <a href="01_1_detalhes_paciente.php">Informações do Paciente</a>
+                        <span class="glyphicon glyphicon-chevron-right fonte_cinza"></span>
+                        <span class="fonte_verde_claro">Consultas</span>                        
+                    </span> 
+                    <br/><br/>
                 </div>
                </div>
         </div>
@@ -167,21 +173,39 @@ $linhas_paciente_selecionado = $db->sql_linhas($info_paciente_selecionado);
                         </a>
                     </td>
                 
-                    <td class="esquerdo">
+                    <td class="esquerdo text-uppercase">
                         <a href="01_1_detalhes_paciente.php?cod=<?php print  base64_encode($dados_consultas_paciente['cod_consulta']) ?>" alt="Detalhes da Consulta" title="Detalhes da Consulta">
-                        <?php print date('d/m/Y', strtotime($dados_consultas_paciente['data_consulta']))  ?>
+                        <?php 
+                        //programa no qual o paciente foi inserido durante a consulta    
+                        $sqlstring_programa_paciente   = "select * from tb_programa_paciente ";
+                        $sqlstring_programa_paciente  .= "inner join tb_programa on tb_programa.cod_programa = tb_programa_paciente.cod_programa ";
+                        $sqlstring_programa_paciente  .= "inner join tb_consulta on tb_consulta.cod_consulta = tb_programa_paciente.cod_consulta ";
+                        $sqlstring_programa_paciente  .= "where tb_programa_paciente.cod_consulta = " . $dados_consultas_paciente['cod_consulta'];
+                        $sqlstring_programa_paciente  .= " and tb_programa_paciente.cod_paciente = " . $_SESSION['cod_paciente_selecionado'];
+                        $info_programa_paciente = $db->sql_query($sqlstring_programa_paciente);
+                        $dados_programa_paciente = mysql_fetch_array($info_programa_paciente);
+                        
+                        print $dados_programa_paciente['programa'];
+                        ?>
                         </a>        
                     </td>
                 
                     <td class="direito">
                         <a href="01_detalhes_paciente.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Detalhes do Paciente" title="Detalhes do Paciente">
-                        100
+                        <?php
+                        //peso do paciente na consulta atual
+                        $sqlstring_peso_paciente  = "select * from tb_objetivo_paciente where cod_consulta = " . $dados_consultas_paciente['cod_consulta'];
+                        $info_peso_paciente = $db->sql_query($sqlstring_peso_paciente);
+                        $dados_peso_paciente = mysql_fetch_array($info_peso_paciente);
+                        
+                        print $dados_peso_paciente['peso_paciente'];
+                        ?>
                         </a>
                     </td>
                 
                     <td class="direito">
                         <a href="01_detalhes_paciente.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Detalhes do Paciente" title="Detalhes do Paciente">
-                        200
+                        <script>exibir_imc(<?php print $dados_peso_paciente['peso_paciente']; ?>, <?php print $dados_peso_paciente['altura_paciente']; ?>)</script>
                         </a>
                     </td>
                     
