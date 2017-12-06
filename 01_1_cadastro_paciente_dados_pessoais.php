@@ -471,8 +471,8 @@ ini_set('default_charset','UTF-8');
         // fazendo uplodas das fotos 01
         $arquivo = $_FILES['foto_01'];  
 
-        $destino = 'C:\Bitnami\\wampstack-5.5.28-0\\apache2\htdocs\\plataformanutris\\fotos_usuarios\\';
-//        $destino  = '/home/engineercode/public_html/plataformanutris/fotos_usuarios/';
+//        $destino = 'C:\Bitnami\\wampstack-5.5.28-0\\apache2\htdocs\\plataformanutris\\fotos_usuarios\\';
+        $destino  = '/home/engineercode/public_html/plataformanutris/fotos/';
         $destino .= $dados_codigo['cod_paciente'] . "_";
         $destino .= $arquivo['name'];  
 

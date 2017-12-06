@@ -220,7 +220,7 @@ $dados_paciente_selecionado = mysql_fetch_array($info_paciente_selecionado);
                 <input id="uploadImage1" type="file" name="foto_01" onchange="pre_visualizacao1();" style="display:none"/>                
                 <?php
                 }                
-                else if($dados_paciente_selecionado['foto_paciente'] == "" or $dados_paciente_selecionado['foto_foto_paciente'] == "avatar.png") 
+                else if($dados_paciente_selecionado['foto_paciente'] == "" or $dados_paciente_selecionado['foto_paciente'] == "avatar.png") 
                 {
                  ?>
                  <label for="uploadImage1"><img src="img/avatar.png" class="img-responsive margin_auto" width=150 height=200  id="uploadPreview1"/></label>   

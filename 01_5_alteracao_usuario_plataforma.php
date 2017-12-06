@@ -298,7 +298,7 @@ $dados_usuario_selecionado = mysql_fetch_array($info_usuario_selecionado);
                   <select name="nivel_acesso" id="nivel_acesso" class="form-control text-uppercase"  onchange="exibir_ocultar_cpf_cnpj()">
                   <?php
                     
-                    $sqlstring_nivel_acesso = "select * from tb_nivel_acesso where cod_nivel_acesso > 1 order by nivel_acesso";
+                    $sqlstring_nivel_acesso = "select * from tb_nivel_acesso order by nivel_acesso";
                     $info_nivel_acesso = $db->sql_query($sqlstring_nivel_acesso);
     
                     while($dados_nivel_acesso = mysql_fetch_array($info_nivel_acesso))

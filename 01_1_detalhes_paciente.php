@@ -58,21 +58,102 @@ $linhas_paciente = $db->sql_linhas($info_paciente_selecionado);
 <!-- inicio container fluid -->    
 <div class="container-fluid" onclick="recua_menu(10)">
     
-    <!-- inicio - gráfico peso -->  
+    
+    <!-- inicio - indicadores do paciente -->  
     <div class="row">
-        <div class="well fundo_transparente fonte_verde_claro   col-md-offset-1 col-md-5 centralizado altura_300">
-            Gráfico Peso           
+        <div class="well fundo_transparente fonte_verde_claro  sem_borda col-md-offset-1 col-md-10 centralizado altura_300">
+            
+            <div class="col-sm-6 col-md-3">
+            <div class="thumbnail padding_top_20">
+              <img src="img/icone_balanca.png" class='img-responsive margin_auto' alt="Ícone Balança" title="Ícone Balança">
+              <div class="caption">
+                <h4 class='centralizado fonte_verde_claro'>Peso Inicial</h4>
+                <p class='centralizado fonte_peso_altura'>
+                <?php
+                $sqlstring_primeiro_peso  = "Select * from tb_objetivo_paciente ";
+                $sqlstring_primeiro_peso .= "where cod_paciente = " . $_SESSION['cod_paciente_selecionado'];
+                $sqlstring_primeiro_peso .= " order by cod_consulta limit 1";
+                    
+                $info_primeiro_peso = $db->sql_query($sqlstring_primeiro_peso);                
+                $dados_primeiro_peso = mysql_fetch_array($info_primeiro_peso);
+                  
+                print $dados_primeiro_peso['peso_paciente'];
+                $p_inicial = $dados_primeiro_peso['peso_paciente'];
+                ?>
+                </p>                   
+              </div>
+            </div>
+          </div>    
+            
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail padding_top_20">
+              <img src="img/icone_balanca.png" class='img-responsive margin_auto' alt="Ícone Balança" title="Ícone Balança">
+              <div class="caption">
+                <h4 class='centralizado fonte_verde_claro'>Peso Atual</h4>
+                <p class='centralizado fonte_peso_altura'>
+                <?php
+                $sqlstring_ultimo_peso  = "Select * from tb_objetivo_paciente ";
+                $sqlstring_ultimo_peso .= "where cod_paciente = " . $_SESSION['cod_paciente_selecionado'];
+                $sqlstring_ultimo_peso .= " order by cod_consulta desc limit 1";
+                    
+                $info_ultimo_peso = $db->sql_query($sqlstring_ultimo_peso);                
+                $dados_ultimo_peso = mysql_fetch_array($info_ultimo_peso);
+                  
+                print $dados_ultimo_peso['peso_paciente'];
+                $p_atual = $dados_ultimo_peso['peso_paciente'];
+                ?>
+                </p>                   
+              </div>
+            </div>
+          </div>   
+            
+            
+            
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail padding_top_20">
+              <img src="img/icone_balanca.png" class='img-responsive margin_auto' alt="Ícone Balança" title="Ícone Balança">
+              <div class="caption">
+                <h4 class='centralizado fonte_verde_claro'>Quilos Perdidos</h4>
+                <p class='centralizado fonte_peso_altura'>
+                <?php
+                $pesos_perdidos = $p_inicial - $p_atual;
+                  
+                print number_format($pesos_perdidos,2);
+                ?>
+                </p>                   
+              </div>
+            </div>
+          </div>   
+            
+            
+            
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail padding_top_20">
+              <img src="img/icone_balanca.png" class='img-responsive margin_auto' alt="Ícone Balança" title="Ícone Balança">
+              <div class="caption">
+                <h4 class='centralizado fonte_verde_claro'>Peso Objetivo</h4>
+                <p class='centralizado fonte_peso_altura'>
+                <?php
+                $sqlstring_objetivo_peso  = "Select * from tb_objetivo_paciente ";
+                $sqlstring_objetivo_peso .= "where cod_paciente = " . $_SESSION['cod_paciente_selecionado'];
+                $sqlstring_objetivo_peso .= " order by cod_consulta desc limit 1";
+                    
+                $info_objetivo_peso = $db->sql_query($sqlstring_objetivo_peso);                
+                $dados_objetivo_peso = mysql_fetch_array($info_objetivo_peso);
+                  
+                print $dados_objetivo_peso['objetivo_peso_paciente'];
+                ?>
+                </p>                   
+              </div>
+            </div>
+          </div>   
+            
+            
         </div>    
-    <!-- fim - grafico peso -->
+    <!-- fim - indicadores do paciente -->
     
     
     
-    <!-- inicio - gráfico imc -->      
-        <div class="well fundo_transparente fonte_verde_claro  col-md-5 centralizado altura_300">
-            Gráfico IMC           
-        </div>
-    </div>
-    <!-- fim - grafico imc -->
     
     
     
@@ -81,33 +162,36 @@ $linhas_paciente = $db->sql_linhas($info_paciente_selecionado);
     
    <div class="row col-md-offset-1 col-md-10">
        
-   <div class="col-md-4">
-     <div class="col-md-12 form-group centralizado borda_cinza altura_300  borda_inferior_verde_claro" id="f_1">
-        <label for="uploadImage1"><img src="img/avatar.png" class="img-responsive margin_auto" width=150 height=200  id="uploadPreview1"/></label>   
-        <input id="uploadImage1" type="file" name="foto_01" onchange="pre_visualizacao1();" style="display:none"/>                
-         <br/><br/>                 
-         10/10/2000
-     </div>       
+       
+    <?php
+    //fotos das ultimas consultas
+    $sqlstring_fotos  = "Select * from tb_objetivo_paciente ";
+    $sqlstring_fotos .= "where cod_paciente = " . $_SESSION['cod_paciente_selecionado'];
+    
+    $info_fotos = $db->sql_query($sqlstring_fotos);                
+    
+    while($dados_fotos = mysql_fetch_array($info_fotos))
+    {
+    ?>
+       
+   <div class="col-md-3">
+     <div class="col-md-12 form-group centralizado borda_cinza altura_350 " id="f_1">
+        <img src='fotos/<?php print $dados_fotos['foto_01'] ?>' width=150 height=200>
+         <br/>
+     </div>
+       
+     <div class="col-md-12 form-group centralizado borda_inferior_verde_claro fonte_muito_grande fundo_verde_claro fonte_branca" id="f_1">
+         <span class='padding_top_20'>
+         <?php print date('d/m/Y', strtotime($dados_fotos['data_objetivo_paciente'])) ?>
+         </span>
+         <br/>                 
+     </div>
+       
    </div>
        
-   <div class="col-md-4">
-     <div class="col-md-12 form-group centralizado borda_cinza altura_300  borda_inferior_verde_claro" id="f_1">
-        <label for="uploadImage1"><img src="img/avatar.png" class="img-responsive margin_auto" width=150 height=200  id="uploadPreview1"/></label>   
-        <input id="uploadImage1" type="file" name="foto_01" onchange="pre_visualizacao1();" style="display:none"/>                
-         <br/><br/>                 
-         10/10/2000
-     </div>       
-   </div>
-       
-       
-   <div class="col-md-4">
-     <div class="col-md-12 form-group centralizado borda_cinza altura_300  borda_inferior_verde_claro" id="f_1">
-        <label for="uploadImage1"><img src="img/avatar.png" class="img-responsive margin_auto" width=150 height=200  id="uploadPreview1"/></label>   
-        <input id="uploadImage1" type="file" name="foto_01" onchange="pre_visualizacao1();" style="display:none"/>                
-         <br/><br/>                 
-         10/10/2000
-     </div>       
-   </div>
+   <?php
+    }
+    ?>
        
    </div>
     

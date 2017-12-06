@@ -87,7 +87,7 @@ $dados_paciente_selecionado = mysql_fetch_array($info_paciente_selecionado);
                 <td class="largura_10 centralizado">Status</td>
                 <td class="largura_10">Data</td>
                 <td class="largura_10">Programa</td>
-                <td class="largura_10">Reeducaçõa</td>
+                <td class="largura_10">Reeducação</td>
                 <td class="largura_80">Refeições</td>
                 <td class="largura_70">Calorias</td>
                 </tr>

@@ -151,7 +151,7 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
                     </td>
                 
                     <td class="centralizado text-uppercase">
-                        <a href="01_detalhes_paciente.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Detalhes do Paciente" title="Detalhes do Paciente">
+                        <a href="01_1_detalhes_paciente.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Detalhes do Paciente" title="Detalhes do Paciente">
                         <?php
                         //ultimo programa que fez parte
                         $sqlstring_ultimo_programa  = "Select * from tb_programa_paciente ";
@@ -167,13 +167,13 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
                     </td>
                 
                     <td class="centralizado">
-                        <a href="01_detalhes_paciente.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Detalhes do Paciente" title="Detalhes do Paciente">
+                        <a href="01_1_detalhes_paciente.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Detalhes do Paciente" title="Detalhes do Paciente">
                         <?php print date('d/m/Y', strtotime($dados_ultimo_programa['data_inicio_programa'])) ?>
                         </a>
                     </td>
                 
                     <td class="centralizado">
-                        <a href="01_detalhes_paciente.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Detalhes do Paciente" title="Detalhes do Paciente">
+                        <a href="01_1_detalhes_paciente.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Detalhes do Paciente" title="Detalhes do Paciente">
                             <?php
                             //ultima consulta                            
                             $sqlstring_ultima_consulta  = "Select * from tb_consulta ";                            
@@ -188,7 +188,7 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
                     </td>
                     
                     <td class="centralizado">
-                        <a href="01_1_cadastro_paciente_anamnese.php?cod=<?php print base64_encode($dados_pacientes['cod_paciente']) ?>;&alt=<?php print base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Anamnese" title="Anamnese">
+                        <a href="01_1_detalhes_paciente.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Detalhes do Paciente" title="Detalhes do Paciente">
                         <?php
                         //ultimo peso do paciente
                         $sqlstring_ultimo_peso  = "Select * from tb_objetivo_paciente ";                            
@@ -203,7 +203,7 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
                     </td>
                 
                     <td class="centralizado">
-                        <a href="01_1_cadastro_paciente_avaliacao.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Avaliação Nutricional" title="Avaliação Nutricional">
+                        <a href="01_1_detalhes_paciente.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Detalhes do Paciente" title="Detalhes do Paciente">
                         <?php
                         //ultimo peso do paciente
                         $sqlstring_ultimo_peso  = "Select * from tb_objetivo_paciente ";                            
@@ -218,7 +218,7 @@ $linhas_pacientes = $db->sql_linhas($info_pacientes);
                     </td>
                 
                     <td class="centralizado">
-                        <a href="01_1_cadastro_paciente_antropometria.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Antropometria" title="Antropometria">
+                        <a href="01_1_detalhes_paciente.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Detalhes do Paciente" title="Detalhes do Paciente">
                         <script>exibir_imc(<?php print $dados_ultimo_peso['peso_paciente'] ?>,<?php print $dados_ultimo_peso['altura_paciente'] ?>);</script>
                         </a>
                     </td>

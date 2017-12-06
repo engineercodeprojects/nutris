@@ -26,11 +26,11 @@ ini_set('default_charset','UTF-8');
             <div class="col-md-1">
                 <?php 
                 if($dados_paciente_selecionado['foto_paciente'] != 'avatar_masculino.png' and $dados_paciente_selecionado['foto_paciente'] != 'avatar_feminino.png')
-                    print "<img src='fotos_usuarios/" . $dados_paciente_selecionado['foto_paciente'] . "' width='120' height='120' class='img-responsive margin_auto'>";
+                    print "<img src='fotos/" . $dados_paciente_selecionado['foto_paciente'] . "' width='120' height='120' class='img-responsive margin_auto'>";
                 else if ($dados_paciente_selecionado['sexo'] == 'M')
-                    print "<img src='fotos_usuarios/avatar_masculino.png' align='left' width='95''>";
+                    print "<img src='fotos/avatar_masculino.png' align='left' width='95''>";
                 else
-                    print "<img src='fotos_usuarios/avatar_feminino.png'  align='left' width='95'>";
+                    print "<img src='fotos/avatar_feminino.png'  align='left' width='95'>";
                 ?>
             </div>
             

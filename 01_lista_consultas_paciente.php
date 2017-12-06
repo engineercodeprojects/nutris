@@ -186,8 +186,7 @@ $linhas_paciente_selecionado = $db->sql_linhas($info_paciente_selecionado);
                         ?>                        
                     </td>
                 
-                    <td class="direito">
-                        <a href="01_detalhes_paciente.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Detalhes do Paciente" title="Detalhes do Paciente">
+                    <td class="direito">                        
                         <?php
                         //peso do paciente na consulta atual
                         $sqlstring_peso_paciente  = "select * from tb_objetivo_paciente where cod_consulta = " . $dados_consultas_paciente['cod_consulta'];
@@ -195,14 +194,12 @@ $linhas_paciente_selecionado = $db->sql_linhas($info_paciente_selecionado);
                         $dados_peso_paciente = mysql_fetch_array($info_peso_paciente);
                         
                         print $dados_peso_paciente['peso_paciente'];
-                        ?>
-                        </a>
+                        ?>                        
                     </td>
                 
-                    <td class="direito">
-                        <a href="01_detalhes_paciente.php?cod=<?php print  base64_encode($dados_pacientes['cod_paciente']) ?>" alt="Detalhes do Paciente" title="Detalhes do Paciente">
+                    <td class="direito">                        
                         <script>exibir_imc(<?php print $dados_peso_paciente['peso_paciente']; ?>, <?php print $dados_peso_paciente['altura_paciente']; ?>)</script>
-                        </a>
+                        
                     </td>
                     
                     <td class="centralizado">
